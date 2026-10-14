@@ -1554,6 +1554,7 @@ button.prow:hover { background: #fbfaf6; }
 .spill2 { display: inline-flex; align-items: center; height: 26px; padding: 0 10px; border-radius: 6px; font-size: 12px; font-weight: 500; white-space: nowrap; background: #e6efec; color: #2b7a5d; }
 .spill2.out { background: #fdeceb; color: #d92d20; }
 .spill2.draft { background: #ececec; color: #6b6b6b; }
+.spill2.archived { background: #f4ecd9; color: #7a5b12; }
 .sv-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 14px; font-size: 11.5px; color: #3d3d39; }
 .pager { display: flex; align-items: center; gap: 6px; }
 .pager button, .pager span { min-width: 24px; height: 24px; display: grid; place-items: center; border-radius: 4px; font-size: 11.5px; color: var(--ink); }
@@ -1691,6 +1692,65 @@ textarea.pf-input { height: 56px; padding: 8px 10px; resize: vertical; line-heig
 .pf-grid textarea.pf-input { height: 68px; }
 .c-price s { margin-left: 6px; font-size: 10.5px; color: #8c8c83; }
 @media (max-width: 480px) { .pf-fields.pf-grid { grid-template-columns: minmax(0, 1fr); } }
+/* Product SEO: summary card in the product dialog */
+.pf-seo { grid-column: 1 / -1; border: 1px solid rgb(0 0 0 / .12); border-radius: 12px; padding: 14px; background: #fff; }
+.ps-head { display: flex; align-items: center; gap: 10px; }
+.ps-badge { width: 32px; height: 32px; flex: none; border-radius: 10px; background: #e6f5ec; color: #0f8a4f; display: grid; place-items: center; }
+.ps-badge svg path, .ps-edit svg path { fill: currentColor; }
+.ps-label { flex: 1; min-width: 0; white-space: nowrap; font-size: 13px; font-weight: 600; color: #000; line-height: 1.25; }
+.ps-label small { display: block; overflow: hidden; text-overflow: ellipsis; font-size: 11px; font-weight: 400; color: #696963; margin-top: 1px; }
+.ps-edit { display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 0 12px; border: 1px solid rgb(0 0 0 / .25); border-radius: 999px; font-size: 12px; font-weight: 500; color: #000; background: #fff; }
+.ps-edit:hover { background: #f6f5ef; border-color: #000; }
+.ps-card { margin-top: 12px; padding: 14px 16px; border-radius: 10px; background: var(--cream); font-family: Arial, Helvetica, sans-serif; }
+.ps-top { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.gp-fav { width: 26px; height: 26px; flex: none; border-radius: 50%; background: #0f8a4f; color: #fff; display: grid; place-items: center; font-size: 12px; font-weight: 600; }
+.ps-site { display: flex; flex-direction: column; min-width: 0; flex: 1; line-height: 1.25; }
+.ps-site b { font-size: 12px; font-weight: 400; color: #202124; }
+.ps-site span { font-size: 11px; color: #5f6368; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ps-pill { flex: none; font-size: 10px; padding: 2px 8px; border-radius: 999px; background: #e6f5ec; color: #0f6b3c; font-family: var(--font-sans); }
+.ps-pill.off { background: #f1ece0; color: #7a5b12; }
+.ps-t { margin-top: 8px; font-size: 16px; line-height: 1.3; color: #1a0dab; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ps-d { margin-top: 3px; font-size: 12px; line-height: 1.5; color: #4d5156; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+/* Product SEO: its own dialog */
+.modal-seo { width: min(580px, calc(100vw - 24px)); }
+.seo-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding: 20px 24px 14px; }
+.seo-head h2 { font-size: 19px; font-weight: 600; color: #000; line-height: 1.2; }
+.seo-head p { font-size: 13px; color: #696963; margin-top: 3px; }
+.seo-head .icon-btn { margin: -6px -8px 0 0; }
+.seo-body { padding: 0 24px 6px; overflow-y: auto; min-height: 0; }
+.seo-stage { padding: 20px; border-radius: 14px; background: var(--cream); border: 1px solid #efe9d8; }
+.seo-q { display: flex; align-items: center; gap: 8px; max-width: 360px; margin: 0 auto 14px; padding: 8px 14px; border-radius: 999px; background: #fff; border: 1px solid rgb(0 0 0 / .1); font: 13px Arial, Helvetica, sans-serif; color: #202124; }
+.seo-q svg { flex: none; color: #70757a; } .seo-q svg path { fill: currentColor; }
+.seo-q span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.seo-res { padding: 16px 18px; border-radius: 12px; background: #fff; border: 1px solid rgb(0 0 0 / .08); box-shadow: 0 8px 20px -12px rgb(0 0 0 / .25); font-family: Arial, Helvetica, sans-serif; }
+.seo-rt { margin-top: 10px; font-size: 20px; line-height: 1.3; color: #1a0dab; overflow-wrap: anywhere; }
+.seo-rd { margin-top: 4px; font-size: 14px; line-height: 1.55; color: #4d5156; overflow-wrap: anywhere; }
+.seo-note { margin: 12px 0 0; text-align: center; font-size: 12px; color: #7a5b12; }
+.seo-res.off { opacity: .45; }
+.seo-fields { display: grid; gap: 18px; margin-top: 22px; }
+.seo-fields .pf-input, .seo-fields .pf-box { height: 42px; font-size: 14px; }
+.seo-fields textarea.pf-input { height: 84px; padding: 10px; }
+.seo-fields .pf-box input { font-size: 14px; }
+.seo-lr { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+.seo-lr label { margin: 0 !important; font-size: 12px; }
+.seo-lr span { font-size: 11px; color: #696963; }
+.seo-lr span.over { color: #b42318; }
+.seo-meter { height: 3px; margin-top: 6px; border-radius: 3px; background: #ece9df; overflow: hidden; }
+.seo-meter i { display: block; height: 100%; width: 0; background: #0f8a4f; border-radius: 3px; transition: width .15s ease; }
+.seo-meter i.over { background: #b42318; }
+.seo-dom { width: auto !important; padding: 0 10px; background: #f6f5ef; color: #5f5f58; font-size: 12px; white-space: nowrap; }
+.seo-switch { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 16px; border: 1px solid rgb(0 0 0 / .12); border-radius: 12px; cursor: pointer; }
+.seo-switch b { display: block; font-size: 13px; font-weight: 600; color: #000; }
+.seo-switch small { display: block; font-size: 12px; color: #696963; margin-top: 2px; line-height: 1.4; }
+.seo-switch input { appearance: none; -webkit-appearance: none; flex: none; width: 40px; height: 24px; margin: 0; border-radius: 999px; background: #cfccc0; position: relative; cursor: pointer; transition: background .15s ease; }
+.seo-switch input::after { content: ""; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; transition: transform .15s ease; }
+.seo-switch input:checked { background: #0f8a4f; }
+.seo-switch input:checked::after { transform: translateX(16px); }
+.seo-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 24px 20px; margin-top: 8px; border-top: 1px solid var(--line); }
+.seo-foot .btn-text { font-size: 12px; }
+.seo-actions { display: flex; gap: 10px; }
+.seo-actions .pf-btn { width: 130px; height: 36px; font-size: 13px; border-radius: 4px; }
+@media (max-width: 480px) { .seo-foot { flex-direction: column-reverse; align-items: stretch; } .seo-actions .pf-btn { flex: 1; width: auto; height: 42px; } .seo-fields .pf-input, .seo-fields .pf-box input { font-size: 16px; } .ps-label small { display: none; } }
 
 /* =====================================================================
    E-Commerce / Store → Orders (Figma "Site Dashboard - E Commerce - Order")
@@ -2457,6 +2517,166 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
   .modal-ship .pf-foot { flex-wrap: wrap; }
 }
 
+
+/* =====================================================================
+   Site Analytics (#/overview/analytics) + Site Settings (#/overview/settings)
+   ===================================================================== */
+.an-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
+.an-tf-wrap { position: relative; }
+.an-tf { display: inline-flex; align-items: center; gap: 10px; height: 38px; padding: 0 12px 0 14px; border: 1px solid rgb(0 0 0 / .15); border-radius: 6px; background: #fff; font-size: 13.5px; color: #3d3d39; white-space: nowrap; }
+.an-tf b { font-weight: 600; color: var(--ink); }
+.an-tf:hover, .an-tf[aria-expanded="true"] { border-color: rgb(0 0 0 / .35); }
+.an-tf-menu { top: calc(100% + 6px); bottom: auto; left: 0; right: auto; min-width: 190px; z-index: 30; }
+.an-export { height: 34px; padding: 0 16px; font-size: 12px; gap: 6px; border: 0; justify-content: center; }
+.an-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 12px; }
+.an-kpi { display: flex; align-items: center; gap: 16px; padding: 18px 18px 18px 20px; min-height: 88px; }
+.an-ki { width: 34px; height: 34px; flex-shrink: 0; border-radius: 7px; display: grid; place-items: center; color: #fff; background: var(--kc); }
+.an-kpi .t { min-width: 0; }
+.an-kpi small { display: block; font-size: 12px; font-weight: 500; color: #191919; }
+.an-kpi .v { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 14px; margin-top: 4px; }
+.an-kpi strong { font-size: 22px; font-weight: 600; color: #000; letter-spacing: -.01em; }
+.an-delta { font-size: 10.5px; font-weight: 500; color: #1f9d5b; white-space: nowrap; }
+.an-delta.down { color: #d92d20; }
+.an-chart { margin-top: 20px; padding: 18px 20px 12px; }
+.an-chart > header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.ov .an-chart h2, .ov .an-list h2 { font-size: 20px; font-weight: 600; color: #000; }
+.an-chart h2 span { font-weight: 400; color: #3d3d39; font-size: 18px; }
+.an-chart .menu-anchor .more-btn { opacity: .7; }
+.an-chart .row-menu { top: calc(100% + 4px); bottom: auto; right: 0; min-width: 190px; }
+.an-plot { position: relative; margin-top: 10px; height: 210px; }
+.an-plot svg { display: block; width: 100%; height: 100%; overflow: visible; outline: none; }
+.an-plot svg:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; border-radius: 4px; }
+.an-plot .gl { stroke: rgb(0 0 0 / .06); }
+.an-plot .yl, .an-plot .xl { font: 500 12px var(--font-sans); fill: #3d3d39; }
+.an-plot .xl { font-size: 13px; fill: #2b2b28; }
+.an-plot .ln { fill: none; stroke: #1f9d63; stroke-width: 1.6; stroke-linejoin: round; }
+.an-plot .dt { fill: #1f9d63; }
+.an-plot .hl { stroke: rgb(0 0 0 / .25); stroke-dasharray: 3 3; }
+.an-plot .hd { fill: #fff; stroke: #1f9d63; stroke-width: 2.2; }
+.an-tip { position: absolute; z-index: 5; transform: translate(-50%, calc(-100% - 12px)); padding: 8px 10px; border-radius: 6px; background: #1c1c1a; color: #fff; font-size: 12px; line-height: 1.45; white-space: nowrap; pointer-events: none; box-shadow: 0 8px 20px -8px rgb(0 0 0 / .4); }
+.an-tip b { display: block; font-weight: 600; }
+.an-tip[hidden] { display: none; }
+.an-bottom { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; margin-top: 22px; align-items: start; }
+.an-list { padding: 18px 14px 6px; }
+.an-list > header { display: flex; align-items: center; gap: 14px; padding: 0 0 14px; border-bottom: 1px solid rgb(0 0 0 / .1); }
+.an-list > header .engine { font-weight: 500; }
+.an-list ol { margin: 0; padding: 0; list-style: none; }
+.an-row { display: grid; grid-template-columns: 22px 22px minmax(0, 1fr) auto auto; align-items: center; gap: 10px; min-height: 48px; padding: 0 2px; font-size: 13px; color: #000; }
+.an-row + .an-row { border-top: 1px solid rgb(0 0 0 / .08); }
+.an-row .n { font-weight: 500; }
+.an-row .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.an-row .ct { font-weight: 600; text-align: right; font-variant-numeric: tabular-nums; }
+.an-row .un { min-width: 34px; color: #2b2b28; }
+.an-pi { width: 22px; height: 22px; border-radius: 4px; display: grid; place-items: center; color: #fff; background: var(--pc); }
+.an-pi svg { max-width: 12px; max-height: 12px; }
+.an-row .pthumb { width: 22px; height: 22px; border-radius: 4px; font-size: 13px; }
+.an-empty { padding: 24px 6px; font-size: 13px; color: var(--muted); }
+@media (max-width: 1100px) { .an-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } .an-bottom { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 760px) {
+  .an-kpi { padding: 14px; gap: 12px; min-height: 0; }
+  .an-kpi strong { font-size: 19px; }
+  .an-chart { padding: 14px 12px 8px; }
+  .ov .an-chart h2, .ov .an-list h2 { font-size: 17px; }
+  .an-chart h2 span { display: block; font-size: 13px; }
+  .an-plot { height: 190px; }
+  .an-plot .xl { font-size: 11px; }
+  .an-tf, .an-export { height: 44px; }
+}
+@media (max-width: 400px) { .an-kpis { grid-template-columns: minmax(0, 1fr); } .an-bar > * { flex: 1 1 100%; } .an-tf { width: 100%; } }
+
+/* Site Settings */
+.ss-tabs { display: flex; gap: 6px; margin-top: 20px; padding: 0 14px; overflow-x: auto; scrollbar-width: none; border-radius: 12px 12px 0 0 !important; }
+.ss-tabs::-webkit-scrollbar { display: none; }
+.ss-tab { display: inline-flex; align-items: center; gap: 8px; height: 56px; padding: 0 20px 0 2px; margin-right: 34px; border-bottom: 2px solid transparent; font-size: 14px; font-weight: 500; color: #8c8c83; white-space: nowrap; }
+.ss-tab:hover { color: var(--ink); }
+.ss-tab[aria-selected="true"] { color: #000; border-bottom-color: #000; padding-right: 0; }
+.ss-panel { margin-top: 8px; padding: 22px 14px 26px; border-radius: 0 0 12px 12px !important; }
+.ss-h { font-size: 14px; font-weight: 600; color: #000; }
+.ss-cur { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; margin-top: 10px; font-size: 13px; font-style: italic; color: #3d3d39; }
+.ss-cur b { font-weight: 700; font-style: italic; color: #000; font-size: 14px; }
+.ss-cur .st { font-size: 11.5px; font-weight: 500; color: #1f9d5b; }
+.ss-cur .st.off { color: #8c8c83; }
+.ss-cur .dot { width: 6px; height: 6px; border-radius: 50%; background: #1f9d5b; }
+.ss-cur .st.off + .dot { background: #b5b2a8; }
+.ss-lbl { display: block; margin-top: 30px; font-size: 13px; font-weight: 500; color: #000; }
+.ss-add { display: flex; gap: 32px; margin-top: 10px; }
+.ss-add input { flex: 1; min-width: 0; height: 38px; padding: 0 10px; border: 1px solid rgb(0 0 0 / .15); border-radius: 4px; background: #fff; font-size: 12px; color: var(--ink); }
+.ss-add input::placeholder { color: #9a9a92; font-size: 11px; }
+.ss-add input:focus { border-color: var(--ink); }
+.ss-add .btn-dark { height: 38px; min-width: 165px; justify-content: center; font-size: 13px; }
+.ss-panel hr { border: 0; border-top: 1px solid rgb(0 0 0 / .1); margin: 42px 0 32px; }
+.ss-dns li { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin-top: 12px; font-size: 13px; color: #000; }
+.ss-dns li::before { content: "\2022"; }
+.ss-dns li i { width: 1px; height: 14px; background: #000; }
+.ss-dns li span { color: #2b2b28; }
+.ss-soon { padding: 36px 22px; text-align: center; }
+.ss-soon h3 { font-size: 16px; font-weight: 600; color: #000; }
+.ss-soon p { font-size: 13.5px; color: var(--muted); margin: 6px auto 0; max-width: 420px; line-height: 1.5; }
+@media (max-width: 760px) {
+  .ss-tab { height: 48px; margin-right: 18px; }
+  .ss-add { flex-direction: column; gap: 10px; }
+  .ss-add input, .ss-add .btn-dark { height: 44px; font-size: 16px; }
+  .ss-panel hr { margin: 28px 0 22px; }
+}
+
+/* Connect domain + DNS dialogs */
+.modal-domain { width: min(928px, calc(100vw - 24px)); border-radius: 12px; }
+.dm-in { padding: 30px 30px 26px 36px; overflow-y: auto; min-height: 0; }
+.dm-head { display: grid; grid-template-columns: 52px minmax(0, 1fr) 32px; gap: 24px; align-items: start; }
+.dm-ic { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: #d6e9e1; color: #0f5e43; }
+.dm-head h2 { font-size: 21px; font-weight: 500; color: #000; margin-top: 2px; }
+.dm-head p { font-size: 13px; line-height: 1.5; color: #191919; margin-top: 6px; max-width: 460px; }
+.dm-head .icon-btn { margin: -2px -6px 0 0; }
+.dm-label { display: block; margin-top: 30px; font-size: 13px; font-weight: 600; color: #000; }
+.dm-label .req { margin-left: 1px; }
+.dm-field { position: relative; margin-top: 6px; }
+.dm-field input { width: 100%; height: 42px; padding: 0 40px 0 8px; border: 1px solid rgb(0 0 0 / .2); border-radius: 4px; background: #fff; font-size: 13.5px; color: #000; }
+.dm-field input:focus { border-color: var(--ink); }
+.dm-field input[aria-invalid="true"] { border-color: #b42318; }
+.dm-ok { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); display: grid; }
+.dm-ok[hidden] { display: none; }
+.dm-foot { display: flex; justify-content: flex-end; align-items: center; gap: 22px; margin-top: 54px; }
+.dm-foot .dm-btn { width: 130px; height: 42px; font-size: 13.5px; }
+.dm-foot .btn-primary.dm-btn { font-size: 10.5px; gap: 12px; }
+.dm-foot .btn-primary.dm-btn.wide { width: 162px; }
+.dns-box { margin-top: 26px; border: 1px solid rgb(0 0 0 / .12); border-radius: 12px; overflow: hidden; }
+.dns-cfg { display: flex; align-items: center; gap: 10px; min-height: 58px; padding: 10px 14px 10px 16px; background: rgb(0 158 103 / .2); font-size: 14px; color: #000; }
+.dns-cfg > span:first-of-type { margin-left: 4px; }
+.dns-cfg b { font-weight: 600; flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.dns-copy { display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 14px; border: 1px solid rgb(0 0 0 / .12); border-radius: 4px; background: #fff; font-size: 13px; font-weight: 500; color: #000; white-space: nowrap; flex-shrink: 0; }
+.dns-copy:hover { background: #f6f5ef; border-color: rgb(0 0 0 / .3); }
+.dns-copy.done { color: #186244; border-color: #bad6c5; }
+.dns-rec { padding: 18px 14px 20px 16px; }
+.dns-rec.alt { background: rgb(6 93 63 / .05); padding-top: 22px; }
+.dns-rt { display: flex; align-items: center; gap: 10px; font-size: 12.5px; font-weight: 500; color: #0f6b4a; }
+.dns-rec.alt .dns-rt { color: #000; }
+.dns-rec hr { border: 0; border-top: 1px solid rgb(0 0 0 / .1); margin: 16px 0 22px; }
+.dns-row { display: grid; grid-template-columns: 70px 1px 90px 1px minmax(0, 1fr) auto; align-items: center; gap: 0 28px; margin-top: 18px; }
+.dns-rec hr + .dns-row { margin-top: 0; }
+.dns-row .sep { width: 1px; height: 14px; background: #000; align-self: center; margin-top: 18px; }
+.dns-row .dc { display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: #000; min-width: 0; }
+.dns-row .dc b { font-weight: 400; overflow-wrap: anywhere; }
+.dns-row .dc b.tp { align-self: flex-start; min-width: 42px; text-align: center; padding: 2px 10px; border-radius: 2px; background: #dcefe5; }
+.dns-row .dns-copy { align-self: center; }
+.dns-status { display: flex; align-items: center; gap: 8px; margin-top: 16px; font-size: 13px; color: #6b4d00; padding: 10px 12px; border-radius: 8px; background: #fff8e6; border: 1px solid #f0dca6; }
+.dns-status[hidden] { display: none; }
+.dm-spin { width: 14px; height: 14px; border-radius: 50%; border: 2px solid rgb(255 255 255 / .35); border-top-color: #fff; animation: dm-spin .7s linear infinite; }
+@keyframes dm-spin { to { transform: rotate(360deg); } }
+@media (max-width: 760px) {
+  .dm-in { padding: 20px 18px; }
+  .dm-head { grid-template-columns: 40px minmax(0, 1fr) 32px; gap: 12px; }
+  .dm-ic { width: 40px; height: 40px; }
+  .dm-ic svg { width: 20px; height: 20px; }
+  .dm-head h2 { font-size: 18px; }
+  .dm-field input { height: 46px; font-size: 16px; }
+  .dm-foot { margin-top: 28px; gap: 10px; }
+  .dm-foot .dm-btn, .dm-foot .btn-primary.dm-btn.wide { flex: 1; width: auto; height: 46px; font-size: 13px; }
+  .dns-cfg { flex-wrap: wrap; }
+  .dns-row { grid-template-columns: auto 1px minmax(0, 1fr); gap: 10px 14px; }
+  .dns-row .dc.v { grid-column: 1 / -1; }
+  .dns-row .dc.v + .dns-copy { grid-column: 1 / -1; justify-self: start; }
+  .dns-row > .sep:nth-of-type(2) { display: none; }
+}
 </style>
 </head>
 <body>
@@ -3008,12 +3228,59 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
       <div class="pf-field full"><label for="pf-desc">Description</label>
         <textarea class="pf-input" id="pf-desc" maxlength="500" placeholder="Add product description..."></textarea>
         <p class="pf-count" id="pf-count" aria-live="polite">0/500</p></div>
+      <div class="pf-seo full">
+        <div class="ps-head">
+          <span class="ps-badge" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#i-search"/></svg></span>
+          <span class="ps-label">Search engine listing<small>How this product appears on Google</small></span>
+          <button type="button" class="ps-edit" id="pf-seo-open"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-edit"/></svg>Edit SEO</button>
+        </div>
+        <div class="ps-card">
+          <div class="ps-top"><span class="gp-fav" id="ps-fav">D</span><span class="ps-site"><b id="ps-site"></b><span id="ps-url"></span></span><span class="ps-pill" id="ps-pill">Visible on Google</span></div>
+          <div class="ps-t" id="ps-t"></div>
+          <div class="ps-d" id="ps-d"></div>
+        </div>
+      </div>
     </div>
     <div class="pf-foot">
       <button type="button" class="btn-outline pf-btn" data-close>Cancel</button>
       <button type="submit" class="btn-primary pf-btn" id="pf-submit">Add Product</button>
     </div>
   </form>
+</dialog>
+
+<!-- ===================== DIALOG · PRODUCT SEO ===================== -->
+<dialog class="modal modal-seo" id="dlg-seo" aria-labelledby="seo-title">
+  <div class="seo-head">
+    <div><h2 id="seo-title">Search engine listing</h2><p>Control how this product looks on Google.</p></div>
+    <button type="button" class="icon-btn" data-close aria-label="Close"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-close"/></svg></button>
+  </div>
+  <div class="seo-body">
+    <div class="seo-stage" aria-label="Google preview">
+      <div class="seo-q"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-search"/></svg><span id="gp-q"></span></div>
+      <div class="seo-res">
+        <div class="ps-top"><span class="gp-fav" id="gp-fav">D</span><span class="ps-site"><b id="gp-sn"></b><span id="gp-url"></span></span></div>
+        <div class="seo-rt" id="gp-t"></div>
+        <div class="seo-rd" id="gp-d"></div>
+      </div>
+      <p class="seo-note" id="gp-off" hidden>This page is hidden from Google. People with the link can still open it.</p>
+    </div>
+    <div class="seo-fields">
+      <div class="pf-field"><div class="seo-lr"><label for="pf-seo-title">Page title</label><span id="seo-c-title"></span></div>
+        <input class="pf-input" id="pf-seo-title" autocomplete="off" placeholder="Buy Fresh Whole Broiler Chicken | Debaz Farm">
+        <div class="seo-meter"><i id="seo-bar-title"></i></div></div>
+      <div class="pf-field"><div class="seo-lr"><label for="pf-seo-meta">Meta description</label><span id="seo-c-meta"></span></div>
+        <textarea class="pf-input" id="pf-seo-meta" placeholder="A short line that makes people want to click"></textarea>
+        <div class="seo-meter"><i id="seo-bar-meta"></i></div></div>
+      <div class="pf-field"><div class="seo-lr"><label for="pf-seo-slug">URL slug</label></div>
+        <div class="pf-box"><span id="seo-dom" class="seo-dom"></span><input id="pf-seo-slug" autocomplete="off" spellcheck="false" placeholder="/products/whole-broiler-chicken"></div></div>
+      <label class="seo-switch"><span><b>Show on search engines</b><small>Turn off to hide this page from Google. It still works for people who have the link.</small></span>
+        <input type="checkbox" id="pf-seo-index" role="switch" checked></label>
+    </div>
+  </div>
+  <div class="seo-foot">
+    <button type="button" class="btn-text" id="pf-seo-reset">Reset to auto-generated</button>
+    <span class="seo-actions"><button type="button" class="btn-outline pf-btn" data-close>Cancel</button><button type="button" class="btn-primary pf-btn" id="pf-seo-save">Save changes</button></span>
+  </div>
 </dialog>
 
 <!-- ===================== DIALOG · ADD PAGE ===================== -->
@@ -3047,6 +3314,16 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
       <div><h2 id="cf-title">Create Product Category</h2></div>
       <button type="button" class="icon-btn" data-close aria-label="Close"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-close"/></svg></button>
     </div>
+    <label class="pf-drop" id="cf-drop">
+      <input type="file" id="cf-file" accept="image/png,image/jpeg" aria-label="Upload category image">
+      <svg class="pf-dash" aria-hidden="true"><rect x=".5" y=".5" rx="12" ry="12"/></svg>
+      <span id="cf-drop-body" style="display:contents"></span>
+    </label>
+    <div class="pf-imgbar" id="cf-img-bar" hidden>
+      <button type="button" class="btn-text" id="cf-img-replace">Replace image</button>
+      <button type="button" class="btn-text" id="cf-img-remove">Remove</button>
+    </div>
+    <p class="pf-err" id="cf-img-err" role="alert" hidden style="text-align:center"></p>
     <div class="pf-fields cf-fields">
       <div class="pf-field"><label for="cf-name">Category Name<span class="req" aria-hidden="true">*</span></label>
         <input class="pf-input" id="cf-name" maxlength="60" autocomplete="off" placeholder="e.g. Broiler Poultry" required>
@@ -3131,6 +3408,51 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
   </form>
 </dialog>
 
+<!-- ===================== DIALOG · CONNECT CUSTOM DOMAIN ===================== -->
+<dialog class="modal modal-domain" id="dlg-domain" aria-labelledby="dm-title">
+  <form class="dm-in" id="dm-form" novalidate>
+    <div class="dm-head">
+      <span class="dm-ic"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.25" stroke="currentColor" stroke-width="1.3"/><path d="M1.75 8h12.5M8 1.75c1.9 2 1.9 10.5 0 12.5M8 1.75c-1.9 2-1.9 10.5 0 12.5" stroke="currentColor" stroke-width="1.3"/></svg></span>
+      <div><h2 id="dm-title">Connect Custom Domain</h2><p>Enter your existing domain name (e.g; purchased from Namecheap, GoDaddy, or Google Domains).</p></div>
+      <button type="button" class="icon-btn" data-close aria-label="Close"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-close"/></svg></button>
+    </div>
+    <label class="dm-label" for="dm-input">Domain Name:<span class="req" aria-hidden="true">*</span></label>
+    <div class="dm-field">
+      <input id="dm-input" autocomplete="off" spellcheck="false" inputmode="url" placeholder="e.g. mybusiness.com" aria-describedby="dm-err">
+      <span class="dm-ok" id="dm-ok" hidden><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-label="Valid domain"><circle cx="8" cy="8" r="7" fill="#22a95b"/><path d="m5 8.2 2 2 4-4.2" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </div>
+    <p class="pf-err" id="dm-err" role="alert" hidden></p>
+    <div class="dm-foot">
+      <button type="button" class="btn-outline dm-btn" data-close>Cancel</button>
+      <button type="submit" class="btn-primary dm-btn">Verify DNS <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
+    </div>
+  </form>
+</dialog>
+
+<!-- ===================== DIALOG · DNS RECORD INSTRUCTIONS ===================== -->
+<dialog class="modal modal-domain" id="dlg-dns" aria-labelledby="dns-title">
+  <div class="dm-in">
+    <div class="dm-head">
+      <span class="dm-ic"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.25" stroke="currentColor" stroke-width="1.3"/><path d="M1.75 8h12.5M8 1.75c1.9 2 1.9 10.5 0 12.5M8 1.75c-1.9 2-1.9 10.5 0 12.5" stroke="currentColor" stroke-width="1.3"/></svg></span>
+      <div><h2 id="dns-title">DNS Verification &amp; Record Instructions</h2><p>Once you enter your domain, the system instantly generates the required DNS records and displays them in a clear, copy-and-paste format.</p></div>
+      <button type="button" class="icon-btn" data-close aria-label="Close"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-close"/></svg></button>
+    </div>
+    <div class="dns-box">
+      <div class="dns-cfg">
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.3"/><path d="M8 7.2v4M8 4.9h.01" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span>DNS Configuration for:</span><b id="dns-domain"></b>
+        <button type="button" class="dns-copy" data-dns-copy="all"></button>
+      </div>
+      <div id="dns-recs"></div>
+    </div>
+    <p class="dns-status" id="dns-status" role="status" hidden></p>
+    <div class="dm-foot">
+      <button type="button" class="btn-outline dm-btn" id="dns-back"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" style="transform:scaleX(-1)"><use href="#i-arrow-right"/></svg>Back</button>
+      <button type="button" class="btn-primary dm-btn wide" id="dns-verify">Verify Connection</button>
+    </div>
+  </div>
+</dialog>
+
 <div class="toast" id="toast" role="status" aria-live="polite"><span id="toast-text"></span><a id="toast-link" hidden></a></div>
 
 <!-- ===================== 05 · SITE OVERVIEW + WORKSPACE & SITE SWITCHER  (#/overview) ===================== -->
@@ -3210,7 +3532,7 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
             Website Pages</a></li>
           <li class="nav-grp"><button type="button" class="nav-link nav-group-btn" data-store-toggle aria-expanded="false" aria-controls="store-sub">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-store"/></svg>
-            E-Commerce / Store
+            Store
             <svg class="chev" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-chevron-down"/></svg></button>
             <ul class="store-sub" id="store-sub" hidden>
               <li><a href="#/overview/products" data-site-nav="products"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1.5 2h2l1.6 8h7.4l1.5-5.5H4.3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.2" cy="13" r="1" fill="currentColor"/><circle cx="11.8" cy="13" r="1" fill="currentColor"/></svg>Products</a></li>
@@ -3218,6 +3540,9 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
               <li><a href="#/overview/categories" data-site-nav="categories"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="5.5" y="1.75" width="5" height="4" rx="1" stroke="currentColor" stroke-width="1.4"/><rect x="1.75" y="10.25" width="5" height="4" rx="1" stroke="currentColor" stroke-width="1.4"/><rect x="9.25" y="10.25" width="5" height="4" rx="1" stroke="currentColor" stroke-width="1.4"/><path d="M8 5.75V8M4.25 10.25V8h7.5v2.25" stroke="currentColor" stroke-width="1.4"/></svg>Categories</a></li>
               <li><a href="#/overview/checkout" data-site-nav="checkout"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-settings"/></svg>Checkout Settings</a></li>
             </ul></li>
+          <li><a class="nav-link" href="#/overview/analytics" data-site-nav="analytics">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 14.25h12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><rect x="2.75" y="8.5" width="2.5" height="5.75" rx=".5" stroke="currentColor" stroke-width="1.3"/><rect x="6.75" y="5.25" width="2.5" height="9" rx=".5" stroke="currentColor" stroke-width="1.3"/><rect x="10.75" y="2" width="2.5" height="12.25" rx=".5" stroke="currentColor" stroke-width="1.3"/></svg>
+            Analytics</a></li>
           <li><a class="nav-link" href="#/overview" data-site-nav="cms">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2.25" y="2.25" width="11.5" height="11.5" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M5 5.5h6M5 8h6M5 10.5h3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
             Content/CMS</a></li>
@@ -3227,7 +3552,7 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
           <li><a class="nav-link" href="#/overview" data-site-nav="permissions">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-team"/></svg>
             Site Permissions</a></li>
-          <li><a class="nav-link" href="#/overview" data-site-nav="settings">
+          <li><a class="nav-link" href="#/overview/settings" data-site-nav="settings">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-settings"/></svg>
             Site Settings</a></li>
         </ul>
@@ -3279,7 +3604,7 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
       <div class="proto-group"><h2>Sign up & sign in</h2><a href="#/signin">Sign in</a><a href="#/signup">Sign up</a><a href="#/signup/password">Set password</a><a href="#/signup/created">Account created</a><a href="#/reset">Reset password</a><a href="#/invite">Accept invite</a></div>
       <div class="proto-group"><h2>Onboarding</h2><a href="#/onboarding/profile">Profile</a><a href="#/onboarding/workspace">New workspace</a></div>
       <div class="proto-group"><h2>Workspace</h2><a href="#/workspace">All sites</a><a href="#/workspace/templates">Templates</a><a href="#/workspace/team">Team</a><a href="#/workspace/settings">General settings</a><a href="#/overview">Site overview</a></div>
-      <div class="proto-group"><h2>Site</h2><a href="#/overview/pages">Website pages</a><a href="#/overview/products">Products</a><a href="#/overview/orders">Orders</a><a href="#/overview/categories">Categories</a><a href="#/overview/checkout">Checkout settings</a></div>
+      <div class="proto-group"><h2>Site</h2><a href="#/overview/pages">Website pages</a><a href="#/overview/products">Products</a><a href="#/overview/orders">Orders</a><a href="#/overview/categories">Categories</a><a href="#/overview/checkout">Checkout settings</a><a href="#/overview/analytics">Analytics</a><a href="#/overview/settings">Site settings</a></div>
     </div>
   </nav>
 </div>
@@ -4663,8 +4988,8 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
      E-Commerce / Store → Products (+ Add / edit product dialog)
      ===================================================================== */
   let siteView = 'overview';
-  const SITE_VIEWS = { overview: '#/overview', pages: '#/overview/pages', products: '#/overview/products', orders: '#/overview/orders', categories: '#/overview/categories', checkout: '#/overview/checkout' };
-  const SITE_VIEW_TITLES = { overview: 'Overview', pages: 'Website Pages', products: 'Products', orders: 'Orders', categories: 'Categories', checkout: 'Checkout Settings' };
+  const SITE_VIEWS = { overview: '#/overview', pages: '#/overview/pages', products: '#/overview/products', orders: '#/overview/orders', categories: '#/overview/categories', checkout: '#/overview/checkout', analytics: '#/overview/analytics', settings: '#/overview/settings' };
+  const SITE_VIEW_TITLES = { overview: 'Overview', pages: 'Website Pages', products: 'Products', orders: 'Orders', categories: 'Categories', checkout: 'Checkout Settings', analytics: 'Analytics', settings: 'Site Settings' };
   const curSite = () => { const w = ws(); return w ? w.sites.find(x => x.id === state.currentSiteId) || null : null; };
   const money = n => '$' + Number(n).toFixed(2);
   const isShop = s => s.theme === 'alicia' || s.theme === 'sun';
@@ -4697,6 +5022,8 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
     else if (siteView === 'orders') renderOrdersView();
     else if (siteView === 'categories') renderCategoriesView();
     else if (siteView === 'checkout') renderCheckoutView();
+    else if (siteView === 'analytics') renderAnalyticsView();
+    else if (siteView === 'settings') renderSettingsView();
     else renderSiteOverview();
     document.title = SITE_VIEW_TITLES[siteView] + ' · Digital Romanian';
   }
@@ -4766,12 +5093,12 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
     }
     return (s.store = { products });
   }
-  const statusPill = p => p.status === 'draft' ? '<span class="spill2 draft">Draft</span>'
+  const statusPill = p => p.status === 'archived' ? '<span class="spill2 archived">Archived</span>' : p.status === 'draft' ? '<span class="spill2 draft">Draft</span>'
     : p.stock === 0 ? '<span class="spill2 out">Out of Stock</span>' : '<span class="spill2">Published</span>';
-  const FILTERS = { all: 'All products', published: 'Published', draft: 'Draft', out: 'Out of stock' };
+  const FILTERS = { all: 'All products', published: 'Published', draft: 'Draft', archived: 'Archived', out: 'Out of stock' };
   function prodList(s) {
     const q = state.prodQuery.trim().toLowerCase(), f = state.prodFilter;
-    return storeOf(s).products.filter(p => (f === 'all' || (f === 'out' ? p.stock === 0 && p.status !== 'draft' : f === 'draft' ? p.status === 'draft' : p.status === 'published' && p.stock > 0))
+    return storeOf(s).products.filter(p => (f === 'all' || (f === 'out' ? p.stock === 0 && p.status === 'published' : f === 'draft' ? p.status === 'draft' : f === 'archived' ? p.status === 'archived' : p.status === 'published' && p.stock > 0))
       && (!q || [p.name, p.sub, p.sku, p.cat].some(x => x.toLowerCase().includes(q))));
   }
 
@@ -4827,8 +5154,10 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
           <button type="button" class="edit-btn" data-pedit="${p.id}" aria-label="Edit ${esc(p.name)}">${icon('i-edit', 11)}Edit</button>
           <span class="menu-anchor"><button type="button" class="more-btn" data-more="pm-${p.id}" aria-expanded="false" aria-label="More actions for ${esc(p.name)}">${icon('i-more')}</button>
             <div class="more-menu row-menu" id="pm-${p.id}" hidden>
+              <button data-pedit="${p.id}">Edit</button>
               <button data-pdup="${p.id}">Duplicate</button>
-              <button data-pstatus="${p.id}">${p.status === 'draft' ? 'Publish' : 'Move to draft'}</button>
+              ${p.status === 'draft' ? `<button data-pstatus="${p.id}">Publish</button>` : ''}
+              <button data-parchive="${p.id}">${p.status === 'archived' ? 'Restore' : 'Archive'}</button>
               <hr><button class="danger" data-pdel="${p.id}">Delete product</button>
             </div></span>
         </span>
@@ -4945,7 +5274,8 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
       list.splice(i + 1, 0, { ...src, id: s.id + 'p' + Date.now(), name: src.name + ' copy', sku, status: 'draft' });
       closeMenus(); paintProducts(); toast(`${src.name} duplicated as a draft`); return;
     }
-    if ((b = hit('data-pstatus'))) { const p = P().find(x => x.id === b.dataset.pstatus); p.status = p.status === 'draft' ? 'published' : 'draft'; closeMenus(); paintProducts(); toast(`${p.name} ${p.status === 'draft' ? 'moved to draft' : 'published'}`); return; }
+    if ((b = hit('data-pstatus'))) { const p = P().find(x => x.id === b.dataset.pstatus); p.status = 'published'; closeMenus(); paintProducts(); toast(`${p.name} published`); return; }
+    if ((b = hit('data-parchive'))) { const p = P().find(x => x.id === b.dataset.parchive); p.status = p.status === 'archived' ? 'published' : 'archived'; closeMenus(); paintProducts(); toast(`${p.name} ${p.status === 'archived' ? 'archived' : 'restored'}`); return; }
     if ((b = hit('data-pdel'))) {
       const list = P(), i = list.findIndex(x => x.id === b.dataset.pdel), [p] = list.splice(i, 1);
       closeMenus(); paintProducts();
@@ -5008,6 +5338,54 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
   ['#pf-sale', '#pf-regular'].forEach(id => $(id).addEventListener('input', e => { e.target.value = e.target.value.replace(/[^\d.]/g, '').replace(/(\..*)\./g, '$1'); }));
   $('#pf-desc').addEventListener('input', e => { $('#pf-count').textContent = `${e.target.value.length}/500`; });
 
+  /* ---- Product SEO: summary card + separate dialog ---- */
+  const dSeo = $('#dlg-seo');
+  let seoAuto = { title: true, meta: true, slug: true }, seoSnap = null, seoSaved = false;
+  const SEO_T = 60, SEO_D = 160;
+  const seoSlug = n => '/products/' + n.toLowerCase().replace(/\(.*?\)/g, m => m.slice(1, -1)).replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  const seoTwo = t => { const m = t.replace(/\s+/g, ' ').trim().match(/[^.!?]+[.!?]+/g); return m ? m.slice(0, 2).join(' ').trim() : t.trim(); };
+  const seoCut = (t, n) => t.length > n ? t.slice(0, n - 1).trimEnd() + '\u2026' : t;
+  function seoSite() { let name = 'Your store', domain = 'yourwebsite.com'; try { const s = curSite(); if (s) { name = s.name || name; domain = (siteData(s) || {}).domain || domain; } } catch (e) {} return { name, domain }; }
+  function seoFill() {
+    const n = $('#pf-name').value.trim(), site = seoSite();
+    if (seoAuto.title) $('#pf-seo-title').value = n ? n + ' \u2014 ' + site.name : '';
+    if (seoAuto.meta) $('#pf-seo-meta').value = seoTwo($('#pf-desc').value);
+    if (seoAuto.slug) $('#pf-seo-slug').value = n ? seoSlug(n) : '';
+  }
+  function seoPaint() {
+    const t = $('#pf-seo-title').value, m = $('#pf-seo-meta').value, sl = $('#pf-seo-slug').value.trim(), site = seoSite(), on = $('#pf-seo-index').checked;
+    const path = sl.replace(/^\/+/, '').split('/').filter(Boolean).join(' \u203A ');
+    const url = site.domain + (path ? ' \u203A ' + path : ''), ini = site.name.charAt(0).toUpperCase();
+    const T = seoCut(t, SEO_T) || 'Page title', D = seoCut(m, SEO_D) || 'Add a description and it shows here.';
+    $('#ps-fav').textContent = ini; $('#ps-site').textContent = site.name; $('#ps-url').textContent = url; $('#ps-t').textContent = T; $('#ps-d').textContent = D;
+    $('#ps-pill').textContent = on ? 'Visible on Google' : 'Hidden from Google'; $('#ps-pill').classList.toggle('off', !on);
+    $('#gp-fav').textContent = ini; $('#gp-sn').textContent = site.name; $('#gp-url').textContent = url; $('#gp-t').textContent = T; $('#gp-d').textContent = D;
+    $('#gp-q').textContent = 'buy ' + ($('#pf-name').value.trim().toLowerCase() || 'your product') + ' online';
+    $('#seo-dom').textContent = site.domain;
+    [['title', t, SEO_T], ['meta', m, SEO_D]].forEach(([k, v, lim]) => {
+      const c = $('#seo-c-' + k), b = $('#seo-bar-' + k);
+      c.textContent = v.length + ' / ' + lim; c.className = v.length > lim ? 'over' : '';
+      b.style.width = Math.min(100, v.length / lim * 100) + '%'; b.className = v.length > lim ? 'over' : '';
+    });
+    $('#gp-off').hidden = on; $('.seo-res', dSeo).classList.toggle('off', !on);
+  }
+  function seoRestore(o) {
+    seoAuto = { ...o.auto }; $('#pf-seo-title').value = o.title; $('#pf-seo-meta').value = o.meta; $('#pf-seo-slug').value = o.slug; $('#pf-seo-index').checked = o.index;
+  }
+  const seoRead = () => ({ title: $('#pf-seo-title').value.trim(), meta: $('#pf-seo-meta').value.trim(), slug: $('#pf-seo-slug').value.trim(), index: $('#pf-seo-index').checked, auto: { ...seoAuto } });
+  function seoLoad(p) {
+    if (p && p.seo) seoRestore(p.seo);
+    else { seoAuto = { title: true, meta: true, slug: true }; $('#pf-seo-index').checked = true; seoFill(); }
+    seoPaint();
+  }
+  ['#pf-name', '#pf-desc'].forEach(id => $(id).addEventListener('input', () => { seoFill(); seoPaint(); }));
+  [['title', '#pf-seo-title'], ['meta', '#pf-seo-meta'], ['slug', '#pf-seo-slug']].forEach(([k, id]) => $(id).addEventListener('input', () => { seoAuto[k] = false; seoPaint(); }));
+  $('#pf-seo-index').addEventListener('change', seoPaint);
+  $('#pf-seo-open').addEventListener('click', () => { seoSnap = seoRead(); seoSaved = false; seoPaint(); dSeo.showModal(); $('#pf-seo-title').focus(); });
+  $('#pf-seo-save').addEventListener('click', () => { seoSaved = true; dSeo.close(); });
+  $('#pf-seo-reset').addEventListener('click', () => { seoAuto = { title: true, meta: true, slug: true }; seoFill(); seoPaint(); });
+  dSeo.addEventListener('close', () => { if (!seoSaved && seoSnap) seoRestore(seoSnap); seoPaint(); if (seoSaved) toast('Search listing updated'); seoSaved = false; });
+
   function openProduct(p) {
     pfEdit = p || null; pfF.reset(); pfImg = p ? p.img : null; pfSkuEdited = !!p; pfImgErr('');
     $('#pf-title').textContent = p ? 'Edit Product' : 'Add Product';
@@ -5018,6 +5396,7 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
       $('#pf-stock').value = p.stock; $('#pf-sale').value = p.price.toFixed(2); $('#pf-regular').value = (p.regular || p.price).toFixed(2); $('#pf-desc').value = p.desc || '';
     }
     $('#pf-count').textContent = `${$('#pf-desc').value.length}/500`;
+    seoLoad(p);
     PF_IDS.forEach(id => fieldErr(id, ''));
     pfPaintImg(); dProd.showModal(); $('#pf-name').focus();
   }
@@ -5039,7 +5418,7 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
     if (!(regular > 0)) bad('pf-regular', 'Enter a regular price above 0, e.g. 4.99.');
     else if (price > regular) bad('pf-sale', 'The sale price can’t be higher than the regular price.');
     if (first) { $('#' + first).focus(); return; }
-    const data = { name, sku, cat, stock: +stockRaw, price: Math.round(price * 100) / 100, regular: Math.round(regular * 100) / 100, desc, img: pfImg,
+    const data = { name, sku, cat, stock: +stockRaw, price: Math.round(price * 100) / 100, regular: Math.round(regular * 100) / 100, desc, img: pfImg, seo: seoRead(),
       sub: desc ? desc.split('\n')[0].slice(0, 40) : (pfEdit ? pfEdit.sub : cat) };
     if (pfEdit) {
       if (pfEdit.cat !== cat && !pfImg) data.emoji = CAT_EMOJI[cat];
@@ -5102,18 +5481,18 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
     rowsEl.innerHTML = rows.map(c => {
       const parent = c.parent && catById(s, c.parent);
       return `<div class="ctab-row" role="row">
-        <span class="ccell" role="cell"><span class="cthumb" style="--tb:${c.tint}" aria-hidden="true">${c.emoji}${c.photo ? `<img src="${photoUrl(c.photo)}" alt="" loading="lazy" onerror="this.remove()">` : ''}</span>
+        <span class="ccell" role="cell"><span class="cthumb" style="--tb:${c.tint}" aria-hidden="true">${c.emoji}${(c.img || c.photo) ? `<img src="${c.img || photoUrl(c.photo)}" alt="" loading="lazy" onerror="this.remove()">` : ''}</span>
           <span class="ptxt"><strong>${esc(c.name)}</strong>${parent ? `<small class="cparent">In ${esc(parent.name)}</small>` : ''}<small>${esc(c.desc || 'No description yet.')}</small>
             <small class="pmeta">/${esc(c.slug)} · ${items(c.count)}</small></span></span>
         <span class="c-slug" role="cell">/${esc(c.slug)}</span>
         <span class="c-count" role="cell">${items(c.count)}</span>
-        <span class="c-cstatus" role="cell"><span class="cpill${c.status === 'active' ? '' : ' off'}">${c.status === 'active' ? 'Active' : 'Hidden'}</span></span>
+        <span class="c-cstatus" role="cell"><span class="cpill${c.status === 'active' ? '' : ' off'}">${c.status === 'active' ? 'Active' : 'Archived'}</span></span>
         <span class="c-act" role="cell">
           <button type="button" class="edit-btn" data-cat-edit="${c.id}" aria-label="Edit ${esc(c.name)}">${icon('i-edit', 12)}Edit</button>
           <span class="menu-anchor"><button type="button" class="more-btn" data-more="cm-${c.id}" aria-expanded="false" aria-label="More actions for ${esc(c.name)}">${icon('i-more')}</button>
             <div class="more-menu row-menu" id="cm-${c.id}" hidden>
               <button data-cat-products="${c.id}">View products</button>
-              <button data-cat-status="${c.id}">${c.status === 'active' ? 'Hide from store' : 'Show in store'}</button>
+              <button data-cat-status="${c.id}">${c.status === 'active' ? 'Archive' : 'Restore'}</button>
               <hr><button class="danger" data-cat-del="${c.id}">Delete category</button>
             </div></span>
         </span>
@@ -5130,7 +5509,7 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
     if ((b = hit('data-cat-edit'))) { closeMenus(); openCategory(catById(s, b.dataset.catEdit)); return; }
     if ((b = hit('data-cat-page'))) { state.catPage = +b.dataset.catPage; paintCategories(); return; }
     if ((b = hit('data-cat-products'))) { const c = catById(s, b.dataset.catProducts); closeMenus(); state.prodQuery = ''; state.prodFilter = 'all'; state.prodPage = 1; go(SITE_VIEWS.products); toast(`${c.name} has ${c.count} ${c.count === 1 ? 'product' : 'products'}`); return; }
-    if ((b = hit('data-cat-status'))) { const c = catById(s, b.dataset.catStatus); c.status = c.status === 'active' ? 'hidden' : 'active'; closeMenus(); paintCategories(); toast(`${c.name} ${c.status === 'active' ? 'is now shown in the store' : 'is hidden from the store'}`); return; }
+    if ((b = hit('data-cat-status'))) { const c = catById(s, b.dataset.catStatus); c.status = c.status === 'active' ? 'archived' : 'active'; closeMenus(); paintCategories(); toast(`${c.name} ${c.status === 'active' ? 'restored' : 'archived'}`); return; }
     if ((b = hit('data-cat-del'))) {
       const all = list(), i = all.findIndex(x => x.id === b.dataset.catDel), [c] = all.splice(i, 1);
       const kids = all.filter(x => x.parent === c.id); kids.forEach(k => k.parent = null);
@@ -5141,10 +5520,31 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
 
   /* ---------- Create / edit category dialog ---------- */
   const dCat = $('#dlg-category');
-  let cfEdit = null, cfSlugEdited = false;
+  let cfEdit = null, cfSlugEdited = false, cfImg = null;
+  function cfPaintImg() {
+    $('#cf-drop').classList.toggle('has-img', !!cfImg);
+    $('#cf-drop-body').innerHTML = cfImg ? `<img src="${cfImg}" alt="Category image preview">`
+      : `${I_CLOUD}<strong>Upload category image</strong><small>Drag and drop an image, or click to browse</small><small>JPG, PNG (max 5MB)</small>`;
+    $('#cf-img-bar').hidden = !cfImg;
+  }
+  function cfImgErr(msg) { const e = $('#cf-img-err'); e.textContent = msg || ''; e.hidden = !msg; }
+  function cfTake(file) {
+    if (!file) return;
+    if (!/^image\/(png|jpe?g)$/.test(file.type)) return cfImgErr('Use a JPG or PNG image.');
+    if (file.size > 5 * 1024 * 1024) return cfImgErr('That image is over 5MB. Pick a smaller one.');
+    cfImgErr('');
+    const r = new FileReader(); r.onload = () => { cfImg = r.result; cfPaintImg(); }; r.readAsDataURL(file);
+  }
+  $('#cf-file').addEventListener('change', e => { cfTake(e.target.files[0]); e.target.value = ''; });
+  const cfDrop = $('#cf-drop');
+  ['dragenter', 'dragover'].forEach(ev => cfDrop.addEventListener(ev, e => { e.preventDefault(); cfDrop.classList.add('drag'); }));
+  ['dragleave', 'drop'].forEach(ev => cfDrop.addEventListener(ev, () => cfDrop.classList.remove('drag')));
+  cfDrop.addEventListener('drop', e => { e.preventDefault(); cfTake(e.dataTransfer.files[0]); });
+  $('#cf-img-replace').addEventListener('click', () => $('#cf-file').click());
+  $('#cf-img-remove').addEventListener('click', () => { cfImg = null; cfPaintImg(); });
   function openCategory(c) {
     const s = curSite(); if (!s) return;
-    cfEdit = c || null; $('#cf-form').reset(); cfSlugEdited = !!c;
+    cfEdit = c || null; $('#cf-form').reset(); cfSlugEdited = !!c; cfImg = c ? (c.img || null) : null; cfImgErr('');
     $('#cf-title').textContent = c ? 'Edit Product Category' : 'Create Product Category';
     $('#cf-submit').textContent = c ? 'Save Changes' : 'Create';
     /* A category can't be its own parent, or the parent of its parent */
@@ -5153,7 +5553,7 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
     if (c) { $('#cf-name').value = c.name; $('#cf-slug').value = c.slug; $('#cf-parent').value = c.parent || ''; $('#cf-desc').value = c.desc || ''; }
     $('#cf-count').textContent = `${$('#cf-desc').value.length}/500`;
     ['cf-name', 'cf-slug'].forEach(id => fieldErr(id, ''));
-    dCat.showModal(); $('#cf-name').focus();
+    cfPaintImg(); dCat.showModal(); $('#cf-name').focus();
   }
   $('#cf-name').addEventListener('input', e => { fieldErr('cf-name', ''); if (!cfSlugEdited) { $('#cf-slug').value = catSlug(e.target.value); fieldErr('cf-slug', ''); } });
   $('#cf-slug').addEventListener('input', e => { cfSlugEdited = true; fieldErr('cf-slug', ''); e.target.value = e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-{2,}/g, '-'); });
@@ -5168,7 +5568,7 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
     if (!slug) bad('cf-slug', 'Add a URL slug, e.g. broiler-poultry.');
     else if (list.some(x => x !== cfEdit && x.slug === slug)) bad('cf-slug', `/${slug} is already used by another category.`);
     if (first) { $('#' + first).focus(); return; }
-    const data = { name, slug, parent: $('#cf-parent').value || null, desc: $('#cf-desc').value.trim() };
+    const data = { name, slug, parent: $('#cf-parent').value || null, desc: $('#cf-desc').value.trim(), img: cfImg };
     if (cfEdit) { Object.assign(cfEdit, data); dCat.close(); paintCategories(); toast(`${name} updated`); }
     else {
       const [emoji, tint] = NEW_CAT_LOOK[list.length % NEW_CAT_LOOK.length];
@@ -5543,6 +5943,331 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
     const data = { name, type, amount: Math.round(amount * 100) / 100, eta: $('#sr-eta').value, regions };
     if (srEdit) Object.assign(srEdit, data); else c.zones.push({ id: s.id + 'z' + Date.now(), ...data });
     dShip.close(); renderCheckoutView(); toast(srEdit ? `${name} updated` : `${name} added`);
+  });
+
+  /* =====================================================================
+     Site analytics (#/overview/analytics): KPIs, live trend chart,
+     top pages and top-selling products, all computed from one series
+     ===================================================================== */
+  Object.assign(state, { anDays: 30, anMetric: 'views', ssTab: 'domain' });
+  const TF_LABEL = { 7: 'Last 7 Days', 30: 'Last 30 Days', 90: 'Last 90 Days' };
+  /* Daily page views for the last 30 days (shape matches the design) */
+  const TREND30 = [900, 1150, 1050, 1650, 1850, 1900, 2000, 1950, 1750, 2150, 2450, 2650, 2300, 1700, 2000, 2500, 2700, 2550, 2450, 2550, 2600, 2600, 2650, 2800, 2700, 2850, 3000, 2900, 3050, 3350];
+  const VISIT_RATIO = 14820 / TREND30.reduce((a, b) => a + b, 0);
+  const DELTAS = { 7: [4.1, 3.6, 2.9], 30: [12.4, 10.2, 8.2], 90: [18.7, 15.3, 11.6] };
+  const CONV = { 7: 2.6, 30: 2.4, 90: 2.2 };
+  const TOP_SELLERS = [
+    { name: 'Whole Broiler Chicken', base: 84, emoji: '🍗', tint: '#f6e3de', photo: '1633096013004-e2cb4023b560' },
+    { name: 'New Hope Feed 510', base: 32, emoji: '🌾', tint: '#f3e6d4', photo: '1574323347407-f5e1ad6d020b' },
+    { name: 'Fresh Catfish (Live)', base: 19, emoji: '🐟', tint: '#dfe8f7', photo: '1534043464124-3be32fe000c9' }
+  ];
+  const PAGE_SHARE = [6200, 4100, 1800].map(v => v / 14820);
+  const PAGE_TINT = ['#7a2e12', '#2f4f6f', '#2e7d4a'];
+  const seedOf = str => [...str].reduce((a, c) => (a * 31 + c.charCodeAt(0)) >>> 0, 7);
+  const rnd = n => { const x = Math.sin(n * 12.9898) * 43758.5453; return x - Math.floor(x); };
+  const fmtN = n => Math.round(n).toLocaleString('en-US');
+  const fmtDay = d => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+  function anSeries(s, days) {
+    const seed = seedOf(s.id), scale = s.id === 's1' ? 1 : 0.3 + (seed % 55) / 100;
+    let views = TREND30.slice();
+    if (days > 30) {
+      const pre = Array.from({ length: days - 30 }, (_, i) => 550 + i * 7 + 260 * Math.sin(i / 3.6) + rnd(seed + i) * 220);
+      views = pre.concat(views);
+    } else views = views.slice(-days);
+    const today = new Date(); today.setHours(12, 0, 0, 0);
+    return views.map((v, i) => {
+      const jitter = s.id === 's1' ? 1 : 0.88 + rnd(seed * 3 + i) * 0.24;
+      const pv = Math.round(v * scale * jitter);
+      return { date: new Date(today.getTime() - (views.length - 1 - i) * D), views: pv, visits: Math.round(pv * VISIT_RATIO) };
+    });
+  }
+  function anCompute(s) {
+    const days = state.anDays, ser = anSeries(s, days), shop = isShop(s);
+    const visits = Math.round(ser.reduce((a, d) => a + d.views, 0) * VISIT_RATIO);
+    const k = visits / 14820, dl = DELTAS[days];
+    return {
+      ser, visits, shop,
+      unique: Math.round(visits * 11104 / 14820),
+      revenue: shop ? Math.round(visits * 482500 / 14820 / 100) * 100 : 0,
+      conv: shop ? CONV[days] : 0, dl,
+      pages: pagesOf(s).slice(0, 3).map((p, i) => ({ ...p, views: Math.round(visits * PAGE_SHARE[i]) })),
+      sellers: shop ? TOP_SELLERS.map(p => ({ ...p, sold: Math.max(1, Math.round(p.base * k)) })) : []
+    };
+  }
+  const svgS = (p, w = 18, vb = '0 0 16 16') => `<svg width="${w}" height="${w}" viewBox="${vb}" fill="none" aria-hidden="true">${p}</svg>`;
+  const KI = {
+    eye: svgS('<path d="M1.5 8S3.9 3.5 8 3.5 14.5 8 14.5 8 12.1 12.5 8 12.5 1.5 8 1.5 8Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.4"/>'),
+    users: svgS('<circle cx="6" cy="5.5" r="2.4" stroke="currentColor" stroke-width="1.4"/><path d="M1.75 13.5c0-2.5 1.9-4 4.25-4s4.25 1.5 4.25 4M11 3.3a2.3 2.3 0 0 1 0 4.4M12.3 9.7c1.2.6 2 1.9 2 3.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>'),
+    bars: svgS('<rect x="2" y="2" width="12" height="12" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M5.25 11V8M8 11V5.5M10.75 11V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>'),
+    conv: svgS('<path d="M12.5 5.5A5 5 0 0 0 3.6 4.4M3.5 10.5a5 5 0 0 0 8.9 1.1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M12.75 2.75v2.9h-2.9M3.25 13.25v-2.9h2.9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 5.75v4.5M6.6 6.9h2.1a.8.8 0 0 1 0 1.6H7.3a.8.8 0 0 0 0 1.6h2.1" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>')
+  };
+  const CAL = svgS('<rect x="2.25" y="3" width="11.5" height="10.5" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M2.25 6.5h11.5M5.5 1.75v2.5M10.5 1.75v2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>', 15);
+  const DL = svgS('<path d="M8 2.5v8M4.8 7.5 8 10.7l3.2-3.2M2.5 13.5h11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>', 12);
+  let anData = null;
+
+  function renderAnalyticsView() {
+    const el = $('#ov-view'), s = curSite();
+    syncDomain(s);
+    if (!s) { el.innerHTML = noSiteView('Site & Store Analytics', 'Track your visitor traffic, conversion rates, and revenue performance.'); return; }
+    const a = anData = anCompute(s);
+    const up = v => `<span class="an-delta">↑ +${v}%</span>`;
+    const kpi = (ic, c, label, val, d) => `<div class="ov-card an-kpi"><span class="an-ki" style="--kc:${c}">${KI[ic]}</span><div class="t"><small>${label}</small><div class="v"><strong>${val}</strong>${d != null ? up(d) : ''}</div></div></div>`;
+    el.innerHTML = `
+      <div class="ov-head"><h1 tabindex="-1">Site &amp; Store Analytics</h1><p>Track your visitor traffic, conversion rates, and revenue performance.</p></div>
+      <div class="an-bar">
+        <div class="an-tf-wrap">
+          <button type="button" class="an-tf" id="an-tf-btn" data-more="an-tf-menu" aria-haspopup="true" aria-expanded="false">${CAL}<span>Timeframe</span><b>${TF_LABEL[state.anDays]}</b>${CHEV_D}</button>
+          <div class="more-menu fmenu an-tf-menu" id="an-tf-menu" role="menu" hidden>
+            ${[7, 30, 90].map(d => `<button role="menuitemradio" aria-checked="${d === state.anDays}" data-an-days="${d}">${TF_LABEL[d]}${TICK}</button>`).join('')}
+          </div>
+        </div>
+        <button type="button" class="btn-dark an-export" data-an-export>${DL}Export Report CSV</button>
+      </div>
+      <div class="an-kpis">
+        ${kpi('eye', '#4a5aa8', 'Total Visits', fmtN(a.visits), a.dl[0])}
+        ${kpi('users', '#a07c3c', 'Unique Visitors', fmtN(a.unique), a.dl[1])}
+        ${kpi('bars', '#2e9a54', 'Store Revenue', a.shop ? '₦' + fmtN(a.revenue) : '—', a.shop ? a.dl[2] : null)}
+        ${kpi('conv', '#8a3fa8', 'Conversion Rate', a.shop ? a.conv.toFixed(1) + '%' : '—', null)}
+      </div>
+      <section class="ov-card an-chart" aria-labelledby="an-ct">
+        <header><h2 id="an-ct">Traffic Overview <span>(Visitor Trend Chart)</span></h2>
+          <span class="menu-anchor"><button type="button" class="more-btn" data-more="an-cm" aria-expanded="false" aria-label="Chart options">${icon('i-more')}</button>
+            <div class="more-menu row-menu fmenu" id="an-cm" role="menu" hidden>
+              <p class="menu-label">Plot</p>
+              <button role="menuitemradio" data-an-metric="views" aria-checked="${state.anMetric === 'views'}">Page views${TICK}</button>
+              <button role="menuitemradio" data-an-metric="visits" aria-checked="${state.anMetric === 'visits'}">Visits${TICK}</button>
+              <hr><button data-an-export>Download CSV</button>
+            </div></span></header>
+        <div class="an-plot" id="an-plot"></div>
+      </section>
+      <div class="an-bottom">
+        <section class="ov-card an-list" aria-labelledby="an-pt">
+          <header><h2 id="an-pt">Top Performing Pages</h2></header>
+          <ol>${a.pages.map((p, i) => `<li class="an-row"><span class="n">${i + 1}.</span><span class="an-pi" style="--pc:${PAGE_TINT[i]}">${wIcon(p.ic)}</span>
+            <span class="nm">${esc(p.name === 'Home Page' ? 'Homepage' : p.name)} ('${esc(p.path)}')</span><span class="ct">${fmtN(p.views)}</span><span class="un">views</span></li>`).join('')}</ol>
+        </section>
+        <section class="ov-card an-list" aria-labelledby="an-st">
+          <header><h2 id="an-st">Top Selling Products</h2><span class="engine">${I_CHECK_C}Medusa</span></header>
+          ${a.sellers.length ? `<ol>${a.sellers.map((p, i) => `<li class="an-row"><span class="n">${i + 1}.</span>
+            <span class="pthumb" style="--tb:${p.tint}" aria-hidden="true">${p.emoji}<img src="${photoUrl(p.photo)}" alt="" loading="lazy" onerror="this.remove()"></span>
+            <span class="nm">${esc(p.name)}</span><span class="ct">${fmtN(p.sold)}</span><span class="un">Sold</span></li>`).join('')}</ol>`
+            : '<p class="an-empty">This site has no store yet, so there are no sales to show.</p>'}
+        </section>
+      </div>`;
+    drawChart();
+  }
+
+  function niceMax(v) {
+    const raw = Math.max(v, 1) * 1.08 / 4, mag = Math.pow(10, Math.floor(Math.log10(raw)));
+    const step = [1, 2, 2.5, 5, 10].map(m => m * mag).find(x => x >= raw);
+    return step * 4;
+  }
+  const kfmt = v => v >= 1000 ? (v / 1000).toFixed(v % 1000 ? 1 : 0) + 'k' : String(v);
+  let anIdx = -1;
+  function drawChart() {
+    const box = $('#an-plot'); if (!box || !anData) return;
+    const ser = anData.ser, n = ser.length, key = state.anMetric;
+    const W = Math.max(box.clientWidth, 280), H = box.clientHeight || 210;
+    const pl = 34, pr = 14, pt = 10, pb = 30, iw = W - pl - pr, ih = H - pt - pb;
+    const vals = ser.map(d => d[key]), max = niceMax(Math.max(...vals));
+    const x = i => pl + (n === 1 ? iw / 2 : i * iw / (n - 1)), y = v => pt + ih - v / max * ih;
+    const pts = vals.map((v, i) => [x(i), y(v)]);
+    const line = pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
+    const area = `${line} L${x(n - 1).toFixed(1)} ${pt + ih} L${pl} ${pt + ih} Z`;
+    const every = Math.ceil(n / (W < 520 ? 5 : 10));
+    let grid = '';
+    for (let t = 0; t <= 4; t++) { const v = max / 4 * t, yy = y(v); grid += `<line class="gl" x1="${pl}" x2="${W - pr}" y1="${yy}" y2="${yy}"/><text class="yl" x="${pl - 10}" y="${yy + 4}" text-anchor="end">${kfmt(v)}</text>`; }
+    let xl = '';
+    for (let i = n - 1; i >= 0; i -= every) xl = `<text class="xl" x="${x(i)}" y="${H - 6}" text-anchor="middle">${fmtDay(ser[i].date)}</text>` + xl;
+    const dots = n <= 45 ? pts.map(p => `<circle class="dt" cx="${p[0]}" cy="${p[1]}" r="2.6"/>`).join('') : '';
+    const label = key === 'views' ? 'page views' : 'visits';
+    const total = vals.reduce((a, b) => a + b, 0);
+    box.innerHTML = `<svg viewBox="0 0 ${W} ${H}" tabindex="0" role="img" aria-label="Daily ${label}, ${TF_LABEL[state.anDays].toLowerCase()}: ${fmtN(total)} in total, peaking at ${fmtN(Math.max(...vals))}. Use the arrow keys to read each day.">
+        <defs><linearGradient id="an-grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2fb57a" stop-opacity=".9"/><stop offset="1" stop-color="#2fb57a" stop-opacity=".06"/></linearGradient></defs>
+        ${grid}<path d="${area}" fill="url(#an-grad)"/><path class="ln" d="${line}"/>${dots}${xl}
+        <g id="an-hov" visibility="hidden"><line class="hl" y1="${pt}" y2="${pt + ih}"/><circle class="hd" r="4.5"/></g>
+        <rect x="${pl}" y="0" width="${iw}" height="${H}" fill="transparent" id="an-hit"/>
+      </svg><div class="an-tip" id="an-tip" hidden></div>`;
+    const svg = $('svg', box), hov = $('#an-hov', box), tip = $('#an-tip', box);
+    const show = i => {
+      if (i < 0) { hov.setAttribute('visibility', 'hidden'); tip.hidden = true; return; }
+      anIdx = i; const [px, py] = pts[i], d = ser[i];
+      hov.setAttribute('visibility', 'visible');
+      $('line', hov).setAttribute('x1', px); $('line', hov).setAttribute('x2', px);
+      $('circle', hov).setAttribute('cx', px); $('circle', hov).setAttribute('cy', py);
+      tip.innerHTML = `<b>${d.date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}</b>${fmtN(d.views)} page views · ${fmtN(d.visits)} visits`;
+      tip.hidden = false;
+      const half = tip.offsetWidth / 2;
+      tip.style.left = Math.min(Math.max(px, half), W - half) + 'px';
+      tip.style.top = py + 'px';
+    };
+    const fromEvent = e => { const r = svg.getBoundingClientRect(); const mx = (e.clientX - r.left) * W / r.width; return Math.max(0, Math.min(n - 1, Math.round((mx - pl) / iw * (n - 1)))); };
+    $('#an-hit', box).addEventListener('pointermove', e => show(fromEvent(e)));
+    $('#an-hit', box).addEventListener('pointerleave', () => { if (document.activeElement !== svg) show(-1); });
+    svg.addEventListener('keydown', e => {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight' && e.key !== 'Home' && e.key !== 'End') return;
+      e.preventDefault();
+      const cur = anIdx < 0 || anIdx >= n ? n - 1 : anIdx;
+      show(e.key === 'Home' ? 0 : e.key === 'End' ? n - 1 : Math.max(0, Math.min(n - 1, cur + (e.key === 'ArrowRight' ? 1 : -1))));
+    });
+    svg.addEventListener('focus', () => show(anIdx >= 0 && anIdx < n ? anIdx : n - 1));
+    svg.addEventListener('blur', () => show(-1));
+  }
+  let anResizeT;
+  window.addEventListener('resize', () => { clearTimeout(anResizeT); anResizeT = setTimeout(() => { if (siteView === 'analytics') drawChart(); }, 80); });
+
+  function exportAnalytics() {
+    const s = curSite(); if (!s || !anData) return;
+    const rows = [['Date', 'Page views', 'Visits']].concat(anData.ser.map(d => [d.date.toISOString().slice(0, 10), d.views, d.visits]));
+    rows.push([], ['Total visits', anData.visits], ['Unique visitors', anData.unique]);
+    if (anData.shop) rows.push(['Store revenue (NGN)', anData.revenue], ['Conversion rate (%)', anData.conv]);
+    const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+    a.download = `${slugify(s.name) || 'site'}-analytics-${state.anDays}d.csv`;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    toast(`Report exported (${TF_LABEL[state.anDays].toLowerCase()})`);
+  }
+
+  $('#ov-view').addEventListener('click', e => {
+    if (siteView !== 'analytics' || !curSite()) return;
+    const hit = a => e.target.closest(`[${a}]`); let b;
+    if ((b = hit('data-an-days'))) { state.anDays = +b.dataset.anDays; anIdx = -1; closeMenus(); renderAnalyticsView(); $('#an-tf-btn').focus(); return; }
+    if ((b = hit('data-an-metric'))) { state.anMetric = b.dataset.anMetric; closeMenus(); renderAnalyticsView(); return; }
+    if (hit('data-an-export')) { closeMenus(); exportAnalytics(); }
+  });
+
+  /* =====================================================================
+     Site settings (#/overview/settings): tabs, custom domain,
+     Connect Custom Domain dialog → DNS records dialog → verify
+     ===================================================================== */
+  const DNS_RECORDS = [
+    { type: 'A', host: '@', value: '76.76.21.21', title: 'A Record - Root Domain' },
+    { type: 'CNAME', host: 'www', value: 'alias.digitalromanian.com', title: 'CNAME Record - www Subdomain' }
+  ];
+  const SS_TABS = [
+    ['domain', 'Custom Domain', svgS('<circle cx="8" cy="8" r="6.25" stroke="currentColor" stroke-width="1.3"/><path d="M1.75 8h12.5M8 1.75c1.9 2 1.9 10.5 0 12.5M8 1.75c-1.9 2-1.9 10.5 0 12.5" stroke="currentColor" stroke-width="1.3"/>', 16)],
+    ['branding', 'Branding & Favicon', svgS('<path d="M8 1.75a6.25 6.25 0 1 0 0 12.5c.9 0 1.3-.6 1.3-1.2 0-.8-.6-1-.6-1.8 0-.7.6-1.2 1.3-1.2h1.4A2.85 2.85 0 0 0 14.25 7.2 5.8 5.8 0 0 0 8 1.75Z" stroke="currentColor" stroke-width="1.3"/><circle cx="5" cy="7" r=".9" fill="currentColor"/><circle cx="7.5" cy="4.6" r=".9" fill="currentColor"/><circle cx="10.6" cy="5.4" r=".9" fill="currentColor"/>', 16)],
+    ['pixels', 'Analytics & Pixels', '<svg width="17" height="17" viewBox="0 0 17 17" fill="none" aria-hidden="true"><path d="M4.51398 10.3701C4.3196 10.3701 4.16121 10.516 4.16121 10.6951V15.643H1.50462V10.7084C1.50462 10.5293 1.34623 10.3834 1.15184 10.3834C0.95746 10.3834 0.799072 10.5293 0.799072 10.7084V15.9747C0.799072 16.1537 0.95746 16.2997 1.15184 16.2997H4.51398C4.70837 16.2997 4.86676 16.1537 4.86676 15.9747V10.7017C4.86676 10.516 4.70837 10.3701 4.51398 10.3701Z" fill="currentColor" stroke="currentColor" stroke-width="0.6"/><path d="M9.97846 9.11035C9.78408 9.11035 9.62569 9.25627 9.62569 9.43535V15.6435H6.9763V10.4103C6.9763 10.2313 6.81791 10.0853 6.62352 10.0853C6.42914 10.0853 6.27075 10.2313 6.27075 10.4103V15.9685C6.27075 16.1475 6.42914 16.2934 6.62352 16.2934H9.98566C10.18 16.2934 10.3384 16.1475 10.3384 15.9685V9.43535C10.3384 9.25627 10.18 9.11035 9.97846 9.11035Z" fill="currentColor" stroke="currentColor" stroke-width="0.6"/><path d="M15.4571 6.10547C15.2627 6.10547 15.1043 6.25139 15.1043 6.43047V15.6431H12.4477V8.36055C12.4477 8.18147 12.2893 8.03555 12.095 8.03555C11.9006 8.03555 11.7422 8.18147 11.7422 8.36055V15.9681C11.7422 16.1472 11.9006 16.2931 12.095 16.2931H15.4571C15.6515 16.2931 15.8099 16.1472 15.8099 15.9681V6.4371C15.8099 6.25139 15.6515 6.10547 15.4571 6.10547Z" fill="currentColor" stroke="currentColor" stroke-width="0.6"/><path d="M15.9971 0.607115C15.9899 0.487728 15.9107 0.388239 15.8027 0.335179C15.6875 0.282118 15.5507 0.28875 15.4499 0.355076L11.5766 2.72954C11.4686 2.79587 11.411 2.90862 11.4182 3.02138C11.4254 3.14076 11.5046 3.24025 11.6126 3.29331L13.3405 4.08259C11.5046 7.83664 5.52908 9.28918 0.69826 8.73867C0.503875 8.71214 0.323889 8.84479 0.302291 9.02387C0.280692 9.20295 0.417482 9.36877 0.611867 9.38867C1.32461 9.46826 2.05175 9.50805 2.7933 9.50805C7.42974 9.50805 12.2606 7.87643 13.9812 4.36779L15.7883 5.19687C15.8387 5.21677 15.8891 5.23003 15.9467 5.23003C16.0187 5.23003 16.0835 5.21013 16.1411 5.17697C16.249 5.11064 16.3066 4.99789 16.2994 4.88514L15.9971 0.607115ZM13.938 3.62494L12.4909 2.96168L15.3347 1.21731L15.5579 4.36116L13.938 3.62494Z" fill="currentColor" stroke="currentColor" stroke-width="0.6"/></svg>'],
+    ['danger', 'Danger Zone', '<svg width="18" height="16" viewBox="0 0 18 16" fill="none" aria-hidden="true"><path d="M0 16L9 0L18 16H0ZM2.29518 14.6286H15.7048L9 2.74286L2.29518 14.6286ZM9.50886 13.3239C9.64784 13.181 9.71733 13.0063 9.71733 12.8C9.71733 12.5937 9.64784 12.419 9.50886 12.2761C9.37002 12.133 9.2004 12.0615 9 12.0615C8.7996 12.0615 8.62998 12.133 8.49114 12.2761C8.35216 12.419 8.28267 12.5937 8.28267 12.8C8.28267 13.0063 8.35216 13.181 8.49114 13.3239C8.62998 13.467 8.7996 13.5385 9 13.5385C9.2004 13.5385 9.37002 13.467 9.50886 13.3239ZM8.33396 11.1472H9.66604V6.57577H8.33396V11.1472Z" fill="currentColor"/></svg>']
+  ];
+  const SS_SOON = {
+    branding: 'Upload your logo and favicon and set the colours visitors see on this site.',
+    pixels: 'Add Google Analytics, Meta Pixel and other tracking scripts to this site.',
+    danger: 'Unpublish, transfer or permanently delete this site.'
+  };
+  const normDomain = v => v.trim().toLowerCase().replace(/^https?:\/\//, '').replace(/[/?#].*$/, '').replace(/^www\./, '').replace(/\.$/, '');
+  const DOMAIN_RE = /^(?=.{4,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,24}$/;
+
+  function renderSettingsView() {
+    const el = $('#ov-view'), s = curSite();
+    syncDomain(s);
+    if (!s) { el.innerHTML = noSiteView('Site Settings', 'Manage global domain connections, brand identity, tracking scripts, and site deletion.'); return; }
+    const d = siteData(s), tab = state.ssTab;
+    const panel = tab === 'domain' ? `
+        <h2 class="ss-h">Custom Domain Configuration</h2>
+        <p class="ss-cur">Current Domain: <b>${esc(d.domain)}</b><span class="st${d.live ? '' : ' off'}">(${d.live ? 'Active' : 'Not live'})</span><span class="dot" aria-hidden="true"></span></p>
+        <label class="ss-lbl" for="ss-domain">Add Custom Domain:</label>
+        <div class="ss-add"><input id="ss-domain" autocomplete="off" spellcheck="false" inputmode="url" placeholder="e.g. mybusiness.com">
+          <button type="button" class="btn-dark" data-ss-connect>Connect Domain</button></div>
+        <hr>
+        <h2 class="ss-h">DNS Records to Point:</h2>
+        <ul class="ss-dns">${DNS_RECORDS.map(r => `<li><span>Type:</span>${r.type}<i></i><span>Host:</span>${r.host}<i></i><span>Value:</span>${r.value}</li>`).join('')}</ul>`
+      : `<div class="ss-soon"><span class="soon-tag">Coming soon</span><h3 style="margin-top:14px">${SS_TABS.find(t => t[0] === tab)[1]}</h3><p>${SS_SOON[tab]}</p></div>`;
+    el.innerHTML = `
+      <div class="ov-head"><h1 tabindex="-1">Site Settings</h1><p>Manage global domain connections, brand identity, tracking scripts, and site deletion.</p></div>
+      <div class="ov-card ss-tabs" role="tablist" aria-label="Site settings sections">
+        ${SS_TABS.map(([k, l, ic]) => `<button type="button" class="ss-tab" role="tab" id="ss-tab-${k}" aria-selected="${k === tab}" aria-controls="ss-panel" tabindex="${k === tab ? 0 : -1}" data-ss-tab="${k}">${ic}${esc(l)}</button>`).join('')}
+      </div>
+      <section class="ov-card ss-panel" id="ss-panel" role="tabpanel" aria-labelledby="ss-tab-${tab}">${panel}</section>`;
+    $('#ss-domain')?.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); openDomain(e.target.value); } });
+  }
+  $('#ov-view').addEventListener('click', e => {
+    if (siteView !== 'settings' || !curSite()) return;
+    const t = e.target.closest('[data-ss-tab]');
+    if (t) { state.ssTab = t.dataset.ssTab; renderSettingsView(); $('#ss-tab-' + state.ssTab).focus(); return; }
+    if (e.target.closest('[data-ss-connect]')) openDomain($('#ss-domain').value);
+  });
+  $('#ov-view').addEventListener('keydown', e => {
+    const t = e.target.closest('[data-ss-tab]'); if (!t || (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft')) return;
+    e.preventDefault();
+    const i = SS_TABS.findIndex(x => x[0] === t.dataset.ssTab), n = SS_TABS.length;
+    state.ssTab = SS_TABS[(i + (e.key === 'ArrowRight' ? 1 : n - 1)) % n][0];
+    renderSettingsView(); $('#ss-tab-' + state.ssTab).focus();
+  });
+
+  const dDomain = $('#dlg-domain'), dDns = $('#dlg-dns'), dmIn = $('#dm-input');
+  let dnsDomain = '';
+  function dmCheck() {
+    const v = normDomain(dmIn.value);
+    $('#dm-ok').hidden = !DOMAIN_RE.test(v);
+    dmIn.removeAttribute('aria-invalid'); $('#dm-err').hidden = true;
+  }
+  function openDomain(prefill) {
+    if (!curSite()) return;
+    dmIn.value = (prefill || '').trim(); dmCheck();
+    dDomain.showModal(); dmIn.focus(); dmIn.select();
+  }
+  dmIn.addEventListener('input', dmCheck);
+  $('#dm-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const s = curSite(); if (!s) return;
+    const v = normDomain(dmIn.value), err = $('#dm-err');
+    let msg = '';
+    if (!v) msg = 'Enter the domain you own, e.g. mybusiness.com.';
+    else if (!DOMAIN_RE.test(v)) msg = `“${dmIn.value.trim()}” isn't a valid domain. Use something like mybusiness.com.`;
+    else if (v === siteData(s).domain) msg = `${v} is already connected to this site.`;
+    else if (/(^|\.)digitalromanian\.(ro|com)$/.test(v)) msg = 'Use a domain you own, not a Digital Romanian address.';
+    err.textContent = msg; err.hidden = !msg;
+    if (msg) { dmIn.setAttribute('aria-invalid', 'true'); dmIn.focus(); return; }
+    dnsDomain = v; dDomain.close(); openDns();
+  });
+
+  const COPY_IC = '<svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8.5" rx="1.2" stroke="currentColor" stroke-width="1.3"/><path d="M10.5 3.5v-.5a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6.5a1 1 0 0 0 1 1h.5" stroke="currentColor" stroke-width="1.3"/></svg>';
+  const REC_IC = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2.25" y="2.25" width="11.5" height="11.5" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M8 5v5M5.5 7.5 8 10l2.5-2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  function openDns() {
+    $('#dns-domain').textContent = dnsDomain;
+    $('[data-dns-copy="all"]', dDns).innerHTML = COPY_IC + 'Copy All';
+    $('#dns-recs').innerHTML = DNS_RECORDS.map((r, i) => `
+      <div class="dns-rec${i ? ' alt' : ''}">
+        <p class="dns-rt">${REC_IC}Record ${i + 1} ( ${r.title} )</p>${i ? '' : '<hr>'}
+        <div class="dns-row">
+          <div class="dc"><span>Type:</span><b${r.type === 'A' ? ' class="tp"' : ''}>${r.type}</b></div><i class="sep"></i>
+          <div class="dc"><span>Host:</span><b>${r.host}</b></div><i class="sep"></i>
+          <div class="dc v"><span>Value:</span><b>${r.value}</b></div>
+          <button type="button" class="dns-copy" data-dns-copy="${i}" aria-label="Copy record ${i + 1}">${COPY_IC}Copy</button>
+        </div>
+      </div>`).join('');
+    $('#dns-status').hidden = true;
+    const v = $('#dns-verify'); v.disabled = false; v.textContent = 'Verify Connection';
+    dDns.showModal(); $('#dns-verify').focus();
+  }
+  function copyText(text, btn) {
+    const done = () => { const old = btn.innerHTML; btn.classList.add('done'); btn.innerHTML = TICK + 'Copied'; setTimeout(() => { btn.classList.remove('done'); btn.innerHTML = old; }, 1600); };
+    const fallback = () => { const ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0'; dDns.appendChild(ta); ta.select(); try { document.execCommand('copy'); done(); } catch (e) { toast(text); } ta.remove(); };
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
+  }
+  dDns.addEventListener('click', e => {
+    const b = e.target.closest('[data-dns-copy]'); if (!b) return;
+    const k = b.dataset.dnsCopy;
+    const line = r => `Type: ${r.type} | Host: ${r.host} | Value: ${r.value}`;
+    copyText(k === 'all' ? `DNS records for ${dnsDomain}\n` + DNS_RECORDS.map(line).join('\n') : DNS_RECORDS[+k].value, b);
+  });
+  $('#dns-back').addEventListener('click', () => { dDns.close(); openDomain(dnsDomain); });
+  $('#dns-verify').addEventListener('click', () => {
+    const s = curSite(), btn = $('#dns-verify'); if (!s || btn.disabled) return;
+    btn.disabled = true; btn.innerHTML = '<span class="dm-spin" aria-hidden="true"></span>Checking DNS…';
+    const st = $('#dns-status'); st.hidden = false; st.textContent = `Looking up the A and CNAME records for ${dnsDomain}…`;
+    setTimeout(() => {
+      if (!dDns.open) return;
+      s.domain = dnsDomain;
+      const w = ws(); if (w) w.activity.push({ kind: 'update', text: `${dnsDomain} was connected to ${s.name}`, time: Date.now() });
+      dDns.close();
+      if (siteView === 'settings') renderSettingsView(); else syncDomain(s);
+      toast(`${dnsDomain} is connected to ${s.name}`);
+    }, 1400);
   });
 
   /* ---------- Overview sidebar groups + mobile drawers ---------- */
