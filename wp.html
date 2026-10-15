@@ -2676,6 +2676,23 @@ dialog#dlg-product.closing::backdrop { animation: pd-fade .2s ease-in reverse fo
 .wiz-cat:has(input:checked) .ck { opacity: 1; }
 .wiz-cat:has(input:focus-visible) { outline: 2px solid var(--focus); outline-offset: 2px; }
 .wiz-form { margin-top: 24px; }
+.wiz-about { text-align: center; padding: 18px 0 8px; }
+.wiz h1 { font-size: 30px; }
+.wiz-desc { display: block; width: 100%; min-height: 54px; margin-top: 30px; padding: 15px 18px; border: 1.5px solid rgb(0 0 0 / .15); border-radius: 8px; background: #fff; font: inherit; font-size: 16px; line-height: 1.45; color: var(--ink); resize: none; overflow: hidden; transition: border-color .15s ease, box-shadow .15s ease; }
+.wiz-desc::placeholder { color: #9a9a92; }
+.wiz-desc:hover { border-color: rgb(0 0 0 / .3); }
+.wiz-desc:focus { border-color: #8fb0e6; box-shadow: 0 0 0 3px rgb(26 98 214 / .1); }
+.wiz-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 12px; margin-top: 34px; }
+.wiz-chip { height: 42px; padding: 0 16px; border: 1px solid rgb(0 0 0 / .14); border-radius: 8px; background: #fff; font-size: 15px; font-weight: 500; color: var(--ink); transition: border-color .15s ease, background .15s ease; }
+.wiz-chip:hover { border-color: rgb(0 0 0 / .4); }
+.wiz-chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+.wiz .wiz-foot3 { border-top: 0; margin-top: 44px; gap: 18px; }
+.wiz-foot3 .spacer { flex: 1; }
+.wiz-back { display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 500; color: var(--ink); padding: 8px 4px; }
+.wiz-back:hover { text-decoration: underline; text-underline-offset: 3px; }
+.wiz-skip { font-size: 15px; color: var(--ink); text-decoration: none; }
+.wiz-skip:hover { text-decoration: underline; }
+.wiz-foot3 .btn-primary:disabled { background: #ececea; border-color: #ececea; color: #9a9a92; opacity: 1; }
 .wiz-hint { margin-top: 8px; font-size: 13px; color: #3d3d39; line-height: 1.45; overflow-wrap: anywhere; }
 .wiz-hint b { color: var(--ink); font-weight: 600; }
 .wiz-sugs-h { margin-top: 22px; font-size: 14px; font-weight: 600; color: var(--ink); }
@@ -2693,6 +2710,8 @@ dialog#dlg-product.closing::backdrop { animation: pd-fade .2s ease-in reverse fo
   .wiz-cat { min-height: 96px; padding: 14px; }
   .wiz h1 { font-size: 22px; }
   .wiz-foot .btn-primary, .wiz-foot .btn-outline { flex: 1; min-width: 0; }
+  .wiz-foot3 .btn-primary { flex: 0 0 auto; min-width: 130px; }
+  .wiz h1 { font-size: 24px; } .wiz-chip { height: 40px; font-size: 14px; padding: 0 13px; } .wiz-chips { margin-top: 24px; gap: 8px; }
 }
 @media (max-width: 360px) { .wiz-cats { grid-template-columns: minmax(0, 1fr); } .wiz-cat { min-height: 0; flex-direction: row; align-items: center; } .wiz-cat small { display: none; } }
 /* DNS dialog: per-field copy, live connection status, pending domain */
@@ -3732,7 +3751,7 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
             Overview</a></li>
           <li><a class="nav-link" href="#/overview/pages" data-site-nav="pages">
             <svg class="ic-doc" width="14" height="18" viewBox="0 0 14 18" fill="none" aria-hidden="true"><use href="#i-doc"/></svg>
-            Website Pages</a></li>
+            Pages</a></li>
           <li class="nav-grp"><button type="button" class="nav-link nav-group-btn" data-store-toggle aria-expanded="false" aria-controls="store-sub">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-store"/></svg>
             Store
@@ -3748,13 +3767,10 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
             Analytics</a></li>
           <li><a class="nav-link" href="#/overview" data-site-nav="cms">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2.25" y="2.25" width="11.5" height="11.5" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M5 5.5h6M5 8h6M5 10.5h3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-            Content/CMS</a></li>
+            Content</a></li>
           <li><a class="nav-link" href="#/overview" data-site-nav="media">
             <svg class="ic-media" width="21" height="16" viewBox="0 0 21 16" fill="none" aria-hidden="true"><use href="#i-media"/></svg>
             Media Library</a></li>
-          <li><a class="nav-link" href="#/overview" data-site-nav="permissions">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-team"/></svg>
-            Site Permissions</a></li>
           <li><a class="nav-link" href="#/overview/settings" data-site-nav="settings">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-settings"/></svg>
             Site Settings</a></li>
@@ -3807,7 +3823,7 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
       <div class="proto-group"><h2>Sign up & sign in</h2><a href="#/signin">Sign in</a><a href="#/signup">Sign up</a><a href="#/signup/password">Set password</a><a href="#/signup/created">Account created</a><a href="#/reset">Reset password</a><a href="#/invite">Accept invite</a></div>
       <div class="proto-group"><h2>Onboarding</h2><a href="#/onboarding/profile">Profile</a><a href="#/onboarding/workspace">New workspace</a></div>
       <div class="proto-group"><h2>Workspace</h2><a href="#/workspace">All sites</a><a href="#/workspace/templates">Templates</a><a href="#/workspace/team">Team</a><a href="#/workspace/settings">General settings</a><a href="#/new-site">Create new site</a><a href="#/overview">Site overview</a></div>
-      <div class="proto-group"><h2>Site</h2><a href="#/overview/pages">Website pages</a><a href="#/overview/products">Products</a><a href="#/overview/orders">Orders</a><a href="#/overview/categories">Categories</a><a href="#/overview/checkout">Checkout settings</a><a href="#/overview/analytics">Analytics</a><a href="#/overview/settings">Site settings</a></div>
+      <div class="proto-group"><h2>Site</h2><a href="#/overview/pages">Pages</a><a href="#/overview/products">Products</a><a href="#/overview/orders">Orders</a><a href="#/overview/categories">Categories</a><a href="#/overview/checkout">Checkout settings</a><a href="#/overview/analytics">Analytics</a><a href="#/overview/settings">Site settings</a></div>
     </div>
   </nav>
 </div>
@@ -5186,7 +5202,7 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
      ===================================================================== */
   let siteView = 'overview';
   const SITE_VIEWS = { overview: '#/overview', pages: '#/overview/pages', products: '#/overview/products', orders: '#/overview/orders', categories: '#/overview/categories', checkout: '#/overview/checkout', analytics: '#/overview/analytics', settings: '#/overview/settings' };
-  const SITE_VIEW_TITLES = { overview: 'Overview', pages: 'Website Pages', products: 'Products', orders: 'Orders', categories: 'Categories', checkout: 'Checkout Settings', analytics: 'Analytics', settings: 'Site Settings' };
+  const SITE_VIEW_TITLES = { overview: 'Overview', pages: 'Pages', products: 'Products', orders: 'Orders', categories: 'Categories', checkout: 'Checkout Settings', analytics: 'Analytics', settings: 'Site Settings' };
   const curSite = () => { const w = ws(); return w ? w.sites.find(x => x.id === state.currentSiteId) || null : null; };
   const money = n => '$' + Number(n).toFixed(2);
   const isShop = s => s.theme === 'alicia' || s.theme === 'sun';
@@ -5398,10 +5414,10 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
   function renderPagesView() {
     const el = $('#ov-view'), s = curSite();
     syncDomain(s);
-    if (!s) { el.innerHTML = noSiteView('Website Pages', 'Manage your page tree, SEO titles, subpaths, and publishing status.'); return; }
+    if (!s) { el.innerHTML = noSiteView('Pages', 'Manage your page tree, SEO titles, subpaths, and publishing status.'); return; }
     el.innerHTML = `
       <div class="sv-head">
-        <div class="ov-head"><h1 tabindex="-1">Website Pages</h1><p>Manage your page tree, SEO titles, subpaths, and publishing status.</p></div>
+        <div class="ov-head"><h1 tabindex="-1">Pages</h1><p>Manage your page tree, SEO titles, subpaths, and publishing status.</p></div>
         <div class="wp-tools">
           <div class="sv-search">${icon('i-search', 14, 14, '0 0 16 16')}<label class="sr-only" for="page-search">Search pages</label>
             <input id="page-search" type="search" placeholder="Search pages by name or path..." value="${esc(state.pageQuery)}" autocomplete="off"></div>
@@ -5409,7 +5425,7 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
         </div>
       </div>
       <section class="ov-card wp-card" aria-label="Pages">
-        <div class="wtab" role="table" aria-label="Website pages">
+        <div class="wtab" role="table" aria-label="Pages">
           <div class="wrow head" role="row"><span role="columnheader">Page Name/Title</span><span role="columnheader">URL Path</span><span role="columnheader">Layout Template</span><span role="columnheader">Status</span><span role="columnheader">Actions</span></div>
           <div id="wp-rows" role="rowgroup"></div>
         </div>
@@ -5423,7 +5439,7 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
     const list = pagesOf(s).filter(p => !q || p.name.toLowerCase().includes(q) || p.path.toLowerCase().includes(q));
     rowsEl.innerHTML = list.map(p => `
       <div class="wrow" role="row">
-        <span class="wname" role="cell"><span class="wic">${wIcon(p.ic)}</span>
+        <span class="wname" role="cell">
           <span><strong>${esc(p.name)}</strong><span class="wmeta">${esc(p.path)} · ${esc(p.tpl)}</span></span></span>
         <span class="w-path" role="cell">${esc(p.path)}</span>
         <span class="w-tpl" role="cell">${esc(p.tpl)}</span>
@@ -6721,11 +6737,11 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
       icon: wsvg('<rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4M8 14h2.5M13.5 14H16M8 17h2.5"/>') }
   ];
   const WIZ_STEPS = ['category', 'name', 'domain'];
-  let wiz = { cat: null, name: '', domain: '' };
+  let wiz = { cat: null, desc: '', name: '', domain: '' };
   const siteSlug = n => slugify(n).replace(/-/g, '') || 'mysite';
   function startWizard() {
     if (!ws()) { go('#/workspace'); return; }
-    wiz = { cat: null, name: '', domain: '' };
+    wiz = { cat: null, desc: '', name: '', domain: '' };
     go('#/new-site/category');
   }
   $$('[data-wiz-start]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); closeSwitcher(false); startWizard(); }));
@@ -6743,26 +6759,46 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
     const root = wizRoot(typed);
     return root ? cat.words.map(w => `${root} ${w}`) : [];
   }
+  /* No category picked: guess one from the description, otherwise a plain landing page */
+  const CAT_WORDS = { store: /\b(shop|store|sell|product|ecommerce|e-commerce)/i, restaurant: /\b(restaurant|food|menu|cafe|kitchen|bar)\b/i,
+    blog: /\b(blog|articles?|write|journal|news)\b/i, portfolio: /\b(portfolio|photograph|design|artist|my work)/i, event: /\b(event|conference|wedding|festival|tickets?)\b/i,
+    nonprofit: /\b(charity|non-?profit|ngo|donat|volunteer)/i, tech: /\b(software|app|saas|tech|startup)\b/i, services: /\b(services?|consult|agency|clients?|booking)/i };
+  const guessCat = t => (Object.entries(CAT_WORDS).find(([, re]) => re.test(t || '')) || ['landing'])[0];
   function renderWizard(path) {
     if (!ws()) { go('#/workspace'); return; }
     let step = path.split('/')[2] || 'category';
     if (!WIZ_STEPS.includes(step)) step = 'category';
-    if (step !== 'category' && !wiz.cat) { go('#/new-site/category'); return; }
+    if (step !== 'category' && !wiz.cat) wiz.cat = guessCat(wiz.desc);
     if (step === 'domain' && !wiz.name.trim()) { go('#/new-site/name'); return; }
     const el = $('#wiz');
     if (step === 'category') {
       el.innerHTML = `${wizHead(1)}
-        <h1 tabindex="-1">What is your site all about?</h1>
-        <p class="auth-lead">Pick your main category. We'll tailor your starter layout and switch on the right features.</p>
-        <fieldset class="wiz-cats"><legend class="sr-only">Site category</legend>
-          ${WIZ_CATS.map(c => `<label class="wiz-cat"><input type="radio" name="wiz-cat" value="${c.k}" ${wiz.cat === c.k ? 'checked' : ''}>
-            <span class="wi">${c.icon}</span><strong>${c.label}</strong><small>${c.hint}</small>
-            <span class="ck" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><use href="#i-check"/></svg></span></label>`).join('')}
-        </fieldset>
-        <div class="wiz-foot"><button type="button" class="btn-primary" id="wiz-next" ${wiz.cat ? '' : 'disabled'}>Continue ${icon('i-arrow-right', 16)}</button></div>`;
-      $$('[name=wiz-cat]', el).forEach(r => r.addEventListener('change', () => { wiz.cat = r.value; $('#wiz-next').disabled = false; }));
-      $$('.wiz-cat', el).forEach(l => l.addEventListener('dblclick', () => { wiz.cat = $('input', l).value; go('#/new-site/name'); }));
-      $('#wiz-next').addEventListener('click', () => { if (wiz.cat) go('#/new-site/name'); });
+        <div class="wiz-about">
+          <h1 tabindex="-1">First, what is your site all about?</h1>
+          <label class="sr-only" for="wiz-desc">Describe your site or business</label>
+          <textarea class="wiz-desc" id="wiz-desc" rows="1" maxlength="400" placeholder="Describe your site or business in a few sentences">${esc(wiz.desc || '')}</textarea>
+          <div class="wiz-chips" role="group" aria-label="Or pick a category">
+            ${WIZ_CATS.map(c => `<button type="button" class="wiz-chip" data-wcat="${c.k}" aria-pressed="${wiz.cat === c.k}">${c.label}</button>`).join('')}
+          </div>
+        </div>
+        <div class="wiz-foot wiz-foot3">
+          <button type="button" class="wiz-back" data-wiz-cancel><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Back</button>
+          <span class="spacer"></span>
+          <button type="button" class="btn-text wiz-skip" id="wiz-skip">Skip</button>
+          <button type="button" class="btn-primary" id="wiz-next">Continue</button>
+        </div>`;
+      const desc = $('#wiz-desc'), next = $('#wiz-next');
+      const sync = () => { next.disabled = !wiz.cat && !desc.value.trim(); desc.style.height = 'auto'; desc.style.height = desc.scrollHeight + 2 + 'px'; };
+      desc.addEventListener('input', () => { wiz.desc = desc.value; sync(); });
+      desc.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey && !next.disabled) { e.preventDefault(); next.click(); } });
+      $$('[data-wcat]', el).forEach(b => b.addEventListener('click', () => {
+        wiz.cat = wiz.cat === b.dataset.wcat ? null : b.dataset.wcat;
+        $$('[data-wcat]', el).forEach(x => x.setAttribute('aria-pressed', x.dataset.wcat === wiz.cat));
+        sync();
+      }));
+      next.addEventListener('click', () => { if (next.disabled) return; wiz.cat ||= guessCat(desc.value); go('#/new-site/name'); });
+      $('#wiz-skip').addEventListener('click', () => { wiz.cat ||= guessCat(desc.value); go('#/new-site/name'); });
+      sync();
     }
     if (step === 'name') {
       el.innerHTML = `${wizHead(2)}
@@ -6822,7 +6858,7 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
   }
   function launchSite(customDomain) {
     const w = ws(); if (!w) return;
-    const cat = WIZ_CATS.find(c => c.k === wiz.cat);
+    const cat = WIZ_CATS.find(c => c.k === wiz.cat) || WIZ_CATS.find(c => c.k === 'landing');
     let slug = siteSlug(wiz.name), n = 2;
     const taken = new Set(w.sites.map(x => (x.domain || '').split('.')[0]));
     while (taken.has(slug)) slug = siteSlug(wiz.name) + n++;
@@ -6832,12 +6868,12 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
     w.sites.unshift(site);
     w.activity.push({ kind: 'create', text: `${site.name} was created`, time: Date.now() });
     state.currentSiteId = site.id; state.siteFilter = 'all'; state.siteQuery = '';
-    wiz = { cat: null, name: '', domain: '' };
+    wiz = { cat: null, desc: '', name: '', domain: '' };
     go('#/overview');
     toast(customDomain ? `${site.name} is ready. Add the DNS records to connect ${customDomain}.` : `${site.name} is ready at ${site.domain}`,
       customDomain ? { label: 'Set up DNS', action: () => { state.ssTab = 'domain'; go('#/overview/settings'); } } : null);
   }
-  document.addEventListener('click', e => { if (e.target.closest('[data-wiz-cancel]')) { wiz = { cat: null, name: '', domain: '' }; go('#/workspace'); } });
+  document.addEventListener('click', e => { if (e.target.closest('[data-wiz-cancel]')) { wiz = { cat: null, desc: '', name: '', domain: '' }; go('#/workspace'); } });
 
   /* ---------- Overview sidebar groups + mobile drawers ---------- */
   $$('.nav-group-btn').forEach(btn => {
