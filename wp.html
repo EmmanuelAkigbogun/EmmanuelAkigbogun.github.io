@@ -2609,16 +2609,205 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
 .ss-dns li::before { content: "\2022"; }
 .ss-dns li i { width: 1px; height: 14px; background: #000; }
 .ss-dns li span { color: #2b2b28; }
+.ss-dns .f b { font-weight: 400; }
 .ss-soon { padding: 36px 22px; text-align: center; }
 .ss-soon h3 { font-size: 16px; font-weight: 600; color: #000; }
 .ss-soon p { font-size: 13.5px; color: var(--muted); margin: 6px auto 0; max-width: 420px; line-height: 1.5; }
 @media (max-width: 760px) {
   .ss-tab { height: 48px; margin-right: 18px; }
   .ss-add { flex-direction: column; gap: 10px; }
-  .ss-add input, .ss-add .btn-dark { height: 44px; font-size: 16px; }
+  .ss-add input, .ss-add .btn-dark { height: 48px; font-size: 16px; }
+  .ss-add input { flex: none; width: 100%; padding: 0 14px; border-radius: 8px; border-color: rgb(0 0 0 / .2); }
+  .ss-add input::placeholder { font-size: 15px; }
+  .ss-add .btn-dark { border-radius: 8px; font-size: 15px; }
+  .ss-lbl { margin-top: 24px; font-size: 14px; }
+  .ss-dns { display: grid; gap: 10px; margin-top: 12px; }
+  .ss-dns li { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 12px; margin: 0; padding: 12px 14px; border: 1px solid rgb(0 0 0 / .1); border-radius: 10px; background: #fbfaf6; }
+  .ss-dns li::before, .ss-dns li i { display: none; }
+  .ss-dns .f { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .ss-dns .f > span { font-size: 11.5px; color: var(--muted); }
+  .ss-dns .f b { font-size: 14px; font-weight: 500; color: #000; overflow-wrap: anywhere; }
+  .ss-dns .f.v { grid-column: 1 / -1; }
   .ss-panel hr { margin: 28px 0 22px; }
 }
 
+/* Custom domain field: stack under the label whenever the panel is narrow (phones, tablets, narrow windows) */
+.ss-panel { container-type: inline-size; }
+.ss-add { gap: 12px; }
+.ss-add input { height: 42px; padding: 0 14px; border-radius: 6px; font-size: 14px; }
+.ss-add input::placeholder { font-size: 13px; }
+.ss-add .btn-dark { height: 42px; border-radius: 6px; }
+@container (max-width: 620px) {
+  .ss-add { flex-direction: column; gap: 10px; }
+  .ss-add input { flex: none !important; width: 100%; height: 48px !important; min-height: 48px; font-size: 16px; border-radius: 8px; border-color: rgb(0 0 0 / .2); }
+  .ss-add input::placeholder { font-size: 15px; }
+  .ss-add .btn-dark { width: 100%; height: 48px; font-size: 15px; border-radius: 8px; }
+}
+/* Add / edit product: stays a centred dialog, slides in from the right and back out */
+dialog#dlg-product[open] { animation: pd-in .3s cubic-bezier(.2, .8, .2, 1); }
+dialog#dlg-product.closing { animation: pd-out .2s ease-in forwards; }
+dialog#dlg-product::backdrop { animation: pd-fade .3s ease; }
+dialog#dlg-product.closing::backdrop { animation: pd-fade .2s ease-in reverse forwards; }
+@keyframes pd-in { from { transform: translateX(60vw); opacity: 0; } }
+@keyframes pd-out { to { transform: translateX(60vw); opacity: 0; } }
+@keyframes pd-fade { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { dialog#dlg-product[open], dialog#dlg-product.closing, dialog#dlg-product::backdrop { animation: none; } }
+
+/* ---------- Create a new website: 3-step wizard (#/new-site) ---------- */
+.auth-card:has(.wiz) { max-width: 760px; }
+.auth-inner.wiz { max-width: 660px; }
+.wiz-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.wiz-top .onb-step { margin: 0; }
+.wiz-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 12px 0 22px; }
+.wiz-bar i { height: 4px; border-radius: 4px; background: #e6e4dd; }
+.wiz-bar i.on { background: var(--ink); }
+.wiz h1 { font-size: 26px; font-weight: 600; margin-bottom: 6px; }
+.wiz .auth-lead { font-weight: 400; color: var(--muted); }
+.wiz-cats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 24px; border: 0; padding: 0; }
+.wiz-cat { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; min-height: 104px; padding: 16px; border: 1px solid rgb(0 0 0 / .16); border-radius: 10px; background: #fff; cursor: pointer; transition: border-color .15s ease, box-shadow .15s ease; }
+.wiz-cat:hover { border-color: rgb(0 0 0 / .4); }
+.wiz-cat input { position: absolute; opacity: 0; pointer-events: none; }
+.wiz-cat .wi { width: 40px; height: 40px; border-radius: 9px; display: grid; place-items: center; background: var(--soft); color: var(--ink); transition: background .15s ease, color .15s ease; }
+.wiz-cat:has(input:checked) .wi { background: var(--ink); color: #fff; }
+.wiz-cat strong { font-size: 14.5px; font-weight: 600; color: var(--ink); line-height: 1.25; }
+.wiz-cat small { font-size: 12px; color: var(--muted); line-height: 1.35; margin-top: -6px; }
+.wiz-cat .ck { position: absolute; top: 12px; right: 12px; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; background: var(--ink); color: #fff; opacity: 0; transition: opacity .15s ease; }
+.wiz-cat:has(input:checked) { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.wiz-cat:has(input:checked) .ck { opacity: 1; }
+.wiz-cat:has(input:focus-visible) { outline: 2px solid var(--focus); outline-offset: 2px; }
+.wiz-form { margin-top: 24px; }
+.wiz-hint { margin-top: 8px; font-size: 13px; color: #3d3d39; line-height: 1.45; overflow-wrap: anywhere; }
+.wiz-hint b { color: var(--ink); font-weight: 600; }
+.wiz-sugs-h { margin-top: 22px; font-size: 14px; font-weight: 600; color: var(--ink); }
+.wiz-sugs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.wiz-sug { display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 14px; border: 1px solid rgb(0 0 0 / .2); border-radius: 999px; background: #fff; font-size: 13.5px; font-weight: 500; color: var(--ink); }
+.wiz-sug:hover { border-color: rgb(0 0 0 / .45); }
+.wiz-sug[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+.wiz-foot { display: flex; justify-content: flex-end; align-items: center; gap: 10px; margin-top: 30px; padding-top: 18px; border-top: 1px solid var(--line); }
+.wiz-foot .btn-primary, .wiz-foot .btn-outline { width: auto; min-width: 140px; height: 46px; padding: 0 20px; font-size: 15px; }
+.wiz-foot .btn-primary:disabled { opacity: .4; }
+.wiz .alert-error { margin: 14px 0 0; }
+.wiz-cancel { font-size: 14px; }
+@media (max-width: 760px) {
+  .wiz-cats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .wiz-cat { min-height: 96px; padding: 14px; }
+  .wiz h1 { font-size: 22px; }
+  .wiz-foot .btn-primary, .wiz-foot .btn-outline { flex: 1; min-width: 0; }
+}
+@media (max-width: 360px) { .wiz-cats { grid-template-columns: minmax(0, 1fr); } .wiz-cat { min-height: 0; flex-direction: row; align-items: center; } .wiz-cat small { display: none; } }
+/* DNS dialog: per-field copy, live connection status, pending domain */
+.dns-row { grid-template-columns: 112px 1px 120px 1px minmax(0, 1fr); }
+.dns-val { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.dns-val b { white-space: nowrap; }
+#dns-back[hidden] { display: none; }
+.dns-row .dc.v .dns-val b { white-space: normal; overflow-wrap: anywhere; }
+.dns-fc { flex-shrink: 0; width: 26px; height: 26px; display: grid; place-items: center; border: 1px solid rgb(0 0 0 / .12); border-radius: 4px; background: #fff; color: #3d3d39; }
+.dns-fc:hover { background: #f6f5ef; border-color: rgb(0 0 0 / .3); color: #000; }
+.dns-fc.done { color: #186244; border-color: #bad6c5; }
+.dns-fc svg { width: 13px; height: 13px; }
+.dns-st { margin-top: 18px; padding: 14px 16px; border: 1px solid rgb(0 0 0 / .12); border-radius: 12px; background: #fff; }
+.dns-st h3 { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.dns-st-line { display: flex; align-items: center; gap: 10px; margin-top: 8px; font-size: 14px; font-weight: 600; color: #000; }
+.dns-st-line .sub { font-weight: 400; color: #3d3d39; }
+.dns-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; background: #f5c400; box-shadow: 0 0 0 0 rgb(245 196 0 / .6); animation: dns-pulse 1.6s ease-out infinite; }
+.dns-dot.bad { background: #d92d20; animation: none; }
+.dns-dot.ok { background: #1f9d5b; animation: none; }
+@keyframes dns-pulse { 70% { box-shadow: 0 0 0 7px rgb(245 196 0 / 0); } 100% { box-shadow: 0 0 0 0 rgb(245 196 0 / 0); } }
+.dns-st .dm-spin { border-color: rgb(0 0 0 / .15); border-top-color: #000; }
+.dns-st-note { margin-top: 6px; font-size: 12.5px; line-height: 1.5; color: #3d3d39; }
+.dns-st-list { margin-top: 8px; display: grid; gap: 4px; font-size: 12.5px; }
+.dns-st-list li { display: flex; align-items: center; gap: 8px; }
+.dns-st-list .ok { color: #186244; } .dns-st-list .bad { color: #912d25; }
+.dns-st.ok { border-color: #bad6c5; background: #f3faf6; }
+.dns-st.bad { border-color: #f1c4bd; background: #fff8f6; }
+.ss-pend { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 10px; margin-top: 12px; padding: 10px 12px; border-radius: 8px; background: #fff8e6; border: 1px solid #f0dca6; font-size: 13px; color: #6b4d00; }
+.ss-pend b { color: #000; font-weight: 600; }
+.ss-pend .dns-dot { width: 8px; height: 8px; }
+.ss-pend .btn-text { margin-left: auto; font-size: 12.5px; color: #000; }
+@media (prefers-reduced-motion: reduce) { .dns-dot { animation: none; } }
+@media (max-width: 760px) {
+  .dns-row { grid-template-columns: auto 1px minmax(0, 1fr); }
+  .ss-pend .btn-text { margin-left: 0; }
+}
+/* ---------- Site settings: Branding & Favicon ---------- */
+.br-h { font-size: 19px; font-weight: 500; color: #000; }
+.br-row { display: grid; grid-template-columns: 150px minmax(0, 1fr); align-items: center; gap: 8px 16px; margin-top: 22px; padding-left: 18px; }
+.br-row > label, .br-row .br-lbl { font-size: 13px; font-weight: 500; color: #000; }
+.br-row.top { align-items: start; }
+.br-row.top > label { padding-top: 12px; }
+.br-input { width: 100%; height: 40px; padding: 0 12px; border: 1px solid rgb(0 0 0 / .15); border-radius: 4px; background: #fff; font-size: 13px; font-weight: 500; color: #000; }
+.br-input:focus { border-color: var(--ink); }
+.br-input[aria-invalid="true"] { border-color: #b42318; }
+textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-height: 1.5; font-weight: 400; font-family: inherit; }
+.br-field { position: relative; min-width: 0; }
+.br-field .br-input.has-pill { padding-right: 84px; }
+.br-pill { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); height: 20px; padding: 0 9px; border-radius: 4px; display: inline-flex; align-items: center; font-size: 10.5px; font-weight: 500; background: #dcefe5; color: #0f6b4a; pointer-events: none; }
+.br-pill.over { background: #fde4e1; color: #b42318; }
+.br-count { text-align: right; font-size: 11px; color: #3d3d39; margin-top: 6px; }
+.br-err { grid-column: 2; font-size: 12px; color: #912d25; margin: -2px 0 0; }
+.br-err[hidden] { display: none; }
+.br-fav { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.br-drop { position: relative; width: 62px; height: 62px; border: 1px dashed rgb(0 0 0 / .35); border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; cursor: pointer; text-align: center; background: #fff; }
+.br-drop:hover, .br-drop.drag { background: #fafaf6; border-color: var(--ink); }
+.br-drop:has(input:focus-visible) { outline: 2px solid var(--focus); outline-offset: 2px; }
+.br-drop input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.br-drop small { font-size: 6px; line-height: 1.25; color: #3d3d39; }
+.br-prev { width: 62px; height: 62px; border-radius: 6px; overflow: hidden; background: var(--soft); border: 1px solid var(--line); display: grid; place-items: center; font-size: 22px; font-weight: 600; color: var(--muted); }
+.br-prev img { width: 100%; height: 100%; object-fit: cover; }
+.br-fav .btn-text { font-size: 12px; }
+.br-fav .btn-text[hidden] { display: none; }
+.br-sec { display: flex; align-items: baseline; gap: 6px; margin-top: 40px; font-size: 18px; font-weight: 500; color: #000; }
+.br-sec small { font-size: 10px; font-weight: 600; color: #000; white-space: nowrap; }
+.br-sec::after { content: ""; flex: 1; height: 1px; background: rgb(0 0 0 / .1); margin-left: 12px; align-self: center; }
+.br-foot { display: flex; justify-content: flex-end; gap: 10px; margin-top: 26px; }
+.br-foot .btn-dark { height: 38px; min-width: 182px; justify-content: center; font-size: 12px; }
+.br-foot .btn-text { font-size: 12.5px; }
+
+/* ---------- Site settings: Analytics & Pixels ---------- */
+.px-sub { font-size: 13px; color: #191919; margin-top: 6px; line-height: 1.5; }
+.px-list { margin: 20px -14px -26px; border-top: 1px solid rgb(0 0 0 / .06); }
+.px-row { display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; align-items: center; gap: 4px 14px; min-height: 90px; padding: 16px 18px 16px 22px; }
+.px-row.tint { background: #eef3f0; }
+.px-row + .px-row { border-top: 1px solid rgb(0 0 0 / .06); }
+.px-row:last-child { border-radius: 0 0 12px 12px; }
+.px-ic { width: 32px; height: 32px; display: grid; place-items: center; color: #000; }
+.px-ic.code { width: 28px; height: 28px; border-radius: 4px; background: #fff; border: 1px solid rgb(0 0 0 / .12); }
+.px-row strong { display: block; font-size: 13px; font-weight: 600; color: #000; }
+.px-id { display: flex; align-items: center; flex-wrap: wrap; gap: 2px 6px; margin-top: 4px; font-size: 12.5px; color: #191919; }
+.px-in { width: 22ch; max-width: 100%; height: 26px; padding: 0 6px; border: 1px dashed transparent; border-radius: 3px; background: transparent; font: inherit; font-variant-numeric: tabular-nums; letter-spacing: .02em; color: #191919; }
+.px-in:hover { border-color: rgb(0 0 0 / .25); }
+.px-in:focus { border-style: solid; border-color: var(--ink); background: #fff; }
+.px-in[aria-invalid="true"] { border: 1px solid #b42318; background: #fff; }
+.px-err { font-size: 12px; color: #912d25; margin-top: 4px; }
+.px-err[hidden] { display: none; }
+.px-copy { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border: 1px solid rgb(0 0 0 / .14); border-radius: 4px; background: #fff; font-size: 12.5px; font-weight: 500; color: #000; white-space: nowrap; }
+.px-copy:hover:not(:disabled) { background: #f6f5ef; border-color: rgb(0 0 0 / .3); }
+.px-copy.done { color: #186244; border-color: #bad6c5; }
+.px-snip { display: flex; align-items: center; gap: 8px; margin-top: 4px; font-size: 12.5px; color: #191919; }
+.px-snip code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 46ch; }
+.px-snip .btn-text { font-size: 12px; }
+.px-code { grid-column: 2 / -1; width: 100%; min-height: 110px; padding: 10px 12px; border: 1px solid rgb(0 0 0 / .18); border-radius: 6px; background: #fff; font: 12px/1.55 ui-monospace, SFMono-Regular, Menlo, monospace; color: #191919; resize: vertical; }
+.px-code:focus { border-color: var(--ink); outline: none; }
+.px-code[hidden] { display: none; }
+.px-save { height: 38px; padding: 0 18px; font-size: 13px; gap: 8px; }
+@media (max-width: 760px) {
+  .br-row { grid-template-columns: minmax(0, 1fr); padding-left: 0; gap: 8px; margin-top: 18px; }
+  .br-row.top > label { padding-top: 0; }
+  .br-err { grid-column: 1; }
+  .br-input { height: 44px; font-size: 16px; }
+  textarea.br-input { height: 110px; }
+  .br-sec { flex-wrap: wrap; font-size: 16px; margin-top: 30px; }
+  .br-sec::after { display: none; }
+  .br-sec small { white-space: normal; }
+  .br-foot .btn-dark { flex: 1; height: 44px; }
+  .px-list { margin: 18px -14px -26px; }
+  .px-row { grid-template-columns: 32px minmax(0, 1fr); padding: 16px 14px; }
+  .px-row > .px-copy, .px-row > .px-save { grid-column: 1 / -1; justify-self: stretch; justify-content: center; height: 44px; }
+  .px-in { font-size: 16px; height: 36px; width: 100%; border-color: rgb(0 0 0 / .2); border-style: solid; background: #fff; }
+  .px-br { display: none; }
+  .px-id { flex-direction: column; align-items: stretch; gap: 4px; }
+  .px-snip code { max-width: 100%; }
+}
 /* Connect domain + DNS dialogs */
 .modal-domain { width: min(928px, calc(100vw - 24px)); border-radius: 12px; }
 .dm-in { padding: 30px 30px 26px 36px; overflow-y: auto; min-height: 0; }
@@ -2670,7 +2859,8 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
   .dm-head h2 { font-size: 18px; }
   .dm-field input { height: 46px; font-size: 16px; }
   .dm-foot { margin-top: 28px; gap: 10px; }
-  .dm-foot .dm-btn, .dm-foot .btn-primary.dm-btn.wide { flex: 1; width: auto; height: 46px; font-size: 13px; }
+  .dm-foot .dm-btn, .dm-foot .btn-primary.dm-btn, .dm-foot .btn-primary.dm-btn.wide { flex: 1; width: auto; height: 48px; font-size: 15px; }
+  .dm-field input { height: 48px; border-radius: 8px; }
   .dns-cfg { flex-wrap: wrap; }
   .dns-row { grid-template-columns: auto 1px minmax(0, 1fr); gap: 10px 14px; }
   .dns-row .dc.v { grid-column: 1 / -1; }
@@ -2942,6 +3132,15 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
         </form>
         <button type="button" class="btn-text onb-skip" id="onb-ws-skip">Skip for now</button>
       </div>
+    </div>
+  </main>
+</section>
+
+<!-- ===================== 01f · CREATE A NEW WEBSITE  (#/new-site/category → /name → /domain) ===================== -->
+<section data-route="/new-site" data-nested data-title="Create a new website">
+  <main class="auth-page">
+    <div class="auth-card">
+      <div class="auth-inner wiz" id="wiz"></div>
     </div>
   </main>
 </section>
@@ -3434,7 +3633,7 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
   <div class="dm-in">
     <div class="dm-head">
       <span class="dm-ic"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.25" stroke="currentColor" stroke-width="1.3"/><path d="M1.75 8h12.5M8 1.75c1.9 2 1.9 10.5 0 12.5M8 1.75c-1.9 2-1.9 10.5 0 12.5" stroke="currentColor" stroke-width="1.3"/></svg></span>
-      <div><h2 id="dns-title">DNS Verification &amp; Record Instructions</h2><p>Once you enter your domain, the system instantly generates the required DNS records and displays them in a clear, copy-and-paste format.</p></div>
+      <div><h2 id="dns-title">DNS Verification &amp; Record Instructions</h2><p>Add these records with your domain registrar (Namecheap, GoDaddy, etc.). Open your domain’s DNS settings there and copy each value below.</p></div>
       <button type="button" class="icon-btn" data-close aria-label="Close"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-close"/></svg></button>
     </div>
     <div class="dns-box">
@@ -3445,7 +3644,11 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
       </div>
       <div id="dns-recs"></div>
     </div>
-    <p class="dns-status" id="dns-status" role="status" hidden></p>
+    <section class="dns-st" id="dns-st" aria-labelledby="dns-st-h">
+      <h3 id="dns-st-h">Connection Status</h3>
+      <div id="dns-st-body" role="status" aria-live="polite"></div>
+      <p class="dns-st-note" id="dns-ssl">SSL certificate will be provisioned automatically once verified.</p>
+    </section>
     <div class="dm-foot">
       <button type="button" class="btn-outline dm-btn" id="dns-back"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" style="transform:scaleX(-1)"><use href="#i-arrow-right"/></svg>Back</button>
       <button type="button" class="btn-primary dm-btn wide" id="dns-verify">Verify Connection</button>
@@ -3489,7 +3692,7 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
 
           <p class="switcher-empty" id="switcher-empty" hidden>No workspaces or sites match that search.</p>
 
-          <a href="#/workspace" class="create-site">
+          <a href="#/new-site" class="create-site" data-wiz-start>
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><use href="#i-plus"/></svg>
             Create new site
           </a>
@@ -3603,7 +3806,7 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
     <div class="proto-scroll">
       <div class="proto-group"><h2>Sign up & sign in</h2><a href="#/signin">Sign in</a><a href="#/signup">Sign up</a><a href="#/signup/password">Set password</a><a href="#/signup/created">Account created</a><a href="#/reset">Reset password</a><a href="#/invite">Accept invite</a></div>
       <div class="proto-group"><h2>Onboarding</h2><a href="#/onboarding/profile">Profile</a><a href="#/onboarding/workspace">New workspace</a></div>
-      <div class="proto-group"><h2>Workspace</h2><a href="#/workspace">All sites</a><a href="#/workspace/templates">Templates</a><a href="#/workspace/team">Team</a><a href="#/workspace/settings">General settings</a><a href="#/overview">Site overview</a></div>
+      <div class="proto-group"><h2>Workspace</h2><a href="#/workspace">All sites</a><a href="#/workspace/templates">Templates</a><a href="#/workspace/team">Team</a><a href="#/workspace/settings">General settings</a><a href="#/new-site">Create new site</a><a href="#/overview">Site overview</a></div>
       <div class="proto-group"><h2>Site</h2><a href="#/overview/pages">Website pages</a><a href="#/overview/products">Products</a><a href="#/overview/orders">Orders</a><a href="#/overview/categories">Categories</a><a href="#/overview/checkout">Checkout settings</a><a href="#/overview/analytics">Analytics</a><a href="#/overview/settings">Site settings</a></div>
     </div>
   </nav>
@@ -3736,6 +3939,7 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
     const r = active.dataset.route;
     if (r === '/onboarding/profile') fillProfile();
     if (r === '/onboarding/workspace') resetWsForm($('#onb-ws-form'));
+    if (r === '/new-site') renderWizard(path);
     if (r === '/invite') renderInvitePage();
     if (r === '/workspace') { view = path.split('/')[2] || 'sites'; if (!['sites', 'templates', 'team', 'settings'].includes(view)) view = 'sites'; renderDashboard(); $('#wsd-main').scrollTop = 0; }
     if (r === '/overview') { const sv = path.split('/')[2]; siteView = SITE_VIEW_TITLES[sv] ? sv : 'overview'; setSiteNav(true); renderOverviewSwitcher(); fitSidebar(); $('#workspace-main').scrollTop = 0; }
@@ -4441,14 +4645,7 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
     const t = e.target;
     const f = t.closest('[data-filter]'); if (f) { state.siteFilter = f.dataset.filter; renderSites(w, displayName().split(' ')[0]); $(`[data-filter="${state.siteFilter}"]`).focus(); return; }
     if (t.closest('[data-filter-reset]')) { e.preventDefault(); state.siteFilter = 'all'; state.siteQuery = ''; renderSites(w, displayName().split(' ')[0]); return; }
-    if (t.closest('[data-new-site]')) {
-      const n = w.sites.filter(s => s.name.startsWith('Untitled site')).length;
-      const s = { id: 's' + Date.now(), name: n ? `Untitled site ${n + 1}` : 'Untitled site', status: 'unpublished', updated: Date.now(), theme: 'plain' };
-      w.sites.unshift(s); w.activity.push({ kind: 'create', text: `${s.name} was created`, time: Date.now() });
-      state.siteFilter = 'all'; state.siteQuery = ''; renderSites(w, displayName().split(' ')[0]);
-      toast(`${s.name} created`, { label: 'Open', href: '#/overview', site: s.id });
-      return;
-    }
+    if (t.closest('[data-new-site]')) { startWizard(); return; }
     const more = t.closest('[data-more]');
     if (more) { const m = $('#more-' + more.dataset.more); const open = m.hidden; closeMenus(); m.hidden = !open; more.setAttribute('aria-expanded', open); if (open) placeMenu(m); return; }
     const st = t.closest('[data-status]');
@@ -5577,6 +5774,19 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
     }
   });
 
+
+  /* Product drawer slides out before it closes */
+  (() => {
+    const d = $('#dlg-product'), nativeClose = d.close.bind(d);
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+    d.close = function (v) {
+      if (!d.open || d.classList.contains('closing')) return;
+      if (reduce.matches) { nativeClose(v); return; }
+      d.classList.add('closing');
+      d.addEventListener('animationend', () => { d.classList.remove('closing'); nativeClose(v); }, { once: true });
+    };
+    d.addEventListener('cancel', e => { if (dSeo.open) return; e.preventDefault(); d.close(); });
+  })();
   /* ---------- Add page dialog ---------- */
   const dPage = $('#dlg-page');
   let pgPathEdited = false;
@@ -6169,12 +6379,14 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
     const panel = tab === 'domain' ? `
         <h2 class="ss-h">Custom Domain Configuration</h2>
         <p class="ss-cur">Current Domain: <b>${esc(d.domain)}</b><span class="st${d.live ? '' : ' off'}">(${d.live ? 'Active' : 'Not live'})</span><span class="dot" aria-hidden="true"></span></p>
+        ${s.pendingDomain ? `<p class="ss-pend"><span class="dns-dot" aria-hidden="true"></span><b>${esc(s.pendingDomain)}</b>Pending · waiting for DNS records<button type="button" class="btn-text" data-ss-pending>View DNS records</button></p>` : ''}
         <label class="ss-lbl" for="ss-domain">Add Custom Domain:</label>
         <div class="ss-add"><input id="ss-domain" autocomplete="off" spellcheck="false" inputmode="url" placeholder="e.g. mybusiness.com">
           <button type="button" class="btn-dark" data-ss-connect>Connect Domain</button></div>
         <hr>
         <h2 class="ss-h">DNS Records to Point:</h2>
-        <ul class="ss-dns">${DNS_RECORDS.map(r => `<li><span>Type:</span>${r.type}<i></i><span>Host:</span>${r.host}<i></i><span>Value:</span>${r.value}</li>`).join('')}</ul>`
+        <ul class="ss-dns">${DNS_RECORDS.map(r => `<li><span class="f"><span>Type:</span> <b>${r.type}</b></span><i></i><span class="f"><span>Host:</span> <b>${r.host}</b></span><i></i><span class="f v"><span>Value:</span> <b>${r.value}</b></span></li>`).join('')}</ul>`
+      : tab === 'branding' ? brandingPanel(s) : tab === 'pixels' ? pixelsPanel(s)
       : `<div class="ss-soon"><span class="soon-tag">Coming soon</span><h3 style="margin-top:14px">${SS_TABS.find(t => t[0] === tab)[1]}</h3><p>${SS_SOON[tab]}</p></div>`;
     el.innerHTML = `
       <div class="ov-head"><h1 tabindex="-1">Site Settings</h1><p>Manage global domain connections, brand identity, tracking scripts, and site deletion.</p></div>
@@ -6183,12 +6395,15 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
       </div>
       <section class="ov-card ss-panel" id="ss-panel" role="tabpanel" aria-labelledby="ss-tab-${tab}">${panel}</section>`;
     $('#ss-domain')?.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); openDomain(e.target.value); } });
+    if (tab === 'branding') wireBranding(s);
+    if (tab === 'pixels') wirePixels(s);
   }
   $('#ov-view').addEventListener('click', e => {
     if (siteView !== 'settings' || !curSite()) return;
     const t = e.target.closest('[data-ss-tab]');
     if (t) { state.ssTab = t.dataset.ssTab; renderSettingsView(); $('#ss-tab-' + state.ssTab).focus(); return; }
     if (e.target.closest('[data-ss-connect]')) openDomain($('#ss-domain').value);
+    if (e.target.closest('[data-ss-pending]')) { dnsDomain = curSite().pendingDomain; openDns(); }
   });
   $('#ov-view').addEventListener('keydown', e => {
     const t = e.target.closest('[data-ss-tab]'); if (!t || (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft')) return;
@@ -6197,6 +6412,180 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
     state.ssTab = SS_TABS[(i + (e.key === 'ArrowRight' ? 1 : n - 1)) % n][0];
     renderSettingsView(); $('#ss-tab-' + state.ssTab).focus();
   });
+
+  /* ---------- Site settings → Branding & Favicon ---------- */
+  const META_T = 60, META_D = 300;
+  function brandingOf(s) {
+    if (s.branding) return s.branding;
+    const shop = isShop(s);
+    return (s.branding = {
+      siteName: s.name,
+      favicon: shop ? photoUrl('1635450370155-d6a650322fa5') : null,
+      metaTitle: shop ? `${s.name} | Sustainable Poultry & Produce` : `${s.name} | Official Website`,
+      metaDesc: shop ? 'Premium farm-raised broilers, feeds, and fresh produce.' : ''
+    });
+  }
+  const I_IMG_UP = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="m4 17 4.5-4.5 3.5 3.5 2-2 4 4" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="9" cy="9" r="1.4" fill="currentColor"/><path d="M18 3v6M15 6h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
+  function brandingPanel(s) {
+    const b = brandingOf(s);
+    return `
+      <h2 class="ss-h br-h">Branding &amp; Global Metadata</h2>
+      <div class="br-row"><label for="br-name">Site Name:</label>
+        <input class="br-input" id="br-name" maxlength="80" autocomplete="off" value="${esc(b.siteName)}" aria-describedby="br-name-err">
+        <p class="br-err" id="br-name-err" hidden>Give your site a name. It shows in browser tabs and search results.</p></div>
+      <div class="br-row"><span class="br-lbl" id="br-fav-lbl">Favicon Upload</span>
+        <div class="br-fav">
+          <label class="br-drop" id="br-drop">${I_IMG_UP}<small>PNG, JPG,<br>SVG or ICO</small>
+            <input type="file" id="br-file" accept=".ico,.svg,image/png,image/jpeg,image/webp,image/gif,image/svg+xml,image/x-icon,image/vnd.microsoft.icon" aria-labelledby="br-fav-lbl"></label>
+          <span class="br-prev" id="br-prev" aria-label="Favicon preview" role="img"></span>
+          <button type="button" class="btn-text" id="br-fav-rm">Remove</button>
+        </div>
+        <p class="br-err" id="br-fav-err" role="alert" hidden></p></div>
+      <h3 class="br-sec">Global Site Default SEO <small>(Fallback for pages without custom SEO)</small></h3>
+      <div class="br-row"><label for="br-title">Default Meta Title:</label>
+        <div class="br-field"><input class="br-input has-pill" id="br-title" autocomplete="off" value="${esc(b.metaTitle)}"><span class="br-pill" id="br-title-pill"></span></div></div>
+      <div class="br-row top"><label for="br-desc">Default Meta Description:</label>
+        <div class="br-field"><textarea class="br-input" id="br-desc" maxlength="${META_D}" placeholder="A short line that describes the site in search results">${esc(b.metaDesc)}</textarea>
+          <p class="br-count" id="br-desc-count" aria-live="polite"></p></div></div>
+      <div class="br-foot">
+        <button type="button" class="btn-dark" id="br-save">Save Branding Changes</button>
+      </div>`;
+  }
+  function wireBranding(s) {
+    const b = brandingOf(s);
+    let fav = b.favicon;
+    const name = $('#br-name'), title = $('#br-title'), desc = $('#br-desc');
+    const paintFav = () => {
+      $('#br-prev').innerHTML = fav ? `<img src="${fav}" alt="" onerror="this.replaceWith(document.createTextNode('${esc(initials(name.value || s.name).slice(0, 1))}'))">` : esc(initials(name.value || s.name).slice(0, 1) || '?');
+      $('#br-fav-rm').hidden = !fav;
+    };
+    const paintCounts = () => {
+      const n = title.value.length, pill = $('#br-title-pill');
+      pill.textContent = `${n} chars`; pill.classList.toggle('over', n > META_T);
+      pill.title = n > META_T ? `Google usually cuts titles after about ${META_T} characters` : '';
+      $('#br-desc-count').textContent = `${desc.value.length}/${META_D}`;
+    };
+    const favErr = m => { const e = $('#br-fav-err'); e.textContent = m || ''; e.hidden = !m; };
+    const take = file => {
+      if (!file) return;
+      const svg = file.type === 'image/svg+xml' || /\.svg$/i.test(file.name), ico = /icon$/.test(file.type) || /\.ico$/i.test(file.name);
+      const okType = svg || ico || /^image\/(png|jpeg|webp|gif)$/.test(file.type);
+      if (!okType) return favErr('Use a PNG, JPG, WebP, SVG or ICO image.');
+      if (file.size > 5 * 1024 * 1024) return favErr('That image is over 5MB. Pick a smaller one.');
+      favErr('');
+      const r = new FileReader();
+      r.onload = () => {
+        /* SVG and ICO are kept as they are. Other images are cropped to a centred square. */
+        if (svg || ico) { fav = r.result; paintFav(); return; }
+        const img = new Image();
+        img.onload = () => {
+          const side = Math.min(img.naturalWidth, img.naturalHeight), out = Math.min(side, 512);
+          if (side < 32) { favErr('That image is too small. Use one that is at least 32 × 32px.'); return; }
+          const c = document.createElement('canvas'); c.width = c.height = out;
+          c.getContext('2d').drawImage(img, (img.naturalWidth - side) / 2, (img.naturalHeight - side) / 2, side, side, 0, 0, out, out);
+          fav = c.toDataURL('image/png'); paintFav();
+          if (img.naturalWidth !== img.naturalHeight) toast('Your image wasn’t square, so it was cropped to the centre.');
+          else if (side < 512) toast('Favicon added. A 512 × 512px image will look sharper on phones.');
+        };
+        img.onerror = () => favErr('That image couldn’t be opened. Try another file.');
+        img.src = r.result;
+      };
+      r.readAsDataURL(file);
+    };
+    $('#br-file').addEventListener('change', e => { take(e.target.files[0]); e.target.value = ''; });
+    const drop = $('#br-drop');
+    ['dragenter', 'dragover'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add('drag'); }));
+    ['dragleave', 'drop'].forEach(ev => drop.addEventListener(ev, () => drop.classList.remove('drag')));
+    drop.addEventListener('drop', e => { e.preventDefault(); take(e.dataTransfer.files[0]); });
+    $('#br-fav-rm').addEventListener('click', () => { fav = null; favErr(''); paintFav(); });
+    name.addEventListener('input', () => { name.removeAttribute('aria-invalid'); $('#br-name-err').hidden = true; if (!fav) paintFav(); });
+    title.addEventListener('input', paintCounts); desc.addEventListener('input', paintCounts);
+    $('#br-save').addEventListener('click', () => {
+      const n = name.value.trim();
+      if (!n) { name.setAttribute('aria-invalid', 'true'); $('#br-name-err').hidden = false; name.focus(); return; }
+      Object.assign(b, { siteName: n, favicon: fav, metaTitle: title.value.trim() || n, metaDesc: desc.value.trim() });
+      const w = ws(); if (w) w.activity.push({ kind: 'update', text: `${s.name} branding was updated`, time: Date.now() });
+      title.value = b.metaTitle; paintCounts();
+      toast(title.value.length > META_T ? `Branding saved. Your meta title is over ${META_T} characters, so Google may shorten it.` : 'Branding changes saved');
+    });
+    paintFav(); paintCounts();
+  }
+
+  /* ---------- Site settings → Analytics & Pixels ---------- */
+  function pixelsOf(s) {
+    if (s.pixels) return s.pixels;
+    return (s.pixels = { ga: '', fb: isShop(s) ? '123456789012345' : '', code: '' });
+  }
+  const PX_RULES = {
+    ga: { re: /^G-[A-Z0-9]{6,12}$/, msg: 'A Measurement ID looks like G-XXXXXXXXXX (G, a dash, then letters and numbers).' },
+    fb: { re: /^\d{15,16}$/, msg: 'A Pixel ID is 15 or 16 digits, numbers only.' }
+  };
+  const I_GA = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="14" width="4" height="7" rx="1" fill="currentColor"/><rect x="10" y="9" width="4" height="12" rx="1" fill="currentColor"/><rect x="17" y="3" width="4" height="18" rx="1" fill="currentColor"/></svg>';
+  const I_FB = '<svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-facebook"/></svg>';
+  const I_CODE = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5.5 4 1.5 8l4 4M10.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const I_SAVE = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2.5h8l2.5 2.5v8.5H3z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M5.5 2.5v3h5v-3M5.5 13.5V9.5h5v4" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>';
+  const codeSnippet = c => { const line = (c || '').split('\n').map(x => x.trim()).find(Boolean); return line ? line : '...custom tracking script...'; };
+  function pixelsPanel(s) {
+    const p = pixelsOf(s);
+    const idRow = (k, tint, ic, title, label, ph, val, mode) => `
+      <div class="px-row${tint ? ' tint' : ''}">
+        <span class="px-ic">${ic}</span>
+        <div><strong>${title}</strong>
+          <span class="px-id"><label for="px-${k}">${label}:</label><span class="px-br">[</span> <input class="px-in" id="px-${k}" data-px="${k}" inputmode="${mode}" autocomplete="off" spellcheck="false" placeholder="${ph}" value="${esc(val)}" aria-describedby="px-${k}-err"> <span class="px-br">]</span></span>
+          <p class="px-err" id="px-${k}-err" hidden></p></div>
+        <button type="button" class="px-copy" data-px-copy="${k}" ${val ? '' : 'disabled'}>${COPY_IC}Copy ID</button>
+      </div>`;
+    return `
+      <h2 class="ss-h br-h">Analytics &amp; Pixels</h2>
+      <p class="px-sub">Connect your tracking tools and add custom scripts to monitor your site's performance and behaviour.</p>
+      <div class="px-list">
+        ${idRow('ga', true, I_GA, 'Google Analytics', 'Measurement ID', 'G-XXXXXXXXXX', p.ga, 'text')}
+        ${idRow('fb', false, I_FB, 'Facebook / Meta Pixel', 'Pixel ID', '123456789012345', p.fb, 'numeric')}
+        <div class="px-row tint">
+          <span class="px-ic code">${I_CODE}</span>
+          <div><strong>Custom Header Code Injection</strong>
+            <span class="px-snip"><code id="px-snip">${esc(codeSnippet(p.code))}</code><button type="button" class="btn-text" id="px-code-toggle" aria-expanded="false" aria-controls="px-code">${p.code ? 'Edit' : 'Add script'}</button></span></div>
+          <button type="button" class="btn-dark px-save" id="px-save">${I_SAVE}Save Tracking Configuration</button>
+          <label class="sr-only" for="px-code">Custom code added to the head of every page</label>
+          <textarea class="px-code" id="px-code" hidden spellcheck="false" placeholder="<!-- Paste scripts here. They load in the <head> of every page. -->">${esc(p.code)}</textarea>
+        </div>
+      </div>`;
+  }
+  function pxCopy(text, btn) {
+    const done = () => { btn.classList.add('done'); btn.innerHTML = TICK + 'Copied'; setTimeout(() => { btn.classList.remove('done'); btn.innerHTML = COPY_IC + 'Copy ID'; }, 1600); };
+    const fallback = () => { const ta = document.createElement('textarea'); ta.value = text; ta.style.cssText = 'position:fixed;opacity:0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); done(); } catch (e) { toast(text); } ta.remove(); };
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
+  }
+  function wirePixels(s) {
+    const p = pixelsOf(s), code = $('#px-code'), tog = $('#px-code-toggle');
+    const err = (k, m) => { const i = $('#px-' + k), e = $(`#px-${k}-err`); e.textContent = m || ''; e.hidden = !m; m ? i.setAttribute('aria-invalid', 'true') : i.removeAttribute('aria-invalid'); };
+    $$('[data-px]').forEach(i => i.addEventListener('input', () => {
+      const k = i.dataset.px;
+      i.value = k === 'ga' ? i.value.toUpperCase().replace(/[^A-Z0-9-]/g, '') : i.value.replace(/\D/g, '');
+      err(k, ''); $(`[data-px-copy="${k}"]`).disabled = !i.value.trim();
+    }));
+    $$('[data-px-copy]').forEach(b => b.addEventListener('click', () => { const v = $('#px-' + b.dataset.pxCopy).value.trim(); if (v) pxCopy(v, b); }));
+    tog.addEventListener('click', () => {
+      const open = code.hidden; code.hidden = !open; tog.setAttribute('aria-expanded', open);
+      tog.textContent = open ? 'Hide editor' : (code.value.trim() ? 'Edit' : 'Add script');
+      if (open) code.focus();
+    });
+    code.addEventListener('input', () => { $('#px-snip').textContent = codeSnippet(code.value); });
+    $('#px-save').addEventListener('click', () => {
+      let first = null;
+      Object.entries(PX_RULES).forEach(([k, r]) => {
+        const v = $('#px-' + k).value.trim();
+        if (v && !r.re.test(v)) { err(k, r.msg); first ||= $('#px-' + k); } else err(k, '');
+      });
+      if (first) { first.focus(); return; }
+      const c = code.value.trim();
+      if (/<script\b/i.test(c) && !/<\/script>/i.test(c)) { if (code.hidden) tog.click(); code.focus(); toast('Your custom code has an opening <script> tag with no closing <\/script>.'); return; }
+      Object.assign(p, { ga: $('#px-ga').value.trim(), fb: $('#px-fb').value.trim(), code: c });
+      const n = [p.ga, p.fb, p.code].filter(Boolean).length;
+      const w = ws(); if (w) w.activity.push({ kind: 'update', text: `${s.name} tracking settings were updated`, time: Date.now() });
+      toast(n ? `Tracking saved. ${n} ${n === 1 ? 'tool is' : 'tools are'} active on ${s.name}.` : 'Tracking saved. No tracking tools are active.');
+    });
+  }
 
   const dDomain = $('#dlg-domain'), dDns = $('#dlg-dns'), dmIn = $('#dm-input');
   let dnsDomain = '';
@@ -6227,6 +6616,35 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
 
   const COPY_IC = '<svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8.5" rx="1.2" stroke="currentColor" stroke-width="1.3"/><path d="M10.5 3.5v-.5a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6.5a1 1 0 0 0 1 1h.5" stroke="currentColor" stroke-width="1.3"/></svg>';
   const REC_IC = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2.25" y="2.25" width="11.5" height="11.5" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M8 5v5M5.5 7.5 8 10l2.5-2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const FIELD_COPY = (v, label) => `<button type="button" class="dns-fc" data-dns-field="${esc(v)}" aria-label="Copy ${label}" title="Copy">${COPY_IC}</button>`;
+  /* Prototype only: how many times Verify has been pressed for each domain. The first check finds the
+     A record but not the CNAME yet, the second one succeeds, so both outcomes can be shown. */
+  const dnsTries = {};
+  let dnsState = 'wait', dnsLeave = 'pending';
+  function paintDnsStatus(state, info) {
+    dnsState = state;
+    const box = $('#dns-st'), body = $('#dns-st-body');
+    box.className = 'dns-st' + (state === 'bad' ? ' bad' : state === 'ok' ? ' ok' : '');
+    const v = $('#dns-verify');
+    $('#dns-back').hidden = state === 'ok';
+    $('#dns-ssl').textContent = state === 'ok' ? 'SSL certificate is being issued. Your site will load over https:// within a few minutes.' : 'SSL certificate will be provisioned automatically once verified.';
+    if (state === 'wait') {
+      body.innerHTML = `<p class="dns-st-line"><span class="dns-dot" aria-hidden="true"></span>Waiting for DNS propagation… <span class="sub">(Checking live)</span></p>`;
+      v.disabled = false; v.textContent = 'Verify Connection';
+    } else if (state === 'check') {
+      body.innerHTML = `<p class="dns-st-line"><span class="dm-spin" aria-hidden="true"></span>Looking up the records for ${esc(dnsDomain)}…</p>`;
+      v.disabled = true; v.innerHTML = '<span class="dm-spin" aria-hidden="true"></span>Checking DNS…';
+    } else if (state === 'bad') {
+      body.innerHTML = `<p class="dns-st-line"><span class="dns-dot bad" aria-hidden="true"></span>Records not found yet</p>
+        <ul class="dns-st-list">${info.map(r => `<li class="${r.ok ? 'ok' : 'bad'}">${r.ok ? TICK : '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M12 4 4 12M4 4l8 8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>'}${r.type} record (${r.host}) ${r.ok ? 'found' : 'not found'}</li>`).join('')}</ul>
+        <p class="dns-st-note">DNS changes can take a few minutes, and sometimes up to 48 hours, to spread. Check the missing record at your registrar, then try again.</p>`;
+      v.disabled = false; v.textContent = 'Check Again';
+    } else {
+      body.innerHTML = `<p class="dns-st-line"><span class="dns-dot ok" aria-hidden="true"></span>Connected · ${esc(dnsDomain)} is live</p>
+        <ul class="dns-st-list">${DNS_RECORDS.map(r => `<li class="ok">${TICK}${r.type} record (${r.host}) verified</li>`).join('')}</ul>`;
+      v.disabled = false; v.textContent = 'Done';
+    }
+  }
   function openDns() {
     $('#dns-domain').textContent = dnsDomain;
     $('[data-dns-copy="all"]', dDns).innerHTML = COPY_IC + 'Copy All';
@@ -6234,41 +6652,192 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
       <div class="dns-rec${i ? ' alt' : ''}">
         <p class="dns-rt">${REC_IC}Record ${i + 1} ( ${r.title} )</p>${i ? '' : '<hr>'}
         <div class="dns-row">
-          <div class="dc"><span>Type:</span><b${r.type === 'A' ? ' class="tp"' : ''}>${r.type}</b></div><i class="sep"></i>
-          <div class="dc"><span>Host:</span><b>${r.host}</b></div><i class="sep"></i>
-          <div class="dc v"><span>Value:</span><b>${r.value}</b></div>
-          <button type="button" class="dns-copy" data-dns-copy="${i}" aria-label="Copy record ${i + 1}">${COPY_IC}Copy</button>
+          <div class="dc"><span>Type:</span><span class="dns-val"><b${r.type === 'A' ? ' class="tp"' : ''}>${r.type}</b>${FIELD_COPY(r.type, `record ${i + 1} type`)}</span></div><i class="sep"></i>
+          <div class="dc"><span>Host:</span><span class="dns-val"><b>${r.host}</b>${FIELD_COPY(r.host, `record ${i + 1} host`)}</span></div><i class="sep"></i>
+          <div class="dc v"><span>Value:</span><span class="dns-val"><b>${r.value}</b>${FIELD_COPY(r.value, `record ${i + 1} value`)}</span></div>
         </div>
       </div>`).join('');
-    $('#dns-status').hidden = true;
-    const v = $('#dns-verify'); v.disabled = false; v.textContent = 'Verify Connection';
+    dnsLeave = 'pending';
+    paintDnsStatus('wait');
     dDns.showModal(); $('#dns-verify').focus();
   }
   function copyText(text, btn) {
-    const done = () => { const old = btn.innerHTML; btn.classList.add('done'); btn.innerHTML = TICK + 'Copied'; setTimeout(() => { btn.classList.remove('done'); btn.innerHTML = old; }, 1600); };
+    const done = () => { const old = btn.innerHTML; btn.classList.add('done'); btn.innerHTML = btn.classList.contains('dns-fc') ? TICK : TICK + 'Copied'; setTimeout(() => { btn.classList.remove('done'); btn.innerHTML = old; }, 1400); };
     const fallback = () => { const ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0'; dDns.appendChild(ta); ta.select(); try { document.execCommand('copy'); done(); } catch (e) { toast(text); } ta.remove(); };
     if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
   }
   dDns.addEventListener('click', e => {
+    const f = e.target.closest('[data-dns-field]'); if (f) { copyText(f.dataset.dnsField, f); return; }
     const b = e.target.closest('[data-dns-copy]'); if (!b) return;
-    const k = b.dataset.dnsCopy;
     const line = r => `Type: ${r.type} | Host: ${r.host} | Value: ${r.value}`;
-    copyText(k === 'all' ? `DNS records for ${dnsDomain}\n` + DNS_RECORDS.map(line).join('\n') : DNS_RECORDS[+k].value, b);
+    copyText(`DNS records for ${dnsDomain}\n` + DNS_RECORDS.map(line).join('\n'), b);
   });
-  $('#dns-back').addEventListener('click', () => { dDns.close(); openDomain(dnsDomain); });
+  /* Closing without verifying leaves the domain pending on the Custom Domain tab */
+  dDns.addEventListener('close', () => {
+    const s = curSite(); if (!s) return;
+    if (dnsLeave === 'pending' && dnsState !== 'ok') s.pendingDomain = dnsDomain;
+    if (siteView === 'settings') renderSettingsView(); else syncDomain(s);
+  });
+  $('#dns-back').addEventListener('click', () => { dnsLeave = 'back'; dDns.close(); openDomain(dnsDomain); });
   $('#dns-verify').addEventListener('click', () => {
-    const s = curSite(), btn = $('#dns-verify'); if (!s || btn.disabled) return;
-    btn.disabled = true; btn.innerHTML = '<span class="dm-spin" aria-hidden="true"></span>Checking DNS…';
-    const st = $('#dns-status'); st.hidden = false; st.textContent = `Looking up the A and CNAME records for ${dnsDomain}…`;
+    const s = curSite(); if (!s) return;
+    if (dnsState === 'ok') { dDns.close(); return; }
+    if (dnsState === 'check') return;
+    paintDnsStatus('check');
+    const tries = (dnsTries[dnsDomain] = (dnsTries[dnsDomain] || 0) + 1);
     setTimeout(() => {
       if (!dDns.open) return;
-      s.domain = dnsDomain;
+      if (tries < 2) { paintDnsStatus('bad', DNS_RECORDS.map(r => ({ ...r, ok: r.type === 'A' }))); return; }
+      s.domain = dnsDomain; delete s.pendingDomain;
       const w = ws(); if (w) w.activity.push({ kind: 'update', text: `${dnsDomain} was connected to ${s.name}`, time: Date.now() });
-      dDns.close();
-      if (siteView === 'settings') renderSettingsView(); else syncDomain(s);
-      toast(`${dnsDomain} is connected to ${s.name}`);
+      paintDnsStatus('ok');
+      toast(`${dnsDomain} is connected. SSL is being set up.`);
     }, 1400);
   });
+
+
+  /* =====================================================================
+     Create a new website: 3-step wizard (#/new-site/category → name → domain)
+     ===================================================================== */
+  const wsvg = d => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+  const WIZ_CATS = [
+    { k: 'store', label: 'Online store', hint: 'Sell products with a cart and checkout', theme: 'sun', words: ['Store', 'Shop', 'Market'],
+      icon: wsvg('<path d="M3 4h2.2l2.1 10.2a1.5 1.5 0 0 0 1.5 1.2h8.4a1.5 1.5 0 0 0 1.5-1.1L20.5 8H6.1"/><circle cx="9.5" cy="19.5" r="1.2"/><circle cx="17" cy="19.5" r="1.2"/>') },
+    { k: 'portfolio', label: 'Portfolio', hint: 'Show off your work and projects', theme: 'axis', words: ['Studio', 'Works', 'Portfolio'],
+      icon: wsvg('<rect x="3.5" y="3.5" width="7" height="7" rx="1.2"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.2"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.2"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.2"/>') },
+    { k: 'services', label: 'Offering services', hint: 'Bookings, pricing and enquiries', theme: 'nova', words: ['Services', 'Solutions', 'Consulting'],
+      icon: wsvg('<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8.5 7V5.5A1.5 1.5 0 0 1 10 4h4a1.5 1.5 0 0 1 1.5 1.5V7M3 12.5h18"/>') },
+    { k: 'blog', label: 'Blog', hint: 'Articles, news and updates', theme: 'plain', words: ['Journal', 'Notes', 'Blog'],
+      icon: wsvg('<path d="M5 3.5h10l4 4V20a.5.5 0 0 1-.5.5h-13A.5.5 0 0 1 5 20z"/><path d="M14.5 3.5V8H19M8.5 12h7M8.5 15.5h7M8.5 8.5h3"/>') },
+    { k: 'landing', label: 'Landing page', hint: 'One page for a launch or campaign', theme: 'nova', words: ['Launch', 'Hub', 'Online'],
+      icon: wsvg('<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 8.5h18M7 13h6M7 16h4"/><rect x="15" y="12" width="3" height="4.5" rx=".5"/>') },
+    { k: 'nonprofit', label: 'Non-profit organization', hint: 'Causes, donations and volunteers', theme: 'plain', words: ['Foundation', 'Initiative', 'Trust'],
+      icon: wsvg('<path d="M12 20s-7.5-4.4-7.5-10A4.5 4.5 0 0 1 12 7.2 4.5 4.5 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10Z"/>') },
+    { k: 'tech', label: 'Tech company', hint: 'Product pages, docs and careers', theme: 'axis', words: ['Labs', 'Technologies', 'Digital'],
+      icon: wsvg('<rect x="3" y="4.5" width="18" height="12" rx="1.5"/><path d="M2 19.5h20M10 8.5l-2 2 2 2M14 8.5l2 2-2 2"/>') },
+    { k: 'restaurant', label: 'Restaurant', hint: 'Menu, opening hours and reservations', theme: 'sun', words: ['Kitchen', 'Bistro', 'Eatery'],
+      icon: wsvg('<path d="M6 3v7a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V3M8 12v9M17 21V3c-1.9 1-3 3.4-3 6.5V13h3"/>') },
+    { k: 'event', label: 'Promoting an event', hint: 'Schedule, speakers and tickets', theme: 'nova', words: ['Live', 'Summit', 'Fest'],
+      icon: wsvg('<rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4M8 14h2.5M13.5 14H16M8 17h2.5"/>') }
+  ];
+  const WIZ_STEPS = ['category', 'name', 'domain'];
+  let wiz = { cat: null, name: '', domain: '' };
+  const siteSlug = n => slugify(n).replace(/-/g, '') || 'mysite';
+  function startWizard() {
+    if (!ws()) { go('#/workspace'); return; }
+    wiz = { cat: null, name: '', domain: '' };
+    go('#/new-site/category');
+  }
+  $$('[data-wiz-start]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); closeSwitcher(false); startWizard(); }));
+  function wizHead(n) {
+    return `<div class="wiz-top"><p class="onb-step">Step ${n} of 3</p><button type="button" class="btn-text wiz-cancel" data-wiz-cancel>Cancel</button></div>
+      <div class="wiz-bar" aria-hidden="true">${[1, 2, 3].map(i => `<i class="${i <= n ? 'on' : ''}"></i>`).join('')}</div>`;
+  }
+  /* Suggestions come from the "root" of what was typed, so picking one never stacks extra words on top */
+  function wizRoot(name) {
+    const all = WIZ_CATS.flatMap(c => c.words).join('|');
+    return name.trim().replace(/^the\s+/i, '').replace(new RegExp(`\\s+(${all})$`, 'i'), '').trim();
+  }
+  function wizSuggestions(typed) {
+    const cat = WIZ_CATS.find(c => c.k === wiz.cat) || WIZ_CATS[0];
+    const root = wizRoot(typed);
+    return root ? cat.words.map(w => `${root} ${w}`) : [];
+  }
+  function renderWizard(path) {
+    if (!ws()) { go('#/workspace'); return; }
+    let step = path.split('/')[2] || 'category';
+    if (!WIZ_STEPS.includes(step)) step = 'category';
+    if (step !== 'category' && !wiz.cat) { go('#/new-site/category'); return; }
+    if (step === 'domain' && !wiz.name.trim()) { go('#/new-site/name'); return; }
+    const el = $('#wiz');
+    if (step === 'category') {
+      el.innerHTML = `${wizHead(1)}
+        <h1 tabindex="-1">What is your site all about?</h1>
+        <p class="auth-lead">Pick your main category. We'll tailor your starter layout and switch on the right features.</p>
+        <fieldset class="wiz-cats"><legend class="sr-only">Site category</legend>
+          ${WIZ_CATS.map(c => `<label class="wiz-cat"><input type="radio" name="wiz-cat" value="${c.k}" ${wiz.cat === c.k ? 'checked' : ''}>
+            <span class="wi">${c.icon}</span><strong>${c.label}</strong><small>${c.hint}</small>
+            <span class="ck" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><use href="#i-check"/></svg></span></label>`).join('')}
+        </fieldset>
+        <div class="wiz-foot"><button type="button" class="btn-primary" id="wiz-next" ${wiz.cat ? '' : 'disabled'}>Continue ${icon('i-arrow-right', 16)}</button></div>`;
+      $$('[name=wiz-cat]', el).forEach(r => r.addEventListener('change', () => { wiz.cat = r.value; $('#wiz-next').disabled = false; }));
+      $$('.wiz-cat', el).forEach(l => l.addEventListener('dblclick', () => { wiz.cat = $('input', l).value; go('#/new-site/name'); }));
+      $('#wiz-next').addEventListener('click', () => { if (wiz.cat) go('#/new-site/name'); });
+    }
+    if (step === 'name') {
+      el.innerHTML = `${wizHead(2)}
+        <h1 tabindex="-1">What do you want to call your site?</h1>
+        <p class="auth-lead">Enter your site name below or pick a suggested name based on your category.</p>
+        <form class="wiz-form" id="wiz-form" novalidate>
+          <div class="auth-field"><label for="wiz-name">Site name</label>
+            <input class="auth-input" id="wiz-name" maxlength="48" autocomplete="off" placeholder="e.g. Debaz Farm" value="${esc(wiz.name)}" aria-describedby="wiz-addr"></div>
+          <p class="wiz-hint" id="wiz-addr"></p>
+          <p class="wiz-sugs-h">Suggested names</p>
+          <div class="wiz-sugs" id="wiz-sugs"></div>
+          <p class="alert-error" role="alert" hidden id="wiz-err">Give your site a name.</p>
+          <div class="wiz-foot">
+            <a href="#/new-site/category" class="btn-outline">${icon('i-arrow-right', 16).replace('<svg', '<svg style="transform:scaleX(-1)"')}Back</a>
+            <button type="submit" class="btn-primary">Continue ${icon('i-arrow-right', 16)}</button>
+          </div>
+        </form>`;
+      const inp = $('#wiz-name');
+      const paint = () => {
+        wiz.name = inp.value;
+        $('#wiz-addr').innerHTML = `Your site address will automatically be <b>${esc(siteSlug(inp.value || 'yoursite'))}.digitalromanian.site</b>`;
+        const list = wizSuggestions(inp.value), cur = inp.value.trim().toLowerCase();
+        $('#wiz-sugs').innerHTML = list.length ? list.map(n => `<button type="button" class="wiz-sug" data-sug="${esc(n)}" aria-pressed="${n.toLowerCase() === cur}">${esc(n)}</button>`).join('') : '<p class="wiz-hint" style="margin:0">Start typing a name and we’ll suggest a few versions.</p>';
+      };
+      inp.addEventListener('input', () => { $('#wiz-err').hidden = true; paint(); });
+      $('#wiz-sugs').addEventListener('click', e => { const b = e.target.closest('[data-sug]'); if (!b) return; inp.value = b.dataset.sug; $('#wiz-err').hidden = true; paint(); inp.focus(); });
+      $('#wiz-form').addEventListener('submit', e => { e.preventDefault(); if (!inp.value.trim()) { $('#wiz-err').hidden = false; inp.focus(); return; } wiz.name = inp.value.trim(); go('#/new-site/domain'); });
+      paint();
+    }
+    if (step === 'domain') {
+      el.innerHTML = `${wizHead(3)}
+        <h1 tabindex="-1">Connect a custom domain</h1>
+        <p class="auth-lead">Enter your domain name if you already own one, or leave it blank to connect later.</p>
+        <form class="wiz-form" id="wiz-form" novalidate>
+          <div class="auth-field"><div class="field-row"><label for="wiz-domain">Custom domain name</label><span class="opt">Optional</span></div>
+            <input class="auth-input" id="wiz-domain" autocomplete="off" spellcheck="false" inputmode="url" placeholder="e.g. mybusiness.com" value="${esc(wiz.domain)}" aria-describedby="wiz-dhint"></div>
+          <p class="wiz-hint" id="wiz-dhint">Your site will be live at <b>${esc(siteSlug(wiz.name))}.digitalromanian.site</b> straight away. If you add a domain, we'll show you the DNS records to set up after launch.</p>
+          <p class="alert-error" role="alert" hidden id="wiz-err"></p>
+          <div class="wiz-foot">
+            <a href="#/new-site/name" class="btn-outline">${icon('i-arrow-right', 16).replace('<svg', '<svg style="transform:scaleX(-1)"')}Back</a>
+            <button type="submit" class="btn-primary">Launch site</button>
+          </div>
+        </form>`;
+      const inp = $('#wiz-domain');
+      inp.addEventListener('input', () => { wiz.domain = inp.value; $('#wiz-err').hidden = true; });
+      $('#wiz-form').addEventListener('submit', e => {
+        e.preventDefault();
+        const raw = inp.value.trim(), d = normDomain(raw), err = $('#wiz-err');
+        let msg = '';
+        if (raw && !DOMAIN_RE.test(d)) msg = `“${raw}” isn't a valid domain. Use something like mybusiness.com, or leave it blank.`;
+        else if (raw && /(^|\.)digitalromanian\.(ro|com|site)$/.test(d)) msg = 'Use a domain you own, or leave it blank to use your free address.';
+        err.textContent = msg; err.hidden = !msg;
+        if (msg) { inp.focus(); return; }
+        launchSite(d);
+      });
+    }
+  }
+  function launchSite(customDomain) {
+    const w = ws(); if (!w) return;
+    const cat = WIZ_CATS.find(c => c.k === wiz.cat);
+    let slug = siteSlug(wiz.name), n = 2;
+    const taken = new Set(w.sites.map(x => (x.domain || '').split('.')[0]));
+    while (taken.has(slug)) slug = siteSlug(wiz.name) + n++;
+    const site = { id: 's' + Date.now(), name: wiz.name.trim(), status: 'draft', updated: Date.now(), theme: cat.theme, category: cat.k,
+      domain: `${slug}.digitalromanian.site`, store: { products: [] }, orders: [], categories: [] };
+    if (customDomain) site.pendingDomain = customDomain;
+    w.sites.unshift(site);
+    w.activity.push({ kind: 'create', text: `${site.name} was created`, time: Date.now() });
+    state.currentSiteId = site.id; state.siteFilter = 'all'; state.siteQuery = '';
+    wiz = { cat: null, name: '', domain: '' };
+    go('#/overview');
+    toast(customDomain ? `${site.name} is ready. Add the DNS records to connect ${customDomain}.` : `${site.name} is ready at ${site.domain}`,
+      customDomain ? { label: 'Set up DNS', action: () => { state.ssTab = 'domain'; go('#/overview/settings'); } } : null);
+  }
+  document.addEventListener('click', e => { if (e.target.closest('[data-wiz-cancel]')) { wiz = { cat: null, name: '', domain: '' }; go('#/workspace'); } });
 
   /* ---------- Overview sidebar groups + mobile drawers ---------- */
   $$('.nav-group-btn').forEach(btn => {
