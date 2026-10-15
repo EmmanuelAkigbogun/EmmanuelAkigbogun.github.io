@@ -6,7 +6,7 @@
 <title>Digital Romanian</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 <style>
 /* ---------- Base (from the site's token file) ---------- */
 :root {
@@ -1654,6 +1654,177 @@ textarea.pf-input { height: 56px; padding: 8px 10px; resize: vertical; line-heig
 .pf-dash rect { width: calc(100% - 1px); height: calc(100% - 1px); fill: none; stroke: rgb(0 0 0 / .6); stroke-width: 1; stroke-dasharray: 10 10; }
 .pf-drop.drag .pf-dash rect { stroke: var(--ink); stroke-dasharray: none; }
 
+
+/* =====================================================================
+   Content (#/overview/content) — Figma "Site Dashboard > Content/CMS"
+   ===================================================================== */
+.acard { margin-top: 18px; border-color: rgb(0 0 0 / .2) !important; }
+.ov-card > header.acard-head { display: block; padding: 18px 12px 16px; }
+.ov .acard-head h2 { font-size: 22px; font-weight: 500; color: #000; }
+.acard-head p { font-size: 12px; line-height: 1.5; color: #191919; margin-top: 8px; max-width: 640px; }
+.acard-tools { display: flex; align-items: center; gap: 12px; padding: 0 8px 22px 12px; }
+.acard-tools .sv-search { flex: 1; width: auto; height: 40px; }
+.acard-tools .sv-search input { font-size: 13px; }
+.acard-tools .ofilter-btn { height: 40px; min-width: 200px; gap: 10px; padding: 0 14px; font-size: 13.5px; color: var(--ink); }
+.acard-tools .ofilter-btn .lbl { flex: 1; text-align: left; }
+.acard-tools .sv-add { flex: 0 0 auto; height: 40px; padding: 0 22px; font-size: 13.5px; font-weight: 600; justify-content: center; }
+.arow { position: relative; display: grid; grid-template-columns: minmax(0, 300fr) minmax(0, 124fr) minmax(0, 232fr) minmax(0, 136fr) minmax(0, 190fr); align-items: center; min-height: 100px; padding: 10px 8px; font-size: 13px; color: #000; }
+.arow > * { min-width: 0; padding-right: 12px; }
+.arow.head { min-height: 58px; padding-top: 0; padding-bottom: 0; background: #f0f0ef; font-size: 13.5px; font-weight: 600; margin-bottom: 16px; }
+#art-rows .arow:nth-child(even) { background: #f3f3f2; }
+#art-rows .arow:hover { background: #fafaf7; }
+#art-rows { border-radius: 0 0 12px 12px; padding-bottom: 34px; }
+.acell { display: flex; align-items: center; gap: 10px; }
+.athumb { position: relative; width: 68px; height: 68px; flex-shrink: 0; border-radius: 4px; overflow: hidden; display: grid; place-items: center; font-size: 28px; background: var(--tb, #eeece6); }
+.athumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.atxt { min-width: 0; }
+.atxt strong { display: block; font-size: 12.5px; font-weight: 600; line-height: 1.35; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.atxt code { display: block; font-family: inherit; font-size: 10.5px; color: #191919; margin-top: 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.atxt small { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: 10.5px; line-height: 1.5; color: #191919; margin-top: 6px; }
+.atxt .pmeta { display: none; -webkit-line-clamp: unset; color: var(--muted); }
+.a-date span { display: block; font-size: 14px; }
+.a-date span + span { margin-top: 4px; }
+.a-date.none span { color: var(--muted); font-size: 13px; }
+.cpill.sched { background: #fdf0dc; color: #c27a0e; }
+.arow .edit-btn { height: 38px; padding: 0 18px; gap: 8px; font-size: 14px; border-radius: 4px; }
+.arow .c-act { padding-right: 16px !important; }
+.ar-slug > span { width: auto !important; padding: 0 10px; background: #f6f5ef; color: #5f5f58; }
+@media (max-width: 1100px) {
+  .arow.head { display: none; }
+  .a-author, .a-date { display: none; }
+  .atxt .pmeta { display: block; }
+  .arow { grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto; align-items: start; gap: 6px 16px; min-height: 0; padding: 14px 16px; }
+  .arow > * { padding-right: 0; }
+  .acell { grid-column: 1; grid-row: 1 / span 2; align-self: center; }
+  .a-status { grid-column: 2; grid-row: 1; justify-self: end; }
+  .arow .c-act { grid-column: 2 !important; grid-row: 2; justify-self: end; align-self: end; gap: 6px !important; padding-right: 0 !important; }
+  .acard-tools { flex-wrap: wrap; }
+  .acard-tools .sv-search { flex: 1 1 100%; }
+}
+@media (max-width: 760px) {
+  .acard-tools .ofilter, .acard-tools .sv-add { flex: 1 1 0; height: 44px; min-width: 0; }
+  .acard-tools .ofilter-btn { width: 100%; height: 44px; min-width: 0; }
+  .athumb { width: 56px; height: 56px; }
+  .atxt strong { white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; font-size: 13.5px; }
+  .atxt code, .atxt small { font-size: 12px; }
+  .arow .edit-btn { height: 34px; padding: 0 12px; font-size: 13px; }
+}
+@media (max-width: 420px) {
+  .acard-tools .ofilter, .acard-tools .sv-add { flex: 1 1 100%; }
+  .acell { grid-row: 1; }
+  .arow .c-act { grid-column: 1 / -1 !important; justify-self: stretch; justify-content: flex-end; }
+}
+
+/* ---------- Site settings → Danger Zone ---------- */
+[data-route="/overview"] .ov .sdz-h { font-size: 22px; font-weight: 500; color: #000; }
+.sdz-sub { font-size: 14px; color: #191919; margin-top: 8px; }
+.sdz-list { margin: 22px -14px -26px; }
+.sdz-row { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; gap: 20px; align-items: center; min-height: 102px; padding: 18px 22px 18px 26px; }
+.sdz-row.tint { background: #eff6f4; }
+.sdz-row:last-child { border-radius: 0 0 12px 12px; }
+.sdz-ic { width: 44px; height: 44px; border-radius: 4px; display: grid; place-items: center; background: #e7e7e7; color: #1c1c1a; }
+.sdz-row strong { display: block; font-size: 14px; font-weight: 600; color: #000; }
+.sdz-row p { font-size: 14px; line-height: 1.45; color: #191919; margin-top: 4px; }
+.sdz-btn { width: 168px; height: 42px; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; font-size: 14px; font-weight: 500; white-space: nowrap; transition: background .15s ease, border-color .15s ease; }
+.sdz-btn.ghost { background: #fff; border: 1px solid rgb(253 63 29 / .5); color: #fd3f1d; }
+.sdz-btn.ghost:hover { background: #fff4f2; border-color: #fd3f1d; }
+.sdz-btn.solid { background: #fd3f1d; border: 1px solid #fd3f1d; color: #fff; }
+.sdz-btn.solid:hover { background: #e2310f; border-color: #e2310f; }
+.sdz-btn.calm { border-color: rgb(0 0 0 / .25); color: #000; }
+.sdz-btn.calm:hover { background: #f6f5ef; border-color: #000; }
+.sdz-state { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; font-size: 12px; font-weight: 500; color: #8c8c83; }
+.sdz-state::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.sdz-state.live { color: #1f9d5b; }
+.sd-name { font-weight: 600; }
+@media (max-width: 760px) {
+  [data-route="/overview"] .ov .sdz-h { font-size: 19px; }
+  .sdz-row { grid-template-columns: 40px minmax(0, 1fr); padding: 16px 14px; gap: 12px 14px; }
+  .sdz-ic { width: 40px; height: 40px; }
+  .sdz-row > .sdz-btn { grid-column: 1 / -1; width: 100%; height: 44px; }
+}
+
+/* ---------- Analytics & Pixels: status chips, help, save bar ---------- */
+.px-head { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 10px; }
+.px-chip { display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0 9px; border-radius: 999px; font-size: 11.5px; font-weight: 500; background: #ececec; color: #6b6b6b; }
+.px-chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.px-chip.on { background: #e3f4ea; color: #1f8a3b; }
+.px-chip.off { background: #fdf0dc; color: #c27a0e; }
+.px-help { font-size: 12px; line-height: 1.5; color: #696963; margin-top: 6px; max-width: 520px; }
+.px-switch { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 500; color: #000; cursor: pointer; }
+.px-switch input { appearance: none; -webkit-appearance: none; width: 36px; height: 22px; margin: 0; border-radius: 999px; background: #cfccc0; position: relative; cursor: pointer; transition: background .15s ease; flex-shrink: 0; }
+.px-switch input::after { content: ""; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; transition: transform .15s ease; }
+.px-switch input:checked { background: #0f8a4f; }
+.px-switch input:checked::after { transform: translateX(14px); }
+.px-switch input:disabled { opacity: .45; cursor: not-allowed; background: #cfccc0; }
+.px-switch input:disabled::after { transform: none; }
+.px-switch input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.px-acts { display: flex; align-items: center; gap: 14px; }
+.px-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 16px 22px; border-top: 1px solid rgb(0 0 0 / .06); }
+.px-bar .note { font-size: 12.5px; line-height: 1.5; color: #696963; max-width: 520px; }
+.px-bar .note.dirty { color: #c27a0e; font-weight: 500; }
+.px-bar .row { display: flex; gap: 10px; }
+.px-bar .btn-light { height: 38px; }
+.px-list .px-row:last-of-type { border-radius: 0; }
+@media (max-width: 760px) {
+  .px-acts { grid-column: 1 / -1; justify-content: space-between; }
+  .px-bar { padding: 14px; }
+  .px-bar .row { width: 100%; } .px-bar .row > * { flex: 1; justify-content: center; height: 44px; }
+}
+
+/* Custom header code: a small code editor */
+.px-coderow { align-items: start; }
+.px-coderow > .px-ic, .px-coderow > .px-acts { margin-top: 2px; }
+.pe { grid-column: 2 / -1; margin-top: 6px; border-radius: 10px; overflow: hidden; background: #1c1c1a; border: 1px solid #1c1c1a; box-shadow: 0 1px 2px rgb(0 0 0 / .06), 0 10px 24px -14px rgb(0 0 0 / .45); transition: box-shadow .15s ease, border-color .15s ease; }
+.pe:focus-within { border-color: #0f8a4f; box-shadow: 0 0 0 3px rgb(15 138 79 / .18), 0 10px 24px -14px rgb(0 0 0 / .45); }
+.pe-bar { display: flex; align-items: center; gap: 12px; height: 40px; padding: 0 12px 0 14px; background: #262624; border-bottom: 1px solid #33332f; }
+.pe-dots { display: flex; gap: 6px; }
+.pe-dots i { width: 9px; height: 9px; border-radius: 50%; }
+.pe-dots i:nth-child(1) { background: #ef6a5a; } .pe-dots i:nth-child(2) { background: #e9b949; } .pe-dots i:nth-child(3) { background: #5fbf6a; }
+.pe-file { display: inline-flex; align-items: center; gap: 7px; height: 24px; padding: 0 10px; border-radius: 6px; background: #1c1c1a; color: #e8e6df; font: 500 12px ui-monospace, SFMono-Regular, Menlo, monospace; }
+.pe-file svg { width: 13px; height: 13px; color: #8fd6a8; }
+.pe-file em { font-style: normal; color: #8c8a82; font-family: var(--font-sans); }
+.pe-meta { margin-left: auto; font-size: 11.5px; color: #8c8a82; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.pe-clear { height: 24px; padding: 0 10px; border-radius: 6px; font-size: 11.5px; font-weight: 500; color: #e8e6df; border: 1px solid #3d3c38; }
+.pe-clear:hover { background: #33332f; }
+.pe-clear[hidden] { display: none; }
+.pe-body { display: flex; height: 170px; }
+.pe-gutter { margin: 0; flex-shrink: 0; width: 44px; padding: 12px 10px 12px 0; overflow: hidden; text-align: right; background: #1c1c1a; border-right: 1px solid #2e2e2b; color: #5c5b55; font: 12.5px/20px ui-monospace, SFMono-Regular, Menlo, monospace; user-select: none; }
+.pe-code { flex: 1; min-width: 0; height: 100%; margin: 0; padding: 12px 14px; border: 0; outline: none !important; resize: none; background: transparent; color: #e8e6df; caret-color: #8fd6a8; font: 12.5px/20px ui-monospace, SFMono-Regular, Menlo, monospace; tab-size: 2; white-space: pre; overflow: auto; scrollbar-color: #4a4944 transparent; }
+.pe-code::placeholder { color: #6b6a63; }
+.pe-code::selection { background: rgb(143 214 168 / .28); }
+@media (max-width: 760px) {
+  .pe { grid-column: 1 / -1; }
+  .pe-file em, .pe-dots { display: none; }
+  .pe-body { height: 190px; }
+  .pe-code { font-size: 14px; }
+}
+
+
+/* Analytics & Pixels: clear inputs and quiet empty states */
+.px-id { gap: 6px 10px; margin-top: 8px; }
+.px-id label { font-size: 12.5px; color: #3d3d39; min-width: 104px; }
+@media (max-width: 760px) { .px-id label { min-width: 0; } }
+.px-id .px-in, .px-id .px-in:hover { width: 260px; max-width: 100%; height: 36px; padding: 0 12px; border: 1px solid rgb(0 0 0 / .18); border-radius: 6px; background: #fff; font-size: 13px; letter-spacing: .02em; }
+.px-id .px-in:hover { border-color: rgb(0 0 0 / .35); }
+.px-id .px-in:focus { border: 1px solid #0f8a4f; box-shadow: 0 0 0 3px rgb(15 138 79 / .15); }
+.px-id .px-in::placeholder { color: #a3a199; letter-spacing: 0; }
+.px-id .px-in[aria-invalid="true"] { border-color: #b42318; box-shadow: none; }
+.px-switch[hidden], .px-copy[hidden], .px-remove[hidden] { display: none; }
+.px-acts:not(:has(> :not([hidden]))) { display: none; }
+.px-save:disabled { background: #ececea; border-color: #ececea; color: #9a9a92; opacity: 1; cursor: default; }
+@media (max-width: 760px) { .px-id .px-in, .px-id .px-in:hover { width: 100%; height: 44px; font-size: 16px; } }
+
+
+/* Custom code: collapsed summary line */
+.px-snip { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; margin-top: 10px; }
+.px-snip code { max-width: 46ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; height: 28px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 6px; background: #1c1c1a; color: #e8e6df; font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; }
+.px-snip code.none { background: #fff; color: #8c8a82; border: 1px dashed rgb(0 0 0 / .2); font-family: var(--font-sans); }
+.px-toggle { display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border-radius: 6px; border: 1px solid rgb(0 0 0 / .2); background: #fff; font-size: 12.5px; font-weight: 500; color: #000; }
+.px-toggle:hover { border-color: #000; background: #f6f5ef; }
+.px-toggle[aria-expanded="true"] { background: #1c1c1a; border-color: #1c1c1a; color: #fff; }
+.pe[hidden] { display: none; }
+@media (max-width: 760px) { .px-snip code { max-width: 100%; } .px-toggle { height: 36px; } }
+
 /* Design icons keep their own proportions in the sidebar */
 [data-route="/overview"] .nav.nav-flat .nav-link svg.ic-doc { width: 14px; height: 18px; margin: 0 2px; }
 [data-route="/overview"] .nav.nav-flat .nav-link svg.ic-media { width: 18px; height: 14px; }
@@ -2802,12 +2973,6 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
 .px-copy { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border: 1px solid rgb(0 0 0 / .14); border-radius: 4px; background: #fff; font-size: 12.5px; font-weight: 500; color: #000; white-space: nowrap; }
 .px-copy:hover:not(:disabled) { background: #f6f5ef; border-color: rgb(0 0 0 / .3); }
 .px-copy.done { color: #186244; border-color: #bad6c5; }
-.px-snip { display: flex; align-items: center; gap: 8px; margin-top: 4px; font-size: 12.5px; color: #191919; }
-.px-snip code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 46ch; }
-.px-snip .btn-text { font-size: 12px; }
-.px-code { grid-column: 2 / -1; width: 100%; min-height: 110px; padding: 10px 12px; border: 1px solid rgb(0 0 0 / .18); border-radius: 6px; background: #fff; font: 12px/1.55 ui-monospace, SFMono-Regular, Menlo, monospace; color: #191919; resize: vertical; }
-.px-code:focus { border-color: var(--ink); outline: none; }
-.px-code[hidden] { display: none; }
 .px-save { height: 38px; padding: 0 18px; font-size: 13px; gap: 8px; }
 @media (max-width: 760px) {
   .br-row { grid-template-columns: minmax(0, 1fr); padding-left: 0; gap: 8px; margin-top: 18px; }
@@ -2825,8 +2990,7 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
   .px-in { font-size: 16px; height: 36px; width: 100%; border-color: rgb(0 0 0 / .2); border-style: solid; background: #fff; }
   .px-br { display: none; }
   .px-id { flex-direction: column; align-items: stretch; gap: 4px; }
-  .px-snip code { max-width: 100%; }
-}
+  }
 /* Connect domain + DNS dialogs */
 .modal-domain { width: min(928px, calc(100vw - 24px)); border-radius: 12px; }
 .dm-in { padding: 30px 30px 26px 36px; overflow-y: auto; min-height: 0; }
@@ -2886,6 +3050,160 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
   .dns-row .dc.v + .dns-copy { grid-column: 1 / -1; justify-self: start; }
   .dns-row > .sep:nth-of-type(2) { display: none; }
 }
+
+/* ---------- Analytics & Pixels: add tracking tool ---------- */
+.px-row.px-coderow[hidden], .pxa-other[hidden] { display: none; }
+.px-mark.ic { background: transparent; box-shadow: none; color: #000; }
+.px-mark { width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; background: var(--mk); color: var(--mt); font-size: 12px; font-weight: 700; letter-spacing: -.01em; box-shadow: inset 0 0 0 1px rgb(0 0 0 / .08); }
+.px-mark.sm { font-size: 10px; }
+.px-remove { display: inline-grid; place-items: center; width: 32px; height: 32px; border: 1px solid rgb(0 0 0 / .14); border-radius: 4px; background: #fff; color: #6b6b6b; }
+.px-remove:hover { color: #b42318; border-color: #f0b8b1; background: #fff6f5; }
+.px-row.px-addrow { min-height: 0; padding-top: 14px; padding-bottom: 14px; background: #fff; }
+.px-plus { width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; border: 1px dashed rgb(0 0 0 / .25); color: #6b6b6b; }
+.px-addbox { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 14px; }
+.px-addbox .px-help { margin-top: 0; }
+.px-add { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px 0 10px; border: 1px solid #000; border-radius: 4px; background: #fff; font-size: 12.5px; font-weight: 600; color: #000; }
+.px-add:hover { background: #f6f5ef; }
+.px-add:focus-visible, .px-remove:focus-visible, .pxa-item:focus-visible, .pxa-other:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.modal-pxadd { width: min(620px, calc(100vw - 24px)); }
+.pxa-in { padding: 26px 26px 22px 30px; }
+.pxa-in .dm-head { grid-template-columns: 48px minmax(0, 1fr) 32px; gap: 18px; }
+.pxa-in .dm-ic { width: 48px; height: 48px; }
+.pxa-search { position: relative; margin-top: 22px; }
+.pxa-search svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #000; }
+.pxa-search input { width: 100%; height: 42px; padding: 0 12px 0 36px; border: 1px solid rgb(0 0 0 / .2); border-radius: 6px; background: #fff; font-size: 13.5px; color: #000; }
+.pxa-search input:focus { border-color: #0f8a4f; box-shadow: 0 0 0 3px rgb(15 138 79 / .15); outline: none; }
+.pxa-list { margin-top: 6px; max-height: min(46vh, 380px); overflow-y: auto; }
+.pxa-list ul { list-style: none; margin: 0; padding: 0; }
+.pxa-g { margin: 16px 0 6px; font-size: 11.5px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: #696963; }
+.pxa-item, .pxa-other { width: 100%; display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 10px 10px; border: 0; border-radius: 8px; background: transparent; text-align: left; color: #000; cursor: pointer; }
+.pxa-item:hover:not(:disabled), .pxa-other:hover { background: #eef3f0; }
+.pxa-item .t, .pxa-other .t { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.pxa-item b, .pxa-other b { font-size: 13px; font-weight: 600; }
+.pxa-item small, .pxa-other small { font-size: 12px; color: #696963; line-height: 1.4; }
+.pxa-item .st, .pxa-other .st { display: inline-flex; align-items: center; gap: 5px; height: 28px; padding: 0 10px; border: 1px solid rgb(0 0 0 / .16); border-radius: 4px; background: #fff; font-size: 12px; font-weight: 500; }
+.pxa-item:disabled { cursor: default; }
+.pxa-item:disabled .st { border-color: #bad6c5; background: #e3f4ea; color: #1f8a3b; }
+.pxa-item:disabled .px-mark, .pxa-item:disabled .t { opacity: .55; }
+.pxa-empty { margin: 18px 4px 6px; font-size: 13px; color: #696963; line-height: 1.5; }
+.pxa-other { margin-top: 12px; border: 1px dashed rgb(0 0 0 / .22); }
+.pxa-foot { margin-top: 20px; }
+@media (max-width: 760px) {
+  .px-addbox { flex-direction: column; align-items: stretch; }
+  .px-add { height: 44px; justify-content: center; }
+  .px-remove { width: 44px; height: 44px; }
+  .pxa-in { padding: 20px 16px 16px; }
+  .pxa-in .dm-head { grid-template-columns: minmax(0, 1fr) 32px; }
+  .pxa-in .dm-ic { display: none; }
+  .pxa-item small { display: none; }
+  .pxa-search input { font-size: 16px; height: 44px; }
+}
+
+/* ---------- Article editor: content body + social share (matches the product dialog) ---------- */
+.ae-lbl { display: block; font-size: 11px; font-weight: 500; color: #000; margin-bottom: 5px; }
+.ae { border: 1px solid rgb(0 0 0 / .2); border-radius: 4px; background: #fff; overflow: hidden; }
+.ae:focus-within { border-color: var(--ink); }
+.ae.bad { border-color: #b42318; }
+.ae-bar { display: flex; align-items: center; flex-wrap: wrap; gap: 1px; padding: 4px 6px; border-bottom: 1px solid rgb(0 0 0 / .1); background: #faf9f5; }
+.ae-block { height: 26px; padding: 0 4px; border: 1px solid rgb(0 0 0 / .15); border-radius: 4px; background: #fff; font: inherit; font-size: 11.5px; color: #000; }
+.ae-tb { width: 26px; height: 26px; display: grid; place-items: center; border: 0; border-radius: 4px; background: transparent; color: #191919; }
+.ae-tb:hover { background: #ecebe4; }
+.ae-tb[aria-pressed="true"] { background: #1c1c1a; color: #fff; }
+.ae-tb:focus-visible, .ae-block:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+.ae-sep { width: 1px; height: 16px; margin: 0 4px; background: rgb(0 0 0 / .14); }
+.ae-link { display: flex; align-items: center; gap: 8px; padding: 6px; border-bottom: 1px solid rgb(0 0 0 / .1); background: #f6f5ef; }
+.ae-link[hidden] { display: none; }
+.ae-link input { flex: 1; min-width: 0; height: 28px; padding: 0 8px; border: 1px solid rgb(0 0 0 / .2); border-radius: 4px; font-size: 12px; }
+.ae-link .btn-dark { height: 28px; padding: 0 12px; font-size: 11.5px; }
+.ae .ae-doc { width: auto; height: auto; margin: 0; border: 0; border-radius: 0; box-shadow: none; background: #fff; }
+.ae-doc { min-height: 150px; max-height: 300px; overflow-y: auto; padding: 10px 12px; font-size: 12.5px; line-height: 1.6; color: #191919; outline: none; }
+.ae-doc.empty::before { content: attr(data-ph); color: #9a9a92; font-size: 11px; pointer-events: none; }
+.ae-doc h2 { font-size: 16px; font-weight: 600; line-height: 1.3; margin: 10px 0 4px; color: #000; }
+.ae-doc h3 { font-size: 14px; font-weight: 600; line-height: 1.35; margin: 8px 0 4px; color: #000; }
+.ae-doc p, .ae-doc div { margin: 0 0 8px; }
+.ae-doc ul, .ae-doc ol { margin: 0 0 8px; padding-left: 20px; }
+.ae-doc ul { list-style: disc; } .ae-doc ol { list-style: decimal; }
+.ae-doc blockquote { margin: 0 0 8px; padding: 2px 0 2px 12px; border-left: 3px solid #0f8a4f; color: #3d3d39; font-style: italic; }
+.ae-doc a { color: #0b6b3a; text-decoration: underline; }
+.ae-doc img { max-width: 100%; border-radius: 6px; margin: 4px 0; }
+.ae-foot { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 4px 10px; border-top: 1px solid rgb(0 0 0 / .08); font-size: 9.5px; color: #696963; background: #faf9f5; }
+.ae-foot .ae-tip b, .ae-foot .ae-tip i, .ae-foot .ae-tip u { color: #191919; }
+.seo-lr .ae-lbl, .aseo-og .ae-lbl { font-size: 13px; font-weight: 500; color: #000; margin: 0; }
+.ar-og-chk { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #191919; cursor: pointer; margin-top: 6px; }
+.ar-og-chk input { width: 16px; height: 16px; accent-color: #0f8a4f; }
+.ar-og-own { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+.ar-og-own[hidden] { display: none; }
+.ar-og { display: grid; grid-template-columns: 120px minmax(0, 1fr); margin-top: 10px; border: 1px solid rgb(0 0 0 / .12); border-radius: 8px; overflow: hidden; background: #f4f3ee; }
+.ar-og-img { aspect-ratio: 1200 / 630; background: #e7e5dc; display: grid; place-items: center; text-align: center; padding: 6px; font-size: 10.5px; line-height: 1.35; color: #8c8a82; }
+.ar-og-img img { width: 100%; height: 100%; object-fit: cover; }
+.ar-og-img:has(img) { padding: 0; }
+.ar-og-txt { display: flex; flex-direction: column; justify-content: center; gap: 2px; padding: 8px 12px; min-width: 0; }
+.ar-og-txt small { font-size: 10px; color: #696963; letter-spacing: .03em; }
+.ar-og-txt b { font-size: 13px; font-weight: 600; color: #000; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ar-og-txt span { font-size: 11.5px; color: #4d5156; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+@media (max-width: 760px) { .ae-doc, .ae-link input { font-size: 16px; } .ar-og { grid-template-columns: 96px minmax(0, 1fr); } }
+
+/* ---------- SEO dialogs: shorter layout with sub-edit rows ---------- */
+.seo-stage { padding: 14px; }
+.seo-q { margin-bottom: 10px; padding: 6px 12px; }
+.seo-res { padding: 12px 14px; }
+.seo-rt { margin-top: 6px; font-size: 18px; }
+.seo-rd { font-size: 13px; }
+.seo-fields { gap: 14px; margin-top: 16px; }
+.seo-fields textarea.pf-input { height: 70px; }
+.sx-list { border: 1px solid rgb(0 0 0 / .12); border-radius: 12px; overflow: hidden; }
+.sx + .sx, .sx + .sx-row, .sx-list > .sx-row + .sx { border-top: 1px solid rgb(0 0 0 / .08); }
+.sx-row { width: 100%; display: flex; align-items: center; gap: 12px; min-height: 50px; padding: 8px 14px; border: 0; background: #fff; text-align: left; font: inherit; color: #000; cursor: pointer; }
+button.sx-row:hover { background: #faf9f5; }
+.sx-row:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+.sx-k { flex: none; font-size: 13px; font-weight: 500; }
+.sx-v { flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; justify-content: flex-end; font-size: 12px; color: #696963; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: right; }
+.sx-thumb { flex: none; width: 38px; height: 20px; border-radius: 3px; background: #e7e5dc; overflow: hidden; }
+.sx-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.sx-act { flex: none; font-size: 12px; font-weight: 600; color: #000; text-decoration: underline; text-underline-offset: 2px; }
+.sx-row[aria-expanded="true"] { background: #faf9f5; }
+.sx-body { padding: 4px 14px 14px; background: #faf9f5; }
+.sx-body[hidden] { display: none; }
+.sx-body .ar-og-chk { margin-top: 0; font-size: 12.5px; }
+.sx-row.seo-switch { border: 0; border-radius: 0; padding: 8px 14px; }
+.sx-list > .sx-row.seo-switch { border-top: 1px solid rgb(0 0 0 / .08); }
+@media (max-width: 480px) { .sx-v { display: none; } .sx-row { justify-content: space-between; } }
+
+/* ---------- Article content body: compact card + its own editor dialog ---------- */
+.ab-card { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 1px solid rgb(0 0 0 / .12); border-radius: 12px; background: #fff; }
+.ab-card.bad { border-color: #b42318; }
+.ab-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.ab-txt b { font-size: 12.5px; font-weight: 600; color: #000; }
+.ab-snip { display: block; max-height: calc(1.5em * 3); overflow: hidden; font-size: 11.5px; line-height: 1.5; color: #3d3d39;
+  -webkit-mask-image: linear-gradient(#000 60%, transparent); mask-image: linear-gradient(#000 60%, transparent); }
+.a-snip { margin-top: 6px; max-height: calc(1.5em * 2); font-size: 10.5px; color: #191919; }
+.ab-snip.ph { color: #696963; -webkit-mask-image: none; mask-image: none; }
+.ab-snip > * { margin: 0; }
+.ab-snip h2, .ab-snip h3 { font-size: 12px; font-weight: 700; color: #000; line-height: 1.5; }
+.ab-snip ul, .ab-snip ol { padding-left: 16px; } .ab-snip ul { list-style: disc; } .ab-snip ol { list-style: decimal; }
+.ab-snip blockquote { padding-left: 8px; border-left: 2px solid #0f8a4f; font-style: italic; }
+.ab-snip a { color: #0b6b3a; text-decoration: underline; }
+.ab-snip b, .ab-snip strong { font-weight: 700; color: #000; }
+.ab-ex { margin-top: 18px; }
+.ab-ex textarea.pf-input { height: 64px; font-size: 13px; }
+.ab-card.empty .ab-txt b { color: #696963; font-weight: 500; }
+.modal-abody { width: min(720px, calc(100vw - 24px)); }
+.modal-abody .seo-body { padding-bottom: 16px; }
+.modal-abody .ae { border-radius: 8px; }
+.modal-abody .ae-bar { padding: 6px 8px; gap: 2px; }
+.modal-abody .ae-tb { width: 30px; height: 30px; }
+.modal-abody .ae-block { height: 30px; font-size: 12.5px; }
+.modal-abody .ae-doc { min-height: 320px; max-height: 56vh; padding: 14px 16px; font-size: 14px; line-height: 1.65; }
+.modal-abody .ae-doc.empty::before { font-size: 13px; }
+.modal-abody .ae-doc h2 { font-size: 19px; } .modal-abody .ae-doc h3 { font-size: 16px; }
+.modal-abody .ae-foot { font-size: 11px; padding: 6px 12px; }
+@media (max-width: 760px) { .modal-abody .ae-doc { min-height: 240px; font-size: 16px; } }
+
+/* Article form: shorter */
+#dlg-article .pf-drop { height: 112px; margin-top: 14px; }
+#dlg-article .pf-drop svg:not(.pf-dash) { width: 22px; height: 22px; }
+#dlg-article .pf-fields.pf-grid { gap: 12px; margin-top: 14px; }
+#dlg-article .pf-seo .ps-card { margin-top: 10px; padding: 10px 14px; }
 </style>
 </head>
 <body>
@@ -3489,15 +3807,98 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
       <div class="pf-field"><div class="seo-lr"><label for="pf-seo-meta">Meta description</label><span id="seo-c-meta"></span></div>
         <textarea class="pf-input" id="pf-seo-meta" placeholder="A short line that makes people want to click"></textarea>
         <div class="seo-meter"><i id="seo-bar-meta"></i></div></div>
-      <div class="pf-field"><div class="seo-lr"><label for="pf-seo-slug">URL slug</label></div>
-        <div class="pf-box"><span id="seo-dom" class="seo-dom"></span><input id="pf-seo-slug" autocomplete="off" spellcheck="false" placeholder="/products/whole-broiler-chicken"></div></div>
-      <label class="seo-switch"><span><b>Show on search engines</b><small>Turn off to hide this page from Google. It still works for people who have the link.</small></span>
-        <input type="checkbox" id="pf-seo-index" role="switch" checked></label>
+      <div class="sx-list">
+        <div class="sx"><button type="button" class="sx-row" aria-expanded="false" aria-controls="ps-sx-slug"><span class="sx-k">URL slug</span><span class="sx-v" id="ps-sxv-slug"></span><span class="sx-act">Edit</span></button>
+          <div class="sx-body" id="ps-sx-slug" hidden><label class="sr-only" for="pf-seo-slug">URL slug</label><div class="pf-box"><span id="seo-dom" class="seo-dom"></span><input id="pf-seo-slug" autocomplete="off" spellcheck="false" placeholder="/products/whole-broiler-chicken"></div></div></div>
+        <label class="sx-row seo-switch" title="Hidden pages still work for people who have the link."><span class="sx-k">Show on search engines</span><span class="sx-v" id="ps-sxv-index"></span><input type="checkbox" id="pf-seo-index" role="switch" checked></label>
+      </div>
     </div>
   </div>
   <div class="seo-foot">
     <button type="button" class="btn-text" id="pf-seo-reset">Reset to auto-generated</button>
-    <span class="seo-actions"><button type="button" class="btn-outline pf-btn" data-close>Cancel</button><button type="button" class="btn-primary pf-btn" id="pf-seo-save">Save changes</button></span>
+    <span class="seo-actions"><button type="button" class="btn-outline pf-btn" data-close data-discard>Cancel</button><button type="button" class="btn-primary pf-btn" id="pf-seo-save">Save changes</button></span>
+  </div>
+</dialog>
+
+<!-- ===================== DIALOG · ARTICLE CONTENT BODY ===================== -->
+<dialog class="modal modal-seo modal-abody" id="dlg-abody" aria-labelledby="ab-title">
+  <div class="seo-head">
+    <div><h2 id="ab-title">Content Body</h2><p>Write the article. Use the toolbar for headings, bold text and bullet points.</p></div>
+    <button type="button" class="icon-btn" data-close aria-label="Close"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-close"/></svg></button>
+  </div>
+  <div class="seo-body">
+    <div class="ae" id="ae">
+          <div class="ae-bar" role="toolbar" aria-label="Formatting" aria-controls="ae-doc">
+            <label class="sr-only" for="ae-block">Text style</label>
+            <select class="ae-block" id="ae-block"><option value="p">Paragraph</option><option value="h2">Heading</option><option value="h3">Subheading</option></select>
+            <span class="ae-sep" aria-hidden="true"></span>
+            <button type="button" class="ae-tb" data-ae="bold" aria-label="Bold" title="Bold (Ctrl+B): highlight text, or click before typing" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 3h4.2a2.6 2.6 0 0 1 0 5.2H4.5zM4.5 8.2h4.8a2.6 2.6 0 0 1 0 5.3H4.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></button><button type="button" class="ae-tb" data-ae="italic" aria-label="Italic" title="Italic (Ctrl+I): highlight text, or click before typing" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3H6.5M9.5 13H6M9 3 7 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button><button type="button" class="ae-tb" data-ae="underline" aria-label="Underline" title="Underline (Ctrl+U): highlight text, or click before typing" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 2.5v5a3.5 3.5 0 0 0 7 0v-5M3.5 14h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button><span class="ae-sep" aria-hidden="true"></span><button type="button" class="ae-tb" data-ae="insertUnorderedList" aria-label="Bullet list" title="Bullet list" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="3" cy="4" r="1" fill="currentColor"/><circle cx="3" cy="8" r="1" fill="currentColor"/><circle cx="3" cy="12" r="1" fill="currentColor"/><path d="M6 4h7.5M6 8h7.5M6 12h7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button><button type="button" class="ae-tb" data-ae="insertOrderedList" aria-label="Numbered list" title="Numbered list" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.4 3.2 3.4 2.6V6M2.3 13.4h2l-1.9-2.2c.6-.8 1.9-.6 1.9.3M6.5 4h7M6.5 8h7M6.5 12h7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" class="ae-tb" data-ae="quote" aria-label="Quote" title="Quote" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 4.5h3.5V8c0 2-1 3.2-3 3.5M9.5 4.5H13V8c0 2-1 3.2-3 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="ae-sep" aria-hidden="true"></span><button type="button" class="ae-tb" data-ae="link" aria-label="Add link" title="Add link" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6.8 9.2a2.6 2.6 0 0 0 3.7 0l2.2-2.2a2.6 2.6 0 0 0-3.7-3.7l-.8.8M9.2 6.8a2.6 2.6 0 0 0-3.7 0L3.3 9a2.6 2.6 0 0 0 3.7 3.7l.8-.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button><button type="button" class="ae-tb" data-ae="insertImage" aria-label="Insert image" title="Insert image" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="5.6" cy="6.4" r="1.2" fill="currentColor"/><path d="m2.5 12 3.8-3.8 2.6 2.6 1.8-1.8 3 3" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></button><button type="button" class="ae-tb" data-ae="removeFormat" aria-label="Clear formatting" title="Clear formatting" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 3h8M8 3l-2 10M3 13h5M10.5 9.5l3 3M13.5 9.5l-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
+          </div>
+          <div class="ae-link" id="ae-link" hidden>
+            <label class="sr-only" for="ae-url">Link address</label>
+            <input id="ae-url" type="url" inputmode="url" autocomplete="off" placeholder="Paste a link, e.g. https://example.com">
+            <button type="button" class="btn-dark" id="ae-link-ok">Apply</button>
+            <button type="button" class="btn-text" id="ae-link-x">Cancel</button>
+          </div>
+          <div class="ae-doc empty" id="ae-doc" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="ab-title" data-ph="Start writing… paragraph text, headings, bullet points."></div>
+          <div class="ae-foot"><span class="ae-tip">Tip: highlight text, then click <b>B</b>, <i>I</i> or <u>U</u>. Or click one first and start typing.</span><span id="ae-words">0 words</span></div>
+          <input type="file" id="ae-img" accept="image/png,image/jpeg,image/webp" hidden>
+        </div>
+    <div class="pf-field ab-ex"><div class="seo-lr"><label for="ar-excerpt">Excerpt <span class="opt-note" id="ar-ex-mode">(Auto-generated from the article)</span></label>
+        <button type="button" class="btn-text" id="ar-ex-reset" style="font-size:12px" hidden>Use article opening</button></div>
+      <textarea class="pf-input" id="ar-excerpt" maxlength="200" placeholder="Fills in automatically as you write. You can also write your own short summary."></textarea>
+      <div class="seo-lr" style="margin-top:4px"><span class="px-help" style="margin:0">Shown in search results and when the article is shared.</span><span class="pf-count" id="ar-count" aria-live="polite" style="margin:0">0/200</span></div></div>
+  </div>
+  <div class="seo-foot">
+    <span></span>
+    <span class="seo-actions"><button type="button" class="btn-outline pf-btn" data-close data-discard>Cancel</button><button type="button" class="btn-primary pf-btn" id="ab-done">Done</button></span>
+  </div>
+</dialog>
+
+<!-- ===================== DIALOG · ARTICLE SEO ===================== -->
+<dialog class="modal modal-seo" id="dlg-aseo" aria-labelledby="aseo-title">
+  <div class="seo-head">
+    <div><h2 id="aseo-title">Search engine listing</h2><p>Control how this article looks on Google and when people share it.</p></div>
+    <button type="button" class="icon-btn" data-close aria-label="Close"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-close"/></svg></button>
+  </div>
+  <div class="seo-body">
+    <div class="seo-stage" aria-label="Google preview">
+      <div class="seo-q"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-search"/></svg><span id="agp-q"></span></div>
+      <div class="seo-res">
+        <div class="ps-top"><span class="gp-fav" id="agp-fav">D</span><span class="ps-site"><b id="agp-sn"></b><span id="agp-url"></span></span></div>
+        <div class="seo-rt" id="agp-t"></div>
+        <div class="seo-rd" id="agp-d"></div>
+      </div>
+      <p class="seo-note" id="agp-off" hidden>This page is hidden from Google. People with the link can still open it.</p>
+    </div>
+    <div class="seo-fields">
+      <div class="pf-field"><div class="seo-lr"><label for="ar-seo-title">Meta title</label><span id="aseo-c-title"></span></div>
+        <input class="pf-input" id="ar-seo-title" autocomplete="off" placeholder="5 Essential Tips for Healthy Broiler Farming">
+        <div class="seo-meter"><i id="aseo-bar-title"></i></div></div>
+      <div class="pf-field"><div class="seo-lr"><label for="ar-seo-meta">Meta description</label><span id="aseo-c-meta"></span></div>
+        <textarea class="pf-input" id="ar-seo-meta" placeholder="Learn practical biosecurity, feed scheduling, and natural gut hygiene methods for broilers."></textarea>
+        <div class="seo-meter"><i id="aseo-bar-meta"></i></div></div>
+      <div class="sx-list">
+        <div class="sx"><button type="button" class="sx-row" aria-expanded="false" aria-controls="ar-sx-slug"><span class="sx-k">URL slug</span><span class="sx-v" id="ar-sxv-slug"></span><span class="sx-act">Edit</span></button>
+          <div class="sx-body" id="ar-sx-slug" hidden><label class="sr-only" for="ar-seo-slug">URL slug</label><div class="pf-box"><span id="aseo-dom" class="seo-dom"></span><input id="ar-seo-slug" autocomplete="off" spellcheck="false" placeholder="/blog/5-tips-raising-broilers"></div></div></div>
+        <div class="sx"><button type="button" class="sx-row" aria-expanded="false" aria-controls="ar-sx-og"><span class="sx-k">Social share image</span><span class="sx-v" id="ar-sxv-og"></span><span class="sx-act">Change</span></button>
+          <div class="sx-body" id="ar-sx-og" hidden><label class="ar-og-chk"><input type="checkbox" id="ar-og-use" checked> Use featured banner image for WhatsApp/Social</label>
+        <div class="ar-og-own" id="ar-og-own" hidden>
+          <button type="button" class="ps-edit" id="ar-og-pick">Upload a different image</button>
+          <button type="button" class="btn-text" id="ar-og-clear" hidden>Remove</button>
+          <input type="file" id="ar-og-file" accept="image/png,image/jpeg,image/webp" hidden>
+        </div>
+        <div class="ar-og" aria-label="Social share preview">
+          <div class="ar-og-img" id="ar-og-img"><span>No image yet</span></div>
+          <div class="ar-og-txt"><small id="ar-og-dom"></small><b id="ar-og-t"></b><span id="ar-og-d"></span></div>
+        </div></div></div>
+        <label class="sx-row seo-switch" title="Hidden pages still work for people who have the link."><span class="sx-k">Show on search engines</span><span class="sx-v" id="ar-sxv-index"></span><input type="checkbox" id="ar-seo-index" role="switch" checked></label>
+      </div>
+    </div>
+  </div>
+  <div class="seo-foot">
+    <button type="button" class="btn-text" id="ar-seo-reset">Reset to auto-generated</button>
+    <span class="seo-actions"><button type="button" class="btn-outline pf-btn" data-close data-discard>Cancel</button><button type="button" class="btn-primary pf-btn" id="ar-seo-save">Save changes</button></span>
   </div>
 </dialog>
 
@@ -3675,6 +4076,107 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
   </div>
 </dialog>
 
+<!-- ===================== DIALOG · ADD TRACKING TOOL ===================== -->
+<dialog class="modal modal-domain modal-pxadd" id="dlg-pxadd" aria-labelledby="pxa-title" aria-describedby="pxa-sub">
+  <div class="dm-in pxa-in">
+    <div class="dm-head">
+      <span class="dm-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="14" width="4" height="7" rx="1" fill="currentColor"/><rect x="10" y="9" width="4" height="12" rx="1" fill="currentColor"/><rect x="17" y="3" width="4" height="18" rx="1" fill="currentColor"/></svg></span>
+      <div><h2 id="pxa-title">Add a tracking tool</h2><p id="pxa-sub">Pick the tool you use. You'll only need its ID, and we add the tracking code to every page for you.</p></div>
+      <button type="button" class="icon-btn" data-close aria-label="Close"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-close"/></svg></button>
+    </div>
+    <div class="pxa-search">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-search"/></svg>
+      <label class="sr-only" for="pxa-q">Search tracking tools</label>
+      <input id="pxa-q" type="search" autocomplete="off" spellcheck="false" placeholder="Search tools, e.g. TikTok">
+    </div>
+    <div class="pxa-list" id="pxa-list" aria-live="polite"></div>
+    <button type="button" class="pxa-other" id="pxa-other">
+      <span class="px-ic code"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5.5 4 1.5 8l4 4M10.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="t"><b>Other tool</b><small>Not listed? Paste the tool's code into Custom Header Code Injection.</small></span>
+      <span class="st">Paste code<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-arrow-right"/></svg></span>
+    </button>
+    <div class="dm-foot pxa-foot">
+      <button type="button" class="btn-outline dm-btn" data-close>Cancel</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- ===================== DIALOG · ADD / EDIT ARTICLE ===================== -->
+<dialog class="modal modal-product" id="dlg-article" aria-labelledby="ar-title" aria-describedby="ar-sub">
+  <form id="ar-form" novalidate>
+    <div class="pf-head">
+      <div><h2 id="ar-title">Add New Article</h2><p id="ar-sub">Write a blog post, farm update or resource guide.</p></div>
+      <button type="button" class="icon-btn" data-close aria-label="Close"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-close"/></svg></button>
+    </div>
+    <label class="pf-drop" id="ar-drop">
+      <input type="file" id="ar-file" accept="image/png,image/jpeg,image/webp" aria-label="Upload cover image">
+      <svg class="pf-dash" aria-hidden="true"><rect x=".5" y=".5" rx="12" ry="12"/></svg>
+      <span id="ar-drop-body" style="display:contents"></span>
+    </label>
+    <div class="pf-imgbar" id="ar-img-bar" hidden>
+      <button type="button" class="btn-text" id="ar-img-replace">Replace image</button>
+      <button type="button" class="btn-text" id="ar-img-remove">Remove</button>
+    </div>
+    <p class="pf-err" id="ar-img-err" role="alert" hidden style="text-align:center"></p>
+    <div class="pf-fields pf-grid">
+      <div class="pf-field full"><label for="ar-name">Article Title<span class="req" aria-hidden="true">*</span></label>
+        <input class="pf-input" id="ar-name" maxlength="100" autocomplete="off" placeholder="e.g. 5 Tips for Raising Healthy Broilers" required>
+        <p class="pf-err" data-err-for="ar-name" hidden></p></div>
+      <div class="pf-field full"><label for="ar-slug">URL Slug <span class="opt-note">(Auto-generated)</span><span class="req" aria-hidden="true">*</span></label>
+        <div class="pf-box ar-slug"><span aria-hidden="true">/blog/</span><input id="ar-slug" autocomplete="off" spellcheck="false" maxlength="80" placeholder="5-tips-raising-broilers" required></div>
+        <p class="pf-err" data-err-for="ar-slug" hidden></p></div>
+      <div class="pf-field"><label for="ar-author">Author<span class="req" aria-hidden="true">*</span></label>
+        <select class="pf-input" id="ar-author" required></select>
+        <p class="pf-err" data-err-for="ar-author" hidden></p></div>
+      <div class="pf-field"><label for="ar-status">Status</label>
+        <select class="pf-input" id="ar-status"><option value="published">Published</option><option value="draft">Draft</option></select></div>
+      <div class="pf-field full"><span class="ae-lbl" id="ae-lbl">Content Body<span class="req" aria-hidden="true">*</span></span>
+        <div class="ab-card" id="ab-card">
+          <span class="ps-badge" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 2.5h5.5L12.5 5.5v8H4z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M6 8h4.5M6 10.5h4.5M6 5.5h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></span>
+          <span class="ab-txt"><b id="ab-sum">No content yet</b><span class="ab-snip" id="ab-snip">Write the article: paragraph text, headings, bullet points.</span></span>
+          <button type="button" class="ps-edit" id="ab-open" aria-haspopup="dialog"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-edit"/></svg><span id="ab-open-l">Write content</span></button>
+        </div>
+        <p class="pf-err" id="ae-err" hidden></p></div>
+      <div class="pf-seo full">
+        <div class="ps-head">
+          <span class="ps-badge" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#i-search"/></svg></span>
+          <span class="ps-label">Search engine listing<small>How this article appears on Google and when shared</small></span>
+          <button type="button" class="ps-edit" id="ar-seo-open"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-edit"/></svg>Edit SEO</button>
+        </div>
+        <div class="ps-card">
+          <div class="ps-top"><span class="gp-fav" id="arps-fav">D</span><span class="ps-site"><b id="arps-site"></b><span id="arps-url"></span></span><span class="ps-pill" id="arps-pill">Visible on Google</span></div>
+          <div class="ps-t" id="arps-t"></div>
+          <div class="ps-d" id="arps-d"></div>
+        </div>
+      </div>
+    </div>
+    <div class="pf-foot">
+      <button type="button" class="btn-outline pf-btn" data-close>Cancel</button>
+      <button type="submit" class="btn-primary pf-btn" id="ar-submit">Add Article</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- ===================== DIALOG · SITE DANGER ZONE (unpublish / transfer / delete) ===================== -->
+<dialog class="modal modal-danger" id="dlg-site-danger" aria-labelledby="sd-title" aria-describedby="sd-desc">
+  <form id="sd-form" novalidate>
+    <div class="modal-head">
+      <div class="dh"><span class="dh-ic" id="sd-ic"></span><div><h2 id="sd-title"></h2><p id="sd-desc"></p></div></div>
+      <button type="button" class="icon-btn" data-close aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-close"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div id="sd-body"></div>
+      <label class="confirm-label" for="sd-confirm" id="sd-confirm-label">Type <code id="sd-word"></code> to confirm</label>
+      <input class="auth-input confirm-input" id="sd-confirm" autocomplete="off" spellcheck="false">
+      <p class="alert-error" role="alert" hidden id="sd-error" style="margin-top:12px"></p>
+    </div>
+    <div class="modal-foot">
+      <button type="button" class="btn-outline btn-inline" data-close>Cancel</button>
+      <button type="submit" class="btn-danger" id="sd-submit" disabled></button>
+    </div>
+  </form>
+</dialog>
+
 <div class="toast" id="toast" role="status" aria-live="polite"><span id="toast-text"></span><a id="toast-link" hidden></a></div>
 
 <!-- ===================== 05 · SITE OVERVIEW + WORKSPACE & SITE SWITCHER  (#/overview) ===================== -->
@@ -3765,7 +4267,7 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
           <li><a class="nav-link" href="#/overview/analytics" data-site-nav="analytics">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 14.25h12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><rect x="2.75" y="8.5" width="2.5" height="5.75" rx=".5" stroke="currentColor" stroke-width="1.3"/><rect x="6.75" y="5.25" width="2.5" height="9" rx=".5" stroke="currentColor" stroke-width="1.3"/><rect x="10.75" y="2" width="2.5" height="12.25" rx=".5" stroke="currentColor" stroke-width="1.3"/></svg>
             Analytics</a></li>
-          <li><a class="nav-link" href="#/overview" data-site-nav="cms">
+          <li><a class="nav-link" href="#/overview/content" data-site-nav="content">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2.25" y="2.25" width="11.5" height="11.5" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M5 5.5h6M5 8h6M5 10.5h3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
             Content</a></li>
           <li><a class="nav-link" href="#/overview" data-site-nav="media">
@@ -3823,7 +4325,7 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
       <div class="proto-group"><h2>Sign up & sign in</h2><a href="#/signin">Sign in</a><a href="#/signup">Sign up</a><a href="#/signup/password">Set password</a><a href="#/signup/created">Account created</a><a href="#/reset">Reset password</a><a href="#/invite">Accept invite</a></div>
       <div class="proto-group"><h2>Onboarding</h2><a href="#/onboarding/profile">Profile</a><a href="#/onboarding/workspace">New workspace</a></div>
       <div class="proto-group"><h2>Workspace</h2><a href="#/workspace">All sites</a><a href="#/workspace/templates">Templates</a><a href="#/workspace/team">Team</a><a href="#/workspace/settings">General settings</a><a href="#/new-site">Create new site</a><a href="#/overview">Site overview</a></div>
-      <div class="proto-group"><h2>Site</h2><a href="#/overview/pages">Pages</a><a href="#/overview/products">Products</a><a href="#/overview/orders">Orders</a><a href="#/overview/categories">Categories</a><a href="#/overview/checkout">Checkout settings</a><a href="#/overview/analytics">Analytics</a><a href="#/overview/settings">Site settings</a></div>
+      <div class="proto-group"><h2>Site</h2><a href="#/overview/pages">Pages</a><a href="#/overview/products">Products</a><a href="#/overview/orders">Orders</a><a href="#/overview/categories">Categories</a><a href="#/overview/checkout">Checkout settings</a><a href="#/overview/analytics">Analytics</a><a href="#/overview/content">Content</a><a href="#/overview/settings">Site settings</a></div>
     </div>
   </nav>
 </div>
@@ -3883,7 +4385,7 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
           { id: 's2', name: 'Nova studio', status: 'draft', updated: t - 4 * D, theme: 'nova' },
           { id: 's3', name: 'Axis Digital', status: 'unpublished', updated: t - 7 * D, theme: 'axis' }
         ],
-        members: [me, { name: 'Elena Dumitru', email: 'elena.dumitru@gmail.com', role: 'admin', access: 'all' }, { name: 'Ioana Pop', email: 'ioana.pop@digitalromanian.ro', role: 'contributor', access: ['s1'] }, { name: 'Mihai Stan', email: 'mihai.stan@gmail.com', role: 'contributor', access: ['s2'] }],
+        members: [me, { name: 'Elena Dumitru', email: 'elena.dumitru@gmail.com', role: 'admin', access: 'all' }, { name: 'Ioana Pop', email: 'ioana.pop@digitalromanian.ro', role: 'contributor', access: ['s1'], siteRole: 'content' }, { name: 'Mihai Stan', email: 'mihai.stan@gmail.com', role: 'contributor', access: ['s2'], siteRole: 'editor' }],
         invites: [],
         activity: [
           { kind: 'update', text: 'Alicia was published', time: t - 2 * D },
@@ -5162,7 +5664,7 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
       <div class="qstats">
         <div class="ov-card qstat"><span class="qi">${I_DOC.replace('width="16" height="16"', 'width="18" height="18"')}</span><small>Total Pages</small><strong>${st.pages}</strong><a href="#/overview" data-ov-nav="pages">View all</a></div>
         <div class="ov-card qstat"><span class="qi">${I_CART}</span><small>Products</small><strong>${st.products}</strong><a href="#/overview" data-ov-nav="store">${st.products ? 'View Store' : 'Set up store'}</a></div>
-        <div class="ov-card qstat"><span class="qi">${I_POST}</span><small>Blog Posts</small><strong>${st.posts}</strong><a href="#/overview" data-ov-nav="cms">View Content</a></div>
+        <div class="ov-card qstat"><span class="qi">${I_POST}</span><small>Blog Posts</small><strong>${articlesOf(s).length}</strong><a href="#/overview/content" data-ov-nav="content">View Content</a></div>
         <div class="ov-card qstat"><span class="qi">${I_MEDIA}</span><small>Media Files</small><strong>${st.media}</strong><a href="#/overview" data-ov-nav="media">View Library</a></div>
       </div>
 
@@ -5201,8 +5703,8 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
      E-Commerce / Store → Products (+ Add / edit product dialog)
      ===================================================================== */
   let siteView = 'overview';
-  const SITE_VIEWS = { overview: '#/overview', pages: '#/overview/pages', products: '#/overview/products', orders: '#/overview/orders', categories: '#/overview/categories', checkout: '#/overview/checkout', analytics: '#/overview/analytics', settings: '#/overview/settings' };
-  const SITE_VIEW_TITLES = { overview: 'Overview', pages: 'Pages', products: 'Products', orders: 'Orders', categories: 'Categories', checkout: 'Checkout Settings', analytics: 'Analytics', settings: 'Site Settings' };
+  const SITE_VIEWS = { overview: '#/overview', pages: '#/overview/pages', products: '#/overview/products', orders: '#/overview/orders', categories: '#/overview/categories', checkout: '#/overview/checkout', analytics: '#/overview/analytics', content: '#/overview/content', settings: '#/overview/settings' };
+  const SITE_VIEW_TITLES = { overview: 'Overview', pages: 'Pages', products: 'Products', orders: 'Orders', categories: 'Categories', checkout: 'Checkout Settings', analytics: 'Analytics', content: 'Content', settings: 'Site Settings' };
   const curSite = () => { const w = ws(); return w ? w.sites.find(x => x.id === state.currentSiteId) || null : null; };
   const money = n => '$' + Number(n).toFixed(2);
   const isShop = s => s.theme === 'alicia' || s.theme === 'sun';
@@ -5237,6 +5739,7 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
     else if (siteView === 'checkout') renderCheckoutView();
     else if (siteView === 'analytics') renderAnalyticsView();
     else if (siteView === 'settings') renderSettingsView();
+    else if (siteView === 'content') renderContentView();
     else renderSiteOverview();
     document.title = SITE_VIEW_TITLES[siteView] + ' · Digital Romanian';
   }
@@ -5556,7 +6059,7 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
   let seoAuto = { title: true, meta: true, slug: true }, seoSnap = null, seoSaved = false;
   const SEO_T = 60, SEO_D = 160;
   const seoSlug = n => '/products/' + n.toLowerCase().replace(/\(.*?\)/g, m => m.slice(1, -1)).replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-  const seoTwo = t => { const m = t.replace(/\s+/g, ' ').trim().match(/[^.!?]+[.!?]+/g); return m ? m.slice(0, 2).join(' ').trim() : t.trim(); };
+  const seoTwo = t => { const m = t.replace(/\s+/g, ' ').trim().match(/[^.!?]+[.!?]+/g); return m ? m.slice(0, 2).map(x => x.trim()).join(' ') : t.trim(); };
   const seoCut = (t, n) => t.length > n ? t.slice(0, n - 1).trimEnd() + '\u2026' : t;
   function seoSite() { let name = 'Your store', domain = 'yourwebsite.com'; try { const s = curSite(); if (s) { name = s.name || name; domain = (siteData(s) || {}).domain || domain; } } catch (e) {} return { name, domain }; }
   function seoFill() {
@@ -5581,6 +6084,8 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
       b.style.width = Math.min(100, v.length / lim * 100) + '%'; b.className = v.length > lim ? 'over' : '';
     });
     $('#gp-off').hidden = on; $('.seo-res', dSeo).classList.toggle('off', !on);
+    $('#ps-sxv-slug').textContent = site.domain + (sl ? '/' + sl.replace(/^\/+/, '') : '');
+    $('#ps-sxv-index').textContent = on ? 'Visible on Google' : 'Hidden from Google';
   }
   function seoRestore(o) {
     seoAuto = { ...o.auto }; $('#pf-seo-title').value = o.title; $('#pf-seo-meta').value = o.meta; $('#pf-seo-slug').value = o.slug; $('#pf-seo-index').checked = o.index;
@@ -5594,10 +6099,11 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
   ['#pf-name', '#pf-desc'].forEach(id => $(id).addEventListener('input', () => { seoFill(); seoPaint(); }));
   [['title', '#pf-seo-title'], ['meta', '#pf-seo-meta'], ['slug', '#pf-seo-slug']].forEach(([k, id]) => $(id).addEventListener('input', () => { seoAuto[k] = false; seoPaint(); }));
   $('#pf-seo-index').addEventListener('change', seoPaint);
-  $('#pf-seo-open').addEventListener('click', () => { seoSnap = seoRead(); seoSaved = false; seoPaint(); dSeo.showModal(); $('#pf-seo-title').focus(); });
+  $('#pf-seo-open').addEventListener('click', () => { seoSnap = seoRead(); seoSaved = true; seoPaint(); dSeo.showModal(); $('#pf-seo-title').focus(); });
   $('#pf-seo-save').addEventListener('click', () => { seoSaved = true; dSeo.close(); });
+  $('#dlg-seo [data-discard]').addEventListener('click', () => { seoSaved = false; });
   $('#pf-seo-reset').addEventListener('click', () => { seoAuto = { title: true, meta: true, slug: true }; seoFill(); seoPaint(); });
-  dSeo.addEventListener('close', () => { if (!seoSaved && seoSnap) seoRestore(seoSnap); seoPaint(); if (seoSaved) toast('Search listing updated'); seoSaved = false; });
+  dSeo.addEventListener('close', () => { if (!seoSaved && seoSnap) seoRestore(seoSnap); seoPaint(); seoSaved = false; seoSnap = null; });
 
   function openProduct(p) {
     pfEdit = p || null; pfF.reset(); pfImg = p ? p.img : null; pfSkuEdited = !!p; pfImgErr('');
@@ -6384,6 +6890,540 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
     pixels: 'Add Google Analytics, Meta Pixel and other tracking scripts to this site.',
     danger: 'Unpublish, transfer or permanently delete this site.'
   };
+
+  /* =====================================================================
+     Content (#/overview/content): article list + add / edit dialog
+     ===================================================================== */
+  Object.assign(state, { artQuery: '', artFilter: 'all', artPage: 1 });
+  const ART_STATUS = { published: 'Published', draft: 'Draft' };
+  const ART_FILTER_ICON = '<svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M2.5 5h13M5 9h8M7.5 13h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
+  const fmtDate = t => new Date(t).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  const fmtTime = t => new Date(t).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+  function articlesOf(s) {
+    if (s.articles) return s.articles;
+    const farm = isShop(s);
+    const seed = farm ? [
+      ['5 Tips for Raising Healthy Broilers', '5-tips-raising-broilers', 'Practical tips to keep your broilers healthy, improve growth, and boost productivity.', new Date(2026, 9, 14, 10, 24).getTime(), '🐔', '#f6e3de', '1548550023-2bdb3c5beed7'],
+      ['Why We Use Bitter Leaf for Poultry', 'bitter-leaf-poultry', 'Learn how bitter leaf helps improve digestion, boost, and promote better poultry health.', new Date(2026, 9, 5, 12, 49).getTime(), '🌿', '#e6f0de', '1500382017468-9049fed747ef']
+    ] : [
+      [`Welcome to ${s.name}`, 'welcome', 'A short introduction to who we are, what we do and how we can help.', s.updated || Date.now(), '👋', '#dfe8f7', null]
+    ];
+    return (s.articles = seed.map(([title, slug, excerpt, date, emoji, tint, photo], i) =>
+      ({ id: `${s.id}a${i}`, title, slug, excerpt, author: 'Admin', status: 'published', date, emoji, tint, photo, img: null })));
+  }
+  function artList(s) {
+    const q = state.artQuery.trim().toLowerCase(), f = state.artFilter;
+    return articlesOf(s).filter(a => (f === 'all' || a.status === f) && (!q || [a.title, a.slug, a.author].some(x => x.toLowerCase().includes(q))));
+  }
+  function renderContentView() {
+    const el = $('#ov-view'), s = curSite();
+    syncDomain(s);
+    if (!s) { el.innerHTML = noSiteView('Content', 'Manage articles, farm updates, and resource guides.'); return; }
+    el.innerHTML = `
+      <div class="ov-head"><h1 tabindex="-1">Content</h1><p>Manage articles, farm updates, and resource guides.</p></div>
+      <section class="ov-card acard" aria-labelledby="ac-t">
+        <header class="acard-head"><h2 id="ac-t">Article Management</h2>
+          <p>Create, edit, and manage your blog posts, announcements, and other content. Each article includes built-in SEO and metadata fields to help your content get discovered.</p></header>
+        <div class="acard-tools">
+          <div class="sv-search">${icon('i-search', 14, 14, '0 0 16 16')}
+            <label class="sr-only" for="art-search">Search articles</label>
+            <input id="art-search" type="search" placeholder="Search articles by title, slug, or author..." value="${esc(state.artQuery)}" autocomplete="off"></div>
+          <div class="ofilter">
+            <button type="button" class="ofilter-btn" id="art-filter-btn" data-more="art-filter" aria-haspopup="true" aria-expanded="false">${ART_FILTER_ICON}<span class="lbl" id="art-filter-lbl">Filter by Status</span>${CHEV_D}</button>
+            <div class="more-menu fmenu" id="art-filter" role="menu" hidden>
+              <p class="menu-label">Status</p>
+              <button role="menuitemradio" data-afilter="all">All statuses${TICK}</button>
+              ${Object.entries(ART_STATUS).map(([k, l]) => `<button role="menuitemradio" data-afilter="${k}">${l}${TICK}</button>`).join('')}
+            </div>
+          </div>
+          <button type="button" class="btn-dark sv-add" data-art-add>${icon('i-plus', 14, 14, '0 0 18 18')}Add New Article</button>
+        </div>
+        <div class="atab" role="table" aria-label="Articles">
+          <div class="arow head" role="row"><span role="columnheader">Article Title &amp; Slug</span><span role="columnheader">Author</span><span role="columnheader">Published Date</span><span role="columnheader">Status</span><span role="columnheader">Actions</span></div>
+          <div id="art-rows" role="rowgroup"></div>
+        </div>
+      </section>
+      <div class="sv-foot" id="art-foot"></div>`;
+    $('#art-search').addEventListener('input', e => { state.artQuery = e.target.value; state.artPage = 1; paintArticles(); });
+    paintArticles();
+  }
+  function paintArticles() {
+    const s = curSite(), rowsEl = $('#art-rows'); if (!s || !rowsEl) return;
+    const all = articlesOf(s), list = artList(s), PER = 8, d = siteData(s);
+    const pages = Math.max(1, Math.ceil(list.length / PER));
+    state.artPage = Math.min(Math.max(1, state.artPage), pages);
+    const start = (state.artPage - 1) * PER, rows = list.slice(start, start + PER);
+    $('#art-filter-lbl').textContent = state.artFilter === 'all' ? 'Filter by Status' : `Status: ${ART_STATUS[state.artFilter]}`;
+    $$('[data-afilter]').forEach(b => b.setAttribute('aria-checked', b.dataset.afilter === state.artFilter));
+    rowsEl.innerHTML = rows.map(a => {
+      const pub = a.status === 'published';
+      return `<div class="arow" role="row">
+        <span class="acell" role="cell"><span class="athumb" style="--tb:${a.tint}" aria-hidden="true">${a.emoji}${(a.img || a.photo) ? `<img src="${a.img || `https://images.unsplash.com/photo-${a.photo}?w=160&h=160&fit=crop&auto=format&q=70`}" alt="" loading="lazy" onerror="this.remove()">` : ''}</span>
+          <span class="atxt"><strong>${esc(a.title)}</strong><code>/blog/${esc(a.slug)}</code>${a.body && fmtSnip(a.body).replace(/<[^>]*>/g, '').trim() ? `<span class="ab-snip a-snip">${fmtSnip(a.body)}</span>` : `<small>${esc(a.excerpt || 'No excerpt yet.')}</small>`}
+            <small class="pmeta">${esc(a.author)} · ${pub ? fmtDate(a.date) : 'Not published'}</small></span></span>
+        <span class="a-author" role="cell">${esc(a.author)}</span>
+        <span class="a-date${pub ? '' : ' none'}" role="cell">${pub ? `<span>${fmtDate(a.date)}</span><span>${fmtTime(a.date)}</span>` : '<span>Not published</span>'}</span>
+        <span class="a-status" role="cell"><span class="cpill${pub ? '' : ' off'}">${ART_STATUS[a.status]}</span></span>
+        <span class="c-act" role="cell">
+          <button type="button" class="edit-btn" data-art-edit="${a.id}" aria-label="Edit ${esc(a.title)}">${icon('i-edit', 13)}Edit</button>
+          <span class="menu-anchor"><button type="button" class="more-btn" data-more="am-${a.id}" aria-expanded="false" aria-label="More actions for ${esc(a.title)}">${icon('i-more')}</button>
+            <div class="more-menu row-menu" id="am-${a.id}" hidden>
+              ${pub && d.live ? `<a href="https://${esc(d.domain)}/blog/${esc(a.slug)}" target="_blank" rel="noopener">View live article</a>` : ''}
+              <button data-art-status="${a.id}">${pub ? 'Unpublish' : 'Publish now'}</button>
+              <button data-art-dup="${a.id}">Duplicate</button>
+              <hr><button class="danger" data-art-del="${a.id}">Delete article</button>
+            </div></span>
+        </span>
+      </div>`;
+    }).join('')
+      || (all.length ? `<div class="tab-empty"><strong>No articles match</strong>Try another search or status.<br><button type="button" class="btn-text" data-art-clear>Clear search and filters</button></div>`
+        : `<div class="tab-empty"><strong>No articles yet</strong>Write your first post and it shows up here.<br><button type="button" class="btn-dark" data-art-add>${icon('i-plus', 14, 14, '0 0 18 18')}Add New Article</button></div>`);
+    $('#art-foot').innerHTML = `<span>${list.length ? `Showing ${start + 1}–${start + rows.length} of ${list.length} ${list.length === 1 ? 'article' : 'articles'}` : 'Showing 0 articles'}</span>${pagerHTML(state.artPage, pages, 'art-page', 'Article pages')}`;
+  }
+  $('#ov-view').addEventListener('click', e => {
+    const s = curSite(); if (!s || siteView !== 'content') return;
+    const hit = a => e.target.closest(`[${a}]`), list = () => articlesOf(s); let b;
+    if ((b = hit('data-afilter'))) { state.artFilter = b.dataset.afilter; state.artPage = 1; closeMenus(); paintArticles(); $('#art-filter-btn').focus(); return; }
+    if ((b = hit('data-art-page'))) { state.artPage = +b.dataset.artPage; paintArticles(); return; }
+    if (hit('data-art-clear')) { state.artQuery = ''; state.artFilter = 'all'; state.artPage = 1; renderContentView(); return; }
+    if (hit('data-art-add')) { closeMenus(); openArticle(null); return; }
+    if ((b = hit('data-art-edit'))) { closeMenus(); openArticle(list().find(x => x.id === b.dataset.artEdit)); return; }
+    if ((b = hit('data-art-status'))) {
+      const a = list().find(x => x.id === b.dataset.artStatus);
+      a.status = a.status === 'published' ? 'draft' : 'published'; if (a.status === 'published') a.date = Date.now();
+      closeMenus(); paintArticles(); toast(`${a.title} ${a.status === 'published' ? 'published' : 'moved to drafts'}`); return;
+    }
+    if ((b = hit('data-art-dup'))) {
+      const all = list(), i = all.findIndex(x => x.id === b.dataset.artDup), src = all[i];
+      let slug = src.slug + '-copy', n = 2; while (all.some(x => x.slug === slug)) slug = `${src.slug}-copy-${n++}`;
+      all.splice(i + 1, 0, { ...src, id: s.id + 'a' + Date.now(), title: src.title + ' (copy)', slug, status: 'draft' });
+      closeMenus(); paintArticles(); toast(`${src.title} duplicated as a draft`); return;
+    }
+    if ((b = hit('data-art-del'))) {
+      const all = list(), i = all.findIndex(x => x.id === b.dataset.artDel), [a] = all.splice(i, 1);
+      closeMenus(); paintArticles();
+      toast(`${a.title} deleted`, { label: 'Undo', action: () => { all.splice(i, 0, a); paintArticles(); } });
+    }
+  });
+
+  const dArt = $('#dlg-article');
+  let arEdit = null, arImg = null, arSlugEdited = false;
+  const aeDoc = $('#ae-doc');
+  function arPaintImg() {
+    $('#ar-drop').classList.toggle('has-img', !!arImg);
+    $('#ar-drop-body').innerHTML = arImg ? `<img src="${arImg}" alt="Cover image preview">`
+      : `${I_CLOUD}<strong>Upload featured banner image</strong><small>Drag and drop an image, or click to browse</small><small>1200 × 630px · JPG, PNG or WebP (max 5MB)</small>`;
+    $('#ar-img-bar').hidden = !arImg;
+    if (typeof aseoPaint === 'function') aseoPaint();
+  }
+  function arImgErr(m) { const e = $('#ar-img-err'); e.textContent = m || ''; e.hidden = !m; }
+  function arTake(file) {
+    if (!file) return;
+    if (!/^image\/(png|jpe?g|webp)$/.test(file.type)) return arImgErr('Use a JPG, PNG or WebP image.');
+    if (file.size > 5 * 1024 * 1024) return arImgErr('That image is over 5MB. Pick a smaller one.');
+    arImgErr(''); const r = new FileReader(); r.onload = () => { arImg = r.result; arPaintImg(); }; r.readAsDataURL(file);
+  }
+  $('#ar-file').addEventListener('change', e => { arTake(e.target.files[0]); e.target.value = ''; });
+  const arDrop = $('#ar-drop');
+  ['dragenter', 'dragover'].forEach(ev => arDrop.addEventListener(ev, e => { e.preventDefault(); arDrop.classList.add('drag'); }));
+  ['dragleave', 'drop'].forEach(ev => arDrop.addEventListener(ev, () => arDrop.classList.remove('drag')));
+  arDrop.addEventListener('drop', e => { e.preventDefault(); arTake(e.dataTransfer.files[0]); });
+  $('#ar-img-replace').addEventListener('click', () => $('#ar-file').click());
+  $('#ar-img-remove').addEventListener('click', () => { arImg = null; arPaintImg(); });
+  $('#ar-name').addEventListener('input', e => { fieldErr('ar-name', ''); if (!arSlugEdited) { $('#ar-slug').value = slugify(e.target.value).slice(0, 80); fieldErr('ar-slug', ''); } });
+  $('#ar-slug').addEventListener('input', e => { arSlugEdited = true; fieldErr('ar-slug', ''); e.target.value = e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-{2,}/g, '-'); });
+  $('#ar-author').addEventListener('change', () => fieldErr('ar-author', ''));
+  /* Author = the site role the article is posted under. Shop manager is left out: that role only handles products and orders. */
+  const AUTHOR_ROLES = ['admin', 'editor', 'content'];
+  function fillAuthors(s, current) {
+    const sel = $('#ar-author'), labels = AUTHOR_ROLES.map(k => SITE_ROLES[k].label);
+    const opts = labels.map(l => `<option value="${esc(l)}">${esc(l)}</option>`);
+    if (current && !labels.includes(current)) opts.push(`<option value="${esc(current)}">${esc(current)}</option>`);
+    sel.innerHTML = opts.join('');
+    sel.value = current || labels[0];
+  }
+
+  /* ---- Article content body: rich text editor ---- */
+  const aeText = () => aeDoc.innerText.replace(/\s+/g, ' ').trim();
+  const aeErr = m => { const e = $('#ae-err'); e.textContent = m || ''; e.hidden = !m; $('#ab-card').classList.toggle('bad', !!m); };
+  const dBody = $('#dlg-abody');
+  let abSnap = null, abSaved = false, abExSnap = null;
+  /* Formatted, safe copy of article HTML for previews: keeps bold/italic/underline/headings/lists, drops images and attributes */
+  function fmtSnip(html) {
+    const box = document.createElement('div'); box.innerHTML = html || '';
+    box.querySelectorAll('img, script, style, iframe').forEach(n => n.remove());
+    box.querySelectorAll('*').forEach(n => {
+      const wrap = t => { const w = document.createElement(t); n.parentNode.insertBefore(w, n); w.appendChild(n); };
+      if (n.style && !/^(B|STRONG|H\d)$/.test(n.tagName) && /^(bold|[6-9]00)$/.test(n.style.fontWeight)) wrap('b');
+      if (n.style && !/^(I|EM)$/.test(n.tagName) && n.style.fontStyle === 'italic') wrap('i');
+      if (n.style && n.tagName !== 'U' && /underline/.test(n.style.textDecoration + n.style.textDecorationLine)) wrap('u');
+    });
+    box.querySelectorAll('*').forEach(n => [...n.attributes].forEach(a => n.removeAttribute(a.name)));
+    [...box.childNodes].forEach(n => { if (n.nodeType === 1 && !n.textContent.trim()) n.remove(); });
+    return box.innerHTML;
+  }
+  function abPaint() {
+    const txt = aeText(), n = txt ? txt.split(' ').length : 0, img = aeDoc.querySelector('img');
+    $('#ab-sum').textContent = n ? `${n} ${n === 1 ? 'word' : 'words'} · ${Math.max(1, Math.round(n / 200))} min read` : img ? 'Images only' : 'No content yet';
+    /* Show the start of the article with its real formatting (bold, italic, underline, headings, lists) */
+    const snip = $('#ab-snip');
+    snip.classList.toggle('ph', !txt);
+    if (!txt) snip.textContent = 'Write the article: paragraph text, headings, bullet points.';
+    else {
+      snip.innerHTML = fmtSnip(aeDoc.innerHTML);
+    }
+    $('#ab-open-l').textContent = n || img ? 'Edit content' : 'Write content';
+    $('#ab-card').classList.toggle('empty', !n && !img);
+  }
+  $('#ab-open').addEventListener('click', () => {
+    abSnap = aeDoc.innerHTML; abExSnap = { v: $('#ar-excerpt').value, auto: arExAuto }; abSaved = true; $('#ae-link').hidden = true;
+    dBody.showModal(); aeDoc.focus();
+    const r = document.createRange(); r.selectNodeContents(aeDoc); r.collapse(false); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r);
+  });
+  $('#ab-done').addEventListener('click', () => { abSaved = true; dBody.close(); });
+  $('#dlg-abody [data-discard]').addEventListener('click', () => { abSaved = false; });
+  dBody.addEventListener('close', () => {
+    if (!abSaved && abSnap !== null) { aeDoc.innerHTML = abSnap; if (abExSnap) { arExAuto = abExSnap.auto; $('#ar-excerpt').value = abExSnap.v; } }
+    abSnap = null; aeWords(); abPaint(); aseoFill(); aseoPaint();
+    if (abSaved) aeErr('');
+    abSaved = false; $('#ab-open').focus();
+  });
+  const aeWords = () => { const n = aeText() ? aeText().split(' ').length : 0; $('#ae-words').textContent = `${n} ${n === 1 ? 'word' : 'words'}${n ? ` · ${Math.max(1, Math.round(n / 200))} min read` : ''}`; aeDoc.classList.toggle('empty', !aeText() && !aeDoc.querySelector('img,li')); };
+  let aeRange = null;
+  const aeSave = () => { const sel = getSelection(); if (sel.rangeCount && aeDoc.contains(sel.anchorNode)) aeRange = sel.getRangeAt(0).cloneRange(); };
+  /* Put the caret back only when focus actually left the editor (e.g. the style menu or a keyboard-focused button).
+     Re-setting the selection while the editor still has focus wipes the browser's pending bold/italic/underline,
+     which is what made the buttons drop or double up. */
+  const aeRestore = () => {
+    if (document.activeElement === aeDoc) return;
+    aeDoc.focus();
+    if (aeRange && aeDoc.contains(aeRange.startContainer) && aeDoc.contains(aeRange.endContainer)) { const sel = getSelection(); sel.removeAllRanges(); sel.addRange(aeRange); }
+  };
+  const aeBlock = () => { try { return String(document.queryCommandValue('formatBlock')).toLowerCase(); } catch (e) { return ''; } };
+  const AE_FMT = {
+    bold: el => /^(B|STRONG)$/.test(el.tagName) || /^(bold|[6-9]00)$/.test(el.style.fontWeight),
+    italic: el => /^(I|EM)$/.test(el.tagName) || el.style.fontStyle === 'italic',
+    underline: el => el.tagName === 'U' || /underline/.test(el.style.textDecoration + el.style.textDecorationLine)
+  };
+  const aeHas = (node, c) => { for (let n = node.nodeType === 1 ? node : node.parentElement; n && n !== aeDoc; n = n.parentElement) if (AE_FMT[c](n)) return true; return false; };
+  /* true only if every bit of selected text already has the format (null when nothing is selected) */
+  function aeAll(c) {
+    const sel = getSelection(); if (!sel.rangeCount || sel.isCollapsed) return null;
+    const r = sel.getRangeAt(0), w = document.createTreeWalker(aeDoc, NodeFilter.SHOW_TEXT);
+    let n, any = false;
+    while ((n = w.nextNode())) {
+      if (!r.intersectsNode(n) || !n.data.trim()) continue;
+      if (n === r.endContainer && r.endOffset === 0) continue;
+      if (n === r.startContainer && r.startOffset >= n.length) continue;
+      any = true; if (!aeHas(n, c)) return false;
+    }
+    return any;
+  }
+  function aeState() {
+    const blk = aeBlock();
+    const q = c => { try { return document.queryCommandState(c); } catch (e) { return false; } };
+    /* Headings are bold by design, so in a heading only real bold tags count; otherwise Bold lights up with Italic/Underline */
+    const inHeading = blk === 'h2' || blk === 'h3';
+    const sel = getSelection(), node = sel.anchorNode && (sel.anchorNode.nodeType === 1 ? sel.anchorNode : sel.anchorNode.parentElement);
+    const hasTag = re => { for (let n = node; n && n !== aeDoc; n = n.parentElement) if (re.test(n.tagName)) return true; return false; };
+    const fs = c => { const all = aeAll(c); return all === null ? (c === 'bold' && inHeading ? hasTag(/^(B|STRONG)$/) : q(c)) : all; };
+    const st = { bold: fs('bold'), italic: fs('italic'), underline: fs('underline'),
+      insertUnorderedList: q('insertUnorderedList'), insertOrderedList: q('insertOrderedList') };
+    Object.entries(st).forEach(([c, on]) => $(`[data-ae="${c}"]`).setAttribute('aria-pressed', !!on));
+    $('[data-ae="quote"]').setAttribute('aria-pressed', blk === 'blockquote');
+    $('#ae-block').value = ['h2', 'h3'].includes(blk) ? blk : 'p';
+  }
+  document.addEventListener('selectionchange', () => { if (dBody.open && aeDoc.contains(getSelection().anchorNode)) { aeSave(); aeState(); } });
+  aeDoc.addEventListener('input', () => { aeWords(); abPaint(); aseoFill(); aseoPaint(); });
+  aeDoc.addEventListener('paste', e => { e.preventDefault(); document.execCommand('insertText', false, (e.clipboardData || window.clipboardData).getData('text/plain')); });
+  aeDoc.addEventListener('keydown', e => {
+    if (!(e.ctrlKey || e.metaKey) || e.altKey || e.shiftKey) return;
+    const k = e.key.toLowerCase(), map = { b: 'bold', i: 'italic', u: 'underline', k: 'link' };
+    if (map[k]) { e.preventDefault(); $(`[data-ae="${map[k]}"]`).click(); }
+  });
+  /* Ctrl/Cmd+B, I, U change formatting without moving the caret, so refresh the buttons after them too */
+  aeDoc.addEventListener('keyup', e => { if (e.ctrlKey || e.metaKey) aeState(); });
+  aeDoc.addEventListener('focus', () => { try { document.execCommand('styleWithCSS', false, false); } catch (e) {} });
+  $('#ae-block').addEventListener('change', e => { aeRestore(); document.execCommand('formatBlock', false, e.target.value); aeDoc.dispatchEvent(new Event('input')); aeState(); });
+  $('.ae-bar').addEventListener('mousedown', e => { if (e.target.closest('.ae-tb')) e.preventDefault(); });
+  $('.ae-bar').addEventListener('click', e => {
+    const b = e.target.closest('[data-ae]'); if (!b) return;
+    const c = b.dataset.ae; aeRestore();
+    if (c === 'link') { $('#ae-link').hidden = false; $('#ae-url').value = ''; $('#ae-url').focus(); return; }
+    if (c === 'insertImage') { $('#ae-img').click(); return; }
+    if (c === 'quote') document.execCommand('formatBlock', false, aeBlock() === 'blockquote' ? 'p' : 'blockquote');
+    else if (c === 'removeFormat') { document.execCommand('removeFormat'); document.execCommand('formatBlock', false, 'p'); }
+    else if (AE_FMT[c] && aeAll(c) === false) {
+      let on = false; try { on = document.queryCommandState(c); } catch (e) {}
+      if (on) document.execCommand(c);   /* browser thinks it's on: clear it from the whole selection first */
+      document.execCommand(c);
+      if (aeAll(c) === false) document.execCommand(c);
+    }
+    else document.execCommand(c);
+    aeSave(); aeDoc.dispatchEvent(new Event('input')); aeState();
+  });
+  const aeLinkClose = () => { $('#ae-link').hidden = true; aeRestore(); };
+  $('#ae-link-x').addEventListener('click', aeLinkClose);
+  $('#ae-link-ok').addEventListener('click', () => {
+    let u = $('#ae-url').value.trim(); if (!u) return aeLinkClose();
+    if (!/^(https?:|mailto:|\/)/i.test(u)) u = 'https://' + u;
+    aeLinkClose();
+    if (getSelection().isCollapsed) document.execCommand('insertHTML', false, `<a href="${esc(u)}">${esc(u)}</a>`); else document.execCommand('createLink', false, u);
+    aeDoc.dispatchEvent(new Event('input'));
+  });
+  $('#ae-url').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); $('#ae-link-ok').click(); } if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); aeLinkClose(); } });
+  const arReadImg = (f, done) => { if (!f) return; if (!/^image\/(png|jpe?g|webp)$/.test(f.type) || f.size > 5 * 1024 * 1024) return toast('Use a JPG, PNG or WebP image under 5MB.'); const r = new FileReader(); r.onload = () => done(r.result); r.readAsDataURL(f); };
+  $('#ae-img').addEventListener('change', e => { const f = e.target.files[0]; e.target.value = ''; arReadImg(f, src => { aeRestore(); document.execCommand('insertHTML', false, `<img src="${src}" alt="">`); aeDoc.dispatchEvent(new Event('input')); }); });
+
+  /* ---- Article SEO: summary card + its own dialog (same as products) ---- */
+  const dASeo = $('#dlg-aseo');
+  let aseoAuto = { title: true, meta: true }, aseoSnap = null, aseoSaved = false, arOg = null;
+  const aSlugPath = () => '/blog/' + ($('#ar-slug').value.trim().replace(/^-+|-+$/g, '') || '');
+  /* Excerpt: filled from the first sentences of the Content Body until the person types their own */
+  let arExAuto = true;
+  function arExFill() {
+    const ex = $('#ar-excerpt');
+    if (arExAuto) ex.value = seoTwo(aeText()).slice(0, 200);
+    $('#ar-count').textContent = `${ex.value.length}/200`;
+    $('#ar-ex-mode').textContent = arExAuto ? '(Auto-generated from the article)' : '(Written by you)';
+    $('#ar-ex-reset').hidden = arExAuto;
+  }
+  $('#ar-excerpt').addEventListener('input', () => { arExAuto = false; arExFill(); aseoFill(); aseoPaint(); });
+  $('#ar-excerpt').addEventListener('blur', e => { if (!e.target.value.trim()) { arExAuto = true; arExFill(); aseoFill(); aseoPaint(); } });
+  $('#ar-ex-reset').addEventListener('click', () => { arExAuto = true; arExFill(); aseoFill(); aseoPaint(); $('#ar-excerpt').focus(); });
+  function aseoFill() {
+    arExFill();
+    const n = $('#ar-name').value.trim(), site = seoSite();
+    if (aseoAuto.title) $('#ar-seo-title').value = n ? n + ' — ' + site.name : '';
+    if (aseoAuto.meta) $('#ar-seo-meta').value = seoTwo($('#ar-excerpt').value.trim() || aeText());
+    if (!dASeo.open) $('#ar-seo-slug').value = aSlugPath();
+  }
+  function aseoPaint() {
+    const tt = $('#ar-seo-title').value, m = $('#ar-seo-meta').value, sl = $('#ar-seo-slug').value.trim(), site = seoSite(), on = $('#ar-seo-index').checked;
+    const path = sl.replace(/^\/+/, '').split('/').filter(Boolean).join(' › ');
+    const url = site.domain + (path ? ' › ' + path : ''), ini = site.name.charAt(0).toUpperCase();
+    const T = seoCut(tt, SEO_T) || 'Article title', D = seoCut(m, SEO_D) || 'Add a description and it shows here.';
+    $('#arps-fav').textContent = ini; $('#arps-site').textContent = site.name; $('#arps-url').textContent = url; $('#arps-t').textContent = T; $('#arps-d').textContent = D;
+    $('#arps-pill').textContent = on ? 'Visible on Google' : 'Hidden from Google'; $('#arps-pill').classList.toggle('off', !on);
+    $('#agp-fav').textContent = ini; $('#agp-sn').textContent = site.name; $('#agp-url').textContent = url; $('#agp-t').textContent = T; $('#agp-d').textContent = D;
+    $('#agp-q').textContent = ($('#ar-name').value.trim().toLowerCase() || 'your article');
+    $('#aseo-dom').textContent = site.domain;
+    [['title', tt, SEO_T], ['meta', m, SEO_D]].forEach(([k, v, lim]) => {
+      const c = $('#aseo-c-' + k), b = $('#aseo-bar-' + k);
+      c.textContent = v.length + ' / ' + lim; c.className = v.length > lim ? 'over' : '';
+      b.style.width = Math.min(100, v.length / lim * 100) + '%'; b.className = v.length > lim ? 'over' : '';
+    });
+    $('#agp-off').hidden = on; $('.seo-res', dASeo).classList.toggle('off', !on);
+    $('#ar-sxv-slug').textContent = site.domain + (sl ? '/' + sl.replace(/^\/+/, '') : '');
+    $('#ar-sxv-index').textContent = on ? 'Visible on Google' : 'Hidden from Google';
+    const use = $('#ar-og-use').checked, img = use ? arImg : arOg;
+    $('#ar-og-own').hidden = use; $('#ar-og-clear').hidden = !arOg;
+    $('#ar-og-img').innerHTML = img ? `<img src="${img}" alt="">` : `<span>${use ? 'Add a featured banner image to the article' : 'Upload an image for social sharing'}</span>`;
+    $('#ar-sxv-og').innerHTML = `<span class="sx-thumb">${img ? `<img src="${img}" alt="">` : ''}</span>${use ? (arImg ? 'Featured banner image' : 'Featured banner image (none added yet)') : (arOg ? 'Custom image' : 'No image yet')}`;
+    $('#ar-og-dom').textContent = site.domain.toUpperCase(); $('#ar-og-t').textContent = T; $('#ar-og-d').textContent = D;
+  }
+  const aseoRead = () => ({ title: $('#ar-seo-title').value.trim(), meta: $('#ar-seo-meta').value.trim(), slug: $('#ar-seo-slug').value.trim(), index: $('#ar-seo-index').checked, auto: { ...aseoAuto }, ogUse: $('#ar-og-use').checked, og: arOg });
+  function aseoRestore(o) { aseoAuto = { ...o.auto }; $('#ar-seo-title').value = o.title; $('#ar-seo-meta').value = o.meta; $('#ar-seo-slug').value = o.slug; $('#ar-seo-index').checked = o.index; $('#ar-og-use').checked = o.ogUse !== false; arOg = o.og || null; }
+  function aseoLoad(a) {
+    if (a && a.seo) { aseoRestore(a.seo); $('#ar-seo-slug').value = aSlugPath(); }
+    else { aseoAuto = { title: true, meta: true }; $('#ar-seo-index').checked = true; $('#ar-og-use').checked = true; arOg = null; aseoFill(); }
+    aseoPaint();
+  }
+  ['#ar-name', '#ar-slug'].forEach(id => $(id).addEventListener('input', () => { aseoFill(); aseoPaint(); }));
+  [['title', '#ar-seo-title'], ['meta', '#ar-seo-meta']].forEach(([k, id]) => $(id).addEventListener('input', () => { aseoAuto[k] = false; aseoPaint(); }));
+  $('#ar-seo-slug').addEventListener('input', aseoPaint);
+  $('#ar-seo-index').addEventListener('change', aseoPaint);
+  $('#ar-og-use').addEventListener('change', aseoPaint);
+  $('#ar-og-pick').addEventListener('click', () => $('#ar-og-file').click());
+  $('#ar-og-clear').addEventListener('click', () => { arOg = null; aseoPaint(); });
+  $('#ar-og-file').addEventListener('change', e => { const f = e.target.files[0]; e.target.value = ''; arReadImg(f, src => { arOg = src; aseoPaint(); }); });
+  $('#ar-seo-open').addEventListener('click', () => { $('#ar-seo-slug').value = aSlugPath(); aseoSnap = aseoRead(); aseoSaved = true; aseoPaint(); dASeo.showModal(); $('#ar-seo-title').focus(); });
+  $('#ar-seo-save').addEventListener('click', () => {
+    aseoSaved = true; dASeo.close();
+  });
+  $('#ar-seo-reset').addEventListener('click', () => { aseoAuto = { title: true, meta: true }; $('#ar-og-use').checked = true; arOg = null; aseoFill(); $('#ar-seo-slug').value = aSlugPath(); aseoPaint(); });
+  $('#dlg-aseo [data-discard]').addEventListener('click', () => { aseoSaved = false; });
+  dASeo.addEventListener('close', () => {
+    if (!aseoSaved && aseoSnap) aseoRestore(aseoSnap);
+    else {
+      const sl = $('#ar-seo-slug').value.trim().replace(/^\/?(blog\/)?/, '').toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-{2,}/g, '-').replace(/^-+|-+$/g, '');
+      if (sl && sl !== $('#ar-slug').value.trim()) { $('#ar-slug').value = sl; arSlugEdited = true; fieldErr('ar-slug', ''); }
+    }
+    $('#ar-seo-slug').value = aSlugPath(); aseoPaint(); aseoSaved = false; aseoSnap = null;
+  });
+
+  /* ---- SEO dialogs: compact rows that open into a small editor ---- */
+  function sxToggle(btn, open) {
+    const body = document.getElementById(btn.getAttribute('aria-controls')); if (!body) return;
+    open = open ?? body.hidden;
+    body.hidden = !open; btn.setAttribute('aria-expanded', open);
+    const act = btn.querySelector('.sx-act'); act.dataset.label ||= act.textContent; act.textContent = open ? 'Done' : act.dataset.label;
+    if (open) body.querySelector('input:not([type=checkbox]), input, button')?.focus();
+  }
+  [dSeo, dASeo].forEach(dl => {
+    dl.addEventListener('click', e => { const b = e.target.closest('.sx-row[aria-controls]'); if (b) sxToggle(b); });
+    dl.addEventListener('close', () => $$('.sx-row[aria-controls]', dl).forEach(b => sxToggle(b, false)));
+  });
+  function openArticle(a) {
+    arEdit = a || null; $('#ar-form').reset(); arSlugEdited = !!a; arImg = a ? a.img : null; arImgErr(''); aeErr('');
+    aeDoc.innerHTML = a ? (a.body || (a.excerpt ? `<p>${esc(a.excerpt)}</p>` : '')) : ''; $('#ae-link').hidden = true; aeRange = null;
+    $('#ar-title').textContent = a ? 'Edit Article' : 'Add New Article';
+    $('#ar-sub').textContent = a ? 'Update this article’s content and details.' : 'Write a blog post, farm update or resource guide.';
+    $('#ar-submit').textContent = a ? 'Save Changes' : 'Add Article';
+    fillAuthors(curSite(), a ? a.author : null);
+    if (a) { $('#ar-name').value = a.title; $('#ar-slug').value = a.slug; $('#ar-status').value = a.status; }
+    arExAuto = !(a && a.excerptCustom); $('#ar-excerpt').value = arExAuto ? '' : a.excerpt; arExFill();
+    ['ar-name', 'ar-slug', 'ar-author'].forEach(id => fieldErr(id, ''));
+    aseoLoad(a); arPaintImg(); aeWords(); abPaint(); aeState(); try { document.execCommand('defaultParagraphSeparator', false, 'p'); } catch (e) {}
+    dArt.showModal(); $('#ar-form').scrollTop = 0; $('#ar-name').focus();
+  }
+  $('#ar-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const s = curSite(); if (!s) return;
+    const list = articlesOf(s), title = $('#ar-name').value.trim(), slug = $('#ar-slug').value.trim().replace(/^-+|-+$/g, ''), author = $('#ar-author').value.trim();
+    let first = null; const bad = (id, msg) => { fieldErr(id, msg); first ||= id; };
+    if (!title) bad('ar-name', 'Give the article a title.');
+    if (!slug) bad('ar-slug', 'Add a URL slug, e.g. 5-tips-raising-broilers.');
+    else if (list.some(x => x !== arEdit && x.slug === slug)) bad('ar-slug', `/blog/${slug} is already used by another article.`);
+    if (!author) bad('ar-author', 'Pick who this article is posted as.');
+    if (first) { $('#' + first).focus(); return; }
+    const status = $('#ar-status').value;
+    if (status === 'published' && !aeText() && !aeDoc.querySelector('img')) { aeErr('Write the article before publishing, or save it as a draft.'); $('#ab-open').focus(); return; }
+    const data = { title, slug, author, status, excerpt: $('#ar-excerpt').value.trim() || seoTwo(aeText()).slice(0, 200), excerptCustom: !arExAuto && !!$('#ar-excerpt').value.trim(), img: arImg, body: aeDoc.innerHTML, seo: aseoRead() };
+    if (arEdit) {
+      if (status === 'published' && arEdit.status !== 'published') data.date = Date.now();
+      Object.assign(arEdit, data); dArt.close(); paintArticles(); toast(`${title} updated`);
+    } else {
+      list.unshift({ id: s.id + 'a' + Date.now(), date: Date.now(), emoji: '📝', tint: '#efece4', photo: null, ...data });
+      Object.assign(state, { artQuery: '', artFilter: 'all', artPage: 1 });
+      dArt.close(); renderContentView(); toast(status === 'published' ? `${title} published` : `${title} saved as a draft`);
+    }
+  });
+
+  /* =====================================================================
+     Site settings → Danger Zone: unpublish, transfer to another workspace, delete
+     ===================================================================== */
+  const SDZ_IC = {
+    ban: '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.7"/><path d="M4.7 4.7l10.6 10.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>',
+    swap: '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 7h13l-3.5-3.5M17 13H4l3.5 3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    trash: '<svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3.5 5.5h13M8 5.5V4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v1.5M5 5.5l.8 10.6a1 1 0 0 0 1 .9h6.4a1 1 0 0 0 1-.9L15 5.5M8.5 9v5M11.5 9v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    up: '<svg width="20" height="20" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-publishing"/></svg>'
+  };
+  function dangerPanel(s) {
+    const live = s.status === 'published';
+    return `
+      <h2 class="sdz-h">Danger Zone</h2>
+      <p class="sdz-sub">These actions are permanent and cannot be undone. Please proceed with caution.</p>
+      <div class="sdz-list">
+        <div class="sdz-row tint">
+          <span class="sdz-ic">${live ? SDZ_IC.ban : SDZ_IC.up}</span>
+          <div><strong>${live ? 'Unpublish Site' : 'Republish Site'}</strong>
+            <p>${live ? 'Take your website offline temporarily. Visitors will no longer be able to access your site.' : 'Your site is offline. Publish it again so visitors can reach it.'}</p>
+            <span class="sdz-state${live ? ' live' : ''}">${live ? 'Live now' : s.status === 'draft' ? 'Never published' : 'Offline'}</span></div>
+          <button type="button" class="sdz-btn ghost${live ? '' : ' calm'}" data-sdz="unpublish">${live ? 'Unpublish Site' : 'Republish Site'}</button>
+        </div>
+        <div class="sdz-row">
+          <span class="sdz-ic">${SDZ_IC.swap}</span>
+          <div><strong>Transfer Ownership</strong><p>Move site to another workspace. You will lose access to this site.</p></div>
+          <button type="button" class="sdz-btn ghost" data-sdz="transfer">Transfer Site</button>
+        </div>
+        <div class="sdz-row tint">
+          <span class="sdz-ic">${SDZ_IC.trash}</span>
+          <div><strong>Permanently Delete Site</strong><p>This action will permanently delete your site and all related data. This cannot be undone.</p></div>
+          <button type="button" class="sdz-btn solid" data-sdz="delete">Delete Site</button>
+        </div>
+      </div>`;
+  }
+  const dSd = $('#dlg-site-danger');
+  let sdMode = null;
+  function sdSync() {
+    const s = curSite(); if (!s || !sdMode) return;
+    let ok = true;
+    if (sdMode !== 'unpublish') ok = $('#sd-confirm').value.trim() === s.name;
+    if (sdMode === 'transfer') ok = ok && !!$('#sd-form').querySelector('[name=sd-to]:checked');
+    $('#sd-submit').disabled = !ok;
+  }
+  function openSiteDanger(mode) {
+    const s = curSite(), w = ws(); if (!s || !w) return;
+    if (mode === 'unpublish' && s.status !== 'published') {
+      s.status = 'published'; s.updated = Date.now();
+      w.activity.push({ kind: 'update', text: `${s.name} was published`, time: Date.now() });
+      renderSettingsView(); toast(`${s.name} is live again at ${siteData(s).domain}`); return;
+    }
+    sdMode = mode; $('#sd-form').reset(); $('#sd-error').hidden = true;
+    const typing = mode !== 'unpublish';
+    $('#sd-confirm-label').hidden = $('#sd-confirm').hidden = !typing;
+    $('#sd-word').textContent = s.name;
+    const X = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M12 4 4 12M4 4l8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+    const d = siteData(s);
+    if (mode === 'unpublish') {
+      $('#sd-ic').className = 'dh-ic'; $('#sd-ic').innerHTML = SDZ_IC.ban;
+      $('#sd-title').innerHTML = `Unpublish <span class="sd-name">${esc(s.name)}</span>?`;
+      $('#sd-desc').textContent = `${d.domain} goes offline straight away. You can republish any time.`;
+      $('#sd-body').innerHTML = `<ul class="dlist">
+        <li>${X}<span>Visitors see a <b>“Site not available”</b> page</span></li>
+        <li>${X}<span>Checkout stops, so <b>no new orders</b> come in</span></li>
+        <li>${X}<span>Search engines may drop your pages if it stays offline</span></li></ul>
+        <p class="role-note">Your pages, products, orders and settings stay exactly as they are.</p>`;
+      $('#sd-submit').textContent = 'Unpublish Site';
+    } else if (mode === 'transfer') {
+      $('#sd-ic').className = 'dh-ic neutral'; $('#sd-ic').innerHTML = SDZ_IC.swap;
+      $('#sd-title').innerHTML = `Transfer <span class="sd-name">${esc(s.name)}</span>`;
+      $('#sd-desc').innerHTML = `Move this site out of <strong>${esc(w.name)}</strong>. Its team and settings go with it.`;
+      const others = state.workspaces.filter(x => x !== w);
+      $('#sd-body').innerHTML = others.length ? `<fieldset style="border:0;margin:0;padding:0"><legend class="confirm-label">Move to workspace</legend>
+          <div class="tlist">${others.map(o => `<label><input type="radio" name="sd-to" value="${o.id}">${wsMark(o, 32)}<div><strong>${esc(o.name)}</strong><small>${o.sites.length} ${o.sites.length === 1 ? 'site' : 'sites'} · ${o.members.length} ${o.members.length === 1 ? 'member' : 'members'}</small></div></label>`).join('')}</div></fieldset>
+          <p class="role-note" style="margin-bottom:16px">People in <strong>${esc(w.name)}</strong> who only had access through this workspace will lose access to the site.</p>`
+        : `<div class="tempty">You don't have another workspace to move ${esc(s.name)} into. Create one first, then come back.
+            <div><button type="button" class="btn-dark" id="sd-new-ws">${icon('i-plus', 18)}Create workspace</button></div></div>`;
+      $('#sd-new-ws')?.addEventListener('click', () => { dSd.close(); openCreateWs(); });
+      $('#sd-confirm-label').hidden = $('#sd-confirm').hidden = !others.length;
+      $('#sd-submit').textContent = 'Transfer Site';
+    } else {
+      $('#sd-ic').className = 'dh-ic'; $('#sd-ic').innerHTML = SDZ_IC.trash;
+      $('#sd-title').innerHTML = `Delete <span class="sd-name">${esc(s.name)}</span>?`;
+      $('#sd-desc').textContent = 'This can’t be undone. Everything below is removed permanently.';
+      const n = (k, one, many) => `${k} ${k === 1 ? one : many}`;
+      $('#sd-body').innerHTML = `<ul class="dlist">
+        <li>${X}<span><b>${n(pagesOf(s).length, 'page', 'pages')}</b> and ${n(articlesOf(s).length, 'article', 'articles')}</span></li>
+        <li>${X}<span><b>${n(storeOf(s).products.length, 'product', 'products')}</b>, ${n(ordersOf(s).length, 'order', 'orders')} and store settings</span></li>
+        <li>${X}<span><b>All media</b>, branding and tracking settings</span></li>
+        <li>${X}<span>The address <b>${esc(d.domain)}</b> stops working</span></li></ul>`;
+      $('#sd-submit').textContent = 'Delete Site';
+    }
+    sdSync(); dSd.showModal();
+    (typing && !$('#sd-confirm').hidden ? ($('#sd-form [name=sd-to]') || $('#sd-confirm')) : $('#sd-submit')).focus();
+  }
+  $('#sd-form').addEventListener('input', () => { $('#sd-error').hidden = true; sdSync(); });
+  $('#sd-form').addEventListener('change', sdSync);
+  $('#sd-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const s = curSite(), w = ws(); if (!s || !w || $('#sd-submit').disabled) return;
+    const pickNext = () => { state.currentSiteId = w.sites[0] ? w.sites[0].id : null; };
+    if (sdMode === 'unpublish') {
+      s.status = 'unpublished'; s.updated = Date.now();
+      w.activity.push({ kind: 'update', text: `${s.name} was unpublished`, time: Date.now() });
+      dSd.close(); renderSettingsView(); toast(`${s.name} is offline`, { label: 'Republish', action: () => { s.status = 'published'; s.updated = Date.now(); if (siteView === 'settings') renderSettingsView(); toast(`${s.name} is live again`); } });
+    } else if (sdMode === 'transfer') {
+      const to = state.workspaces.find(x => x.id === $('#sd-form').querySelector('[name=sd-to]:checked').value);
+      w.sites = w.sites.filter(x => x !== s); to.sites.unshift(s);
+      w.activity.push({ kind: 'update', text: `${s.name} was moved to ${to.name}`, time: Date.now() });
+      to.activity.push({ kind: 'create', text: `${s.name} was moved here from ${w.name}`, time: Date.now() });
+      dSd.close(); pickNext(); state.ssTab = 'domain';
+      go(w.sites.length ? '#/overview' : '#/workspace');
+      toast(`${s.name} moved to ${to.name}`, { label: `Open ${to.name}`, action: () => { state.currentId = to.id; state.currentSiteId = s.id; go('#/overview'); renderOverviewSwitcher(); renderChrome(); } });
+    } else {
+      w.sites = w.sites.filter(x => x !== s);
+      w.activity.push({ kind: 'update', text: `${s.name} was permanently deleted`, time: Date.now() });
+      dSd.close(); pickNext(); state.ssTab = 'domain';
+      go('#/workspace'); toast(`${s.name} was permanently deleted`);
+    }
+  });
+  $('#ov-view').addEventListener('click', e => {
+    if (siteView !== 'settings') return;
+    const b = e.target.closest('[data-sdz]'); if (b) openSiteDanger(b.dataset.sdz);
+  });
+
   const normDomain = v => v.trim().toLowerCase().replace(/^https?:\/\//, '').replace(/[/?#].*$/, '').replace(/^www\./, '').replace(/\.$/, '');
   const DOMAIN_RE = /^(?=.{4,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,24}$/;
 
@@ -6402,7 +7442,7 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
         <hr>
         <h2 class="ss-h">DNS Records to Point:</h2>
         <ul class="ss-dns">${DNS_RECORDS.map(r => `<li><span class="f"><span>Type:</span> <b>${r.type}</b></span><i></i><span class="f"><span>Host:</span> <b>${r.host}</b></span><i></i><span class="f v"><span>Value:</span> <b>${r.value}</b></span></li>`).join('')}</ul>`
-      : tab === 'branding' ? brandingPanel(s) : tab === 'pixels' ? pixelsPanel(s)
+      : tab === 'branding' ? brandingPanel(s) : tab === 'pixels' ? pixelsPanel(s) : tab === 'danger' ? dangerPanel(s)
       : `<div class="ss-soon"><span class="soon-tag">Coming soon</span><h3 style="margin-top:14px">${SS_TABS.find(t => t[0] === tab)[1]}</h3><p>${SS_SOON[tab]}</p></div>`;
     el.innerHTML = `
       <div class="ov-head"><h1 tabindex="-1">Site Settings</h1><p>Manage global domain connections, brand identity, tracking scripts, and site deletion.</p></div>
@@ -6529,41 +7569,116 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
 
   /* ---------- Site settings → Analytics & Pixels ---------- */
   function pixelsOf(s) {
-    if (s.pixels) return s.pixels;
-    return (s.pixels = { ga: '', fb: isShop(s) ? '123456789012345' : '', code: '' });
+    if (s.pixels) { s.pixels.extra ||= ['ga', 'fb']; return s.pixels; }
+    const p = { ga: '', fb: isShop(s) ? '123456789012345' : '', code: '', extra: ['ga', 'fb'], on: { ga: true, fb: true, code: true }, saved: null };
+    if (p.fb) p.saved = Date.now() - 6 * D;
+    return (s.pixels = p);
   }
   const PX_RULES = {
-    ga: { re: /^G-[A-Z0-9]{6,12}$/, msg: 'A Measurement ID looks like G-XXXXXXXXXX (G, a dash, then letters and numbers).' },
-    fb: { re: /^\d{15,16}$/, msg: 'A Pixel ID is 15 or 16 digits, numbers only.' }
+    ga: { re: /^G-[A-Z0-9]{6,12}$/, msg: 'A Measurement ID looks like G-XXXXXXXXXX (G, a dash, then letters and numbers).', clean: v => v.toUpperCase().replace(/[^A-Z0-9-]/g, '') },
+    fb: { re: /^\d{15,16}$/, msg: 'A Pixel ID is 15 or 16 digits, numbers only.', clean: v => v.replace(/\D/g, '') }
   };
+  /* Tools a site owner can add from "Add tracking tool". Each one only needs an ID; the platform writes the code. */
+  const upAZ = v => v.toUpperCase().replace(/[^A-Z0-9-]/g, ''), digits = v => v.replace(/\D/g, ''), lowAZ = v => v.toLowerCase().replace(/[^a-z0-9]/g, '');
+  const PX_EXTRA = [
+    { k: 'ga', name: 'Google Analytics', icon: () => I_GA, g: 'Analytics', desc: 'See visitors, traffic sources and top pages.', label: 'Measurement ID', ph: 'G-XXXXXXXXXX', mode: 'text', help: '', ...PX_RULES.ga },
+    { k: 'fb', name: 'Facebook / Meta Pixel', icon: () => I_FB, g: 'Ad pixels', desc: 'Measure results from Facebook and Instagram ads.', label: 'Pixel ID', ph: '123456789012345', mode: 'numeric', help: '', ...PX_RULES.fb },
+    { k: 'tt', name: 'TikTok Pixel', mark: 'TT', c: '#161616', g: 'Ad pixels', desc: 'Measure sales and sign-ups from TikTok ads.', label: 'Pixel ID', ph: 'CABCD1234EFGH5678IJK', mode: 'text', help: 'Find it in TikTok Ads Manager → Tools → Events → Web events.', re: /^[A-Z0-9]{20}$/, msg: 'A TikTok Pixel ID is 20 letters and numbers.', clean: v => v.toUpperCase().replace(/[^A-Z0-9]/g, '') },
+    { k: 'gads', name: 'Google Ads', mark: 'Ads', c: '#1a73e8', g: 'Ad pixels', desc: 'Track conversions from Google ad campaigns.', label: 'Conversion ID', ph: 'AW-123456789', mode: 'text', help: 'Find it in Google Ads → Goals → Conversions → your conversion → Tag setup.', re: /^AW-\d{9,11}$/, msg: 'A Conversion ID looks like AW-123456789 (AW, a dash, then 9–11 digits).', clean: upAZ },
+    { k: 'snap', name: 'Snapchat Pixel', mark: 'SC', c: '#fffc00', tc: '#000', g: 'Ad pixels', desc: 'Measure results from Snapchat ads.', label: 'Pixel ID', ph: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890', mode: 'text', help: 'Find it in Snapchat Ads Manager → Events Manager → your pixel.', re: /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/, msg: 'A Snapchat Pixel ID looks like a1b2c3d4-e5f6-7890-abcd-ef1234567890.', clean: v => v.toLowerCase().replace(/[^a-f0-9-]/g, '') },
+    { k: 'pin', name: 'Pinterest Tag', mark: 'Pi', c: '#c8102e', g: 'Ad pixels', desc: 'Track checkouts and sign-ups from Pinterest ads.', label: 'Tag ID', ph: '2612345678901', mode: 'numeric', help: 'Find it in Pinterest Ads → Conversions → Tag manager.', re: /^\d{13}$/, msg: 'A Pinterest Tag ID is 13 digits, numbers only.', clean: digits },
+    { k: 'li', name: 'LinkedIn Insight Tag', mark: 'in', c: '#0a66c2', g: 'Ad pixels', desc: 'Measure LinkedIn ads and see who visits.', label: 'Partner ID', ph: '1234567', mode: 'numeric', help: 'Find it in LinkedIn Campaign Manager → Analyze → Insight Tag.', re: /^\d{5,8}$/, msg: 'A LinkedIn Partner ID is 5 to 8 digits.', clean: digits },
+    { k: 'xp', name: 'X (Twitter) Pixel', mark: 'X', c: '#161616', g: 'Ad pixels', desc: 'Measure results from X ads.', label: 'Pixel ID', ph: 'o1abc', mode: 'text', help: 'Find it in X Ads Manager → Tools → Events manager.', re: /^[a-z0-9]{5,6}$/, msg: 'An X Pixel ID is 5 or 6 letters and numbers, e.g. o1abc.', clean: lowAZ },
+    { k: 'gtm', name: 'Google Tag Manager', mark: 'GTM', c: '#2a6fdb', g: 'Tag managers', desc: 'Manage all your tags from one Google container.', label: 'Container ID', ph: 'GTM-XXXXXXX', mode: 'text', help: 'Find it at the top of your Google Tag Manager workspace.', re: /^GTM-[A-Z0-9]{4,9}$/, msg: 'A Container ID looks like GTM-XXXXXXX.', clean: upAZ },
+    { k: 'clarity', name: 'Microsoft Clarity', mark: 'MC', c: '#5c2d91', g: 'Heatmaps & recordings', desc: 'Free heatmaps and session recordings.', label: 'Project ID', ph: 'abcd1234ef', mode: 'text', help: 'Find it in Clarity → Settings → Overview.', re: /^[a-z0-9]{8,12}$/, msg: 'A Clarity Project ID is 8 to 12 letters and numbers.', clean: lowAZ },
+    { k: 'hj', name: 'Hotjar', mark: 'HJ', c: '#e8452c', g: 'Heatmaps & recordings', desc: 'Heatmaps, recordings and feedback polls.', label: 'Site ID', ph: '1234567', mode: 'numeric', help: 'Find it in Hotjar → Sites & Organizations.', re: /^\d{6,8}$/, msg: 'A Hotjar Site ID is 6 to 8 digits.', clean: digits },
+    { k: 'gsc', name: 'Google Search Console', mark: 'GSC', c: '#188038', g: 'Search & verification', desc: 'Verify your site and see how it shows on Google.', label: 'Verification code', ph: 'aBcD1234efGH5678…', mode: 'text', help: 'In Search Console pick “HTML tag” verification. Paste the whole tag or just the code inside content="…".', re: /^[A-Za-z0-9_-]{20,64}$/, msg: 'Paste the code from the HTML tag, the part inside content="…".', clean: v => { const m = v.match(/content=["']([^"']+)["']/i); return (m ? m[1] : v).replace(/[^A-Za-z0-9_-]/g, ''); } }
+  ];
+  PX_EXTRA.forEach(x => { PX_RULES[x.k] = { re: x.re, msg: x.msg, clean: x.clean }; });
+  const PX_X = Object.fromEntries(PX_EXTRA.map(x => [x.k, x]));
+  const pxMark = x => x.icon ? `<span class="px-mark ic" aria-hidden="true">${x.icon()}</span>` : `<span class="px-mark${x.mark.length > 2 ? ' sm' : ''}" style="--mk:${x.c};--mt:${x.tc || '#fff'}" aria-hidden="true">${x.mark}</span>`;
+  const I_PLUS = s => `<svg width="${s}" height="${s}" viewBox="0 0 18 18" fill="none" aria-hidden="true"><use href="#i-plus"/></svg>`;
+  const I_TRASH = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 4.5h11M6 4.5V3h4v1.5M4 4.5l.7 8.6c.05.5.45.9.95.9h4.7c.5 0 .9-.4.95-.9L12 4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  /* Unsaved edits survive re-renders (adding/removing a tool) but are dropped when the panel is opened fresh. */
+  /* Custom Header Code Injection is built but switched off for now. Set to true to bring it back. */
+  const PX_CODE_ON = false;
+  let pxDraft = null, pxKeep = false, pxCur = null;
+  function pxView(s) {
+    const p = pixelsOf(s);
+    if (!pxKeep) pxDraft = null;
+    pxKeep = false;
+    if (pxDraft && pxDraft.site === s) return pxDraft;
+    const v = { site: s, extra: [...p.extra], vals: {}, on: {}, open: false };
+    [...p.extra, 'code'].forEach(k => { v.vals[k] = p[k] || ''; v.on[k] = p.on[k] !== false; });
+    return v;
+  }
   const I_GA = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="14" width="4" height="7" rx="1" fill="currentColor"/><rect x="10" y="9" width="4" height="12" rx="1" fill="currentColor"/><rect x="17" y="3" width="4" height="18" rx="1" fill="currentColor"/></svg>';
   const I_FB = '<svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-facebook"/></svg>';
   const I_CODE = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5.5 4 1.5 8l4 4M10.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   const I_SAVE = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2.5h8l2.5 2.5v8.5H3z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M5.5 2.5v3h5v-3M5.5 13.5V9.5h5v4" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>';
-  const codeSnippet = c => { const line = (c || '').split('\n').map(x => x.trim()).find(Boolean); return line ? line : '...custom tracking script...'; };
+  const PX_TOOLS = [
+    ['ga', I_GA, 'Google Analytics', 'Measurement ID', 'G-XXXXXXXXXX', 'text', 'Find it in Google Analytics → Admin → Data streams → your web stream.'],
+    ['fb', I_FB, 'Facebook / Meta Pixel', 'Pixel ID', '123456789012345', 'numeric', 'Find it in Meta Events Manager → Data sources → your pixel.']
+  ];
+  const codeSnippet = c => { const line = (c || '').split('\n').map(x => x.trim()).find(Boolean); return line || 'No custom code yet'; };
+  const pxChip = (val, on) => !val ? '<span class="px-chip">Not set up</span>' : on ? '<span class="px-chip on">Active</span>' : '<span class="px-chip off">Paused</span>';
   function pixelsPanel(s) {
-    const p = pixelsOf(s);
-    const idRow = (k, tint, ic, title, label, ph, val, mode) => `
-      <div class="px-row${tint ? ' tint' : ''}">
+    const v = pxCur = pxView(s);
+    const tools = [...v.extra.map(k => { const x = PX_X[k]; return [k, pxMark(x), x.name, x.label, x.ph, x.mode, x.help]; })];
+    const row = ([k, ic, title, label, ph, mode, help], i) => {
+      const val = v.vals[k] || '', on = v.on[k] !== false;
+      return `
+      <div class="px-row${i % 2 ? '' : ' tint'}" data-px-row="${k}">
         <span class="px-ic">${ic}</span>
-        <div><strong>${title}</strong>
-          <span class="px-id"><label for="px-${k}">${label}:</label><span class="px-br">[</span> <input class="px-in" id="px-${k}" data-px="${k}" inputmode="${mode}" autocomplete="off" spellcheck="false" placeholder="${ph}" value="${esc(val)}" aria-describedby="px-${k}-err"> <span class="px-br">]</span></span>
-          <p class="px-err" id="px-${k}-err" hidden></p></div>
-        <button type="button" class="px-copy" data-px-copy="${k}" ${val ? '' : 'disabled'}>${COPY_IC}Copy ID</button>
+        <div><span class="px-head"><strong>${title}</strong><span id="px-${k}-chip">${pxChip(val, on)}</span></span>
+          <span class="px-id"><label for="px-${k}">${label}</label><input class="px-in" id="px-${k}" data-px="${k}" inputmode="${mode}" autocomplete="off" spellcheck="false" placeholder="e.g. ${esc(ph)}" value="${esc(val)}" aria-describedby="px-${k}-err"></span>
+          <p class="px-err" id="px-${k}-err" hidden></p>
+          </div>
+        <div class="px-acts">
+          <label class="px-switch" ${val ? '' : 'hidden'}><input type="checkbox" role="switch" data-px-on="${k}" ${on ? 'checked' : ''} ${val ? '' : 'disabled'} aria-label="Load ${title} on this site">On</label>
+          <button type="button" class="px-copy" data-px-copy="${k}" ${val ? '' : 'hidden'}>${COPY_IC}Copy ID</button>
+          <button type="button" class="px-remove" data-px-remove="${k}" aria-label="Remove ${title}" title="Remove ${title}">${I_TRASH}</button>
+        </div>
       </div>`;
+    };
+    const left = PX_EXTRA.filter(x => !v.extra.includes(x.k)), pop = ['tt', 'gtm', 'clarity', 'gads'];
+    const show = [...left].sort((a, b) => (pop.indexOf(a.k) + 1 || 99) - (pop.indexOf(b.k) + 1 || 99)).slice(0, 3);
+    const hint = left.length ? `${show.map(x => x.name).join(', ')}${left.length > 3 ? ` and ${left.length - 3} more` : ''}` : 'Every listed tool is added';
+    const code = v.vals.code || '', codeOn = v.on.code !== false;
     return `
       <h2 class="ss-h br-h">Analytics &amp; Pixels</h2>
-      <p class="px-sub">Connect your tracking tools and add custom scripts to monitor your site's performance and behaviour.</p>
+      <p class="px-sub">Connect your tracking tools and add custom scripts to monitor your site's performance and behaviour. Tracking only runs on the published site, not in previews.</p>
       <div class="px-list">
-        ${idRow('ga', true, I_GA, 'Google Analytics', 'Measurement ID', 'G-XXXXXXXXXX', p.ga, 'text')}
-        ${idRow('fb', false, I_FB, 'Facebook / Meta Pixel', 'Pixel ID', '123456789012345', p.fb, 'numeric')}
-        <div class="px-row tint">
+        ${tools.map(row).join('')}
+        <div class="px-row px-addrow">
+          <span class="px-ic"><span class="px-plus">${I_PLUS(16)}</span></span>
+          <div class="px-addbox">
+            <button type="button" class="px-add" id="px-add" aria-haspopup="dialog">${I_PLUS(15)}Add tracking tool</button>
+          </div>
+        </div>
+        <div class="px-row tint px-coderow" ${PX_CODE_ON ? '' : 'hidden'}>
           <span class="px-ic code">${I_CODE}</span>
-          <div><strong>Custom Header Code Injection</strong>
-            <span class="px-snip"><code id="px-snip">${esc(codeSnippet(p.code))}</code><button type="button" class="btn-text" id="px-code-toggle" aria-expanded="false" aria-controls="px-code">${p.code ? 'Edit' : 'Add script'}</button></span></div>
-          <button type="button" class="btn-dark px-save" id="px-save">${I_SAVE}Save Tracking Configuration</button>
-          <label class="sr-only" for="px-code">Custom code added to the head of every page</label>
-          <textarea class="px-code" id="px-code" hidden spellcheck="false" placeholder="<!-- Paste scripts here. They load in the <head> of every page. -->">${esc(p.code)}</textarea>
+          <div><span class="px-head"><strong>Custom Header Code Injection</strong><span id="px-code-chip">${pxChip(code, codeOn)}</span></span>
+            <span class="px-snip"><code id="px-snip" class="${code ? '' : 'none'}">${esc(codeSnippet(code))}</code><button type="button" class="px-toggle" id="px-code-toggle" aria-expanded="false" aria-controls="px-pe">${code ? 'Edit code' : 'Add script'}</button></span></div>
+          <div class="px-acts"><label class="px-switch" ${code ? '' : 'hidden'}><input type="checkbox" role="switch" data-px-on="code" ${codeOn ? 'checked' : ''} ${code ? '' : 'disabled'} aria-label="Load custom code on this site">On</label></div>
+          <div class="pe" id="px-pe" hidden>
+            <div class="pe-bar">
+              <span class="pe-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="pe-file">${I_CODE}&lt;head&gt; <em>· every page</em></span>
+              <span class="pe-meta" id="px-lines" aria-live="polite"></span>
+              <button type="button" class="pe-clear" id="px-clear">Clear</button>
+            </div>
+            <div class="pe-body">
+              <pre class="pe-gutter" id="px-gutter" aria-hidden="true">1</pre>
+              <label class="sr-only" for="px-code">Custom code added to the head of every page</label>
+              <textarea class="pe-code" id="px-code" spellcheck="false" autocomplete="off" wrap="off" placeholder="&lt;!-- Paste a script, e.g. --&gt;&#10;&lt;script async src=&quot;https://example.com/widget.js&quot;&gt;&lt;/script&gt;">${esc(code)}</textarea>
+            </div>
+          </div>
+        </div>
+        <div class="px-bar">
+          <p class="note" id="px-note" aria-live="polite"></p>
+          <div class="row"><button type="button" class="btn-light" id="px-discard" hidden>Discard</button>
+            <button type="button" class="btn-dark px-save" id="px-save">${I_SAVE}Save Tracking Configuration</button></div>
         </div>
       </div>`;
   }
@@ -6573,36 +7688,121 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
     if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
   }
   function wirePixels(s) {
-    const p = pixelsOf(s), code = $('#px-code'), tog = $('#px-code-toggle');
+    const p = pixelsOf(s), v = pxCur, code = $('#px-code'), KEYS = [...v.extra, 'code'];
+    const val = k => k === 'code' ? code.value.trim() : $('#px-' + k).value.trim();
+    const onOf = k => $(`[data-px-on="${k}"]`).checked;
     const err = (k, m) => { const i = $('#px-' + k), e = $(`#px-${k}-err`); e.textContent = m || ''; e.hidden = !m; m ? i.setAttribute('aria-invalid', 'true') : i.removeAttribute('aria-invalid'); };
-    $$('[data-px]').forEach(i => i.addEventListener('input', () => {
-      const k = i.dataset.px;
-      i.value = k === 'ga' ? i.value.toUpperCase().replace(/[^A-Z0-9-]/g, '') : i.value.replace(/\D/g, '');
-      err(k, ''); $(`[data-px-copy="${k}"]`).disabled = !i.value.trim();
+    const capture = () => { KEYS.forEach(k => { v.vals[k] = val(k); v.on[k] = onOf(k); }); v.open = !$('#px-pe').hidden; };
+    const redraw = focus => {
+      pxDraft = v; pxKeep = true; renderSettingsView();
+      const el = typeof focus === 'string' ? $(focus) : null;
+      if (el) { el.closest('.px-row')?.scrollIntoView({ block: 'nearest' }); el.focus(); }
+    };
+    const sync = () => {
+      let dirty = v.extra.join() !== p.extra.join();
+      KEYS.forEach(k => {
+        const v = val(k), sw = $(`[data-px-on="${k}"]`);
+        if (v && sw.closest('label').hidden) sw.checked = true;
+        sw.disabled = !v; sw.closest('label').hidden = !v; $(`#px-${k}-chip`).innerHTML = pxChip(v, sw.checked);
+        if (k !== 'code') $(`[data-px-copy="${k}"]`).hidden = !v;
+        if (v !== (p[k] || '') || (v && sw.checked !== (p.on[k] !== false))) dirty = true;
+      });
+      const note = $('#px-note');
+      note.classList.toggle('dirty', dirty); $('#px-discard').hidden = !dirty;
+      const none = ![...p.extra, 'code'].some(k => p[k]);
+      note.textContent = dirty ? 'You have unsaved changes.' : none ? (PX_CODE_ON ? 'No tracking yet. Add an ID or a script above, then save.' : 'No tracking yet. Add a tracking tool above, then save.') : p.saved ? `All changes saved · ${timeAgo(p.saved).toLowerCase()}.` : 'All changes saved.';
+      $('#px-save').disabled = !dirty;
+    };
+    $$('[data-px]').forEach(i => i.addEventListener('input', () => { const k = i.dataset.px; i.value = PX_RULES[k].clean(i.value); err(k, ''); sync(); }));
+    $$('[data-px-on]').forEach(i => i.addEventListener('change', sync));
+    $$('[data-px-copy]').forEach(b => b.addEventListener('click', () => { const v = val(b.dataset.pxCopy); if (v) pxCopy(v, b); }));
+    $$('[data-px-remove]').forEach(b => b.addEventListener('click', () => {
+      const k = b.dataset.pxRemove; capture();
+      v.extra = v.extra.filter(x => x !== k); v.vals[k] = ''; delete v.on[k];
+      redraw('#px-add'); toast(`${PX_X[k].name} removed. Save to apply.`);
     }));
-    $$('[data-px-copy]').forEach(b => b.addEventListener('click', () => { const v = $('#px-' + b.dataset.pxCopy).value.trim(); if (v) pxCopy(v, b); }));
-    tog.addEventListener('click', () => {
-      const open = code.hidden; code.hidden = !open; tog.setAttribute('aria-expanded', open);
-      tog.textContent = open ? 'Hide editor' : (code.value.trim() ? 'Edit' : 'Add script');
-      if (open) code.focus();
+    const gutter = $('#px-gutter');
+    const paintCode = () => {
+      const lines = code.value.split('\n').length, used = code.value.trim() ? lines : 0;
+      gutter.textContent = Array.from({ length: Math.max(lines, 7) }, (_, i) => i + 1).join('\n');
+      $('#px-lines').textContent = used ? `${used} ${used === 1 ? 'line' : 'lines'} · ${code.value.length} chars` : 'Empty';
+      $('#px-clear').hidden = !code.value;
+    };
+    code.addEventListener('scroll', () => { gutter.scrollTop = code.scrollTop; });
+    code.addEventListener('keydown', e => {
+      if (e.key !== 'Tab' || e.shiftKey) return;
+      e.preventDefault();
+      const s0 = code.selectionStart, s1 = code.selectionEnd;
+      code.value = code.value.slice(0, s0) + '  ' + code.value.slice(s1);
+      code.selectionStart = code.selectionEnd = s0 + 2; code.dispatchEvent(new Event('input'));
     });
-    code.addEventListener('input', () => { $('#px-snip').textContent = codeSnippet(code.value); });
+    const tog = $('#px-code-toggle'), pe = $('#px-pe');
+    const setOpen = open => {
+      pe.hidden = !open; tog.setAttribute('aria-expanded', open);
+      tog.textContent = open ? 'Close editor' : (code.value.trim() ? 'Edit code' : 'Add script');
+      if (open) code.focus();
+    };
+    tog.addEventListener('click', () => setOpen(pe.hidden));
+    if (v.open) setOpen(true);
+    $('#px-add').addEventListener('click', () => {
+      capture();
+      openPxAdd(v, k => {
+        if (k === 'code') { setOpen(true); $('.px-coderow').scrollIntoView({ block: 'center', behavior: 'smooth' }); code.focus({ preventScroll: true }); return; }
+        v.extra.push(k); v.vals[k] = ''; v.on[k] = true;
+        redraw('#px-' + k);
+      });
+    });
+    code.addEventListener('input', () => { paintCode(); sync(); const sn = $('#px-snip'); sn.textContent = codeSnippet(code.value); sn.classList.toggle('none', !code.value.trim()); });
+    $('#px-clear').addEventListener('click', () => { code.value = ''; code.dispatchEvent(new Event('input')); code.focus(); });
+    paintCode();
+    $('#px-discard').addEventListener('click', () => { pxDraft = null; renderSettingsView(); toast('Changes discarded'); });
     $('#px-save').addEventListener('click', () => {
       let first = null;
-      Object.entries(PX_RULES).forEach(([k, r]) => {
-        const v = $('#px-' + k).value.trim();
+      KEYS.filter(k => k !== 'code').forEach(k => {
+        const r = PX_RULES[k], v = val(k);
         if (v && !r.re.test(v)) { err(k, r.msg); first ||= $('#px-' + k); } else err(k, '');
       });
       if (first) { first.focus(); return; }
       const c = code.value.trim();
-      if (/<script\b/i.test(c) && !/<\/script>/i.test(c)) { if (code.hidden) tog.click(); code.focus(); toast('Your custom code has an opening <script> tag with no closing <\/script>.'); return; }
-      Object.assign(p, { ga: $('#px-ga').value.trim(), fb: $('#px-fb').value.trim(), code: c });
-      const n = [p.ga, p.fb, p.code].filter(Boolean).length;
+      if (/<script\b/i.test(c) && !/<\/script>/i.test(c)) { setOpen(true); toast('Your custom code has an opening <script> tag with no closing <\/script>.'); return; }
+      p.extra.filter(k => !v.extra.includes(k)).forEach(k => { p[k] = ''; delete p.on[k]; });
+      p.extra = [...v.extra];
+      KEYS.forEach(k => { p[k] = val(k); p.on[k] = onOf(k); });
+      p.saved = Date.now(); pxDraft = null;
+      const n = KEYS.filter(k => p[k] && p.on[k]).length;
       const w = ws(); if (w) w.activity.push({ kind: 'update', text: `${s.name} tracking settings were updated`, time: Date.now() });
-      toast(n ? `Tracking saved. ${n} ${n === 1 ? 'tool is' : 'tools are'} active on ${s.name}.` : 'Tracking saved. No tracking tools are active.');
+      sync();
+      setTimeout(() => toast(n ? `Tracking saved. ${n} ${n === 1 ? 'tool is' : 'tools are'} active on ${s.name}.` : 'Tracking saved. No tracking tools are active.'), 0);
     });
+    sync();
   }
-
+  /* ---------- "Add tracking tool" picker ---------- */
+  const dPxAdd = $('#dlg-pxadd'), pxaQ = $('#pxa-q');
+  let pxaView = null, pxaPick = null;
+  function paintPxAdd() {
+    const q = pxaQ.value.trim().toLowerCase();
+    let html = '', hits = 0;
+    [...new Set(PX_EXTRA.map(x => x.g))].forEach(g => {
+      const items = PX_EXTRA.filter(x => x.g === g && (!q || `${x.name} ${x.desc} ${g}`.toLowerCase().includes(q)));
+      if (!items.length) return;
+      hits += items.length;
+      html += `<p class="pxa-g">${g}</p><ul>${items.map(x => {
+        const added = pxaView.extra.includes(x.k);
+        return `<li><button type="button" class="pxa-item" data-pxa="${x.k}" ${added ? 'disabled' : ''}>${pxMark(x)}<span class="t"><b>${x.name}</b><small>${x.desc}</small></span><span class="st">${added ? TICK + 'Added' : I_PLUS(13) + 'Add'}</span></button></li>`;
+      }).join('')}</ul>`;
+    });
+    $('#pxa-list').innerHTML = hits ? html : `<p class="pxa-empty">“${esc(pxaQ.value.trim())}” isn't in the list yet.${PX_CODE_ON ? ' You can still connect it by pasting its code.' : ''}</p>`;
+  }
+  function openPxAdd(view, onPick) {
+    pxaView = view; pxaPick = onPick; pxaQ.value = '';
+    $('#pxa-other').hidden = !PX_CODE_ON; paintPxAdd(); $('#pxa-list').scrollTop = 0; dPxAdd.showModal(); pxaQ.focus();
+  }
+  pxaQ.addEventListener('input', paintPxAdd);
+  $('#pxa-list').addEventListener('click', e => {
+    const b = e.target.closest('[data-pxa]'); if (!b || b.disabled) return;
+    dPxAdd.close(); pxaPick?.(b.dataset.pxa);
+  });
+  $('#pxa-other').addEventListener('click', () => { dPxAdd.close(); pxaPick?.('code'); });
   const dDomain = $('#dlg-domain'), dDns = $('#dlg-dns'), dmIn = $('#dm-input');
   let dnsDomain = '';
   function dmCheck() {
