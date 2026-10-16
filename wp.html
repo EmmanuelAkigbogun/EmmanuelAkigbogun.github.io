@@ -3266,6 +3266,15 @@ button.sx-row:hover { background: #faf9f5; }
   .ar-pick small { font-size: 10px; }
 }
 @media (max-width: 480px) { .modal-article form { padding: 16px 16px calc(16px + env(safe-area-inset-bottom, 0px)); } }
+.x-img { margin-top: 20px; }
+.x-img .ar-lbl { font-size: 11px; font-weight: 500; margin-bottom: 6px; }
+.x-img .ar-imgs, .modal-article .ar-imgs { gap: 16px; }
+.x-img .ar-imgs .ar-thumb, .modal-article .ar-imgs .ar-thumb { width: 80px; height: 80px; }
+.x-img .ar-pick, .modal-article .ar-pick { width: 88px; min-height: 80px; padding: 8px 5px; gap: 2px; }
+.x-img .ar-pick svg, .modal-article .ar-pick svg { width: 15px; height: 15px; }
+.x-img .ar-pick strong, .modal-article .ar-pick strong { font-size: 10.5px; margin-top: 2px; }
+.x-img .ar-pick small, .modal-article .ar-pick small { font-size: 7.5px; }
+@media (max-width: 480px) { .x-img .ar-lbl { font-size: 13px; } }
 </style>
 </head>
 <body>
@@ -3794,16 +3803,19 @@ button.sx-row:hover { background: #faf9f5; }
       <div><h2 id="pf-title">Add Product</h2><p id="pf-sub">Add a new product to your store</p></div>
       <button type="button" class="icon-btn" data-close aria-label="Close"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-close"/></svg></button>
     </div>
-    <label class="pf-drop" id="pf-drop">
-      <input type="file" id="pf-file" accept="image/png,image/jpeg" aria-label="Upload product image">
-      <svg class="pf-dash" aria-hidden="true"><rect x=".5" y=".5" rx="12" ry="12"/></svg>
-      <span id="pf-drop-body" style="display:contents"></span>
-    </label>
-    <div class="pf-imgbar" id="pf-img-bar" hidden>
-      <button type="button" class="btn-text" id="pf-img-replace">Replace image</button>
-      <button type="button" class="btn-text" id="pf-img-remove">Remove</button>
+    <div class="ar-feat x-img"><span class="ar-lbl" id="pf-img-l">Product Image</span>
+      <div class="ar-imgs">
+        <span class="ar-thumb empty" id="pf-thumb" role="img" aria-label="Product Image preview"></span>
+        <label class="ar-pick" id="pf-drop">
+          <input type="file" id="pf-file" accept="image/png,image/jpeg" aria-labelledby="pf-img-l pf-pick-l">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="m4 17 4.5-4.5 3.5 3.5 2-2 4 4" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="9" cy="9" r="1.4" fill="currentColor"/><path d="M18 3v6M15 6h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <strong id="pf-pick-l">Upload Image</strong>
+          <small>Recommended size: 140 × 140px JPG, PNG (Max 5MB)</small>
+        </label>
+        <button type="button" class="btn-text" id="pf-img-remove" hidden>Remove</button>
+      </div>
+      <p class="pf-err" id="pf-img-err" role="alert" hidden></p>
     </div>
-    <p class="pf-err" id="pf-img-err" role="alert" hidden style="text-align:center"></p>
     <div class="pf-fields pf-grid">
       <div class="pf-field"><label for="pf-name">Product Name<span class="req" aria-hidden="true">*</span></label>
         <input class="pf-input" id="pf-name" maxlength="80" autocomplete="off" placeholder="e.g. Organic Farm Eggs" required>
@@ -3961,16 +3973,19 @@ button.sx-row:hover { background: #faf9f5; }
       <div><h2 id="cf-title">Create Product Category</h2></div>
       <button type="button" class="icon-btn" data-close aria-label="Close"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-close"/></svg></button>
     </div>
-    <label class="pf-drop" id="cf-drop">
-      <input type="file" id="cf-file" accept="image/png,image/jpeg" aria-label="Upload category image">
-      <svg class="pf-dash" aria-hidden="true"><rect x=".5" y=".5" rx="12" ry="12"/></svg>
-      <span id="cf-drop-body" style="display:contents"></span>
-    </label>
-    <div class="pf-imgbar" id="cf-img-bar" hidden>
-      <button type="button" class="btn-text" id="cf-img-replace">Replace image</button>
-      <button type="button" class="btn-text" id="cf-img-remove">Remove</button>
+    <div class="ar-feat x-img"><span class="ar-lbl" id="cf-img-l">Category Image</span>
+      <div class="ar-imgs">
+        <span class="ar-thumb empty" id="cf-thumb" role="img" aria-label="Category Image preview"></span>
+        <label class="ar-pick" id="cf-drop">
+          <input type="file" id="cf-file" accept="image/png,image/jpeg" aria-labelledby="cf-img-l cf-pick-l">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="m4 17 4.5-4.5 3.5 3.5 2-2 4 4" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="9" cy="9" r="1.4" fill="currentColor"/><path d="M18 3v6M15 6h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <strong id="cf-pick-l">Upload Image</strong>
+          <small>Recommended size: 140 × 140px JPG, PNG (Max 5MB)</small>
+        </label>
+        <button type="button" class="btn-text" id="cf-img-remove" hidden>Remove</button>
+      </div>
+      <p class="pf-err" id="cf-img-err" role="alert" hidden></p>
     </div>
-    <p class="pf-err" id="cf-img-err" role="alert" hidden style="text-align:center"></p>
     <div class="pf-fields cf-fields">
       <div class="pf-field"><label for="cf-name">Category Name<span class="req" aria-hidden="true">*</span></label>
         <input class="pf-input" id="cf-name" maxlength="60" autocomplete="off" placeholder="e.g. Broiler Poultry" required>
@@ -6086,10 +6101,10 @@ button.sx-row:hover { background: #faf9f5; }
   let pfEdit = null, pfImg = null, pfSkuEdited = false;
   $('#pf-cat').innerHTML = '<option value="" disabled selected>Select category</option>' + CATS.map(c => `<option>${esc(c)}</option>`).join('');
   function pfPaintImg() {
-    $('#pf-drop').classList.toggle('has-img', !!pfImg);
-    $('#pf-drop-body').innerHTML = pfImg ? `<img src="${pfImg}" alt="Product image preview">`
-      : `${I_CLOUD}<strong>Upload product image</strong><small>Drag and drop an image, or click to browse</small><small>JPG, PNG (max 5MB)</small>`;
-    $('#pf-img-bar').hidden = !pfImg;
+    $('#pf-thumb').innerHTML = pfImg ? `<img src="${pfImg}" alt="" onerror="this.parentNode.classList.add('empty');this.remove()">` : '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="#i-image"/></svg>';
+    $('#pf-thumb').classList.toggle('empty', !pfImg);
+    $('#pf-pick-l').textContent = pfImg ? 'Change Image' : 'Upload Image';
+    $('#pf-img-remove').hidden = !pfImg;
   }
   function pfImgErr(msg) { const e = $('#pf-img-err'); e.textContent = msg || ''; e.hidden = !msg; }
   function pfTake(file) {
@@ -6104,7 +6119,6 @@ button.sx-row:hover { background: #faf9f5; }
   ['dragenter', 'dragover'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add('drag'); }));
   ['dragleave', 'drop'].forEach(ev => drop.addEventListener(ev, () => drop.classList.remove('drag')));
   drop.addEventListener('drop', e => { e.preventDefault(); pfTake(e.dataTransfer.files[0]); });
-  $('#pf-img-replace').addEventListener('click', () => $('#pf-file').click());
   $('#pf-img-remove').addEventListener('click', () => { pfImg = null; pfPaintImg(); });
 
   function fieldErr(id, msg) {
@@ -6173,7 +6187,7 @@ button.sx-row:hover { background: #faf9f5; }
   dSeo.addEventListener('close', () => { if (!seoSaved && seoSnap) seoRestore(seoSnap); seoPaint(); seoSaved = false; seoSnap = null; });
 
   function openProduct(p) {
-    pfEdit = p || null; pfF.reset(); pfImg = p ? p.img : null; pfSkuEdited = !!p; pfImgErr('');
+    pfEdit = p || null; pfF.reset(); pfImg = p ? (p.img || thumbSrc(p).replace('w=120&h=120','w=280&h=280')) : null; pfSkuEdited = !!p; pfImgErr('');
     $('#pf-title').textContent = p ? 'Edit Product' : 'Add Product';
     $('#pf-sub').textContent = p ? 'Update this product’s details' : 'Add a new product to your store';
     $('#pf-submit').textContent = p ? 'Save Changes' : 'Add Product';
@@ -6308,10 +6322,10 @@ button.sx-row:hover { background: #faf9f5; }
   const dCat = $('#dlg-category');
   let cfEdit = null, cfSlugEdited = false, cfImg = null;
   function cfPaintImg() {
-    $('#cf-drop').classList.toggle('has-img', !!cfImg);
-    $('#cf-drop-body').innerHTML = cfImg ? `<img src="${cfImg}" alt="Category image preview">`
-      : `${I_CLOUD}<strong>Upload category image</strong><small>Drag and drop an image, or click to browse</small><small>JPG, PNG (max 5MB)</small>`;
-    $('#cf-img-bar').hidden = !cfImg;
+    $('#cf-thumb').innerHTML = cfImg ? `<img src="${cfImg}" alt="" onerror="this.parentNode.classList.add('empty');this.remove()">` : '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="#i-image"/></svg>';
+    $('#cf-thumb').classList.toggle('empty', !cfImg);
+    $('#cf-pick-l').textContent = cfImg ? 'Change Image' : 'Upload Image';
+    $('#cf-img-remove').hidden = !cfImg;
   }
   function cfImgErr(msg) { const e = $('#cf-img-err'); e.textContent = msg || ''; e.hidden = !msg; }
   function cfTake(file) {
@@ -6326,11 +6340,10 @@ button.sx-row:hover { background: #faf9f5; }
   ['dragenter', 'dragover'].forEach(ev => cfDrop.addEventListener(ev, e => { e.preventDefault(); cfDrop.classList.add('drag'); }));
   ['dragleave', 'drop'].forEach(ev => cfDrop.addEventListener(ev, () => cfDrop.classList.remove('drag')));
   cfDrop.addEventListener('drop', e => { e.preventDefault(); cfTake(e.dataTransfer.files[0]); });
-  $('#cf-img-replace').addEventListener('click', () => $('#cf-file').click());
   $('#cf-img-remove').addEventListener('click', () => { cfImg = null; cfPaintImg(); });
   function openCategory(c) {
     const s = curSite(); if (!s) return;
-    cfEdit = c || null; $('#cf-form').reset(); cfSlugEdited = !!c; cfImg = c ? (c.img || null) : null; cfImgErr('');
+    cfEdit = c || null; $('#cf-form').reset(); cfSlugEdited = !!c; cfImg = c ? (c.img || (c.photo ? photoUrl(c.photo).replace('w=120&h=120','w=280&h=280') : null)) : null; cfImgErr('');
     $('#cf-title').textContent = c ? 'Edit Product Category' : 'Create Product Category';
     $('#cf-submit').textContent = c ? 'Save Changes' : 'Create';
     /* A category can't be its own parent, or the parent of its parent */
@@ -7338,7 +7351,7 @@ button.sx-row:hover { background: #faf9f5; }
      Site settings → Danger Zone: unpublish, transfer to another workspace, delete
      ===================================================================== */
   const SDZ_IC = {
-    ban: '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.7"/><path d="M4.7 4.7l10.6 10.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>',
+    ban: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7.32189 23.0552C5.86147 22.4253 4.59116 21.5704 3.51095 20.4906C2.43074 19.4108 1.57547 18.1411 0.945158 16.6813C0.315052 15.2215 0 13.6618 0 12.0022C0 10.3424 0.314947 8.78232 0.944842 7.32189C1.57474 5.86147 2.42958 4.59116 3.50937 3.51095C4.58916 2.43074 5.85895 1.57547 7.31874 0.945158C8.77853 0.315052 10.3382 0 11.9978 0C13.6576 0 15.2177 0.314947 16.6781 0.944842C18.1385 1.57474 19.4088 2.42958 20.4891 3.50937C21.5693 4.58916 22.4245 5.85895 23.0548 7.31874C23.6849 8.77853 24 10.3382 24 11.9978C24 13.6576 23.6851 15.2177 23.0552 16.6781C22.4253 18.1385 21.5704 19.4088 20.4906 20.4891C19.4108 21.5693 18.1411 22.4245 16.6813 23.0548C15.2215 23.6849 13.6618 24 12.0022 24C10.3424 24 8.78232 23.6851 7.32189 23.0552ZM12 22.1053C13.1851 22.1053 14.3263 21.9048 15.4238 21.504C16.5211 21.1032 17.5239 20.5231 18.4323 19.7637L4.23632 5.56768C3.48495 6.47611 2.90684 7.47895 2.502 8.57621C2.09716 9.67369 1.89474 10.8149 1.89474 12C1.89474 14.8211 2.87368 17.2105 4.83158 19.1684C6.78947 21.1263 9.17895 22.1053 12 22.1053ZM19.7637 18.4323C20.5231 17.5239 21.1032 16.5211 21.504 15.4238C21.9048 14.3263 22.1053 13.1851 22.1053 12C22.1053 9.17895 21.1263 6.78947 19.1684 4.83158C17.2105 2.87368 14.8211 1.89474 12 1.89474C10.812 1.89474 9.668 2.09316 8.568 2.49C7.46821 2.88663 6.46811 3.46874 5.56768 4.23632L19.7637 18.4323Z" fill="currentColor"/></svg>',
     swap: '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 7h13l-3.5-3.5M17 13H4l3.5 3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     trash: '<svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3.5 5.5h13M8 5.5V4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v1.5M5 5.5l.8 10.6a1 1 0 0 0 1 .9h6.4a1 1 0 0 0 1-.9L15 5.5M8.5 9v5M11.5 9v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     up: '<svg width="20" height="20" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-publishing"/></svg>'
