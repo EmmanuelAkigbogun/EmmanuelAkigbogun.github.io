@@ -3275,6 +3275,17 @@ button.sx-row:hover { background: #faf9f5; }
 .x-img .ar-pick strong, .modal-article .ar-pick strong { font-size: 10.5px; margin-top: 2px; }
 .x-img .ar-pick small, .modal-article .ar-pick small { font-size: 7.5px; }
 @media (max-width: 480px) { .x-img .ar-lbl { font-size: 13px; } }
+.sw-back { display: flex; align-items: center; gap: 14px; margin: 0 0 calc(24px * var(--k, 1)); padding: 12px 14px; border-radius: 10px; background: var(--cream); border: 1px solid rgb(0 0 0 / .14); color: var(--ink); text-decoration: none; transition: border-color .15s ease, background .15s ease, box-shadow .15s ease; }
+.sw-back:hover { background: #fff; border-color: var(--ink); box-shadow: 0 6px 16px -10px rgb(0 0 0 / .35); }
+.sw-back:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.sw-back-arrow { width: 36px; height: 36px; flex-shrink: 0; border-radius: 50%; display: grid; place-items: center; background: var(--ink); color: #fff; transition: transform .15s ease; }
+.sw-back:hover .sw-back-arrow { transform: translateX(-3px); }
+.sw-back-txt { flex: 1; min-width: 0; }
+.sw-back-txt strong { display: block; font-size: 16px; font-weight: 600; line-height: 1.25; }
+.sw-back-txt small { display: block; margin-top: 2px; font-size: 12.5px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sw-back-mark { flex-shrink: 0; display: grid; }
+.sw-back-mark .wmark.logo, .sw-back-mark .wmark.icon { background: #fff; }
+@media (max-width: 760px) { .sw-back { gap: 12px; padding: 10px 12px; } .sw-back-txt strong { font-size: 15px; } .sw-back-mark { display: none; } }
 </style>
 </head>
 <body>
@@ -4280,6 +4291,11 @@ button.sx-row:hover { background: #faf9f5; }
 
         <div class="switcher-panel" id="switcher-panel" hidden>
           <div class="switcher-scroll">
+          <a href="#/workspace" class="sw-back" id="sw-back">
+            <span class="sw-back-arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 16 16" fill="none"><path d="M13 8H3.5M7.5 3.5 3 8l4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="sw-back-txt"><strong>Back to workspace</strong><small id="sw-back-ws"></small></span>
+            <span class="sw-back-mark" id="sw-back-mark" aria-hidden="true"></span>
+          </a>
           <div class="switcher-search">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-search"/></svg>
             <label class="sr-only" for="switcher-search">Search sites</label>
@@ -4545,7 +4561,6 @@ button.sx-row:hover { background: #faf9f5; }
 
     const h1 = active.querySelector('h1');
     if (h1) h1.focus({ preventScroll: true });
-    if (r === '/overview' && siteView === 'overview' && !sessionStorageSafe('seenSwitcher')) { openSwitcher(false); sessionStorageSafe('seenSwitcher', '1'); }
   }
   function sessionStorageSafe(k, v) { try { return v === undefined ? sessionStorage.getItem(k) : sessionStorage.setItem(k, v); } catch (e) { return null; } }
   window.addEventListener('hashchange', render);
@@ -5618,6 +5633,8 @@ button.sx-row:hover { background: #faf9f5; }
     const cur = sites.find(x => x.id === state.currentSiteId);
     $('#switcher-label').textContent = cur ? cur.name : 'No sites yet';
     $('#switcher-mark').innerHTML = cur ? `<span class="wmark" style="--s:22px;background:${THEME_BG[cur.theme]}">${esc(cur.name[0])}</span>` : '';
+    $('#sw-back-ws').textContent = w ? `${w.name} · all sites, team & settings` : 'All your workspaces';
+    $('#sw-back-mark').innerHTML = w ? wsMark(w, 32) : '';
     const cw = $('#crumb-ws'); if (cw) cw.innerHTML = w ? `${wsMark(w, 22)}<span>${esc(w.name)}</span>` : '<span>No workspace</span>';
     $('#sw-sites-group').hidden = !sites.length;
     swSearch.dispatchEvent(new Event('input'));
@@ -5641,6 +5658,7 @@ button.sx-row:hover { background: #faf9f5; }
   function openSwitcher(focus = true) { closeWsMenu(false); renderOverviewSwitcher(); swPanel.hidden = false; fitSwitcher(); placeCaret(); swBtn.setAttribute('aria-expanded', 'true'); if (focus) swSearch.focus(); }
   function closeSwitcher(returnFocus = true) { if (swPanel.hidden) return; swPanel.hidden = true; swBtn.setAttribute('aria-expanded', 'false'); if (returnFocus) swBtn.focus(); }
   swBtn.addEventListener('click', () => swPanel.hidden ? openSwitcher() : closeSwitcher());
+  $('#sw-back').addEventListener('click', () => closeSwitcher(false));
   document.addEventListener('click', e => { if (!swPanel.hidden && !swPanel.contains(e.target) && !swBtn.contains(e.target)) closeSwitcher(false); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !document.querySelector('dialog[open]')) { closeSwitcher(); closeWsMenu(); closeMenu(); closeMenus(); } });
 
