@@ -974,7 +974,10 @@ button.act:hover { text-decoration: underline; text-underline-offset: 3px; }
 .sic { width: 42px; height: 42px; border-radius: 10px; background: #d9e5e0; display: grid; place-items: center; flex-shrink: 0; color: var(--ink); }
 .sic.round { border-radius: 50%; }
 .sic .ws-av { position: relative; width: 28px; height: 28px; border-radius: 50%; background: #1c1c1a; color: #fff; display: grid; place-items: center; font-size: 10px; font-weight: 700; letter-spacing: .02em; }
-.sic .ws-av img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.sic .ws-av img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; max-width: none; border-radius: 50%; object-fit: cover; }
+.sbtn[hidden] { display: none; }
+.sbtn:disabled { opacity: .45; cursor: not-allowed; }
+.sbtn.light:disabled:hover { background: #fff; }
 .sic .ws-av .cam { position: absolute; right: -3px; bottom: -3px; width: 13px; height: 13px; border-radius: 50%; background: #fff; color: var(--ink); display: grid; place-items: center; box-shadow: 0 0 0 1px rgb(0 0 0 / .12); }
 .setcol .sbody { flex: 1; min-width: 0; display: flex; flex-direction: column; }
 .setcol .slabel { display: block; font-size: 14px; font-weight: 500; color: var(--ink); margin-top: 2px; }
@@ -3204,6 +3207,65 @@ button.sx-row:hover { background: #faf9f5; }
 #dlg-article .pf-drop svg:not(.pf-dash) { width: 22px; height: 22px; }
 #dlg-article .pf-fields.pf-grid { gap: 12px; margin-top: 14px; }
 #dlg-article .pf-seo .ps-card { margin-top: 10px; padding: 10px 14px; }
+/* ---------- Article dialog: matched to Figma "Create New Article" ---------- */
+.modal-article { width: min(788px, calc(100vw - 24px)); border-radius: 12px; border: 1px solid rgb(0 0 0 / .1); }
+.modal-article form { padding: 24px 26px 22px; }
+.ar-head { display: grid; grid-template-columns: 44px minmax(0, 1fr) 32px; gap: 14px; align-items: center; }
+.ar-hic { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: #e3f2ea; color: #0f6b4a; }
+.ar-head h2 { font-size: 19px; font-weight: 500; color: #000; line-height: 1.25; }
+.ar-head p { font-size: 13px; color: #191919; margin-top: 3px; }
+.ar-head .icon-btn { align-self: start; margin: -4px -8px 0 0; }
+.ar-box { margin-top: 26px; border: 1px solid rgb(0 0 0 / .1); border-radius: 12px; padding: 18px 16px 22px; }
+.ar-box-h { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; color: #000; }
+.ar-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 18px; margin-top: 20px; }
+.modal-article .pf-field label, .ar-lbl { display: block; font-size: 13px; font-weight: 500; color: #000; margin-bottom: 8px; }
+.modal-article .pf-input, .modal-article .pf-box { height: 40px; font-size: 12.5px; border-radius: 4px; }
+.modal-article .pf-input::placeholder, .modal-article .pf-box input::placeholder { font-size: 12px; }
+.modal-article .ar-slug > span { width: auto !important; padding: 0 0 0 10px; border: 0; background: none; color: #191919; font-size: 12.5px; }
+.modal-article .ar-slug input { padding-left: 0; font-size: 12.5px; }
+.ar-ok { display: grid; place-items: center; padding: 0 12px; font-style: normal; }
+.ar-ok[hidden] { display: none; }
+.ar-hint { font-size: 10.5px; color: #696963; margin-top: 6px; }
+.ar-feat { margin-top: 26px; }
+.ar-imgs { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.ar-imgs .ar-thumb { margin: 0; padding: 0; width: 100px; height: 100px; border-radius: 8px; overflow: hidden; flex-shrink: 0; display: grid; place-items: center; background: #f5f4ef; color: #b5b2a8; border: 1px solid transparent; }
+.ar-thumb.empty { border: 1px solid var(--line); }
+.ar-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.ar-pick { position: relative; width: 104px; min-height: 100px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 10px 6px; border: 1px dashed rgb(0 0 0 / .35); border-radius: 6px; text-align: center; cursor: pointer; color: #000; background: #fff; }
+.ar-pick:hover, .ar-pick.drag { background: #fafaf6; border-color: #000; }
+.ar-pick:has(input:focus-visible) { outline: 2px solid var(--focus); outline-offset: 2px; }
+.ar-pick input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.ar-pick strong { font-size: 11.5px; font-weight: 600; margin-top: 4px; }
+.ar-pick small { font-size: 8.5px; line-height: 1.35; color: #3d3d39; }
+.ar-imgs .btn-text { font-size: 12px; }
+.ar-imgs .btn-text[hidden] { display: none; }
+.ar-te { margin-top: 26px; }
+.modal-article .ae { border-radius: 8px; border-color: rgb(0 0 0 / .15); overflow: visible; }
+.modal-article .ae.bad { border-color: #b42318; }
+.modal-article .ae-bar { position: relative; gap: 2px; padding: 6px 8px; background: #fff; border-bottom: 1px solid rgb(0 0 0 / .1); border-radius: 8px 8px 0 0; }
+.modal-article .ae-block { height: 30px; border: 0; background: transparent; font-size: 12.5px; padding: 0 4px; margin-right: 10px; cursor: pointer; }
+.modal-article .ae-tb { width: 30px; height: 30px; }
+.modal-article .ae-sep { margin: 0 8px; }
+.ae-more-wrap { position: relative; margin-left: auto; }
+.ae-more { position: absolute; right: 0; top: calc(100% + 4px); z-index: 20; display: grid; min-width: 160px; padding: 4px; background: #fff; border: 1px solid rgb(0 0 0 / .15); border-radius: 8px; box-shadow: 0 12px 28px -12px rgb(0 0 0 / .3); }
+.ae-more[hidden] { display: none; }
+.ae-mi { padding: 8px 10px; border-radius: 4px; font-size: 13px; text-align: left; color: var(--ink); }
+.ae-mi:hover { background: var(--hover); }
+.modal-article .ae .ae-doc { min-height: 170px; max-height: 340px; padding: 14px 12px; font-size: 13px; line-height: 1.6; border-radius: 0 0 8px 8px; }
+.modal-article .ae-doc.empty::before { font-size: 12.5px; }
+.modal-article .ae-doc ol, .modal-article .ae-doc ul { padding-left: 22px; }
+.modal-article .pf-seo { margin-top: 18px; }
+.modal-article .pf-foot { margin-top: 20px; }
+@media (max-width: 640px) {
+  .ar-grid { grid-template-columns: minmax(0, 1fr); }
+  .ar-head { grid-template-columns: 36px minmax(0, 1fr) 32px; gap: 10px; }
+  .ar-hic { width: 36px; height: 36px; }
+  .ar-box { padding: 14px 12px 18px; }
+  .modal-article .pf-input, .modal-article .pf-box { height: 44px; font-size: 16px; }
+  .modal-article .ar-slug > span, .modal-article .ar-slug input, .modal-article .ae .ae-doc { font-size: 16px; }
+  .ar-pick small { font-size: 10px; }
+}
+@media (max-width: 480px) { .modal-article form { padding: 16px 16px calc(16px + env(safe-area-inset-bottom, 0px)); } }
 </style>
 </head>
 <body>
@@ -3820,40 +3882,6 @@ button.sx-row:hover { background: #faf9f5; }
   </div>
 </dialog>
 
-<!-- ===================== DIALOG · ARTICLE CONTENT BODY ===================== -->
-<dialog class="modal modal-seo modal-abody" id="dlg-abody" aria-labelledby="ab-title">
-  <div class="seo-head">
-    <div><h2 id="ab-title">Content Body</h2><p>Write the article. Use the toolbar for headings, bold text and bullet points.</p></div>
-    <button type="button" class="icon-btn" data-close aria-label="Close"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-close"/></svg></button>
-  </div>
-  <div class="seo-body">
-    <div class="ae" id="ae">
-          <div class="ae-bar" role="toolbar" aria-label="Formatting" aria-controls="ae-doc">
-            <label class="sr-only" for="ae-block">Text style</label>
-            <select class="ae-block" id="ae-block"><option value="p">Paragraph</option><option value="h2">Heading</option><option value="h3">Subheading</option></select>
-            <span class="ae-sep" aria-hidden="true"></span>
-            <button type="button" class="ae-tb" data-ae="bold" aria-label="Bold" title="Bold (Ctrl+B): highlight text, or click before typing" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 3h4.2a2.6 2.6 0 0 1 0 5.2H4.5zM4.5 8.2h4.8a2.6 2.6 0 0 1 0 5.3H4.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></button><button type="button" class="ae-tb" data-ae="italic" aria-label="Italic" title="Italic (Ctrl+I): highlight text, or click before typing" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3H6.5M9.5 13H6M9 3 7 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button><button type="button" class="ae-tb" data-ae="underline" aria-label="Underline" title="Underline (Ctrl+U): highlight text, or click before typing" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 2.5v5a3.5 3.5 0 0 0 7 0v-5M3.5 14h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button><span class="ae-sep" aria-hidden="true"></span><button type="button" class="ae-tb" data-ae="insertUnorderedList" aria-label="Bullet list" title="Bullet list" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="3" cy="4" r="1" fill="currentColor"/><circle cx="3" cy="8" r="1" fill="currentColor"/><circle cx="3" cy="12" r="1" fill="currentColor"/><path d="M6 4h7.5M6 8h7.5M6 12h7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button><button type="button" class="ae-tb" data-ae="insertOrderedList" aria-label="Numbered list" title="Numbered list" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.4 3.2 3.4 2.6V6M2.3 13.4h2l-1.9-2.2c.6-.8 1.9-.6 1.9.3M6.5 4h7M6.5 8h7M6.5 12h7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" class="ae-tb" data-ae="quote" aria-label="Quote" title="Quote" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 4.5h3.5V8c0 2-1 3.2-3 3.5M9.5 4.5H13V8c0 2-1 3.2-3 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="ae-sep" aria-hidden="true"></span><button type="button" class="ae-tb" data-ae="link" aria-label="Add link" title="Add link" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6.8 9.2a2.6 2.6 0 0 0 3.7 0l2.2-2.2a2.6 2.6 0 0 0-3.7-3.7l-.8.8M9.2 6.8a2.6 2.6 0 0 0-3.7 0L3.3 9a2.6 2.6 0 0 0 3.7 3.7l.8-.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button><button type="button" class="ae-tb" data-ae="insertImage" aria-label="Insert image" title="Insert image" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="5.6" cy="6.4" r="1.2" fill="currentColor"/><path d="m2.5 12 3.8-3.8 2.6 2.6 1.8-1.8 3 3" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></button><button type="button" class="ae-tb" data-ae="removeFormat" aria-label="Clear formatting" title="Clear formatting" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 3h8M8 3l-2 10M3 13h5M10.5 9.5l3 3M13.5 9.5l-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
-          </div>
-          <div class="ae-link" id="ae-link" hidden>
-            <label class="sr-only" for="ae-url">Link address</label>
-            <input id="ae-url" type="url" inputmode="url" autocomplete="off" placeholder="Paste a link, e.g. https://example.com">
-            <button type="button" class="btn-dark" id="ae-link-ok">Apply</button>
-            <button type="button" class="btn-text" id="ae-link-x">Cancel</button>
-          </div>
-          <div class="ae-doc empty" id="ae-doc" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="ab-title" data-ph="Start writing… paragraph text, headings, bullet points."></div>
-          <div class="ae-foot"><span class="ae-tip">Tip: highlight text, then click <b>B</b>, <i>I</i> or <u>U</u>. Or click one first and start typing.</span><span id="ae-words">0 words</span></div>
-          <input type="file" id="ae-img" accept="image/png,image/jpeg,image/webp" hidden>
-        </div>
-    <div class="pf-field ab-ex"><div class="seo-lr"><label for="ar-excerpt">Excerpt <span class="opt-note" id="ar-ex-mode">(Auto-generated from the article)</span></label>
-        <button type="button" class="btn-text" id="ar-ex-reset" style="font-size:12px" hidden>Use article opening</button></div>
-      <textarea class="pf-input" id="ar-excerpt" maxlength="200" placeholder="Fills in automatically as you write. You can also write your own short summary."></textarea>
-      <div class="seo-lr" style="margin-top:4px"><span class="px-help" style="margin:0">Shown in search results and when the article is shared.</span><span class="pf-count" id="ar-count" aria-live="polite" style="margin:0">0/200</span></div></div>
-  </div>
-  <div class="seo-foot">
-    <span></span>
-    <span class="seo-actions"><button type="button" class="btn-outline pf-btn" data-close data-discard>Cancel</button><button type="button" class="btn-primary pf-btn" id="ab-done">Done</button></span>
-  </div>
-</dialog>
 
 <!-- ===================== DIALOG · ARTICLE SEO ===================== -->
 <dialog class="modal modal-seo" id="dlg-aseo" aria-labelledby="aseo-title">
@@ -4102,52 +4130,89 @@ button.sx-row:hover { background: #faf9f5; }
 </dialog>
 
 <!-- ===================== DIALOG · ADD / EDIT ARTICLE ===================== -->
-<dialog class="modal modal-product" id="dlg-article" aria-labelledby="ar-title" aria-describedby="ar-sub">
+<dialog class="modal modal-product modal-article" id="dlg-article" aria-labelledby="ar-title" aria-describedby="ar-sub">
   <form id="ar-form" novalidate>
-    <div class="pf-head">
-      <div><h2 id="ar-title">Add New Article</h2><p id="ar-sub">Write a blog post, farm update or resource guide.</p></div>
+    <div class="ar-head">
+      <span class="ar-hic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 16 16" fill="none"><rect x="3" y="2" width="10" height="12" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5.5 5.5h5M5.5 8h5M5.5 10.5h3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></span>
+      <div><h2 id="ar-title">Create New Article</h2><p id="ar-sub">Write and publish a new article with SEO and metadata</p></div>
       <button type="button" class="icon-btn" data-close aria-label="Close"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-close"/></svg></button>
     </div>
-    <label class="pf-drop" id="ar-drop">
-      <input type="file" id="ar-file" accept="image/png,image/jpeg,image/webp" aria-label="Upload cover image">
-      <svg class="pf-dash" aria-hidden="true"><rect x=".5" y=".5" rx="12" ry="12"/></svg>
-      <span id="ar-drop-body" style="display:contents"></span>
-    </label>
-    <div class="pf-imgbar" id="ar-img-bar" hidden>
-      <button type="button" class="btn-text" id="ar-img-replace">Replace image</button>
-      <button type="button" class="btn-text" id="ar-img-remove">Remove</button>
-    </div>
-    <p class="pf-err" id="ar-img-err" role="alert" hidden style="text-align:center"></p>
-    <div class="pf-fields pf-grid">
-      <div class="pf-field full"><label for="ar-name">Article Title<span class="req" aria-hidden="true">*</span></label>
-        <input class="pf-input" id="ar-name" maxlength="100" autocomplete="off" placeholder="e.g. 5 Tips for Raising Healthy Broilers" required>
-        <p class="pf-err" data-err-for="ar-name" hidden></p></div>
-      <div class="pf-field full"><label for="ar-slug">URL Slug <span class="opt-note">(Auto-generated)</span><span class="req" aria-hidden="true">*</span></label>
-        <div class="pf-box ar-slug"><span aria-hidden="true">/blog/</span><input id="ar-slug" autocomplete="off" spellcheck="false" maxlength="80" placeholder="5-tips-raising-broilers" required></div>
-        <p class="pf-err" data-err-for="ar-slug" hidden></p></div>
-      <div class="pf-field"><label for="ar-author">Author<span class="req" aria-hidden="true">*</span></label>
-        <select class="pf-input" id="ar-author" required></select>
-        <p class="pf-err" data-err-for="ar-author" hidden></p></div>
-      <div class="pf-field"><label for="ar-status">Status</label>
-        <select class="pf-input" id="ar-status"><option value="published">Published</option><option value="draft">Draft</option></select></div>
-      <div class="pf-field full"><span class="ae-lbl" id="ae-lbl">Content Body<span class="req" aria-hidden="true">*</span></span>
-        <div class="ab-card" id="ab-card">
-          <span class="ps-badge" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 2.5h5.5L12.5 5.5v8H4z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M6 8h4.5M6 10.5h4.5M6 5.5h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></span>
-          <span class="ab-txt"><b id="ab-sum">No content yet</b><span class="ab-snip" id="ab-snip">Write the article: paragraph text, headings, bullet points.</span></span>
-          <button type="button" class="ps-edit" id="ab-open" aria-haspopup="dialog"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-edit"/></svg><span id="ab-open-l">Write content</span></button>
+    <section class="ar-box" aria-labelledby="ar-box-h">
+      <h3 class="ar-box-h" id="ar-box-h"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3" y="2" width="10" height="12" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 5.5h5M5.5 8h5M5.5 10.5h3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Article Information</h3>
+      <div class="ar-grid">
+        <div class="pf-field"><label for="ar-name">Article Title:<span class="req" aria-hidden="true">*</span></label>
+          <input class="pf-input" id="ar-name" maxlength="100" autocomplete="off" placeholder="e.g. 5 Tips for Raising Healthy Broilers" required>
+          <p class="pf-err" data-err-for="ar-name" hidden></p></div>
+        <div class="pf-field"><label for="ar-slug">URL Slug:<span class="req" aria-hidden="true">*</span></label>
+          <div class="pf-box ar-slug"><span aria-hidden="true">/blog/</span><input id="ar-slug" autocomplete="off" spellcheck="false" maxlength="80" placeholder="5-tips-raising-broilers" required><i class="ar-ok" id="ar-slug-ok" hidden><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-label="Slug is available"><circle cx="8" cy="8" r="6.3" stroke="#1fae5b" stroke-width="1.4"/><path d="m5.4 8.1 1.8 1.8 3.4-3.6" stroke="#1fae5b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></i></div>
+          <p class="ar-hint">The slug will be used in your article URL.</p>
+          <p class="pf-err" data-err-for="ar-slug" hidden></p></div>
+      </div>
+
+      <div class="ar-feat"><span class="ar-lbl" id="ar-feat-l">Featured Image</span>
+        <div class="ar-imgs">
+          <span class="ar-thumb" id="ar-thumb" role="img" aria-label="Featured image preview"></span>
+          <label class="ar-pick" id="ar-drop">
+            <input type="file" id="ar-file" accept="image/png,image/jpeg,image/webp" aria-labelledby="ar-feat-l ar-pick-l">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="m4 17 4.5-4.5 3.5 3.5 2-2 4 4" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="9" cy="9" r="1.4" fill="currentColor"/><path d="M18 3v6M15 6h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <strong id="ar-pick-l">Change Image</strong>
+            <small>Recommended size: 140 × 140px JPG, PNG (Max 5MB)</small>
+          </label>
+          <button type="button" class="btn-text" id="ar-img-remove" hidden>Remove</button>
         </div>
-        <p class="pf-err" id="ae-err" hidden></p></div>
-      <div class="pf-seo full">
-        <div class="ps-head">
-          <span class="ps-badge" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#i-search"/></svg></span>
-          <span class="ps-label">Search engine listing<small>How this article appears on Google and when shared</small></span>
-          <button type="button" class="ps-edit" id="ar-seo-open"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-edit"/></svg>Edit SEO</button>
+        <p class="pf-err" id="ar-img-err" role="alert" hidden></p>
+      </div>
+
+      <div class="ar-te"><span class="ar-lbl" id="ae-lbl">Text Editor<span class="req" aria-hidden="true">*</span></span>
+        <div class="ae" id="ae">
+          <div class="ae-bar" role="toolbar" aria-label="Formatting" aria-controls="ae-doc">
+            <label class="sr-only" for="ae-block">Text style</label>
+            <select class="ae-block" id="ae-block"><option value="p">Paragraph</option><option value="h2">Heading</option><option value="h3">Subheading</option></select>
+            <span class="ae-sep" aria-hidden="true"></span>
+            <button type="button" class="ae-tb" data-ae="bold" aria-label="Bold" title="Bold (Ctrl+B)" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 3h4.2a2.6 2.6 0 0 1 0 5.2H4.5zM4.5 8.2h4.8a2.6 2.6 0 0 1 0 5.3H4.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></button>
+            <button type="button" class="ae-tb" data-ae="italic" aria-label="Italic" title="Italic (Ctrl+I)" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3H6.5M9.5 13H6M9 3 7 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+            <button type="button" class="ae-tb" data-ae="underline" aria-label="Underline" title="Underline (Ctrl+U)" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 2.5v5a3.5 3.5 0 0 0 7 0v-5M3.5 14h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+            <span class="ae-sep" aria-hidden="true"></span>
+            <button type="button" class="ae-tb" data-ae="justifyLeft" aria-label="Align left" title="Align left" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 3.5h11M2.5 6.5h7M2.5 9.5h11M2.5 12.5h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
+            <button type="button" class="ae-tb" data-ae="justifyCenter" aria-label="Align centre" title="Align centre" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 3.5h11M4.5 6.5h7M2.5 9.5h11M4.5 12.5h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
+            <button type="button" class="ae-tb" data-ae="justifyRight" aria-label="Align right" title="Align right" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 3.5h11M6.5 6.5h7M2.5 9.5h11M6.5 12.5h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
+            <span class="ae-sep" aria-hidden="true"></span>
+            <button type="button" class="ae-tb" data-ae="insertUnorderedList" aria-label="Bullet list" title="Bullet list" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="3" cy="4" r="1" fill="currentColor"/><circle cx="3" cy="8" r="1" fill="currentColor"/><circle cx="3" cy="12" r="1" fill="currentColor"/><path d="M6 4h7.5M6 8h7.5M6 12h7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+            <button type="button" class="ae-tb" data-ae="insertOrderedList" aria-label="Numbered list" title="Numbered list" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.4 3.2 3.4 2.6V6M2.3 13.4h2l-1.9-2.2c.6-.8 1.9-.6 1.9.3M6.5 4h7M6.5 8h7M6.5 12h7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <span class="ae-sep" aria-hidden="true"></span>
+            <button type="button" class="ae-tb" data-ae="link" aria-label="Add link" title="Add link" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6.8 9.2a2.6 2.6 0 0 0 3.7 0l2.2-2.2a2.6 2.6 0 0 0-3.7-3.7l-.8.8M9.2 6.8a2.6 2.6 0 0 0-3.7 0L3.3 9a2.6 2.6 0 0 0 3.7 3.7l.8-.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
+            <button type="button" class="ae-tb" data-ae="insertImage" aria-label="Insert image" title="Insert image" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="5.6" cy="6.4" r="1.2" fill="currentColor"/><path d="m2.5 12 3.8-3.8 2.6 2.6 1.8-1.8 3 3" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></button>
+            <span class="ae-more-wrap">
+              <button type="button" class="ae-tb" id="ae-more-btn" aria-label="More formatting" title="More" aria-haspopup="menu" aria-expanded="false"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="3.5" r="1.2" fill="currentColor"/><circle cx="8" cy="8" r="1.2" fill="currentColor"/><circle cx="8" cy="12.5" r="1.2" fill="currentColor"/></svg></button>
+              <span class="ae-more" id="ae-more" role="menu" hidden>
+                <button type="button" class="ae-mi" role="menuitem" data-ae="quote">Quote</button>
+                <button type="button" class="ae-mi" role="menuitem" data-ae="removeFormat">Clear formatting</button>
+              </span>
+            </span>
+          </div>
+          <div class="ae-link" id="ae-link" hidden>
+            <label class="sr-only" for="ae-url">Link address</label>
+            <input id="ae-url" type="url" inputmode="url" autocomplete="off" placeholder="Paste a link, e.g. https://example.com">
+            <button type="button" class="btn-dark" id="ae-link-ok">Apply</button>
+            <button type="button" class="btn-text" id="ae-link-x">Cancel</button>
+          </div>
+          <div class="ae-doc empty" id="ae-doc" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="ae-lbl" data-ph="Start writing… paragraph text, headings, bullet points."></div>
+          <input type="file" id="ae-img" accept="image/png,image/jpeg,image/webp" hidden>
         </div>
-        <div class="ps-card">
-          <div class="ps-top"><span class="gp-fav" id="arps-fav">D</span><span class="ps-site"><b id="arps-site"></b><span id="arps-url"></span></span><span class="ps-pill" id="arps-pill">Visible on Google</span></div>
-          <div class="ps-t" id="arps-t"></div>
-          <div class="ps-d" id="arps-d"></div>
-        </div>
+        <p class="pf-err" id="ae-err" hidden></p>
+      </div>
+    </section>
+
+    <div class="pf-seo">
+      <div class="ps-head">
+        <span class="ps-badge" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#i-search"/></svg></span>
+        <span class="ps-label">Search engine listing<small>How this article appears on Google and when shared</small></span>
+        <button type="button" class="ps-edit" id="ar-seo-open"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-edit"/></svg>Edit SEO</button>
+      </div>
+      <div class="ps-card">
+        <div class="ps-top"><span class="gp-fav" id="arps-fav">D</span><span class="ps-site"><b id="arps-site"></b><span id="arps-url"></span></span><span class="ps-pill" id="arps-pill">Visible on Google</span></div>
+        <div class="ps-t" id="arps-t"></div>
+        <div class="ps-d" id="arps-d"></div>
       </div>
     </div>
     <div class="pf-foot">
@@ -4925,7 +4990,7 @@ button.sx-row:hover { background: #faf9f5; }
               <p class="shelp" style="margin-top:12px">Upload a logo or image to represent your workspace. Recommended size: 400 × 400px (PNG, JPG)</p>
               <div class="sbtns">
                 <label class="sbtn dark">${UPLOAD}Upload image<input type="file" accept="image/png,image/jpeg" class="set-file" aria-label="Upload workspace image"></label>
-                <label class="sbtn light">${SWAP}Change image<input type="file" accept="image/png,image/jpeg" class="set-file" aria-label="Change workspace image"></label>
+                <button type="button" class="sbtn light" id="set-img-rm">${TRASH16}Remove image</button>
               </div>
             </div>
           </div>
@@ -5000,6 +5065,7 @@ button.sx-row:hover { background: #faf9f5; }
       return '';
     };
     const paint = () => {
+      $('#set-img-rm').disabled = !draft.logo;
       $('#set-av').innerHTML = (draft.logo ? `<img src="${draft.logo}" alt="">` : esc(initials(draft.name.trim() || w.name) || 'W')) + `<span class="cam">${CAM}</span>`;
       $('#set-name-show').textContent = draft.name.trim() || w.name;
       $('#set-flag').className = 'flag ' + draft.lang;
@@ -5025,6 +5091,7 @@ button.sx-row:hover { background: #faf9f5; }
     $$('[data-dz]', viewEl).forEach(b => b.addEventListener('click', () => b.dataset.dz === 'transfer' ? openTransfer(w) : openDeleteWs(w)));
     name.addEventListener('input', () => { draft.name = name.value; name.removeAttribute('aria-invalid'); $('#set-name-err').hidden = true; paint(); });
     lang.addEventListener('change', () => { draft.lang = lang.value; paint(); });
+    $('#set-img-rm').addEventListener('click', () => { draft.logo = null; paint(); toast('Image removed. Click Save to apply it.'); });
     $$('.set-file', viewEl).forEach(f => readImage(f, url => { draft.logo = url; f.value = ''; paint(); toast('Image ready. Click Save to apply it.'); }));
     save.addEventListener('click', () => {
       const n = draft.name.trim();
@@ -7010,10 +7077,11 @@ button.sx-row:hover { background: #faf9f5; }
   let arEdit = null, arImg = null, arSlugEdited = false;
   const aeDoc = $('#ae-doc');
   function arPaintImg() {
-    $('#ar-drop').classList.toggle('has-img', !!arImg);
-    $('#ar-drop-body').innerHTML = arImg ? `<img src="${arImg}" alt="Cover image preview">`
-      : `${I_CLOUD}<strong>Upload featured banner image</strong><small>Drag and drop an image, or click to browse</small><small>1200 × 630px · JPG, PNG or WebP (max 5MB)</small>`;
-    $('#ar-img-bar').hidden = !arImg;
+    $('#ar-thumb').innerHTML = arImg ? `<img src="${arImg}" alt="" onerror="this.parentNode.classList.add('empty');this.outerHTML='<svg width=&quot;26&quot; height=&quot;26&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; aria-hidden=&quot;true&quot;><use href=&quot;#i-image&quot;/></svg>'">`
+      : '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="#i-image"/></svg>';
+    $('#ar-thumb').classList.toggle('empty', !arImg);
+    $('#ar-pick-l').textContent = arImg ? 'Change Image' : 'Upload Image';
+    $('#ar-img-remove').hidden = !arImg;
     if (typeof aseoPaint === 'function') aseoPaint();
   }
   function arImgErr(m) { const e = $('#ar-img-err'); e.textContent = m || ''; e.hidden = !m; }
@@ -7028,11 +7096,13 @@ button.sx-row:hover { background: #faf9f5; }
   ['dragenter', 'dragover'].forEach(ev => arDrop.addEventListener(ev, e => { e.preventDefault(); arDrop.classList.add('drag'); }));
   ['dragleave', 'drop'].forEach(ev => arDrop.addEventListener(ev, () => arDrop.classList.remove('drag')));
   arDrop.addEventListener('drop', e => { e.preventDefault(); arTake(e.dataTransfer.files[0]); });
-  $('#ar-img-replace').addEventListener('click', () => $('#ar-file').click());
   $('#ar-img-remove').addEventListener('click', () => { arImg = null; arPaintImg(); });
-  $('#ar-name').addEventListener('input', e => { fieldErr('ar-name', ''); if (!arSlugEdited) { $('#ar-slug').value = slugify(e.target.value).slice(0, 80); fieldErr('ar-slug', ''); } });
-  $('#ar-slug').addEventListener('input', e => { arSlugEdited = true; fieldErr('ar-slug', ''); e.target.value = e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-{2,}/g, '-'); });
-  $('#ar-author').addEventListener('change', () => fieldErr('ar-author', ''));
+  function arSlugOk() {
+    const s = curSite(), v = $('#ar-slug').value.trim().replace(/^-+|-+$/g, '');
+    $('#ar-slug-ok').hidden = !(s && v && !articlesOf(s).some(x => x !== arEdit && x.slug === v));
+  }
+  $('#ar-name').addEventListener('input', e => { fieldErr('ar-name', ''); if (!arSlugEdited) { $('#ar-slug').value = slugify(e.target.value).slice(0, 80); fieldErr('ar-slug', ''); } arSlugOk(); });
+  $('#ar-slug').addEventListener('input', e => { arSlugEdited = true; fieldErr('ar-slug', ''); e.target.value = e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-{2,}/g, '-'); arSlugOk(); });
   /* Author = the site role the article is posted under. Shop manager is left out: that role only handles products and orders. */
   const AUTHOR_ROLES = ['admin', 'editor', 'content'];
   function fillAuthors(s, current) {
@@ -7045,9 +7115,7 @@ button.sx-row:hover { background: #faf9f5; }
 
   /* ---- Article content body: rich text editor ---- */
   const aeText = () => aeDoc.innerText.replace(/\s+/g, ' ').trim();
-  const aeErr = m => { const e = $('#ae-err'); e.textContent = m || ''; e.hidden = !m; $('#ab-card').classList.toggle('bad', !!m); };
-  const dBody = $('#dlg-abody');
-  let abSnap = null, abSaved = false, abExSnap = null;
+  const aeErr = m => { const e = $('#ae-err'); e.textContent = m || ''; e.hidden = !m; $('#ae').classList.toggle('bad', !!m); };
   /* Formatted, safe copy of article HTML for previews: keeps bold/italic/underline/headings/lists, drops images and attributes */
   function fmtSnip(html) {
     const box = document.createElement('div'); box.innerHTML = html || '';
@@ -7062,33 +7130,7 @@ button.sx-row:hover { background: #faf9f5; }
     [...box.childNodes].forEach(n => { if (n.nodeType === 1 && !n.textContent.trim()) n.remove(); });
     return box.innerHTML;
   }
-  function abPaint() {
-    const txt = aeText(), n = txt ? txt.split(' ').length : 0, img = aeDoc.querySelector('img');
-    $('#ab-sum').textContent = n ? `${n} ${n === 1 ? 'word' : 'words'} · ${Math.max(1, Math.round(n / 200))} min read` : img ? 'Images only' : 'No content yet';
-    /* Show the start of the article with its real formatting (bold, italic, underline, headings, lists) */
-    const snip = $('#ab-snip');
-    snip.classList.toggle('ph', !txt);
-    if (!txt) snip.textContent = 'Write the article: paragraph text, headings, bullet points.';
-    else {
-      snip.innerHTML = fmtSnip(aeDoc.innerHTML);
-    }
-    $('#ab-open-l').textContent = n || img ? 'Edit content' : 'Write content';
-    $('#ab-card').classList.toggle('empty', !n && !img);
-  }
-  $('#ab-open').addEventListener('click', () => {
-    abSnap = aeDoc.innerHTML; abExSnap = { v: $('#ar-excerpt').value, auto: arExAuto }; abSaved = true; $('#ae-link').hidden = true;
-    dBody.showModal(); aeDoc.focus();
-    const r = document.createRange(); r.selectNodeContents(aeDoc); r.collapse(false); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r);
-  });
-  $('#ab-done').addEventListener('click', () => { abSaved = true; dBody.close(); });
-  $('#dlg-abody [data-discard]').addEventListener('click', () => { abSaved = false; });
-  dBody.addEventListener('close', () => {
-    if (!abSaved && abSnap !== null) { aeDoc.innerHTML = abSnap; if (abExSnap) { arExAuto = abExSnap.auto; $('#ar-excerpt').value = abExSnap.v; } }
-    abSnap = null; aeWords(); abPaint(); aseoFill(); aseoPaint();
-    if (abSaved) aeErr('');
-    abSaved = false; $('#ab-open').focus();
-  });
-  const aeWords = () => { const n = aeText() ? aeText().split(' ').length : 0; $('#ae-words').textContent = `${n} ${n === 1 ? 'word' : 'words'}${n ? ` · ${Math.max(1, Math.round(n / 200))} min read` : ''}`; aeDoc.classList.toggle('empty', !aeText() && !aeDoc.querySelector('img,li')); };
+  const aeWords = () => { aeDoc.classList.toggle('empty', !aeText() && !aeDoc.querySelector('img,li')); };
   let aeRange = null;
   const aeSave = () => { const sel = getSelection(); if (sel.rangeCount && aeDoc.contains(sel.anchorNode)) aeRange = sel.getRangeAt(0).cloneRange(); };
   /* Put the caret back only when focus actually left the editor (e.g. the style menu or a keyboard-focused button).
@@ -7128,13 +7170,14 @@ button.sx-row:hover { background: #faf9f5; }
     const hasTag = re => { for (let n = node; n && n !== aeDoc; n = n.parentElement) if (re.test(n.tagName)) return true; return false; };
     const fs = c => { const all = aeAll(c); return all === null ? (c === 'bold' && inHeading ? hasTag(/^(B|STRONG)$/) : q(c)) : all; };
     const st = { bold: fs('bold'), italic: fs('italic'), underline: fs('underline'),
+      justifyLeft: q('justifyLeft'), justifyCenter: q('justifyCenter'), justifyRight: q('justifyRight'),
       insertUnorderedList: q('insertUnorderedList'), insertOrderedList: q('insertOrderedList') };
     Object.entries(st).forEach(([c, on]) => $(`[data-ae="${c}"]`).setAttribute('aria-pressed', !!on));
     $('[data-ae="quote"]').setAttribute('aria-pressed', blk === 'blockquote');
     $('#ae-block').value = ['h2', 'h3'].includes(blk) ? blk : 'p';
   }
-  document.addEventListener('selectionchange', () => { if (dBody.open && aeDoc.contains(getSelection().anchorNode)) { aeSave(); aeState(); } });
-  aeDoc.addEventListener('input', () => { aeWords(); abPaint(); aseoFill(); aseoPaint(); });
+  document.addEventListener('selectionchange', () => { if (dArt.open && aeDoc.contains(getSelection().anchorNode)) { aeSave(); aeState(); } });
+  aeDoc.addEventListener('input', () => { aeWords(); aeErr(''); aseoFill(); aseoPaint(); });
   aeDoc.addEventListener('paste', e => { e.preventDefault(); document.execCommand('insertText', false, (e.clipboardData || window.clipboardData).getData('text/plain')); });
   aeDoc.addEventListener('keydown', e => {
     if (!(e.ctrlKey || e.metaKey) || e.altKey || e.shiftKey) return;
@@ -7145,7 +7188,12 @@ button.sx-row:hover { background: #faf9f5; }
   aeDoc.addEventListener('keyup', e => { if (e.ctrlKey || e.metaKey) aeState(); });
   aeDoc.addEventListener('focus', () => { try { document.execCommand('styleWithCSS', false, false); } catch (e) {} });
   $('#ae-block').addEventListener('change', e => { aeRestore(); document.execCommand('formatBlock', false, e.target.value); aeDoc.dispatchEvent(new Event('input')); aeState(); });
-  $('.ae-bar').addEventListener('mousedown', e => { if (e.target.closest('.ae-tb')) e.preventDefault(); });
+  $('.ae-bar').addEventListener('mousedown', e => { if (e.target.closest('.ae-tb, .ae-mi')) e.preventDefault(); });
+  const aeMore = $('#ae-more'), aeMoreBtn = $('#ae-more-btn');
+  const aeMoreClose = () => { aeMore.hidden = true; aeMoreBtn.setAttribute('aria-expanded', 'false'); };
+  aeMoreBtn.addEventListener('click', () => { const open = aeMore.hidden; aeMore.hidden = !open; aeMoreBtn.setAttribute('aria-expanded', open); });
+  aeMore.addEventListener('click', aeMoreClose);
+  dArt.addEventListener('click', e => { if (!e.target.closest('.ae-more-wrap')) aeMoreClose(); });
   $('.ae-bar').addEventListener('click', e => {
     const b = e.target.closest('[data-ae]'); if (!b) return;
     const c = b.dataset.ae; aeRestore();
@@ -7180,22 +7228,10 @@ button.sx-row:hover { background: #faf9f5; }
   let aseoAuto = { title: true, meta: true }, aseoSnap = null, aseoSaved = false, arOg = null;
   const aSlugPath = () => '/blog/' + ($('#ar-slug').value.trim().replace(/^-+|-+$/g, '') || '');
   /* Excerpt: filled from the first sentences of the Content Body until the person types their own */
-  let arExAuto = true;
-  function arExFill() {
-    const ex = $('#ar-excerpt');
-    if (arExAuto) ex.value = seoTwo(aeText()).slice(0, 200);
-    $('#ar-count').textContent = `${ex.value.length}/200`;
-    $('#ar-ex-mode').textContent = arExAuto ? '(Auto-generated from the article)' : '(Written by you)';
-    $('#ar-ex-reset').hidden = arExAuto;
-  }
-  $('#ar-excerpt').addEventListener('input', () => { arExAuto = false; arExFill(); aseoFill(); aseoPaint(); });
-  $('#ar-excerpt').addEventListener('blur', e => { if (!e.target.value.trim()) { arExAuto = true; arExFill(); aseoFill(); aseoPaint(); } });
-  $('#ar-ex-reset').addEventListener('click', () => { arExAuto = true; arExFill(); aseoFill(); aseoPaint(); $('#ar-excerpt').focus(); });
   function aseoFill() {
-    arExFill();
     const n = $('#ar-name').value.trim(), site = seoSite();
     if (aseoAuto.title) $('#ar-seo-title').value = n ? n + ' — ' + site.name : '';
-    if (aseoAuto.meta) $('#ar-seo-meta').value = seoTwo($('#ar-excerpt').value.trim() || aeText());
+    if (aseoAuto.meta) $('#ar-seo-meta').value = seoTwo(aeText());
     if (!dASeo.open) $('#ar-seo-slug').value = aSlugPath();
   }
   function aseoPaint() {
@@ -7265,31 +7301,29 @@ button.sx-row:hover { background: #faf9f5; }
     dl.addEventListener('close', () => $$('.sx-row[aria-controls]', dl).forEach(b => sxToggle(b, false)));
   });
   function openArticle(a) {
-    arEdit = a || null; $('#ar-form').reset(); arSlugEdited = !!a; arImg = a ? a.img : null; arImgErr(''); aeErr('');
+    arEdit = a || null; $('#ar-form').reset(); arSlugEdited = !!a; arImg = a ? (a.img || (a.photo ? `https://images.unsplash.com/photo-${a.photo}?w=280&h=280&fit=crop&auto=format&q=75` : null)) : null; arImgErr(''); aeErr('');
     aeDoc.innerHTML = a ? (a.body || (a.excerpt ? `<p>${esc(a.excerpt)}</p>` : '')) : ''; $('#ae-link').hidden = true; aeRange = null;
-    $('#ar-title').textContent = a ? 'Edit Article' : 'Add New Article';
-    $('#ar-sub').textContent = a ? 'Update this article’s content and details.' : 'Write a blog post, farm update or resource guide.';
+    $('#ar-title').textContent = a ? 'Edit Article' : 'Create New Article';
+    $('#ar-sub').textContent = a ? 'Update this article’s content, SEO and metadata' : 'Write and publish a new article with SEO and metadata';
     $('#ar-submit').textContent = a ? 'Save Changes' : 'Add Article';
-    fillAuthors(curSite(), a ? a.author : null);
-    if (a) { $('#ar-name').value = a.title; $('#ar-slug').value = a.slug; $('#ar-status').value = a.status; }
-    arExAuto = !(a && a.excerptCustom); $('#ar-excerpt').value = arExAuto ? '' : a.excerpt; arExFill();
-    ['ar-name', 'ar-slug', 'ar-author'].forEach(id => fieldErr(id, ''));
-    aseoLoad(a); arPaintImg(); aeWords(); abPaint(); aeState(); try { document.execCommand('defaultParagraphSeparator', false, 'p'); } catch (e) {}
+    if (a) { $('#ar-name').value = a.title; $('#ar-slug').value = a.slug; }
+    aeMoreClose(); arSlugOk();
+    ['ar-name', 'ar-slug'].forEach(id => fieldErr(id, ''));
+    aseoLoad(a); arPaintImg(); aeWords(); aeState(); try { document.execCommand('defaultParagraphSeparator', false, 'p'); } catch (e) {}
     dArt.showModal(); $('#ar-form').scrollTop = 0; $('#ar-name').focus();
   }
   $('#ar-form').addEventListener('submit', e => {
     e.preventDefault();
     const s = curSite(); if (!s) return;
-    const list = articlesOf(s), title = $('#ar-name').value.trim(), slug = $('#ar-slug').value.trim().replace(/^-+|-+$/g, ''), author = $('#ar-author').value.trim();
+    const list = articlesOf(s), title = $('#ar-name').value.trim(), slug = $('#ar-slug').value.trim().replace(/^-+|-+$/g, ''), author = arEdit ? arEdit.author : 'Admin';
     let first = null; const bad = (id, msg) => { fieldErr(id, msg); first ||= id; };
     if (!title) bad('ar-name', 'Give the article a title.');
     if (!slug) bad('ar-slug', 'Add a URL slug, e.g. 5-tips-raising-broilers.');
     else if (list.some(x => x !== arEdit && x.slug === slug)) bad('ar-slug', `/blog/${slug} is already used by another article.`);
-    if (!author) bad('ar-author', 'Pick who this article is posted as.');
     if (first) { $('#' + first).focus(); return; }
-    const status = $('#ar-status').value;
-    if (status === 'published' && !aeText() && !aeDoc.querySelector('img')) { aeErr('Write the article before publishing, or save it as a draft.'); $('#ab-open').focus(); return; }
-    const data = { title, slug, author, status, excerpt: $('#ar-excerpt').value.trim() || seoTwo(aeText()).slice(0, 200), excerptCustom: !arExAuto && !!$('#ar-excerpt').value.trim(), img: arImg, body: aeDoc.innerHTML, seo: aseoRead() };
+    const status = arEdit ? arEdit.status : 'published';
+    if (status === 'published' && !aeText() && !aeDoc.querySelector('img')) { aeErr('Write the article before publishing, or save it as a draft.'); aeDoc.focus(); return; }
+    const data = { title, slug, author, status, excerpt: seoTwo(aeText()).slice(0, 200), img: arImg, body: aeDoc.innerHTML, seo: aseoRead() };
     if (arEdit) {
       if (status === 'published' && arEdit.status !== 'published') data.date = Date.now();
       Object.assign(arEdit, data); dArt.close(); paintArticles(); toast(`${title} updated`);
