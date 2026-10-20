@@ -1,4 +1,240 @@
 <!DOCTYPE html>
+<!--
+  ==================================== FILE MAP: READ THIS FIRST ====================================
+  This whole app is ONE file: all CSS in <style>, then the HTML screens and dialogs, then one <script>.
+  Every section starts with a search tag like @@CSS-ORDERS. A section runs from its tag to the next tag.
+  Line numbers were right when this map was written. Any edit shifts them, so SEARCH FOR THE TAG
+  (e.g. grep "@@JS-ORDERS") instead of trusting the number. Keep tags in place when editing;
+  if you add a new section, give it a new @@TAG and add it to this map.
+
+  HOW TO CHANGE ONE SCREEN
+  1. Find the screen under SCREENS below and read only the sections listed for it.
+  2. Before changing any style, also search the class name in the two override passes that restyle
+     every screen at smaller widths: @@CSS-MOBILE 2255-2600 and @@CSS-NO-OVERLAP 2661-2764.
+     Most screens also have their own @media rules at the end of their own CSS section.
+  3. Site screens are drawn into #ov-view by JS (renderXxxView). Their markup lives in the JS, not the HTML.
+  4. Helpers used everywhere ($, $$, esc, icon, toast, fieldErr, closeMenus, go) are in the Shared rows.
+
+  CLASS / ID PREFIXES
+  auth- sign-in screens | onb- onboarding | wsd- workspace dashboard | ws- workspace menu | sw-/switcher- site switcher
+  ov- site overview | pf- product form | cf- category form | pg- page form | od- order details | sr- shipping rate
+  ck-/gw-/zone checkout | an- analytics | ml- media library | ar- article dialog | ae- article text editor
+  ss- site settings | dm-/dns- custom domain | br- branding | px- pixels | pxa- add tracking tool
+  sd-/sdz- site danger zone | dz-/tr-/dw- workspace danger zone | inv-/invite- invite dialog | wiz- new site wizard
+
+  SCREENS  (CSS = styles, HTML/DLG = markup, JS = behaviour)
+  - Shared / used everywhere
+      CSS  @@CSS-BASE 247-288 | @@CSS-SHARED 719-753 | @@CSS-DIALOGS 1046-1102 | @@CSS-TOAST 1103-1111
+      HTML @@HTML-ICONS 3611-3676 | @@HTML-TOAST 4539-4541
+      JS   @@JS-CORE 4699-4711 | @@JS-STATE 4712-4785 | @@JS-MARKS 4786-4803 | @@JS-ROUTER 4804-4838 | @@JS-TOAST 5878-5890
+  - Sign in, Sign up, Set password, Account created, Reset (#/signin #/signup #/reset)
+      CSS  @@CSS-AUTH 289-594
+      HTML @@HTML-SIGNIN 3677-3728 | @@HTML-SIGNUP 3729-3769 | @@HTML-SETPW 3770-3801 | @@HTML-CREATED 3802-3817 | @@HTML-RESET 3886-3914
+      JS   @@JS-AUTH 4839-4885
+  - Accept invitation (#/invite)
+      CSS  @@CSS-AUTH 289-594
+      HTML @@HTML-INVITE-PAGE 3915-3948
+      JS   @@JS-INVITE-PAGE 5000-5013
+  - Onboarding: profile + first workspace (#/onboarding/...)
+      CSS  @@CSS-ONBOARD 754-800
+      HTML @@HTML-PROFILE 3818-3857 | @@HTML-ONB-WS 3858-3876
+      JS   @@JS-PROFILE 4886-4919 | @@JS-WS-FORM 4920-4999
+  - Create new website wizard (#/new-site)
+      CSS  @@CSS-WIZARD 3072-3166
+      HTML @@HTML-WIZARD 3877-3885
+      JS   @@JS-WIZARD 8447-8609
+  - Workspace > All sites (#/workspace)
+      CSS  @@CSS-WS-DASH 801-943
+      HTML @@HTML-WS-DASH 3949-4014
+      JS   @@JS-WS-DASH 5014-5048 | @@JS-WS-SITES 5466-5563
+  - Workspace > Templates (#/workspace/templates)
+      CSS  @@CSS-WS-PAGES 1112-1265
+      HTML @@HTML-WS-DASH 3949-4014
+      JS   @@JS-LIBRARY 5049-5178
+  - Workspace > Team (#/workspace/team)
+      CSS  @@CSS-WS-PAGES 1112-1265
+      HTML @@HTML-WS-DASH 3949-4014
+      JS   @@JS-TEAM 5179-5246
+  - Workspace > General settings (#/workspace/settings)
+      CSS  @@CSS-WS-PAGES 1112-1265 | @@CSS-WS-SETTINGS2 1421-1538
+      DLG  @@DLG-TRANSFER-WS 4077-4104 | @@DLG-DELETE-WS 4105-4128
+      JS   @@JS-WS-SETTINGS 5247-5443 | @@JS-WS-DANGER 5796-5877
+  - Workspace switcher menu + profile dropdown
+      CSS  @@CSS-WS-DASH 801-943 | @@CSS-WS-PAGES 1112-1265
+      JS   @@JS-WS-SWITCH 5564-5599 | @@JS-PROFILE-MENU 5444-5465
+  - Invite member dialog
+      CSS  @@CSS-INVITE 944-1045 | @@CSS-INVITE-ROLE 1564-1585
+      DLG  @@DLG-INVITE 4015-4061
+      JS   @@JS-INVITE 5600-5787
+  - Create workspace dialog
+      CSS  @@CSS-ONBOARD 754-800 | @@CSS-DIALOGS 1046-1102
+      DLG  @@DLG-CREATE-WS 4062-4076
+      JS   @@JS-WS-FORM 4920-4999 | @@JS-CREATE-WS 5788-5795
+  - Site shell: top bar, site switcher, sidebar (all #/overview/... screens)
+      CSS  @@CSS-SHELL 595-709 | @@CSS-OVERVIEW-FIGMA 1586-1728
+      HTML @@HTML-SITE-SHELL 4542-4679
+      JS   @@JS-SITE-SWITCHER 5891-5943 | @@JS-SITE-VIEWS 6072-6138 | @@JS-DRAWERS 8610-8643
+  - Site > Overview (#/overview)
+      CSS  @@CSS-OVERVIEW 1266-1420 | @@CSS-OVERVIEW-FIGMA 1586-1728
+      JS   @@JS-OVERVIEW 5944-6071
+  - Site > Pages (#/overview/pages)
+      CSS  @@CSS-PAGES-PRODUCTS 1729-1896
+      DLG  @@DLG-PAGE 4211-4234
+      JS   @@JS-PAGES 6258-6335 | @@JS-SITE-CLICKS 6336-6388 | @@JS-PAGE-DLG 6697-6722
+  - Store > Products (#/overview/products)
+      CSS  @@CSS-PAGES-PRODUCTS 1729-1896 | @@CSS-ARTICLE 3347-3547
+      DLG  @@DLG-PRODUCT 4129-4210
+      JS   @@JS-PRODUCTS-DATA 6139-6257 | @@JS-SITE-CLICKS 6336-6388 | @@JS-PRODUCT-DLG 6389-6428 | @@JS-PRODUCT-SEO 6429-6539
+  - Store > Orders (#/overview/orders)
+      CSS  @@CSS-ORDERS 2171-2254
+      DLG  @@DLG-ORDER 4321-4338
+      JS   @@JS-ORDERS 6723-6909 | @@JS-SITE-CLICKS 6336-6388
+  - Store > Categories (#/overview/categories)
+      CSS  @@CSS-CATEGORIES 2601-2660
+      DLG  @@DLG-CATEGORY 4235-4274
+      JS   @@JS-CATEGORIES 6540-6696
+  - Store > Checkout settings (#/overview/checkout)
+      CSS  @@CSS-CHECKOUT 2765-2936
+      DLG  @@DLG-SHIP 4275-4320
+      JS   @@JS-CHECKOUT 6910-7064
+  - Site > Analytics (#/overview/analytics)
+      CSS  @@CSS-ANALYTICS-SETTINGS 2937-3071
+      JS   @@JS-ANALYTICS 7065-7258
+  - Site > Content / articles (#/overview/content)
+      CSS  @@CSS-CONTENT 1897-1956 | @@CSS-ARTICLE 3347-3547
+      DLG  @@DLG-ARTICLE 4413-4518
+      JS   @@JS-CONTENT 7491-7645 | @@JS-ARTICLE-EDITOR 7646-7755 | @@JS-ARTICLE-SEO 7756-7832 | @@JS-PRODUCT-SEO 6429-6539
+  - Site > Media library (#/overview/media)
+      CSS  @@CSS-MEDIA 3548-3607
+      JS   @@JS-MEDIA 7279-7490
+  - Site settings > Custom domain (#/overview/settings)
+      CSS  @@CSS-ANALYTICS-SETTINGS 2937-3071
+      DLG  @@DLG-DOMAIN 4339-4359 | @@DLG-DNS 4360-4387
+      JS   @@JS-SITESET-CONST 7259-7278 | @@JS-SITESET-RENDER 7960-8002 | @@JS-DOMAIN-DNS 8337-8446
+  - Site settings > Branding & favicon
+      CSS  @@CSS-BRANDING 3167-3200
+      JS   @@JS-SITESET-RENDER 7960-8002 | @@JS-BRANDING 8003-8100
+  - Site settings > Analytics & Pixels
+      CSS  @@CSS-PIXELS-A 1985-2170 | @@CSS-PIXELS-B 3201-3346
+      DLG  @@DLG-PXADD 4388-4412
+      JS   @@JS-SITESET-RENDER 7960-8002 | @@JS-PIXELS 8101-8309 | @@JS-PXADD 8310-8336
+  - Site settings > Danger zone
+      CSS  @@CSS-SITE-DANGER 1957-1984
+      DLG  @@DLG-SITE-DANGER 4519-4538
+      JS   @@JS-SITESET-RENDER 7960-8002 | @@JS-SITE-DANGER 7833-7959
+  - Prototype screen picker (not part of the product)
+      CSS  @@CSS-PROTO-NAV 710-718 | @@CSS-PROTO 1539-1563
+      HTML @@HTML-PROTO 4680-4697
+      JS   @@JS-PROTO 8644-8672
+
+  ALL SECTIONS IN FILE ORDER
+  @@CSS-BASE 247-288                 Base tokens, resets
+  @@CSS-AUTH 289-594                 Sign in, sign up, set password, account created, reset, accept invite
+  @@CSS-SHELL 595-709                App shell: top bar, site switcher panel, sidebar
+  @@CSS-PROTO-NAV 710-718            Old prototype nav (not product)
+  @@CSS-SHARED 719-753               Shared small pieces: buttons, inputs, avatars, workspace marks
+  @@CSS-ONBOARD 754-800              Onboarding + workspace form + purpose tiles
+  @@CSS-WS-DASH 801-943              Workspace dashboard: sidebar, ws menu, top bar, site cards, stats
+  @@CSS-INVITE 944-1045              Invite member dialog
+  @@CSS-DIALOGS 1046-1102            Shared dialog frame, email chips, radios
+  @@CSS-TOAST 1103-1111              Toast
+  @@CSS-WS-PAGES 1112-1265           Workspace Templates, Team, General settings, profile menu
+  @@CSS-OVERVIEW 1266-1420           Site overview (base) + site topbar
+  @@CSS-WS-SETTINGS2 1421-1538       Workspace settings: URL card, danger zone + its dialogs
+  @@CSS-PROTO 1539-1563              Prototype screen picker (not product)
+  @@CSS-INVITE-ROLE 1564-1585        Invite dialog: site role dropdown
+  @@CSS-OVERVIEW-FIGMA 1586-1728     Site overview + site shell pixel-match overrides
+  @@CSS-PAGES-PRODUCTS 1729-1896     Sidebar Store menu, Pages list, Products list, product/page dialogs
+  @@CSS-CONTENT 1897-1956            Content: article list
+  @@CSS-SITE-DANGER 1957-1984        Site settings > Danger zone
+  @@CSS-PIXELS-A 1985-2170           Analytics & Pixels: chips, switches, code editor
+  @@CSS-ORDERS 2171-2254             Orders list + order details dialog
+  @@CSS-MOBILE 2255-2600             MOBILE & TABLET PASS: overrides for every screen
+  @@CSS-CATEGORIES 2601-2660         Categories list + category dialog
+  @@CSS-NO-OVERLAP 2661-2764         NO OVERLAP PASS: overrides for every screen
+  @@CSS-CHECKOUT 2765-2936           Checkout settings + shipping rate dialog
+  @@CSS-ANALYTICS-SETTINGS 2937-3071 Site analytics + site settings tabs, custom domain, domain/DNS dialogs
+  @@CSS-WIZARD 3072-3166             Create new website wizard
+  @@CSS-BRANDING 3167-3200           Site settings > Branding & favicon
+  @@CSS-PIXELS-B 3201-3346           Site settings > Analytics & Pixels list + add tracking tool dialog
+  @@CSS-ARTICLE 3347-3547            Article editor, article dialog, inline SEO (also used by product SEO)
+  @@CSS-MEDIA 3548-3607              Media library
+  @@HTML-ICONS 3611-3676             SVG icon sprite (logos are big base64 images)
+  @@HTML-SIGNIN 3677-3728            Sign in screen
+  @@HTML-SIGNUP 3729-3769            Sign up screen
+  @@HTML-SETPW 3770-3801             Set password screen
+  @@HTML-CREATED 3802-3817           Account created screen
+  @@HTML-PROFILE 3818-3857           Onboarding: profile
+  @@HTML-ONB-WS 3858-3876            Onboarding: first workspace
+  @@HTML-WIZARD 3877-3885            Create new website (filled by JS)
+  @@HTML-RESET 3886-3914             Reset password screen
+  @@HTML-INVITE-PAGE 3915-3948       Accept invitation screen
+  @@HTML-WS-DASH 3949-4014           Workspace shell (views filled by JS into #wsd-view)
+  @@DLG-INVITE 4015-4061             Invite member dialog
+  @@DLG-CREATE-WS 4062-4076          Create workspace dialog
+  @@DLG-TRANSFER-WS 4077-4104        Transfer workspace ownership dialog
+  @@DLG-DELETE-WS 4105-4128          Delete workspace dialog
+  @@DLG-PRODUCT 4129-4210            Add / edit product dialog (incl. SEO & Social Sharing)
+  @@DLG-PAGE 4211-4234               Add page dialog
+  @@DLG-CATEGORY 4235-4274           Category dialog
+  @@DLG-SHIP 4275-4320               Shipping rate dialog
+  @@DLG-ORDER 4321-4338              Order details dialog
+  @@DLG-DOMAIN 4339-4359             Connect custom domain dialog
+  @@DLG-DNS 4360-4387                DNS records dialog
+  @@DLG-PXADD 4388-4412              Add tracking tool dialog
+  @@DLG-ARTICLE 4413-4518            Add / edit article dialog
+  @@DLG-SITE-DANGER 4519-4538        Site unpublish / transfer / delete dialog
+  @@HTML-TOAST 4539-4541             Toast element
+  @@HTML-SITE-SHELL 4542-4679        Site shell: top bar, sidebar, #ov-view (every site screen is drawn into #ov-view by JS)
+  @@HTML-PROTO 4680-4697             Prototype screen picker (not product)
+  @@JS-CORE 4699-4711                Start of script: $, esc, slugify, icon helpers
+  @@JS-STATE 4712-4785               Mock data + app state (workspaces, sites, members)
+  @@JS-MARKS 4786-4803               Avatar / workspace logo helpers
+  @@JS-ROUTER 4804-4838              Hash router: which screen renders for each #/route
+  @@JS-AUTH 4839-4885                Password toggle, sign in, sign up, set password
+  @@JS-PROFILE 4886-4919             Onboarding profile
+  @@JS-WS-FORM 4920-4999             Workspace form (onboarding + create dialog)
+  @@JS-INVITE-PAGE 5000-5013         Accept invitation screen
+  @@JS-WS-DASH 5014-5048             Workspace dashboard chrome + view switch
+  @@JS-LIBRARY 5049-5178             Workspace > Templates
+  @@JS-TEAM 5179-5246                Workspace > Team
+  @@JS-WS-SETTINGS 5247-5443         Workspace > General settings
+  @@JS-PROFILE-MENU 5444-5465        Profile dropdown + sign out
+  @@JS-WS-SITES 5466-5563            Workspace > All sites grid
+  @@JS-WS-SWITCH 5564-5599           Sidebar workspace switcher menu
+  @@JS-INVITE 5600-5787              Invite member dialog + site roles
+  @@JS-CREATE-WS 5788-5795           Create workspace dialog
+  @@JS-WS-DANGER 5796-5877           Workspace transfer ownership + delete
+  @@JS-TOAST 5878-5890               toast()
+  @@JS-SITE-SWITCHER 5891-5943       Site switcher in the site top bar
+  @@JS-OVERVIEW 5944-6071            Site > Overview screen
+  @@JS-SITE-VIEWS 6072-6138          Site screen router (renderSiteView), shared site helpers
+  @@JS-PRODUCTS-DATA 6139-6257       Products: mock catalogue + list render
+  @@JS-PAGES 6258-6335               Site > Pages list
+  @@JS-SITE-CLICKS 6336-6388         Click handlers for Pages, Products, Orders lists
+  @@JS-PRODUCT-DLG 6389-6428         Product dialog: image, fields, open, save
+  @@JS-PRODUCT-SEO 6429-6539         Product dialog: SEO & Social Sharing (also defines seoSite/seoTwo used by articles)
+  @@JS-CATEGORIES 6540-6696          Store > Categories + category dialog
+  @@JS-PAGE-DLG 6697-6722            Add page dialog
+  @@JS-ORDERS 6723-6909              Store > Orders + order details dialog
+  @@JS-CHECKOUT 6910-7064            Store > Checkout settings + shipping rate dialog
+  @@JS-ANALYTICS 7065-7258           Site > Analytics
+  @@JS-SITESET-CONST 7259-7278       Site settings constants (DNS records, tabs)
+  @@JS-MEDIA 7279-7490               Site > Media library
+  @@JS-CONTENT 7491-7645             Site > Content: article list + article dialog
+  @@JS-ARTICLE-EDITOR 7646-7755      Article rich text editor
+  @@JS-ARTICLE-SEO 7756-7832         Article SEO & Social Sharing
+  @@JS-SITE-DANGER 7833-7959         Site settings > Danger zone
+  @@JS-SITESET-RENDER 7960-8002      Site settings: tabs + Custom domain tab render
+  @@JS-BRANDING 8003-8100            Site settings > Branding
+  @@JS-PIXELS 8101-8309              Site settings > Analytics & Pixels
+  @@JS-PXADD 8310-8336               Add tracking tool picker
+  @@JS-DOMAIN-DNS 8337-8446          Connect domain + DNS dialogs
+  @@JS-WIZARD 8447-8609              Create new website wizard
+  @@JS-DRAWERS 8610-8643             Sidebar groups + mobile drawers
+  @@JS-PROTO 8644-8672               Prototype screen picker
+  ================================================================================================
+-->
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -8,7 +244,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 <style>
-/* ---------- Base (from the site's token file) ---------- */
+/* @@CSS-BASE ---------- Base (from the site's token file) ---------- */
 :root {
   --font-sans: "Inter", "Arial", ui-sans-serif, system-ui, sans-serif;
   --cream: #fffbf2;
@@ -50,7 +286,7 @@ h1[tabindex="-1"]:focus { outline: none; }
 [data-route] { display: none; }
 [data-route].is-active { display: block; }
 
-/* ---------- Auth screens (sign in / reset / invite) ----------
+/* @@CSS-AUTH ---------- Auth screens (sign in / reset / invite) ----------
    The card is sized by its content (no fixed 854px height). Every vertical
    measurement comes from the tokens on .auth-page, and those tokens step down
    with viewport HEIGHT, so the card fits a laptop screen instead of spilling
@@ -356,7 +592,7 @@ h1[tabindex="-1"]:focus { outline: none; }
   .auth-card .auth-setpw .auth-submit { font-size: 16px; }
 }
 
-/* ---------- Workspace: app shell + workspace/site switcher ----------
+/* @@CSS-SHELL ---------- Workspace: app shell + workspace/site switcher ----------
    Sizes measured from Figma frame "04 Workspace & Site Switcher" (1440 × 872).
    Main nav + switcher text is 16px; sub-nav is 14px; small UI text (search) is 13px. */
 .app { height: 100dvh; display: flex; flex-direction: column; overflow: hidden; background: var(--cream); }
@@ -471,7 +707,7 @@ h1[tabindex="-1"]:focus { outline: none; }
 .icon-btn:hover { background: #f4f3f0; }
 
 
-/* ---------- Prototype route switcher (not part of the product) ---------- */
+/* @@CSS-PROTO-NAV ---------- Prototype route switcher (not part of the product) ---------- */
 .proto-nav { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 100; display: flex; gap: 4px; padding: 4px; background: #1c1c1a; border-radius: 10px; box-shadow: 0 6px 20px rgb(0 0 0 / .2); }
 .proto-nav a { padding: 7px 10px; border-radius: 7px; font-size: 12px; color: #d8d8d2; text-decoration: none; }
 .proto-nav a:hover { color: #fff; }
@@ -480,7 +716,7 @@ h1[tabindex="-1"]:focus { outline: none; }
 
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; } }
 
-/* =====================================================================
+/* @@CSS-SHARED =====================================================================
    ADDITIONS: onboarding (profile + first workspace), workspace dashboard,
    sidebar workspace menu, invite + create-workspace dialogs, toast.
    Everything reuses the tokens above: cream / ink / Inter, 2px input
@@ -515,7 +751,7 @@ select.auth-input { appearance: none; -webkit-appearance: none; padding-right: 4
 .wmark.icon { background: #fff; border: 1px solid var(--line); color: var(--ink); }
 .wmark.icon svg { width: 62%; height: auto; }
 
-/* ---------- Onboarding (profile → workspace) ---------- */
+/* @@CSS-ONBOARD ---------- Onboarding (profile → workspace) ---------- */
 .auth-card:has(.onb) { max-width: 540px; }
 .onb-step { font-size: 13px; font-weight: 500; color: var(--muted); margin-bottom: 10px; }
 .onb h1 { font-size: 28px; font-weight: 600; margin-bottom: 8px; }
@@ -562,7 +798,7 @@ select.auth-input { appearance: none; -webkit-appearance: none; padding-right: 4
   .picker-face { width: 76px; height: 76px; font-size: 28px; }
 }
 
-/* ---------- Workspace dashboard (#/workspace) ---------- */
+/* @@CSS-WS-DASH ---------- Workspace dashboard (#/workspace) ---------- */
 .wsd { height: 100dvh; display: flex; background: var(--cream); overflow: hidden; }
 .wsd-side { position: relative; z-index: 40; width: 240px; flex-shrink: 0; display: flex; flex-direction: column; background: #fff; border-right: 1px solid var(--line); }
 .wsd-brand { display: flex; align-items: center; gap: 8px; height: 64px; padding: 0 20px; font-size: 16px; font-weight: 600; color: var(--ink); text-decoration: none; flex-shrink: 0; }
@@ -705,7 +941,7 @@ select.auth-input { appearance: none; -webkit-appearance: none; padding-right: 4
 .ptile:has(input:checked) .pcheck { opacity: 1; }
 .ptile:has(input:focus-visible) { outline: 2px solid var(--focus); outline-offset: 2px; }
 
-/* ---- Invite dialog v2: one field (people + role), one access switch ---- */
+/* @@CSS-INVITE ---- Invite dialog v2: one field (people + role), one access switch ---- */
 .modal-invite, .modal-invite form, .modal-invite .modal-body { overflow: visible; }
 .modal-invite { width: min(480px, calc(100vw - 24px)); }
 .modal-invite .inv-head { align-items: center; border-bottom: 0; padding-bottom: 4px; }
@@ -807,7 +1043,7 @@ select.auth-input { appearance: none; -webkit-appearance: none; padding-right: 4
 }
 .wsd-side .menu-close { display: none; }
 
-/* ---------- Dialogs (invite member, create workspace) ---------- */
+/* @@CSS-DIALOGS ---------- Dialogs (invite member, create workspace) ---------- */
 .modal { --control-h: 48px; --field-gap: 18px; width: min(520px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); padding: 0; border: 1px solid rgb(0 0 0 / .12); border-radius: 16px; background: #fff; color: var(--text); box-shadow: 0 24px 64px -16px rgb(0 0 0 / .35); }
 .modal[open] { display: flex; flex-direction: column; }
 .modal::backdrop { background: rgb(15 15 12 / .45); }
@@ -864,7 +1100,7 @@ select.auth-input { appearance: none; -webkit-appearance: none; padding-right: 4
 .site-picks label { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--ink); cursor: pointer; }
 .site-picks input { width: 16px; height: 16px; margin: 0; accent-color: var(--ink); }
 
-/* ---------- Toast ---------- */
+/* @@CSS-TOAST ---------- Toast ---------- */
 .toast { position: fixed; left: 50%; bottom: calc(76px + env(safe-area-inset-bottom, 0px)); z-index: 120; transform: translate(-50%, 16px); display: flex; align-items: center; gap: 16px; max-width: calc(100vw - 32px); padding: 12px 16px; border-radius: 8px; background: #1c1c1a; color: #fff; font-size: 14px; box-shadow: 0 12px 32px rgb(0 0 0 / .25); opacity: 0; visibility: hidden; transition: opacity .2s ease, transform .2s ease, visibility .2s; }
 .toast.show { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
 .toast a { color: #fff; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
@@ -873,7 +1109,7 @@ select.auth-input { appearance: none; -webkit-appearance: none; padding-right: 4
 .switcher-panel .wmark.logo, .switcher-panel .wmark.icon { border: 0; background: transparent; }
 .switcher-panel .wmark.logo svg { width: 100%; }
 
-/* =====================================================================
+/* @@CSS-WS-PAGES =====================================================================
    Workspace pages: Library (templates), Team, General settings
    + profile dropdown (sign out lives here, not in the workspace switcher)
    ===================================================================== */
@@ -1027,7 +1263,7 @@ button.act:hover { text-decoration: underline; text-underline-offset: 3px; }
 .me-menu .danger { color: #912d25; }
 
 
-/* =====================================================================
+/* @@CSS-OVERVIEW =====================================================================
    Site overview (#/overview), matched to Figma "Site Dashboard - Overview"
    ===================================================================== */
 .topbar.has-extras { grid-template-columns: 240px minmax(0, 1fr) auto; padding-right: 32px; }
@@ -1182,7 +1418,7 @@ button.prow:hover { background: #fbfaf6; }
   .prow svg { grid-column: 3; grid-row: 1 / span 2; }
 }
 
-/* ---------- Settings: Workspace URL card ---------- */
+/* @@CSS-WS-SETTINGS2 ---------- Settings: Workspace URL card ---------- */
 :root { --danger: #b42318; --danger-ink: #912d25; --danger-bg: #fff4f2; --danger-line: #f1c4bd; }
 .setcard.url-card { display: grid; grid-template-columns: 42px minmax(0, 1fr); gap: 14px; align-items: start; padding: 22px 24px 24px; }
 .url-card h2 { font-size: 17px; font-weight: 600; color: var(--ink); }
@@ -1300,7 +1536,7 @@ button.prow:hover { background: #fbfaf6; }
   .wsd-tools { flex-wrap: wrap; }
 }
 
-/* ---------- Prototype screen picker (collapsed button + panel) ---------- */
+/* @@CSS-PROTO ---------- Prototype screen picker (collapsed button + panel) ---------- */
 .proto { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 100; }
 .proto-fab { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: #1c1c1a; color: #fff; box-shadow: 0 6px 20px rgb(0 0 0 / .25); transition: transform .15s ease, background .15s ease; }
 .proto-fab:hover { background: #000; transform: scale(1.05); }
@@ -1325,7 +1561,7 @@ button.prow:hover { background: #fbfaf6; }
 .proto .proto-nav a[aria-current="page"]::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #fff; }
 @media (max-width: 760px) { .proto { bottom: calc(84px + env(safe-area-inset-bottom, 0px)); } }
 
-/* ---------- Invite: site role dropdown ---------- */
+/* @@CSS-INVITE-ROLE ---------- Invite: site role dropdown ---------- */
 .srole-pick { position: relative; }
 .srole-btn { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 10px 0 6px; border: 1px solid rgb(0 0 0 / .15); border-radius: 8px; background: #fff; font-size: 13px; font-weight: 500; color: var(--ink); white-space: nowrap; min-width: 170px; }
 .srole-btn:hover, .srole-btn[aria-expanded="true"] { border-color: rgb(0 0 0 / .4); }
@@ -1347,7 +1583,7 @@ button.prow:hover { background: #fbfaf6; }
 @media (max-width: 480px) { .srole-pick { align-self: stretch; } .srole-btn { width: 100%; } .srole-pop { left: 0; right: auto; width: 100%; max-width: none; } }
 
 
-/* =====================================================================
+/* @@CSS-OVERVIEW-FIGMA =====================================================================
    Site overview — pixel-matched to Figma "Site Dashboard - Overview" (1440 frame).
    Scoped to this screen so the other workspace screens keep their own sizes.
    ===================================================================== */
@@ -1490,7 +1726,7 @@ button.prow:hover { background: #fbfaf6; }
   [data-route="/overview"] .ov-bottom { grid-template-columns: 724px minmax(0, 1fr); }
 }
 
-/* =====================================================================
+/* @@CSS-PAGES-PRODUCTS =====================================================================
    Site screens inside the overview shell: Website Pages, E-Commerce / Store
    → Products and the Add Product dialog. Matched to the Figma frames
    "Site Dashboard - Website Pages" and "Site Dashboard - E Commerce".
@@ -1658,7 +1894,7 @@ textarea.pf-input { height: 56px; padding: 8px 10px; resize: vertical; line-heig
 .pf-drop.drag .pf-dash rect { stroke: var(--ink); stroke-dasharray: none; }
 
 
-/* =====================================================================
+/* @@CSS-CONTENT =====================================================================
    Content (#/overview/content) — Figma "Site Dashboard > Content/CMS"
    ===================================================================== */
 .acard { margin-top: 18px; border-color: rgb(0 0 0 / .2) !important; }
@@ -1718,7 +1954,7 @@ textarea.pf-input { height: 56px; padding: 8px 10px; resize: vertical; line-heig
   .arow .c-act { grid-column: 1 / -1 !important; justify-self: stretch; justify-content: flex-end; }
 }
 
-/* ---------- Site settings → Danger Zone ---------- */
+/* @@CSS-SITE-DANGER ---------- Site settings → Danger Zone ---------- */
 [data-route="/overview"] .ov .sdz-h { font-size: 22px; font-weight: 500; color: #000; }
 .sdz-sub { font-size: 14px; color: #191919; margin-top: 8px; }
 .sdz-list { margin: 22px -14px -26px; }
@@ -1746,7 +1982,7 @@ textarea.pf-input { height: 56px; padding: 8px 10px; resize: vertical; line-heig
   .sdz-row > .sdz-btn { grid-column: 1 / -1; width: 100%; height: 44px; }
 }
 
-/* ---------- Analytics & Pixels: status chips, help, save bar ---------- */
+/* @@CSS-PIXELS-A ---------- Analytics & Pixels: status chips, help, save bar ---------- */
 .px-head { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 10px; }
 .px-chip { display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0 9px; border-radius: 999px; font-size: 11.5px; font-weight: 500; background: #ececec; color: #6b6b6b; }
 .px-chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
@@ -1860,6 +2096,12 @@ textarea.pf-input { height: 56px; padding: 8px 10px; resize: vertical; line-heig
 
 .pthumb { background: #eeece6; }
 
+/* Product dialog: SEO & Social Sharing, same layout as the article dialog */
+.pf-grid .ar-seo { grid-column: 1 / -1; margin-top: 14px; padding-top: 18px; border-top: 1px solid rgb(0 0 0 / .08); }
+.pf-grid .ar-seo .ar-seo-f { margin-top: 16px; }
+.pf-grid .ar-seo textarea.pf-input { height: 72px; }
+.pf-grid .ar-seo .gp-hint, .pf-grid .ar-seo .ar-hint { font-size: 10.5px; color: #696963; margin-top: 6px; }
+@media (max-width: 640px) { .pf-grid .ar-seo .ar-seo-sub { margin-left: 0; } }
 /* Add / edit product: two-column form (Figma "Add Product") */
 .pf-fields.pf-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 12px; margin-top: 18px; }
 .pf-grid .pf-field.full { grid-column: 1 / -1; }
@@ -1926,7 +2168,7 @@ textarea.pf-input { height: 56px; padding: 8px 10px; resize: vertical; line-heig
 .seo-actions .pf-btn { width: 130px; height: 36px; font-size: 13px; border-radius: 4px; }
 @media (max-width: 480px) { .seo-foot { flex-direction: column-reverse; align-items: stretch; } .seo-actions .pf-btn { flex: 1; width: auto; height: 42px; } .seo-fields .pf-input, .seo-fields .pf-box input { font-size: 16px; } .ps-label small { display: none; } }
 
-/* =====================================================================
+/* @@CSS-ORDERS =====================================================================
    E-Commerce / Store → Orders (Figma "Site Dashboard - E Commerce - Order")
    ===================================================================== */
 .ocard-tools { display: flex; align-items: center; justify-content: flex-end; gap: 12px; }
@@ -2010,7 +2252,7 @@ textarea.pf-input { height: 56px; padding: 8px 10px; resize: vertical; line-heig
   .od-foot { gap: 10px; } .od-foot > *, .od-foot .od-btn { flex: 1; width: 100%; }
   .od-foot .od-btn { height: 42px; font-size: 14px; }
 }
-/* =====================================================================
+/* @@CSS-MOBILE =====================================================================
    MOBILE & TABLET PASS
    One layer, added last so it wins without touching the desktop rules.
    Breakpoints: 1100 (small laptop / tablet landscape), 760 (tablet
@@ -2356,7 +2598,7 @@ textarea.pf-input { height: 56px; padding: 8px 10px; resize: vertical; line-heig
   .ocard-tools { justify-content: flex-start; }
 }
 
-/* =====================================================================
+/* @@CSS-CATEGORIES =====================================================================
    E-Commerce / Store → Categories (Figma "Site Dashboard > E Commerce > Category")
    Table frame 1107px wide, rows 72px with 11px side padding; columns
    Category Name 260 · Slug 133 · Products Assigned 209 · Status 125 · Actions 158.
@@ -2416,7 +2658,7 @@ textarea.pf-input { height: 56px; padding: 8px 10px; resize: vertical; line-heig
 }
 
 
-/* =====================================================================
+/* @@CSS-NO-OVERLAP =====================================================================
    NO OVERLAP / NO SQUASH PASS
    Found with an automated collision + clipping check across every screen,
    menu and dialog at 320–1440px (see the docs).
@@ -2520,7 +2762,7 @@ textarea.pf-input { height: 56px; padding: 8px 10px; resize: vertical; line-heig
   .sbtns { grid-template-columns: minmax(0, 1fr); }
 }
 
-/* =====================================================================
+/* @@CSS-CHECKOUT =====================================================================
    E-Commerce / Store → Checkout Settings (Figma "Site Dashboard > E Commerce > Checkout Settings")
    ===================================================================== */
 .ck-card { margin-top: 18px; padding: 22px 14px 28px; border-color: rgb(0 0 0 / .2) !important; }
@@ -2692,7 +2934,7 @@ fieldset.sr-field { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
 }
 
 
-/* =====================================================================
+/* @@CSS-ANALYTICS-SETTINGS =====================================================================
    Site Analytics (#/overview/analytics) + Site Settings (#/overview/settings)
    ===================================================================== */
 .an-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
@@ -2827,7 +3069,7 @@ dialog#dlg-product.closing::backdrop { animation: pd-fade .2s ease-in reverse fo
 @keyframes pd-fade { from { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { dialog#dlg-product[open], dialog#dlg-product.closing, dialog#dlg-product::backdrop { animation: none; } }
 
-/* ---------- Create a new website: 3-step wizard (#/new-site) ---------- */
+/* @@CSS-WIZARD ---------- Create a new website: 3-step wizard (#/new-site) ---------- */
 .auth-card:has(.wiz) { max-width: 760px; }
 .auth-inner.wiz { max-width: 660px; }
 .wiz-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
@@ -2922,7 +3164,7 @@ dialog#dlg-product.closing::backdrop { animation: pd-fade .2s ease-in reverse fo
   .dns-row { grid-template-columns: auto 1px minmax(0, 1fr); }
   .ss-pend .btn-text { margin-left: 0; }
 }
-/* ---------- Site settings: Branding & Favicon ---------- */
+/* @@CSS-BRANDING ---------- Site settings: Branding & Favicon ---------- */
 .br-h { font-size: 19px; font-weight: 500; color: #000; }
 .br-row { display: grid; grid-template-columns: 150px minmax(0, 1fr); align-items: center; gap: 8px 16px; margin-top: 22px; padding-left: 18px; }
 .br-row > label, .br-row .br-lbl { font-size: 13px; font-weight: 500; color: #000; }
@@ -2956,7 +3198,7 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
 .br-foot .btn-dark { height: 38px; min-width: 182px; justify-content: center; font-size: 12px; }
 .br-foot .btn-text { font-size: 12.5px; }
 
-/* ---------- Site settings: Analytics & Pixels ---------- */
+/* @@CSS-PIXELS-B ---------- Site settings: Analytics & Pixels ---------- */
 .px-sub { font-size: 13px; color: #191919; margin-top: 6px; line-height: 1.5; }
 .px-list { margin: 20px -14px -26px; border-top: 1px solid rgb(0 0 0 / .06); }
 .px-row { display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; align-items: center; gap: 4px 14px; min-height: 90px; padding: 16px 18px 16px 22px; }
@@ -3102,7 +3344,7 @@ textarea.br-input { height: 84px; padding: 10px 12px; resize: vertical; line-hei
   .pxa-search input { font-size: 16px; height: 44px; }
 }
 
-/* ---------- Article editor: content body + social share (matches the product dialog) ---------- */
+/* @@CSS-ARTICLE ---------- Article editor: content body + social share (matches the product dialog) ---------- */
 .ae-lbl { display: block; font-size: 11px; font-weight: 500; color: #000; margin-bottom: 5px; }
 .ae { border: 1px solid rgb(0 0 0 / .2); border-radius: 4px; background: #fff; overflow: hidden; }
 .ae:focus-within { border-color: var(--ink); }
@@ -3286,10 +3528,92 @@ button.sx-row:hover { background: #faf9f5; }
 .sw-back-mark { flex-shrink: 0; display: grid; }
 .sw-back-mark .wmark.logo, .sw-back-mark .wmark.icon { background: #fff; }
 @media (max-width: 760px) { .sw-back { gap: 12px; padding: 10px 12px; } .sw-back-txt strong { font-size: 15px; } .sw-back-mark { display: none; } }
+
+/* ---------- Article dialog: inline SEO & Social Sharing ---------- */
+.ar-seo { margin-top: 30px; }
+.ar-seo-h { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 600; color: #000; }
+.ar-seo-sub { font-size: 12px; color: #191919; margin: 6px 0 0 30px; }
+.ar-seo-f { margin-top: 20px; }
+.modal-article .ar-seo-f textarea.pf-input { height: 72px; }
+.ar-seo-c { text-align: right; font-size: 10.5px; color: #696963; margin-top: 4px; }
+.ar-seo-c.over { color: #b42318; font-weight: 500; }
+.ar-og-f { margin-top: 18px; }
+.modal-article .ar-og-f .ar-lbl { font-size: 13px; margin-bottom: 8px; }
+.ar-og-note { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; font-size: 12px; color: #696963; max-width: 220px; }
+.ar-og-note .btn-text { font-size: 12px; }
+.ar-og-note .btn-text[hidden] { display: none; }
+.ar-gsw { margin-top: 22px; }
+@media (max-width: 640px) { .ar-seo-sub { margin-left: 0; } }
+
+/* @@CSS-MEDIA ---------- Media Library (#/overview/media) ---------- */
+.ml-card { margin-top: 18px; border-color: rgb(0 0 0 / .2) !important; overflow: hidden; }
+.ml-card.drag { box-shadow: inset 0 0 0 2px #0f8a4f; }
+.ml-bar { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 16px; padding: 18px 20px; border-bottom: 1px solid rgb(0 0 0 / .12); }
+.ml-views { display: flex; gap: 2px; }
+.ml-vbtn { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 4px; color: #8c8c83; }
+.ml-vbtn:hover { color: var(--ink); background: #f6f5ef; }
+.ml-vbtn[aria-pressed="true"] { color: var(--ink); background: #efede6; }
+.ml-sel { height: 36px; padding: 0 32px 0 12px; border: 1px solid rgb(0 0 0 / .18); border-radius: 4px; font-size: 12.5px; font-weight: 500; color: var(--ink); cursor: pointer; appearance: none; -webkit-appearance: none;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3.5 6 8 10.5 12.5 6' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 10px center; }
+.ml-sel:focus { border-color: var(--ink); outline: none; }
+.ml-bulk { height: 36px; padding: 0 14px; border: 1px solid rgb(0 0 0 / .18); border-radius: 4px; background: #fff; font-size: 12.5px; font-weight: 500; color: var(--ink); white-space: nowrap; }
+.ml-bulk:hover { background: #f6f5ef; }
+.ml-bulk[aria-pressed="true"] { background: #1c1c1a; border-color: #1c1c1a; color: #fff; }
+.ml-search { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+.ml-search label { font-size: 12px; font-weight: 500; line-height: 1.2; color: var(--ink); text-align: right; }
+.ml-search input { width: min(320px, 30vw); height: 36px; padding: 0 12px; border: 1px solid rgb(0 0 0 / .18); border-radius: 4px; background: #fff; font-size: 13px; color: var(--ink); }
+.ml-search input:focus { border-color: var(--ink); outline: none; }
+.ml-bulkbar { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 14px; padding: 10px 20px; background: #f6f5ef; border-bottom: 1px solid rgb(0 0 0 / .08); font-size: 13px; color: var(--ink); }
+.ml-bulkbar[hidden] { display: none; }
+.ml-bulkbar strong { font-weight: 600; margin-right: auto; }
+.ml-act { height: 34px; padding: 0 16px; border: 1px solid #000; border-radius: 4px; background: #fff; color: #000; font-size: 13px; font-weight: 500; white-space: nowrap; transition: background .15s ease, color .15s ease; }
+.ml-act:hover:not(:disabled) { background: #000; color: #fff; }
+.ml-act.dark { background: #000; color: #fff; }
+.ml-act.dark:hover:not(:disabled) { background: #30302c; border-color: #30302c; }
+.ml-act:disabled { opacity: .35; cursor: not-allowed; }
+@media (max-width: 760px) { .ml-act { height: 44px; flex: 1; } }
+.ml-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 26px 28px; padding: 18px 20px 30px; }
+.ml-item { position: relative; min-width: 0; }
+.ml-grid.bulk .ml-item { cursor: pointer; }
+.ml-thumb { position: relative; aspect-ratio: 1; border-radius: 4px; overflow: hidden; background: #d5e6e0; display: grid; place-items: center; color: #7e9a90; }
+.ml-thumb img, .ml-thumb video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ml-play { position: relative; z-index: 1; width: 22px; height: 22px; border-radius: 50%; background: rgb(255 255 255 / .82); display: grid; place-items: center; color: #000; box-shadow: 0 1px 4px rgb(0 0 0 / .2); }
+.ml-check { position: absolute; z-index: 2; top: 9px; left: 9px; width: 16px; height: 16px; margin: 0; accent-color: #000; cursor: pointer; }
+.ml-item.sel .ml-thumb { outline: 2px solid #000; outline-offset: 2px; }
+.ml-nrow { display: flex; align-items: flex-start; gap: 6px; margin-top: 10px; }
+.ml-name { flex: 1; min-width: 0; display: flex; font-size: 12px; font-weight: 600; color: #000; }
+.ml-name .b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ml-meta { font-size: 11px; line-height: 1.55; color: #3d3d39; margin-top: 3px; }
+.ml-item .more-btn { width: 26px; height: 22px; margin-top: -3px; flex-shrink: 0; }
+.ml-item .row-menu { top: calc(100% + 2px); }
+.ml-list { padding: 4px 12px 16px; }
+.ml-row { display: grid; grid-template-columns: 20px 48px minmax(0, 1fr) 90px 80px 170px 32px; align-items: center; gap: 14px; min-height: 64px; padding: 8px; font-size: 13px; color: #000; }
+.ml-row + .ml-row { border-top: 1px solid rgb(0 0 0 / .08); }
+.ml-row.head { min-height: 40px; background: #f5f5f5; border-radius: 6px; font-size: 12px; font-weight: 600; margin-top: 12px; }
+.ml-row .ml-check { position: static; }
+.ml-row .ml-thumb { width: 48px; height: 48px; aspect-ratio: auto; }
+.ml-row .ml-play { width: 18px; height: 18px; }
+.ml-row .ml-name { font-weight: 500; font-size: 13px; }
+.ml-row .muted { color: #3d3d39; font-size: 12.5px; }
+.ml-row.sel { background: #f6f5ef; }
+.ml-empty { grid-column: 1 / -1; }
+@media (max-width: 960px) {
+  .ml-search { margin-left: 0; flex: 1 1 100%; }
+  .ml-search input { flex: 1; width: auto; }
+  .ml-row { grid-template-columns: 20px 48px minmax(0, 1fr) 32px; }
+  .ml-row .c-hide, .ml-row.head { display: none; }
+}
+@media (max-width: 760px) {
+  .ml-bar { padding: 14px; }
+  .ml-sel, .ml-bulk, .ml-search input { height: 44px; font-size: 14px; }
+  .ml-search input { font-size: 16px; }
+  .ml-search label { display: none; }
+  .ml-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 18px 14px; padding: 14px; }
+}
 </style>
 </head>
 <body>
-<!-- Icon sprite: icons exported from the Figma file -->
+<!-- @@HTML-ICONS Icon sprite: icons exported from the Figma file -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
 <symbol id="i-search" viewBox="0 0 16 16"><path d="M13.3333 13.3333L10.5355 10.5355M12 7C12 4.23858 9.76142 2 7 2C4.23858 2 2 4.23858 2 7C2 9.76142 4.23858 12 7 12C9.76142 12 12 9.76142 12 7Z" stroke="currentColor" stroke-opacity="0.3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 <symbol id="i-three-circles" viewBox="0 0 20 18"><path d="M1.0595 16.171C0.353167 15.4647 0 14.6128 0 13.6152C0 12.6177 0.353167 11.7658 1.0595 11.0595C1.76583 10.3532 2.61775 10 3.61525 10C4.61275 10 5.46467 10.3532 6.171 11.0595C6.87733 11.7658 7.2305 12.6177 7.2305 13.6152C7.2305 14.6128 6.87733 15.4647 6.171 16.171C5.46467 16.8773 4.61275 17.2305 3.61525 17.2305C2.61775 17.2305 1.76583 16.8773 1.0595 16.171ZM13.0595 16.171C12.3532 15.4647 12 14.6128 12 13.6152C12 12.6177 12.3532 11.7658 13.0595 11.0595C13.7658 10.3532 14.6177 10 15.6152 10C16.6127 10 17.4647 10.3532 18.171 11.0595C18.8773 11.7658 19.2305 12.6177 19.2305 13.6152C19.2305 14.6128 18.8773 15.4647 18.171 16.171C17.4647 16.8773 16.6127 17.2305 15.6152 17.2305C14.6177 17.2305 13.7658 16.8773 13.0595 16.171ZM5.1095 15.1095C5.52367 14.6953 5.73075 14.1972 5.73075 13.6152C5.73075 13.0332 5.52367 12.5352 5.1095 12.121C4.69533 11.7068 4.19725 11.4998 3.61525 11.4998C3.03325 11.4998 2.53517 11.7068 2.121 12.121C1.70683 12.5352 1.49975 13.0332 1.49975 13.6152C1.49975 14.1972 1.70683 14.6953 2.121 15.1095C2.53517 15.5237 3.03325 15.7308 3.61525 15.7308C4.19725 15.7308 4.69533 15.5237 5.1095 15.1095ZM17.1095 15.1095C17.5237 14.6953 17.7307 14.1972 17.7307 13.6152C17.7307 13.0332 17.5237 12.5352 17.1095 12.121C16.6953 11.7068 16.1973 11.4998 15.6152 11.4998C15.0332 11.4998 14.5352 11.7068 14.121 12.121C13.7068 12.5352 13.4998 13.0332 13.4998 13.6152C13.4998 14.1972 13.7068 14.6953 14.121 15.1095C14.5352 15.5237 15.0332 15.7308 15.6152 15.7308C16.1973 15.7308 16.6953 15.5237 17.1095 15.1095ZM7.0595 6.171C6.35317 5.46467 6 4.61275 6 3.61525C6 2.61775 6.35317 1.76583 7.0595 1.0595C7.76583 0.353167 8.61775 0 9.61525 0C10.6128 0 11.4647 0.353167 12.171 1.0595C12.8773 1.76583 13.2305 2.61775 13.2305 3.61525C13.2305 4.61275 12.8773 5.46467 12.171 6.171C11.4647 6.87733 10.6128 7.2305 9.61525 7.2305C8.61775 7.2305 7.76583 6.87733 7.0595 6.171ZM11.1095 5.1095C11.5237 4.69533 11.7308 4.19725 11.7308 3.61525C11.7308 3.03325 11.5237 2.53517 11.1095 2.121C10.6953 1.70683 10.1972 1.49975 9.61525 1.49975C9.03325 1.49975 8.53517 1.70683 8.121 2.121C7.70683 2.53517 7.49975 3.03325 7.49975 3.61525C7.49975 4.19725 7.70683 4.69533 8.121 5.1095C8.53517 5.52367 9.03325 5.73075 9.61525 5.73075C10.1972 5.73075 10.6953 5.52367 11.1095 5.1095Z" fill="currentColor"/></symbol>
@@ -3355,7 +3679,7 @@ button.sx-row:hover { background: #faf9f5; }
 <symbol id="i-send" viewBox="0 0 16 16"><path d="M14.5 1.5 7 9M14.5 1.5 10 14.5 7 9 1.5 6l13-4.5Z" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linejoin="round"/></symbol>
 </svg>
 
-<!-- ===================== 01 · SIGN IN  (#/signin) ===================== -->
+<!-- @@HTML-SIGNIN ===================== 01 · SIGN IN  (#/signin) ===================== -->
 <section data-route="/signin" data-title="Sign in">
   <main class="auth-page">
     <div class="auth-card">
@@ -3407,7 +3731,7 @@ button.sx-row:hover { background: #faf9f5; }
   </main>
 </section>
 
-<!-- ===================== 01a · SIGN UP  (#/signup) ===================== -->
+<!-- @@HTML-SIGNUP ===================== 01a · SIGN UP  (#/signup) ===================== -->
 <section data-route="/signup" data-title="Sign up">
   <main class="auth-page">
     <div class="auth-card">
@@ -3448,7 +3772,7 @@ button.sx-row:hover { background: #faf9f5; }
   </main>
 </section>
 
-<!-- ===================== 01b · SET UP PASSWORD  (#/signup/password) ===================== -->
+<!-- @@HTML-SETPW ===================== 01b · SET UP PASSWORD  (#/signup/password) ===================== -->
 <section data-route="/signup/password" data-title="Set up your password">
   <main class="auth-page">
     <div class="auth-card">
@@ -3480,7 +3804,7 @@ button.sx-row:hover { background: #faf9f5; }
   </main>
 </section>
 
-<!-- ===================== 01c · ACCOUNT CREATED  (#/signup/created) ===================== -->
+<!-- @@HTML-CREATED ===================== 01c · ACCOUNT CREATED  (#/signup/created) ===================== -->
 <section data-route="/signup/created" data-title="Account created">
   <main class="auth-page">
     <div class="auth-card">
@@ -3496,7 +3820,7 @@ button.sx-row:hover { background: #faf9f5; }
   </main>
 </section>
 
-<!-- ===================== 01d · SET UP PROFILE  (#/onboarding/profile) ===================== -->
+<!-- @@HTML-PROFILE ===================== 01d · SET UP PROFILE  (#/onboarding/profile) ===================== -->
 <section data-route="/onboarding/profile" data-title="Set up your profile">
   <main class="auth-page">
     <div class="auth-card">
@@ -3536,7 +3860,7 @@ button.sx-row:hover { background: #faf9f5; }
   </main>
 </section>
 
-<!-- ===================== 01e · CREATE FIRST WORKSPACE  (#/onboarding/workspace) ===================== -->
+<!-- @@HTML-ONB-WS ===================== 01e · CREATE FIRST WORKSPACE  (#/onboarding/workspace) ===================== -->
 <section data-route="/onboarding/workspace" data-title="Create your workspace">
   <main class="auth-page">
     <div class="auth-card">
@@ -3555,7 +3879,7 @@ button.sx-row:hover { background: #faf9f5; }
   </main>
 </section>
 
-<!-- ===================== 01f · CREATE A NEW WEBSITE  (#/new-site/category → /name → /domain) ===================== -->
+<!-- @@HTML-WIZARD ===================== 01f · CREATE A NEW WEBSITE  (#/new-site/category → /name → /domain) ===================== -->
 <section data-route="/new-site" data-nested data-title="Create a new website">
   <main class="auth-page">
     <div class="auth-card">
@@ -3564,7 +3888,7 @@ button.sx-row:hover { background: #faf9f5; }
   </main>
 </section>
 
-<!-- ===================== 02 · RESET PASSWORD  (#/reset) ===================== -->
+<!-- @@HTML-RESET ===================== 02 · RESET PASSWORD  (#/reset) ===================== -->
 <section data-route="/reset" data-title="Reset password">
   <main class="auth-page">
     <div class="auth-card">
@@ -3593,7 +3917,7 @@ button.sx-row:hover { background: #faf9f5; }
   </main>
 </section>
 
-<!-- ===================== 03 · ACCEPT INVITATION  (#/invite) — filled from the last invite sent ===================== -->
+<!-- @@HTML-INVITE-PAGE ===================== 03 · ACCEPT INVITATION  (#/invite) — filled from the last invite sent ===================== -->
 <section data-route="/invite" data-title="Accept invitation">
   <main class="auth-page">
     <div class="auth-card">
@@ -3627,7 +3951,7 @@ button.sx-row:hover { background: #faf9f5; }
   </main>
 </section>
 
-<!-- ===================== 04 · WORKSPACE DASHBOARD  (#/workspace, #/workspace/team, …) ===================== -->
+<!-- @@HTML-WS-DASH ===================== 04 · WORKSPACE DASHBOARD  (#/workspace, #/workspace/team, …) ===================== -->
 <section data-route="/workspace" data-nested data-title="Workspace">
   <div class="wsd">
     <aside class="wsd-side" id="wsd-side" aria-label="Workspace">
@@ -3693,7 +4017,7 @@ button.sx-row:hover { background: #faf9f5; }
   </div>
 </section>
 
-<!-- ===================== DIALOG · INVITE MEMBER ===================== -->
+<!-- @@DLG-INVITE ===================== DIALOG · INVITE MEMBER ===================== -->
 <dialog class="modal modal-invite" id="dlg-invite" aria-labelledby="invite-title">
   <form id="invite-form" novalidate>
     <div class="modal-head inv-head">
@@ -3740,7 +4064,7 @@ button.sx-row:hover { background: #faf9f5; }
   </form>
 </dialog>
 
-<!-- ===================== DIALOG · CREATE WORKSPACE ===================== -->
+<!-- @@DLG-CREATE-WS ===================== DIALOG · CREATE WORKSPACE ===================== -->
 <dialog class="modal" id="dlg-create-ws" aria-labelledby="cws-title">
   <form id="cws-form" method="dialog" novalidate data-ws-form="dlg">
     <div class="modal-head">
@@ -3755,7 +4079,7 @@ button.sx-row:hover { background: #faf9f5; }
   </form>
 </dialog>
 
-<!-- ===================== DIALOG · TRANSFER OWNERSHIP (owner only) ===================== -->
+<!-- @@DLG-TRANSFER-WS ===================== DIALOG · TRANSFER OWNERSHIP (owner only) ===================== -->
 <dialog class="modal modal-danger" id="dlg-transfer" aria-labelledby="tr-title" aria-describedby="tr-desc">
   <form id="tr-form" novalidate>
     <div class="modal-head">
@@ -3783,7 +4107,7 @@ button.sx-row:hover { background: #faf9f5; }
   </form>
 </dialog>
 
-<!-- ===================== DIALOG · DELETE WORKSPACE (owner only) ===================== -->
+<!-- @@DLG-DELETE-WS ===================== DIALOG · DELETE WORKSPACE (owner only) ===================== -->
 <dialog class="modal modal-danger" id="dlg-delete-ws" aria-labelledby="dw-title" aria-describedby="dw-desc">
   <form id="dw-form" novalidate>
     <div class="modal-head">
@@ -3807,7 +4131,7 @@ button.sx-row:hover { background: #faf9f5; }
 </dialog>
 
 
-<!-- ===================== DIALOG · ADD / EDIT PRODUCT ===================== -->
+<!-- @@DLG-PRODUCT ===================== DIALOG · ADD / EDIT PRODUCT ===================== -->
 <dialog class="modal modal-product" id="dlg-product" aria-labelledby="pf-title" aria-describedby="pf-sub">
   <form id="pf-form" novalidate>
     <div class="pf-head">
@@ -3849,17 +4173,35 @@ button.sx-row:hover { background: #faf9f5; }
       <div class="pf-field full"><label for="pf-desc">Description</label>
         <textarea class="pf-input" id="pf-desc" maxlength="500" placeholder="Add product description..."></textarea>
         <p class="pf-count" id="pf-count" aria-live="polite">0/500</p></div>
-      <div class="pf-seo full">
-        <div class="ps-head">
-          <span class="ps-badge" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#i-search"/></svg></span>
-          <span class="ps-label">Search engine listing<small>How this product appears on Google</small></span>
-          <button type="button" class="ps-edit" id="pf-seo-open"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-edit"/></svg>Edit SEO</button>
+      <div class="ar-seo pf-seo-in full" role="group" aria-labelledby="pf-seo-h">
+        <h3 class="ar-seo-h" id="pf-seo-h"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="8.5" cy="8.5" r="6" stroke="currentColor" stroke-width="1.8"/><path d="m13 13 4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>SEO &amp; Social Sharing</h3>
+        <p class="ar-seo-sub">Help this product get discovered on search engines and social media.</p>
+        <div class="pf-field ar-seo-f"><label for="pf-seo-title">Meta Title:<span class="req" aria-hidden="true">*</span></label>
+          <input class="pf-input" id="pf-seo-title" autocomplete="off" placeholder="e.g. Organic Farm Eggs | Debaz Farm" aria-describedby="pseo-c-title">
+          <p class="ar-seo-c" id="pseo-c-title" aria-live="polite"></p>
+          <p class="pf-err" data-err-for="pf-seo-title" hidden></p></div>
+        <div class="pf-field ar-seo-f"><label for="pf-seo-meta">Meta Description:<span class="req" aria-hidden="true">*</span></label>
+          <textarea class="pf-input" id="pf-seo-meta" placeholder="A short summary that makes people want to click" aria-describedby="pseo-c-meta"></textarea>
+          <p class="ar-seo-c" id="pseo-c-meta" aria-live="polite"></p>
+          <p class="pf-err" data-err-for="pf-seo-meta" hidden></p></div>
+        <div class="pf-field ar-seo-f"><label for="pf-seo-slug">URL Slug:<span class="req" aria-hidden="true">*</span></label>
+          <div class="pf-box ar-slug"><span aria-hidden="true">/products/</span><input id="pf-seo-slug" autocomplete="off" spellcheck="false" maxlength="80" placeholder="organic-farm-eggs"></div>
+          <p class="ar-hint">The slug will be used in your product URL.</p>
+          <p class="pf-err" data-err-for="pf-seo-slug" hidden></p></div>
+        <div class="ar-feat x-img ar-og-f"><span class="ar-lbl" id="pf-og-l">Social Share Image</span>
+          <div class="ar-imgs">
+            <span class="ar-thumb" id="pf-og-thumb" role="img" aria-label="Social share image preview"></span>
+            <label class="ar-pick" id="pf-og-drop">
+              <input type="file" id="pf-og-file" accept="image/png,image/jpeg,image/webp" aria-labelledby="pf-og-l pf-og-pick-l">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="m4 17 4.5-4.5 3.5 3.5 2-2 4 4" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="9" cy="9" r="1.4" fill="currentColor"/><path d="M18 3v6M15 6h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              <strong id="pf-og-pick-l">Change Image</strong>
+              <small>Recommended size: 140 × 140px JPG, PNG (Max 5MB)</small>
+            </label>
+            <span class="ar-og-note"><span id="pf-og-note"></span><button type="button" class="btn-text" id="pf-og-clear" hidden>Use product image</button></span>
+          </div>
+          <p class="pf-err" id="pf-og-err" role="alert" hidden></p>
         </div>
-        <div class="ps-card">
-          <div class="ps-top"><span class="gp-fav" id="ps-fav">D</span><span class="ps-site"><b id="ps-site"></b><span id="ps-url"></span></span><span class="ps-pill" id="ps-pill">Visible on Google</span></div>
-          <div class="ps-t" id="ps-t"></div>
-          <div class="ps-d" id="ps-d"></div>
-        </div>
+        <label class="seo-switch ar-gsw"><span><b>Show on search engines</b><small id="pf-index-note">Google can list this product in search results.</small></span><input type="checkbox" id="pf-seo-index" role="switch" checked></label>
       </div>
     </div>
     <div class="pf-foot">
@@ -3869,91 +4211,9 @@ button.sx-row:hover { background: #faf9f5; }
   </form>
 </dialog>
 
-<!-- ===================== DIALOG · PRODUCT SEO ===================== -->
-<dialog class="modal modal-seo" id="dlg-seo" aria-labelledby="seo-title">
-  <div class="seo-head">
-    <div><h2 id="seo-title">Search engine listing</h2><p>Control how this product looks on Google.</p></div>
-    <button type="button" class="icon-btn" data-close aria-label="Close"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-close"/></svg></button>
-  </div>
-  <div class="seo-body">
-    <div class="seo-stage" aria-label="Google preview">
-      <div class="seo-q"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-search"/></svg><span id="gp-q"></span></div>
-      <div class="seo-res">
-        <div class="ps-top"><span class="gp-fav" id="gp-fav">D</span><span class="ps-site"><b id="gp-sn"></b><span id="gp-url"></span></span></div>
-        <div class="seo-rt" id="gp-t"></div>
-        <div class="seo-rd" id="gp-d"></div>
-      </div>
-      <p class="seo-note" id="gp-off" hidden>This page is hidden from Google. People with the link can still open it.</p>
-    </div>
-    <div class="seo-fields">
-      <div class="pf-field"><div class="seo-lr"><label for="pf-seo-title">Page title</label><span id="seo-c-title"></span></div>
-        <input class="pf-input" id="pf-seo-title" autocomplete="off" placeholder="Buy Fresh Whole Broiler Chicken | Debaz Farm">
-        <div class="seo-meter"><i id="seo-bar-title"></i></div></div>
-      <div class="pf-field"><div class="seo-lr"><label for="pf-seo-meta">Meta description</label><span id="seo-c-meta"></span></div>
-        <textarea class="pf-input" id="pf-seo-meta" placeholder="A short line that makes people want to click"></textarea>
-        <div class="seo-meter"><i id="seo-bar-meta"></i></div></div>
-      <div class="sx-list">
-        <div class="sx"><button type="button" class="sx-row" aria-expanded="false" aria-controls="ps-sx-slug"><span class="sx-k">URL slug</span><span class="sx-v" id="ps-sxv-slug"></span><span class="sx-act">Edit</span></button>
-          <div class="sx-body" id="ps-sx-slug" hidden><label class="sr-only" for="pf-seo-slug">URL slug</label><div class="pf-box"><span id="seo-dom" class="seo-dom"></span><input id="pf-seo-slug" autocomplete="off" spellcheck="false" placeholder="/products/whole-broiler-chicken"></div></div></div>
-        <label class="sx-row seo-switch" title="Hidden pages still work for people who have the link."><span class="sx-k">Show on search engines</span><span class="sx-v" id="ps-sxv-index"></span><input type="checkbox" id="pf-seo-index" role="switch" checked></label>
-      </div>
-    </div>
-  </div>
-  <div class="seo-foot">
-    <button type="button" class="btn-text" id="pf-seo-reset">Reset to auto-generated</button>
-    <span class="seo-actions"><button type="button" class="btn-outline pf-btn" data-close data-discard>Cancel</button><button type="button" class="btn-primary pf-btn" id="pf-seo-save">Save changes</button></span>
-  </div>
-</dialog>
 
 
-<!-- ===================== DIALOG · ARTICLE SEO ===================== -->
-<dialog class="modal modal-seo" id="dlg-aseo" aria-labelledby="aseo-title">
-  <div class="seo-head">
-    <div><h2 id="aseo-title">Search engine listing</h2><p>Control how this article looks on Google and when people share it.</p></div>
-    <button type="button" class="icon-btn" data-close aria-label="Close"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-close"/></svg></button>
-  </div>
-  <div class="seo-body">
-    <div class="seo-stage" aria-label="Google preview">
-      <div class="seo-q"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-search"/></svg><span id="agp-q"></span></div>
-      <div class="seo-res">
-        <div class="ps-top"><span class="gp-fav" id="agp-fav">D</span><span class="ps-site"><b id="agp-sn"></b><span id="agp-url"></span></span></div>
-        <div class="seo-rt" id="agp-t"></div>
-        <div class="seo-rd" id="agp-d"></div>
-      </div>
-      <p class="seo-note" id="agp-off" hidden>This page is hidden from Google. People with the link can still open it.</p>
-    </div>
-    <div class="seo-fields">
-      <div class="pf-field"><div class="seo-lr"><label for="ar-seo-title">Meta title</label><span id="aseo-c-title"></span></div>
-        <input class="pf-input" id="ar-seo-title" autocomplete="off" placeholder="5 Essential Tips for Healthy Broiler Farming">
-        <div class="seo-meter"><i id="aseo-bar-title"></i></div></div>
-      <div class="pf-field"><div class="seo-lr"><label for="ar-seo-meta">Meta description</label><span id="aseo-c-meta"></span></div>
-        <textarea class="pf-input" id="ar-seo-meta" placeholder="Learn practical biosecurity, feed scheduling, and natural gut hygiene methods for broilers."></textarea>
-        <div class="seo-meter"><i id="aseo-bar-meta"></i></div></div>
-      <div class="sx-list">
-        <div class="sx"><button type="button" class="sx-row" aria-expanded="false" aria-controls="ar-sx-slug"><span class="sx-k">URL slug</span><span class="sx-v" id="ar-sxv-slug"></span><span class="sx-act">Edit</span></button>
-          <div class="sx-body" id="ar-sx-slug" hidden><label class="sr-only" for="ar-seo-slug">URL slug</label><div class="pf-box"><span id="aseo-dom" class="seo-dom"></span><input id="ar-seo-slug" autocomplete="off" spellcheck="false" placeholder="/blog/5-tips-raising-broilers"></div></div></div>
-        <div class="sx"><button type="button" class="sx-row" aria-expanded="false" aria-controls="ar-sx-og"><span class="sx-k">Social share image</span><span class="sx-v" id="ar-sxv-og"></span><span class="sx-act">Change</span></button>
-          <div class="sx-body" id="ar-sx-og" hidden><label class="ar-og-chk"><input type="checkbox" id="ar-og-use" checked> Use featured banner image for WhatsApp/Social</label>
-        <div class="ar-og-own" id="ar-og-own" hidden>
-          <button type="button" class="ps-edit" id="ar-og-pick">Upload a different image</button>
-          <button type="button" class="btn-text" id="ar-og-clear" hidden>Remove</button>
-          <input type="file" id="ar-og-file" accept="image/png,image/jpeg,image/webp" hidden>
-        </div>
-        <div class="ar-og" aria-label="Social share preview">
-          <div class="ar-og-img" id="ar-og-img"><span>No image yet</span></div>
-          <div class="ar-og-txt"><small id="ar-og-dom"></small><b id="ar-og-t"></b><span id="ar-og-d"></span></div>
-        </div></div></div>
-        <label class="sx-row seo-switch" title="Hidden pages still work for people who have the link."><span class="sx-k">Show on search engines</span><span class="sx-v" id="ar-sxv-index"></span><input type="checkbox" id="ar-seo-index" role="switch" checked></label>
-      </div>
-    </div>
-  </div>
-  <div class="seo-foot">
-    <button type="button" class="btn-text" id="ar-seo-reset">Reset to auto-generated</button>
-    <span class="seo-actions"><button type="button" class="btn-outline pf-btn" data-close data-discard>Cancel</button><button type="button" class="btn-primary pf-btn" id="ar-seo-save">Save changes</button></span>
-  </div>
-</dialog>
-
-<!-- ===================== DIALOG · ADD PAGE ===================== -->
+<!-- @@DLG-PAGE ===================== DIALOG · ADD PAGE ===================== -->
 <dialog class="modal modal-product" id="dlg-page" aria-labelledby="pg-title">
   <form id="pg-form" novalidate>
     <div class="pf-head">
@@ -3977,7 +4237,7 @@ button.sx-row:hover { background: #faf9f5; }
   </form>
 </dialog>
 
-<!-- ===================== DIALOG · CREATE / EDIT PRODUCT CATEGORY ===================== -->
+<!-- @@DLG-CATEGORY ===================== DIALOG · CREATE / EDIT PRODUCT CATEGORY ===================== -->
 <dialog class="modal modal-product" id="dlg-category" aria-labelledby="cf-title">
   <form id="cf-form" novalidate>
     <div class="pf-head">
@@ -4017,7 +4277,7 @@ button.sx-row:hover { background: #faf9f5; }
   </form>
 </dialog>
 
-<!-- ===================== DIALOG · ADD / EDIT SHIPPING RATE ===================== -->
+<!-- @@DLG-SHIP ===================== DIALOG · ADD / EDIT SHIPPING RATE ===================== -->
 <dialog class="modal modal-product modal-ship" id="dlg-ship" aria-labelledby="sr-title">
   <form id="sr-form" novalidate>
     <div class="pf-head">
@@ -4063,7 +4323,7 @@ button.sx-row:hover { background: #faf9f5; }
   </form>
 </dialog>
 
-<!-- ===================== DIALOG · ORDER DETAILS ===================== -->
+<!-- @@DLG-ORDER ===================== DIALOG · ORDER DETAILS ===================== -->
 <dialog class="modal modal-order" id="dlg-order" aria-labelledby="od-title">
   <form id="od-form" novalidate>
     <div class="od-head">
@@ -4081,7 +4341,7 @@ button.sx-row:hover { background: #faf9f5; }
   </form>
 </dialog>
 
-<!-- ===================== DIALOG · CONNECT CUSTOM DOMAIN ===================== -->
+<!-- @@DLG-DOMAIN ===================== DIALOG · CONNECT CUSTOM DOMAIN ===================== -->
 <dialog class="modal modal-domain" id="dlg-domain" aria-labelledby="dm-title">
   <form class="dm-in" id="dm-form" novalidate>
     <div class="dm-head">
@@ -4102,7 +4362,7 @@ button.sx-row:hover { background: #faf9f5; }
   </form>
 </dialog>
 
-<!-- ===================== DIALOG · DNS RECORD INSTRUCTIONS ===================== -->
+<!-- @@DLG-DNS ===================== DIALOG · DNS RECORD INSTRUCTIONS ===================== -->
 <dialog class="modal modal-domain" id="dlg-dns" aria-labelledby="dns-title">
   <div class="dm-in">
     <div class="dm-head">
@@ -4130,7 +4390,7 @@ button.sx-row:hover { background: #faf9f5; }
   </div>
 </dialog>
 
-<!-- ===================== DIALOG · ADD TRACKING TOOL ===================== -->
+<!-- @@DLG-PXADD ===================== DIALOG · ADD TRACKING TOOL ===================== -->
 <dialog class="modal modal-domain modal-pxadd" id="dlg-pxadd" aria-labelledby="pxa-title" aria-describedby="pxa-sub">
   <div class="dm-in pxa-in">
     <div class="dm-head">
@@ -4155,7 +4415,7 @@ button.sx-row:hover { background: #faf9f5; }
   </div>
 </dialog>
 
-<!-- ===================== DIALOG · ADD / EDIT ARTICLE ===================== -->
+<!-- @@DLG-ARTICLE ===================== DIALOG · ADD / EDIT ARTICLE ===================== -->
 <dialog class="modal modal-product modal-article" id="dlg-article" aria-labelledby="ar-title" aria-describedby="ar-sub">
   <form id="ar-form" novalidate>
     <div class="ar-head">
@@ -4227,20 +4487,33 @@ button.sx-row:hover { background: #faf9f5; }
         </div>
         <p class="pf-err" id="ae-err" hidden></p>
       </div>
-    </section>
 
-    <div class="pf-seo">
-      <div class="ps-head">
-        <span class="ps-badge" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#i-search"/></svg></span>
-        <span class="ps-label">Search engine listing<small>How this article appears on Google and when shared</small></span>
-        <button type="button" class="ps-edit" id="ar-seo-open"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-edit"/></svg>Edit SEO</button>
+      <div class="ar-seo" role="group" aria-labelledby="ar-seo-h">
+        <h3 class="ar-seo-h" id="ar-seo-h"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="8.5" cy="8.5" r="6" stroke="currentColor" stroke-width="1.8"/><path d="m13 13 4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>SEO &amp; Social Sharing</h3>
+        <p class="ar-seo-sub">Help your article get discovered on search engines and social media.</p>
+        <div class="pf-field ar-seo-f"><label for="ar-seo-title">Meta Title:<span class="req" aria-hidden="true">*</span></label>
+          <input class="pf-input" id="ar-seo-title" autocomplete="off" placeholder="e.g. 5 Tips for Raising Healthy Broilers | Debaz Farm" aria-describedby="aseo-c-title">
+          <p class="ar-seo-c" id="aseo-c-title" aria-live="polite"></p>
+          <p class="pf-err" data-err-for="ar-seo-title" hidden></p></div>
+        <div class="pf-field ar-seo-f"><label for="ar-seo-meta">Meta Description:<span class="req" aria-hidden="true">*</span></label>
+          <textarea class="pf-input" id="ar-seo-meta" placeholder="A short summary that makes people want to click" aria-describedby="aseo-c-meta"></textarea>
+          <p class="ar-seo-c" id="aseo-c-meta" aria-live="polite"></p>
+          <p class="pf-err" data-err-for="ar-seo-meta" hidden></p></div>
+        <div class="ar-feat x-img ar-og-f"><span class="ar-lbl" id="ar-og-l">Social Share Image</span>
+          <div class="ar-imgs">
+            <span class="ar-thumb" id="ar-og-thumb" role="img" aria-label="Social share image preview"></span>
+            <label class="ar-pick" id="ar-og-drop">
+              <input type="file" id="ar-og-file" accept="image/png,image/jpeg,image/webp" aria-labelledby="ar-og-l ar-og-pick-l">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="m4 17 4.5-4.5 3.5 3.5 2-2 4 4" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="9" cy="9" r="1.4" fill="currentColor"/><path d="M18 3v6M15 6h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              <strong id="ar-og-pick-l">Change Image</strong>
+              <small>Recommended size: 140 × 140px JPG, PNG (Max 5MB)</small>
+            </label>
+            <span class="ar-og-note"><span id="ar-og-note"></span><button type="button" class="btn-text" id="ar-og-clear" hidden>Use featured image</button></span>
+          </div>
+        </div>
+        <label class="seo-switch ar-gsw"><span><b>Show on search engines</b><small id="ar-index-note">Google can list this article in search results.</small></span><input type="checkbox" id="ar-seo-index" role="switch" checked></label>
       </div>
-      <div class="ps-card">
-        <div class="ps-top"><span class="gp-fav" id="arps-fav">D</span><span class="ps-site"><b id="arps-site"></b><span id="arps-url"></span></span><span class="ps-pill" id="arps-pill">Visible on Google</span></div>
-        <div class="ps-t" id="arps-t"></div>
-        <div class="ps-d" id="arps-d"></div>
-      </div>
-    </div>
+    </section>
     <div class="pf-foot">
       <button type="button" class="btn-outline pf-btn" data-close>Cancel</button>
       <button type="submit" class="btn-primary pf-btn" id="ar-submit">Add Article</button>
@@ -4248,7 +4521,7 @@ button.sx-row:hover { background: #faf9f5; }
   </form>
 </dialog>
 
-<!-- ===================== DIALOG · SITE DANGER ZONE (unpublish / transfer / delete) ===================== -->
+<!-- @@DLG-SITE-DANGER ===================== DIALOG · SITE DANGER ZONE (unpublish / transfer / delete) ===================== -->
 <dialog class="modal modal-danger" id="dlg-site-danger" aria-labelledby="sd-title" aria-describedby="sd-desc">
   <form id="sd-form" novalidate>
     <div class="modal-head">
@@ -4268,9 +4541,10 @@ button.sx-row:hover { background: #faf9f5; }
   </form>
 </dialog>
 
+<!-- @@HTML-TOAST Toast -->
 <div class="toast" id="toast" role="status" aria-live="polite"><span id="toast-text"></span><a id="toast-link" hidden></a></div>
 
-<!-- ===================== 05 · SITE OVERVIEW + WORKSPACE & SITE SWITCHER  (#/overview) ===================== -->
+<!-- @@HTML-SITE-SHELL ===================== 05 · SITE OVERVIEW + WORKSPACE & SITE SWITCHER  (#/overview) ===================== -->
 <section data-route="/overview" data-nested data-title="Overview">
   <div class="app">
     <header class="topbar has-extras">
@@ -4366,7 +4640,7 @@ button.sx-row:hover { background: #faf9f5; }
           <li><a class="nav-link" href="#/overview/content" data-site-nav="content">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2.25" y="2.25" width="11.5" height="11.5" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M5 5.5h6M5 8h6M5 10.5h3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
             Content</a></li>
-          <li><a class="nav-link" href="#/overview" data-site-nav="media">
+          <li><a class="nav-link" href="#/overview/media" data-site-nav="media">
             <svg class="ic-media" width="21" height="16" viewBox="0 0 21 16" fill="none" aria-hidden="true"><use href="#i-media"/></svg>
             Media Library</a></li>
           <li><a class="nav-link" href="#/overview/settings" data-site-nav="settings">
@@ -4408,7 +4682,7 @@ button.sx-row:hover { background: #faf9f5; }
   </div>
 </section>
 
-<!-- Prototype-only screen picker (not part of the product). Collapsed to one button by default. -->
+<!-- @@HTML-PROTO Prototype-only screen picker (not part of the product). Collapsed to one button by default. -->
 <div class="proto">
   <button class="proto-fab" id="proto-fab" aria-expanded="false" aria-controls="proto-panel" aria-label="Prototype screens" title="Prototype screens">
     <svg class="ic-open" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="2.5" y="2.5" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="11.5" y="2.5" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="2.5" y="11.5" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="11.5" y="11.5" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.6"/></svg>
@@ -4421,12 +4695,13 @@ button.sx-row:hover { background: #faf9f5; }
       <div class="proto-group"><h2>Sign up & sign in</h2><a href="#/signin">Sign in</a><a href="#/signup">Sign up</a><a href="#/signup/password">Set password</a><a href="#/signup/created">Account created</a><a href="#/reset">Reset password</a><a href="#/invite">Accept invite</a></div>
       <div class="proto-group"><h2>Onboarding</h2><a href="#/onboarding/profile">Profile</a><a href="#/onboarding/workspace">New workspace</a></div>
       <div class="proto-group"><h2>Workspace</h2><a href="#/workspace">All sites</a><a href="#/workspace/templates">Templates</a><a href="#/workspace/team">Team</a><a href="#/workspace/settings">General settings</a><a href="#/new-site">Create new site</a><a href="#/overview">Site overview</a></div>
-      <div class="proto-group"><h2>Site</h2><a href="#/overview/pages">Pages</a><a href="#/overview/products">Products</a><a href="#/overview/orders">Orders</a><a href="#/overview/categories">Categories</a><a href="#/overview/checkout">Checkout settings</a><a href="#/overview/analytics">Analytics</a><a href="#/overview/content">Content</a><a href="#/overview/settings">Site settings</a></div>
+      <div class="proto-group"><h2>Site</h2><a href="#/overview/pages">Pages</a><a href="#/overview/products">Products</a><a href="#/overview/orders">Orders</a><a href="#/overview/categories">Categories</a><a href="#/overview/checkout">Checkout settings</a><a href="#/overview/analytics">Analytics</a><a href="#/overview/content">Content</a><a href="#/overview/media">Media library</a><a href="#/overview/settings">Site settings</a></div>
     </div>
   </nav>
 </div>
 
 <script>
+  /* @@JS-CORE Helpers: $, $$, esc, slugify, initials, icon */
 (function () {
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -4439,7 +4714,7 @@ button.sx-row:hover { background: #faf9f5; }
   const EYE = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1.33 8S3.76 3.33 8 3.33 14.67 8 14.67 8 12.24 12.67 8 12.67 1.33 8 1.33 8Z" stroke="currentColor" stroke-opacity="0.32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-opacity="0.32" stroke-width="1.5"/></svg>';
   const EYE_OFF = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="#i-eye-closed"/></svg>';
 
-  /* =====================================================================
+  /* @@JS-STATE =====================================================================
      Front-end state (mock data). Sign in = the demo account with three
      workspaces; sign up = a fresh account that builds everything itself.
      ===================================================================== */
@@ -4513,7 +4788,7 @@ button.sx-row:hover { background: #faf9f5; }
     const w = Math.round(d / 7); return w === 1 ? '1 week ago' : `${w} weeks ago`;
   }
 
-  /* ---------- Marks (avatars / workspace logos) ---------- */
+  /* @@JS-MARKS ---------- Marks (avatars / workspace logos) ---------- */
   function personMark(p, size = 32, soft = false) {
     const img = p.avatar ? `<img src="${p.avatar}" alt="">` : esc(initials(p.name || p.email) || '?');
     const style = `--s:${size}px${soft ? `;--tint:${tint(p.email || p.name)}` : ''}`;
@@ -4531,7 +4806,7 @@ button.sx-row:hover { background: #faf9f5; }
   const accessText = (w, access) => access === 'all' ? 'All sites in this workspace'
     : (a => a.length ? a.join(', ') : 'No sites yet')(w.sites.filter(s => access.includes(s.id)).map(s => s.name));
 
-  /* =====================================================================
+  /* @@JS-ROUTER =====================================================================
      Router
      ===================================================================== */
   const routes = $$('section[data-route]');
@@ -4566,7 +4841,7 @@ button.sx-row:hover { background: #faf9f5; }
   window.addEventListener('hashchange', render);
   const go = hash => { if (location.hash === hash) render(); else location.hash = hash; };
 
-  /* ---------- Password toggle ---------- */
+  /* @@JS-AUTH ---------- Password toggle ---------- */
   $$('.toggle-pw').forEach(btn => {
     const input = btn.previousElementSibling;
     btn.innerHTML = EYE_OFF;
@@ -4613,7 +4888,7 @@ button.sx-row:hover { background: #faf9f5; }
     if (!msg) { f.reset(); startFreshAccount(signupEmail); go('#/signup/created'); }
   });
 
-  /* ---------- Profile set-up ---------- */
+  /* @@JS-PROFILE ---------- Profile set-up ---------- */
   const pf = $('#profile-form'), pfName = $('#profile-name'), pfUser = $('#profile-username'), pfFace = $('#profile-face');
   let pfAvatar = null, pfUserEdited = false;
   function paintFace() {
@@ -4647,7 +4922,7 @@ button.sx-row:hover { background: #faf9f5; }
     });
   }
 
-  /* =====================================================================
+  /* @@JS-WS-FORM =====================================================================
      Workspace form (used by onboarding and the "Create workspace" dialog)
      ===================================================================== */
   function wsFieldsHTML(p) {
@@ -4727,7 +5002,7 @@ button.sx-row:hover { background: #faf9f5; }
   }
   $('#onb-ws-skip').addEventListener('click', () => go('#/workspace'));
 
-  /* =====================================================================
+  /* @@JS-INVITE-PAGE =====================================================================
      Invitation page (what the invited person sees)
      ===================================================================== */
   function renderInvitePage() {
@@ -4741,7 +5016,7 @@ button.sx-row:hover { background: #faf9f5; }
   }
   $('#invite-decline').addEventListener('click', () => { $('#invite-body').hidden = true; $('#invite-declined').hidden = false; });
 
-  /* =====================================================================
+  /* @@JS-WS-DASH =====================================================================
      Workspace dashboard
      ===================================================================== */
   const viewEl = $('#wsd-view');
@@ -4776,7 +5051,7 @@ button.sx-row:hover { background: #faf9f5; }
     if (view === 'settings') return renderSettings(w);
   }
 
-  /* =====================================================================
+  /* @@JS-LIBRARY =====================================================================
      Library (templates)
      ===================================================================== */
   const TPL_DESC = {
@@ -4906,7 +5181,7 @@ button.sx-row:hover { background: #faf9f5; }
         ${!comps.length ? '<p class="empty-inline">No components match.</p>' : ''}</div>` : ''}`;
   }
 
-  /* =====================================================================
+  /* @@JS-TEAM =====================================================================
      Team
      ===================================================================== */
   const ROLE_TINT = { owner: '#f1efe8', admin: '#f3e4d4', contributor: '#f6dcd6' };
@@ -4974,7 +5249,7 @@ button.sx-row:hover { background: #faf9f5; }
     s.addEventListener('input', () => { state.teamQuery = s.value; paint(); });
   }
 
-  /* =====================================================================
+  /* @@JS-WS-SETTINGS =====================================================================
      General settings: image, name and language, side by side
      ===================================================================== */
   const LANGS = [['ro', 'Romanian'], ['en', 'English'], ['hu', 'Hungarian'], ['de', 'German'], ['fr', 'French']];
@@ -5171,7 +5446,7 @@ button.sx-row:hover { background: #faf9f5; }
     if (cc) { const m = w.invites.splice(+cc.dataset.invCancel, 1)[0]; renderTeam(w); toast(`Invite to ${m.name || m.email} cancelled`); return; }
   });
 
-  /* =====================================================================
+  /* @@JS-PROFILE-MENU =====================================================================
      Profile dropdown (top-right avatar). Sign out lives here.
      ===================================================================== */
   function closeMeMenus(focus) { $$('.me-menu').forEach(m => { if (m.hidden) return; m.hidden = true; const b = m.previousElementSibling; b.setAttribute('aria-expanded', 'false'); if (focus) b.focus(); }); }
@@ -5193,6 +5468,7 @@ button.sx-row:hover { background: #faf9f5; }
   document.addEventListener('click', e => { if (!e.target.closest('.me-wrap')) closeMeMenus(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMeMenus(true); });
 
+  /* @@JS-WS-SITES Workspace > All sites grid + its click handlers */
   function renderSites(w, first) {
     const pub = w.sites.filter(s => s.status === 'published').length;
     const stat = (key, label, n, ic, vb) => `<button class="stat" data-filter="${key}" aria-pressed="${state.siteFilter === key}">
@@ -5290,7 +5566,7 @@ button.sx-row:hover { background: #faf9f5; }
   }
   function closeMenus() { $$('.more-menu').forEach(m => m.hidden = true); $$('[data-more]').forEach(b => b.setAttribute('aria-expanded', 'false')); }
 
-  /* ---------- Sidebar workspace menu (opens upward from the switch) ---------- */
+  /* @@JS-WS-SWITCH ---------- Sidebar workspace menu (opens upward from the switch) ---------- */
   const WS_FEET = $$('.wsd-foot').map(f => ({ btn: $('[data-ws-switch]', f), menu: $('.ws-menu', f), search: $('[data-ws-search]', f), list: $('[data-ws-list]', f), empty: $('[data-ws-empty]', f) }));
   function renderWsMenu() {
     const html = state.workspaces.map(w => `<li><button class="switcher-item" data-ws="${w.id}" data-name="${esc(w.name)}" ${w.id === state.currentId ? 'aria-current="true"' : ''}>
@@ -5326,7 +5602,7 @@ button.sx-row:hover { background: #faf9f5; }
     toast(`Switched to ${w.name}`);
   }
 
-  /* =====================================================================
+  /* @@JS-INVITE =====================================================================
      Invite member dialog
      ===================================================================== */
   /* ---------- Per-site roles (used by the invite dialog and the team table) ---------- */
@@ -5514,7 +5790,7 @@ button.sx-row:hover { background: #faf9f5; }
     toast(`Invite sent to ${who}`, { label: 'Preview invite', href: '#/invite' });
   });
 
-  /* ---------- Create workspace dialog ---------- */
+  /* @@JS-CREATE-WS ---------- Create workspace dialog ---------- */
   const dCreate = $('#dlg-create-ws');
   function openCreateWs() { const f = $('#cws-form'); resetWsForm(f); dCreate.showModal(); f.wsname.focus(); }
 
@@ -5522,7 +5798,7 @@ button.sx-row:hover { background: #faf9f5; }
   $$('dialog.modal').forEach(d => d.addEventListener('click', e => { if (e.target === d) d.close(); }));
   function closeDialogs() { $$('dialog[open]').forEach(d => d.close()); }
 
-  /* ---------- Danger zone: transfer ownership + delete workspace (owner only) ---------- */
+  /* @@JS-WS-DANGER ---------- Danger zone: transfer ownership + delete workspace (owner only) ---------- */
   const RESERVED = ['app', 'api', 'admin', 'www', 'settings', 'login', 'signin', 'signup', 'help', 'support', 'billing'];
   const amOwner = w => (w.members.find(m => m.you) || {}).role === 'owner';
   const dTransfer = $('#dlg-transfer'), dDelete = $('#dlg-delete-ws');
@@ -5604,7 +5880,7 @@ button.sx-row:hover { background: #faf9f5; }
     toast(`${w.name} was permanently deleted`);
   });
 
-  /* ---------- Toast ---------- */
+  /* @@JS-TOAST ---------- Toast ---------- */
   let toastTimer;
   function toast(text, link) {
     const t = $('#toast'), a = $('#toast-link');
@@ -5617,7 +5893,7 @@ button.sx-row:hover { background: #faf9f5; }
     t.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 5200);
   }
 
-  /* =====================================================================
+  /* @@JS-SITE-SWITCHER =====================================================================
      Overview (site level): the central workspace & site switcher
      ===================================================================== */
   const swBtn = $('#switcher-btn');
@@ -5670,7 +5946,7 @@ button.sx-row:hover { background: #faf9f5; }
   });
 
 
-  /* =====================================================================
+  /* @@JS-OVERVIEW =====================================================================
      Site overview: health, status, quick stats, recent pages, issues
      ===================================================================== */
   const SITE_DOMAINS = { s1: 'alicia.ro', s2: 'novastudio.ro', s3: 'axisdigital.ro', s4: 'spring.marketingteam.ro' };
@@ -5765,7 +6041,7 @@ button.sx-row:hover { background: #faf9f5; }
         <div class="ov-card qstat"><span class="qi">${I_DOC.replace('width="16" height="16"', 'width="18" height="18"')}</span><small>Total Pages</small><strong>${st.pages}</strong><a href="#/overview" data-ov-nav="pages">View all</a></div>
         <div class="ov-card qstat"><span class="qi">${I_CART}</span><small>Products</small><strong>${st.products}</strong><a href="#/overview" data-ov-nav="store">${st.products ? 'View Store' : 'Set up store'}</a></div>
         <div class="ov-card qstat"><span class="qi">${I_POST}</span><small>Blog Posts</small><strong>${articlesOf(s).length}</strong><a href="#/overview/content" data-ov-nav="content">View Content</a></div>
-        <div class="ov-card qstat"><span class="qi">${I_MEDIA}</span><small>Media Files</small><strong>${st.media}</strong><a href="#/overview" data-ov-nav="media">View Library</a></div>
+        <div class="ov-card qstat"><span class="qi">${I_MEDIA}</span><small>Media Files</small><strong>${mediaOf(s).length}</strong><a href="#/overview/media" data-ov-nav="media">View Library</a></div>
       </div>
 
       <div class="ov-bottom">
@@ -5798,13 +6074,13 @@ button.sx-row:hover { background: #faf9f5; }
   }));
 
 
-  /* =====================================================================
+  /* @@JS-SITE-VIEWS =====================================================================
      Site screens inside the overview shell: Website Pages and
      E-Commerce / Store → Products (+ Add / edit product dialog)
      ===================================================================== */
   let siteView = 'overview';
-  const SITE_VIEWS = { overview: '#/overview', pages: '#/overview/pages', products: '#/overview/products', orders: '#/overview/orders', categories: '#/overview/categories', checkout: '#/overview/checkout', analytics: '#/overview/analytics', content: '#/overview/content', settings: '#/overview/settings' };
-  const SITE_VIEW_TITLES = { overview: 'Overview', pages: 'Pages', products: 'Products', orders: 'Orders', categories: 'Categories', checkout: 'Checkout Settings', analytics: 'Analytics', content: 'Content', settings: 'Site Settings' };
+  const SITE_VIEWS = { overview: '#/overview', pages: '#/overview/pages', products: '#/overview/products', orders: '#/overview/orders', categories: '#/overview/categories', checkout: '#/overview/checkout', analytics: '#/overview/analytics', content: '#/overview/content', media: '#/overview/media', settings: '#/overview/settings' };
+  const SITE_VIEW_TITLES = { overview: 'Overview', pages: 'Pages', products: 'Products', orders: 'Orders', categories: 'Categories', checkout: 'Checkout Settings', analytics: 'Analytics', content: 'Content', media: 'Media Library', settings: 'Site Settings' };
   const curSite = () => { const w = ws(); return w ? w.sites.find(x => x.id === state.currentSiteId) || null : null; };
   const money = n => '$' + Number(n).toFixed(2);
   const isShop = s => s.theme === 'alicia' || s.theme === 'sun';
@@ -5840,6 +6116,7 @@ button.sx-row:hover { background: #faf9f5; }
     else if (siteView === 'analytics') renderAnalyticsView();
     else if (siteView === 'settings') renderSettingsView();
     else if (siteView === 'content') renderContentView();
+    else if (siteView === 'media') renderMediaView();
     else renderSiteOverview();
     document.title = SITE_VIEW_TITLES[siteView] + ' · Digital Romanian';
   }
@@ -5864,7 +6141,7 @@ button.sx-row:hover { background: #faf9f5; }
     return `<nav class="pager" aria-label="${label}">${h}</nav>`;
   }
 
-  /* ---------- Product catalogue (mock) ---------- */
+  /* @@JS-PRODUCTS-DATA ---------- Product catalogue (mock) ---------- */
   const CATS = ['Eggs & Dairy', 'Fresh Produce', 'Meat & Poultry', 'Bakery', 'Pantry'];
   const CAT_TINT = { 'Eggs & Dairy': '#f5eedf', 'Fresh Produce': '#e6f0de', 'Meat & Poultry': '#f6e3de', 'Bakery': '#f3e6d4', 'Pantry': '#f7ecd2' };
   const CAT_EMOJI = { 'Eggs & Dairy': '🥚', 'Fresh Produce': '🥬', 'Meat & Poultry': '🍗', 'Bakery': '🍞', 'Pantry': '🍯' };
@@ -5983,7 +6260,7 @@ button.sx-row:hover { background: #faf9f5; }
     $('#prod-foot').innerHTML = `<span>${list.length ? `Showing ${start + 1}-${start + rows.length} of ${list.length} products` : 'Showing 0 products'}</span>${list.length > PER ? pagerHTML(state.prodPage, pages) : ''}`;
   }
 
-  /* ---------- Website pages (mock) ---------- */
+  /* @@JS-PAGES ---------- Website pages (mock) ---------- */
   const PAGE_TPLS = ['Default Landing', 'E-Commerce Grid', 'Standard Content', 'Contact Form Layout', 'Blog Index', 'Blank Canvas'];
   const W_ICONS = {
     home: '<path d="M2.75 7.4 9 2.5l6.25 4.9v7.35a.75.75 0 0 1-.75.75h-3.25v-4.75h-4.5v4.75H3.5a.75.75 0 0 1-.75-.75z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>',
@@ -6061,7 +6338,7 @@ button.sx-row:hover { background: #faf9f5; }
       || `<div class="tab-empty"><strong>No pages match</strong>Try another name or path.<br><button type="button" class="btn-text" data-wclear>Clear search</button></div>`;
   }
 
-  /* ---------- Clicks inside the site screens ---------- */
+  /* @@JS-SITE-CLICKS ---------- Clicks inside the site screens ---------- */
   $('#ov-view').addEventListener('click', e => {
     const t = e.target, s = curSite(); if (!s) return;
     const more = t.closest('[data-more]');
@@ -6114,7 +6391,7 @@ button.sx-row:hover { background: #faf9f5; }
     }
   });
 
-  /* ---------- Add / edit product dialog ---------- */
+  /* @@JS-PRODUCT-DLG ---------- Add / edit product dialog ---------- */
   const dProd = $('#dlg-product'), pfF = $('#pf-form');
   let pfEdit = null, pfImg = null, pfSkuEdited = false;
   $('#pf-cat').innerHTML = '<option value="" disabled selected>Select category</option>' + CATS.map(c => `<option>${esc(c)}</option>`).join('');
@@ -6123,6 +6400,7 @@ button.sx-row:hover { background: #faf9f5; }
     $('#pf-thumb').classList.toggle('empty', !pfImg);
     $('#pf-pick-l').textContent = pfImg ? 'Change Image' : 'Upload Image';
     $('#pf-img-remove').hidden = !pfImg;
+    seoPaint();
   }
   function pfImgErr(msg) { const e = $('#pf-img-err'); e.textContent = msg || ''; e.hidden = !msg; }
   function pfTake(file) {
@@ -6153,56 +6431,65 @@ button.sx-row:hover { background: #faf9f5; }
   ['#pf-sale', '#pf-regular'].forEach(id => $(id).addEventListener('input', e => { e.target.value = e.target.value.replace(/[^\d.]/g, '').replace(/(\..*)\./g, '$1'); }));
   $('#pf-desc').addEventListener('input', e => { $('#pf-count').textContent = `${e.target.value.length}/500`; });
 
-  /* ---- Product SEO: summary card + separate dialog ---- */
-  const dSeo = $('#dlg-seo');
-  let seoAuto = { title: true, meta: true, slug: true }, seoSnap = null, seoSaved = false;
+  /* @@JS-PRODUCT-SEO ---- Product SEO & Social Sharing (inline, same as the article dialog) ---- */
+  let pseoAuto = { title: true, meta: true, slug: true }, pfOg = null;
   const SEO_T = 60, SEO_D = 160;
-  const seoSlug = n => '/products/' + n.toLowerCase().replace(/\(.*?\)/g, m => m.slice(1, -1)).replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
   const seoTwo = t => { const m = t.replace(/\s+/g, ' ').trim().match(/[^.!?]+[.!?]+/g); return m ? m.slice(0, 2).map(x => x.trim()).join(' ') : t.trim(); };
-  const seoCut = (t, n) => t.length > n ? t.slice(0, n - 1).trimEnd() + '\u2026' : t;
   function seoSite() { let name = 'Your store', domain = 'yourwebsite.com'; try { const s = curSite(); if (s) { name = s.name || name; domain = (siteData(s) || {}).domain || domain; } } catch (e) {} return { name, domain }; }
+  const prodSlug = x => (x.seo && x.seo.slug) || slugify(x.name);
   function seoFill() {
     const n = $('#pf-name').value.trim(), site = seoSite();
-    if (seoAuto.title) $('#pf-seo-title').value = n ? n + ' \u2014 ' + site.name : '';
-    if (seoAuto.meta) $('#pf-seo-meta').value = seoTwo($('#pf-desc').value);
-    if (seoAuto.slug) $('#pf-seo-slug').value = n ? seoSlug(n) : '';
+    if (pseoAuto.title) $('#pf-seo-title').value = n ? n + ' | ' + site.name : '';
+    if (pseoAuto.meta) $('#pf-seo-meta').value = seoTwo($('#pf-desc').value).slice(0, SEO_D);
+    if (pseoAuto.slug) $('#pf-seo-slug').value = slugify(n);
   }
   function seoPaint() {
-    const t = $('#pf-seo-title').value, m = $('#pf-seo-meta').value, sl = $('#pf-seo-slug').value.trim(), site = seoSite(), on = $('#pf-seo-index').checked;
-    const path = sl.replace(/^\/+/, '').split('/').filter(Boolean).join(' \u203A ');
-    const url = site.domain + (path ? ' \u203A ' + path : ''), ini = site.name.charAt(0).toUpperCase();
-    const T = seoCut(t, SEO_T) || 'Page title', D = seoCut(m, SEO_D) || 'Add a description and it shows here.';
-    $('#ps-fav').textContent = ini; $('#ps-site').textContent = site.name; $('#ps-url').textContent = url; $('#ps-t').textContent = T; $('#ps-d').textContent = D;
-    $('#ps-pill').textContent = on ? 'Visible on Google' : 'Hidden from Google'; $('#ps-pill').classList.toggle('off', !on);
-    $('#gp-fav').textContent = ini; $('#gp-sn').textContent = site.name; $('#gp-url').textContent = url; $('#gp-t').textContent = T; $('#gp-d').textContent = D;
-    $('#gp-q').textContent = 'buy ' + ($('#pf-name').value.trim().toLowerCase() || 'your product') + ' online';
-    $('#seo-dom').textContent = site.domain;
-    [['title', t, SEO_T], ['meta', m, SEO_D]].forEach(([k, v, lim]) => {
-      const c = $('#seo-c-' + k), b = $('#seo-bar-' + k);
-      c.textContent = v.length + ' / ' + lim; c.className = v.length > lim ? 'over' : '';
-      b.style.width = Math.min(100, v.length / lim * 100) + '%'; b.className = v.length > lim ? 'over' : '';
+    [['title', SEO_T], ['meta', SEO_D]].forEach(([k, lim]) => {
+      const v = $('#pf-seo-' + k).value, c = $('#pseo-c-' + k);
+      c.textContent = v.length + '/' + lim; c.classList.toggle('over', v.length > lim);
+      c.title = v.length > lim ? 'Google may cut this off in search results' : '';
     });
-    $('#gp-off').hidden = on; $('.seo-res', dSeo).classList.toggle('off', !on);
-    $('#ps-sxv-slug').textContent = site.domain + (sl ? '/' + sl.replace(/^\/+/, '') : '');
-    $('#ps-sxv-index').textContent = on ? 'Visible on Google' : 'Hidden from Google';
+    const img = pfOg || pfImg, th = $('#pf-og-thumb');
+    th.innerHTML = img ? `<img src="${img}" alt="" onerror="this.parentNode.classList.add('empty');this.remove()">` : '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="#i-image"/></svg>';
+    th.classList.toggle('empty', !img);
+    $('#pf-og-pick-l').textContent = img ? 'Change Image' : 'Upload Image';
+    $('#pf-og-clear').hidden = !pfOg;
+    $('#pf-og-note').textContent = pfOg ? 'Custom image for WhatsApp and social posts.' : pfImg ? 'Using the product image.' : 'Uses the product image once you add one.';
+    $('#pf-index-note').textContent = $('#pf-seo-index').checked ? 'Google can list this product in search results.' : 'Hidden from Google. People with the link can still open it.';
   }
-  function seoRestore(o) {
-    seoAuto = { ...o.auto }; $('#pf-seo-title').value = o.title; $('#pf-seo-meta').value = o.meta; $('#pf-seo-slug').value = o.slug; $('#pf-seo-index').checked = o.index;
-  }
-  const seoRead = () => ({ title: $('#pf-seo-title').value.trim(), meta: $('#pf-seo-meta').value.trim(), slug: $('#pf-seo-slug').value.trim(), index: $('#pf-seo-index').checked, auto: { ...seoAuto } });
+  const seoRead = () => ({ title: $('#pf-seo-title').value.trim(), meta: $('#pf-seo-meta').value.trim(), slug: $('#pf-seo-slug').value.trim().replace(/^-+|-+$/g, ''), index: $('#pf-seo-index').checked, auto: { ...pseoAuto }, ogUse: !pfOg, og: pfOg });
   function seoLoad(p) {
-    if (p && p.seo) seoRestore(p.seo);
-    else { seoAuto = { title: true, meta: true, slug: true }; $('#pf-seo-index').checked = true; seoFill(); }
+    const o = p && p.seo;
+    if (o) {
+      pseoAuto = { title: true, meta: true, slug: true, ...o.auto };
+      $('#pf-seo-title').value = o.title || ''; $('#pf-seo-meta').value = o.meta || '';
+      $('#pf-seo-slug').value = (o.slug || '').replace(/^\/?products\//, '').replace(/^\/+/, '');
+      $('#pf-seo-index').checked = o.index !== false;
+      pfOg = o.ogUse === false ? (o.og || null) : null;
+    } else { pseoAuto = { title: true, meta: true, slug: true }; $('#pf-seo-index').checked = true; pfOg = null; }
+    seoFill();
+    ['pf-seo-title', 'pf-seo-meta', 'pf-seo-slug'].forEach(id => fieldErr(id, ''));
+    $('#pf-og-err').hidden = true;
     seoPaint();
   }
   ['#pf-name', '#pf-desc'].forEach(id => $(id).addEventListener('input', () => { seoFill(); seoPaint(); }));
-  [['title', '#pf-seo-title'], ['meta', '#pf-seo-meta'], ['slug', '#pf-seo-slug']].forEach(([k, id]) => $(id).addEventListener('input', () => { seoAuto[k] = false; seoPaint(); }));
+  [['title', '#pf-seo-title'], ['meta', '#pf-seo-meta'], ['slug', '#pf-seo-slug']].forEach(([k, id]) => $(id).addEventListener('input', e => {
+    if (k === 'slug') e.target.value = e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-{2,}/g, '-');
+    pseoAuto[k] = false; fieldErr(id.slice(1), ''); seoPaint();
+  }));
   $('#pf-seo-index').addEventListener('change', seoPaint);
-  $('#pf-seo-open').addEventListener('click', () => { seoSnap = seoRead(); seoSaved = true; seoPaint(); dSeo.showModal(); $('#pf-seo-title').focus(); });
-  $('#pf-seo-save').addEventListener('click', () => { seoSaved = true; dSeo.close(); });
-  $('#dlg-seo [data-discard]').addEventListener('click', () => { seoSaved = false; });
-  $('#pf-seo-reset').addEventListener('click', () => { seoAuto = { title: true, meta: true, slug: true }; seoFill(); seoPaint(); });
-  dSeo.addEventListener('close', () => { if (!seoSaved && seoSnap) seoRestore(seoSnap); seoPaint(); seoSaved = false; seoSnap = null; });
+  $('#pf-og-clear').addEventListener('click', () => { pfOg = null; seoPaint(); });
+  function pfOgTake(f) {
+    const err = $('#pf-og-err'); if (!f) return;
+    const msg = !/^image\/(png|jpe?g|webp)$/.test(f.type) ? 'Use a JPG, PNG or WebP image.' : f.size > 5 * 1024 * 1024 ? 'That image is over 5MB. Pick a smaller one.' : '';
+    err.textContent = msg; err.hidden = !msg; if (msg) return;
+    const r = new FileReader(); r.onload = () => { pfOg = r.result; seoPaint(); }; r.readAsDataURL(f);
+  }
+  $('#pf-og-file').addEventListener('change', e => { const f = e.target.files[0]; e.target.value = ''; pfOgTake(f); });
+  const pfOgDrop = $('#pf-og-drop');
+  ['dragenter', 'dragover'].forEach(ev => pfOgDrop.addEventListener(ev, e => { e.preventDefault(); pfOgDrop.classList.add('drag'); }));
+  ['dragleave', 'drop'].forEach(ev => pfOgDrop.addEventListener(ev, () => pfOgDrop.classList.remove('drag')));
+  pfOgDrop.addEventListener('drop', e => { e.preventDefault(); pfOgTake(e.dataTransfer.files[0]); });
 
   function openProduct(p) {
     pfEdit = p || null; pfF.reset(); pfImg = p ? (p.img || thumbSrc(p).replace('w=120&h=120','w=280&h=280')) : null; pfSkuEdited = !!p; pfImgErr('');
@@ -6235,6 +6522,11 @@ button.sx-row:hover { background: #faf9f5; }
     if (!(price > 0)) bad('pf-sale', 'Enter a sale price above 0, e.g. 4.99.');
     if (!(regular > 0)) bad('pf-regular', 'Enter a regular price above 0, e.g. 4.99.');
     else if (price > regular) bad('pf-sale', 'The sale price can’t be higher than the regular price.');
+    const pslug = $('#pf-seo-slug').value.trim().replace(/^-+|-+$/g, '');
+    if (!$('#pf-seo-title').value.trim()) bad('pf-seo-title', 'Add a meta title. It is the headline people see on Google.');
+    if (!$('#pf-seo-meta').value.trim()) bad('pf-seo-meta', 'Add a meta description, one or two sentences about the product.');
+    if (!pslug) bad('pf-seo-slug', 'Add a URL slug, e.g. organic-farm-eggs.');
+    else if (list.some(x => x !== pfEdit && prodSlug(x) === pslug)) bad('pf-seo-slug', `/products/${pslug} is already used by another product.`);
     if (first) { $('#' + first).focus(); return; }
     const data = { name, sku, cat, stock: +stockRaw, price: Math.round(price * 100) / 100, regular: Math.round(regular * 100) / 100, desc, img: pfImg, seo: seoRead(),
       sub: desc ? desc.split('\n')[0].slice(0, 40) : (pfEdit ? pfEdit.sub : cat) };
@@ -6250,7 +6542,7 @@ button.sx-row:hover { background: #faf9f5; }
   });
 
 
-  /* =====================================================================
+  /* @@JS-CATEGORIES =====================================================================
      E-Commerce / Store → Categories (+ Create / edit category dialog)
      ===================================================================== */
   Object.assign(state, { catPage: 1 });
@@ -6405,9 +6697,9 @@ button.sx-row:hover { background: #faf9f5; }
       d.classList.add('closing');
       d.addEventListener('animationend', () => { d.classList.remove('closing'); nativeClose(v); }, { once: true });
     };
-    d.addEventListener('cancel', e => { if (dSeo.open) return; e.preventDefault(); d.close(); });
+    d.addEventListener('cancel', e => { e.preventDefault(); d.close(); });
   })();
-  /* ---------- Add page dialog ---------- */
+  /* @@JS-PAGE-DLG ---------- Add page dialog ---------- */
   const dPage = $('#dlg-page');
   let pgPathEdited = false;
   $('#pg-tpl').innerHTML = PAGE_TPLS.map(t => `<option>${esc(t)}</option>`).join('');
@@ -6433,7 +6725,7 @@ button.sx-row:hover { background: #faf9f5; }
     state.pageQuery = ''; dPage.close(); renderPagesView(); toast(`${name} added as a draft`, { label: 'Edit page', action: () => toast(`Opening ${name} in the page editor`) });
   });
 
-  /* =====================================================================
+  /* @@JS-ORDERS =====================================================================
      E-Commerce / Store → Orders (+ Order details dialog)
      ===================================================================== */
   Object.assign(state, { orderFilter: 'all', orderPage: 1 });
@@ -6620,7 +6912,7 @@ button.sx-row:hover { background: #faf9f5; }
   dOrder.addEventListener('cancel', e => { if (!odMenu.hidden) { e.preventDefault(); odMenu.hidden = true; odBtn.setAttribute('aria-expanded', 'false'); odBtn.focus(); } });
   $('#od-form').addEventListener('submit', e => e.preventDefault());
 
-  /* =====================================================================
+  /* @@JS-CHECKOUT =====================================================================
      E-Commerce / Store → Checkout Settings (+ Add / edit shipping rate)
      ===================================================================== */
   const BASE_REGIONS = ['Ikeja', 'Surulere', 'Yaba', 'Agege', 'Lekki', 'Victoria Island'];
@@ -6775,7 +7067,7 @@ button.sx-row:hover { background: #faf9f5; }
     dShip.close(); renderCheckoutView(); toast(srEdit ? `${name} updated` : `${name} added`);
   });
 
-  /* =====================================================================
+  /* @@JS-ANALYTICS =====================================================================
      Site analytics (#/overview/analytics): KPIs, live trend chart,
      top pages and top-selling products, all computed from one series
      ===================================================================== */
@@ -6969,7 +7261,7 @@ button.sx-row:hover { background: #faf9f5; }
     if (hit('data-an-export')) { closeMenus(); exportAnalytics(); }
   });
 
-  /* =====================================================================
+  /* @@JS-SITESET-CONST =====================================================================
      Site settings (#/overview/settings): tabs, custom domain,
      Connect Custom Domain dialog → DNS records dialog → verify
      ===================================================================== */
@@ -6989,7 +7281,219 @@ button.sx-row:hover { background: #faf9f5; }
     danger: 'Unpublish, transfer or permanently delete this site.'
   };
 
-  /* =====================================================================
+  /* @@JS-MEDIA =====================================================================
+     Media Library (#/overview/media): grid / list, type + month filters,
+     search, bulk select, upload (button or drag and drop), per-item menu
+     ===================================================================== */
+  Object.assign(state, { mlType: 'all', mlMonth: 'all', mlQuery: '', mlView: 'grid', mlBulk: false, mlPage: 1 });
+  const mlSel = new Set();
+  const MB = 1024 * 1024;
+  const ML_KIND = { image: 'Image', video: 'Video', document: 'Document' };
+  const ML_TYPES = { all: 'All media items', image: 'Images', video: 'Videos', document: 'Documents' };
+  const ML_SEED = [
+    ['farm-fresh-milk', 'mp4', 'video', 31 * MB, [2026, 9, 15, 23, 47], '1639151082235-406d8eb262b9'],
+    ['invoice-002', 'pdf', 'document', 95 * 1024, [2026, 9, 14, 15, 17]],
+    ['farm-fresh-apples', 'jpg', 'image', 1.4 * MB, [2026, 9, 13, 15, 42], '1560806887-1e4cd0b6cbd6'],
+    ['organic-vegetables', 'mp4', 'video', 27 * MB, [2026, 9, 11, 12, 19], '1635450370155-d6a650322fa5'],
+    ['product-catalog', 'pdf', 'document', 709 * 1024, [2026, 9, 10, 16, 22]],
+    ['artisan-bread', 'mp4', 'video', 24 * MB, [2026, 9, 9, 17, 17], '1590301157172-7ba48dd1c2b2'],
+    ['fresh-chicken', 'jpg', 'image', 1.6 * MB, [2026, 9, 8, 11, 5], '1633096013004-e2cb4023b560'],
+    ['invoice-001', 'pdf', 'document', 101 * 1024, [2026, 9, 7, 7, 57]],
+    ['garden-honey', 'jpg', 'image', 2 * MB, [2026, 9, 5, 9, 50], '1587049352851-8d4e89133924'],
+    ['homemade-cheese', 'mp4', 'video', 29 * MB, [2026, 9, 4, 8, 0], '1654184729393-e9d3b8c589c5'],
+    ['organic-farm-eggs', 'jpg', 'image', 1.7 * MB, [2026, 9, 3, 10, 33], '1498654077810-12c21d4d6dc3']
+  ];
+  function mediaOf(s) {
+    if (s.media) return s.media;
+    return (s.media = isShop(s) ? ML_SEED.map(([base, ext, kind, size, d, photo], i) => ({
+      id: `${s.id}m${i}`, base, ext, kind, size, date: new Date(...d).getTime(),
+      thumb: photo ? `https://images.unsplash.com/photo-${photo}?w=320&h=320&fit=crop&auto=format&q=70` : null
+    })) : []);
+  }
+  const fmtSize = b => b >= MB ? `${+(b / MB).toFixed(1)}MB` : `${Math.max(1, Math.round(b / 1024))}KB`;
+  const mlWhen = t => `${fmtDate(t)} | ${fmtTime(t).replace(/\s/g, '')}`;
+  const mlMonthKey = t => { const d = new Date(t); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`; };
+  const mlMonthLabel = k => { const [y, m] = k.split('-'); return new Date(+y, +m - 1, 1).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }); };
+  const ML_PDF = '<svg width="34" height="34" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 2.75h8.25L18.5 7v14.25H6z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M14 2.75V7.25h4.5" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><text x="12.25" y="16.4" font-family="Inter, Arial, sans-serif" font-size="4.6" font-weight="700" text-anchor="middle" fill="currentColor">PDF</text></svg>';
+  const ML_PLAY = '<span class="ml-play" aria-hidden="true"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M2.5 1.5v7l6-3.5z" fill="currentColor"/></svg></span>';
+  const I_LISTV = '<svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><rect x="2" y="2.5" width="14" height="13" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M5 6.5h8M5 9h8M5 11.5h8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>';
+  const I_GRIDV = '<svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><rect x="2" y="2" width="5.5" height="5.5" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="10.5" y="2" width="5.5" height="5.5" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="2" y="10.5" width="5.5" height="5.5" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="10.5" y="10.5" width="5.5" height="5.5" rx="1" stroke="currentColor" stroke-width="1.5"/></svg>';
+  const mlThumb = m => m.kind === 'document' ? ML_PDF
+    : (m.vsrc ? `<video src="${m.vsrc}" muted preload="metadata" aria-hidden="true"></video>` : m.thumb ? `<img src="${m.thumb}" alt="" loading="lazy" onerror="this.remove()">` : '') + (m.kind === 'video' ? ML_PLAY : '');
+  const mlName = m => `<span class="ml-name"><span class="b">${esc(m.base)}</span><span>.${esc(m.ext)}</span></span>`;
+  const mlFull = m => `${m.base}.${m.ext}`;
+  function mlList(s) {
+    const q = state.mlQuery.trim().toLowerCase();
+    return mediaOf(s).filter(m => (state.mlType === 'all' || m.kind === state.mlType)
+      && (state.mlMonth === 'all' || mlMonthKey(m.date) === state.mlMonth)
+      && (!q || mlFull(m).toLowerCase().includes(q)));
+  }
+
+  function renderMediaView() {
+    const el = $('#ov-view'), s = curSite();
+    syncDomain(s);
+    if (!s) { el.innerHTML = noSiteView('Media Library', 'Manage your images, videos, and documents for this website.'); return; }
+    const months = [...new Set(mediaOf(s).map(m => mlMonthKey(m.date)))].sort().reverse();
+    if (state.mlMonth !== 'all' && !months.includes(state.mlMonth)) state.mlMonth = 'all';
+    el.innerHTML = `
+      <div class="sv-head">
+        <div class="ov-head"><h1 tabindex="-1">Media Library</h1><p>Manage your images, videos, and documents for this website.</p></div>
+        <div class="wp-tools" style="justify-content:flex-end">
+          <button type="button" class="btn-dark sv-add" data-ml-upload>${icon('i-plus', 14, 14, '0 0 18 18')}Upload Media</button>
+          <input type="file" id="ml-file" multiple accept="image/*,video/*,application/pdf" hidden>
+        </div>
+      </div>
+      <section class="ov-card ml-card" id="ml-card" aria-label="Media library">
+        <div class="ml-bar">
+          <div class="ml-views" role="group" aria-label="View">
+            <button type="button" class="ml-vbtn" data-ml-view="list" aria-pressed="${state.mlView === 'list'}" aria-label="List view" title="List view">${I_LISTV}</button>
+            <button type="button" class="ml-vbtn" data-ml-view="grid" aria-pressed="${state.mlView === 'grid'}" aria-label="Grid view" title="Grid view">${I_GRIDV}</button>
+          </div>
+          <label class="sr-only" for="ml-type">Media type</label>
+          <select class="ml-sel" id="ml-type">${Object.entries(ML_TYPES).map(([k, l]) => `<option value="${k}" ${k === state.mlType ? 'selected' : ''}>${l}</option>`).join('')}</select>
+          <label class="sr-only" for="ml-month">Upload date</label>
+          <select class="ml-sel" id="ml-month"><option value="all">All dates</option>${months.map(k => `<option value="${k}" ${k === state.mlMonth ? 'selected' : ''}>${mlMonthLabel(k)}</option>`).join('')}</select>
+          <button type="button" class="ml-bulk" id="ml-bulk" aria-pressed="${state.mlBulk}">${state.mlBulk ? 'Cancel' : 'Bulk Select'}</button>
+          <div class="ml-search"><label for="ml-search">Search</label>
+            <input id="ml-search" type="search" autocomplete="off" value="${esc(state.mlQuery)}"></div>
+        </div>
+        <div class="ml-bulkbar" id="ml-bulkbar" hidden>
+          <strong id="ml-selcount">0 selected</strong>
+          <button type="button" class="ml-act" data-ml-selall>Select all</button>
+          <button type="button" class="ml-act dark" data-ml-delsel disabled>Delete</button>
+        </div>
+        <div id="ml-body"></div>
+      </section>
+      <div class="sv-foot" id="ml-foot"></div>`;
+    $('#ml-type').addEventListener('change', e => { state.mlType = e.target.value; state.mlPage = 1; paintMedia(); });
+    $('#ml-month').addEventListener('change', e => { state.mlMonth = e.target.value; state.mlPage = 1; paintMedia(); });
+    $('#ml-search').addEventListener('input', e => { state.mlQuery = e.target.value; state.mlPage = 1; paintMedia(); });
+    $('#ml-file').addEventListener('change', e => { mlUpload(e.target.files); e.target.value = ''; });
+    const card = $('#ml-card');
+    ['dragenter', 'dragover'].forEach(ev => card.addEventListener(ev, e => { if ([...(e.dataTransfer?.types || [])].includes('Files')) { e.preventDefault(); card.classList.add('drag'); } }));
+    card.addEventListener('dragleave', e => { if (!card.contains(e.relatedTarget)) card.classList.remove('drag'); });
+    card.addEventListener('drop', e => { e.preventDefault(); card.classList.remove('drag'); mlUpload(e.dataTransfer.files); });
+    paintMedia();
+  }
+
+  function paintMedia() {
+    const s = curSite(), body = $('#ml-body'); if (!s || !body) return;
+    const all = mediaOf(s), list = mlList(s), PER = 20;
+    [...mlSel].forEach(id => { if (!all.some(m => m.id === id)) mlSel.delete(id); });
+    const pages = Math.max(1, Math.ceil(list.length / PER));
+    state.mlPage = Math.min(Math.max(1, state.mlPage), pages);
+    const start = (state.mlPage - 1) * PER, rows = list.slice(start, start + PER);
+    const bulk = state.mlBulk || mlSel.size > 0;
+    const menu = m => `<span class="menu-anchor"><button type="button" class="more-btn" data-more="mm-${m.id}" aria-expanded="false" aria-label="More actions for ${esc(mlFull(m))}">${icon('i-more')}</button>
+        <div class="more-menu row-menu" id="mm-${m.id}" hidden>
+          <button data-ml-copy="${m.id}">Copy link</button>
+          <button data-ml-dl="${m.id}">Download</button>
+          <hr><button class="danger" data-ml-del="${m.id}">Delete</button>
+        </div></span>`;
+    const check = m => `<input type="checkbox" class="ml-check" data-ml-check="${m.id}" ${mlSel.has(m.id) ? 'checked' : ''} aria-label="Select ${esc(mlFull(m))}">`;
+    const empty = all.length
+      ? `<div class="tab-empty ml-empty"><strong>No media matches</strong>Try another type, date or search.<br><button type="button" class="btn-text" data-ml-clear>Clear filters</button></div>`
+      : `<div class="tab-empty ml-empty"><strong>No media yet</strong>Upload images, videos or PDFs, or drag files onto this box.<br><button type="button" class="btn-dark" data-ml-upload>${icon('i-plus', 14, 14, '0 0 18 18')}Upload Media</button></div>`;
+    if (state.mlView === 'grid') {
+      body.className = 'ml-grid' + (bulk ? ' bulk' : '');
+      body.innerHTML = rows.map(m => `
+        <article class="ml-item${mlSel.has(m.id) ? ' sel' : ''}" data-ml-item="${m.id}">
+          <div class="ml-thumb${m.kind === 'document' ? ' doc' : ''}">${check(m)}${mlThumb(m)}</div>
+          <div class="ml-nrow">${mlName(m)}${menu(m)}</div>
+          <p class="ml-meta">${ML_KIND[m.kind]} | ${fmtSize(m.size)}<br>${mlWhen(m.date)}</p>
+        </article>`).join('') || empty;
+    } else {
+      body.className = 'ml-list' + (bulk ? ' bulk' : '');
+      body.innerHTML = rows.length ? `<div class="ml-row head" role="row"><span></span><span></span><span>File name</span><span>Type</span><span>Size</span><span>Uploaded</span><span></span></div>` + rows.map(m => `
+        <div class="ml-row${mlSel.has(m.id) ? ' sel' : ''}" data-ml-item="${m.id}">
+          ${check(m)}<span class="ml-thumb${m.kind === 'document' ? ' doc' : ''}">${m.kind === 'document' ? ML_PDF.replace('width="34" height="34"', 'width="24" height="24"') : mlThumb(m)}</span>
+          <span style="min-width:0">${mlName(m)}</span>
+          <span class="muted c-hide">${ML_KIND[m.kind]}</span><span class="muted c-hide">${fmtSize(m.size)}</span><span class="muted c-hide">${mlWhen(m.date)}</span>
+          ${menu(m)}
+        </div>`).join('') : empty;
+    }
+    $('#ml-bulkbar').hidden = !bulk;
+    $('#ml-selcount').textContent = `${mlSel.size} selected`;
+    $('[data-ml-delsel]').disabled = !mlSel.size;
+    const allVis = rows.length && rows.every(m => mlSel.has(m.id));
+    $('[data-ml-selall]').textContent = allVis ? 'Clear selection' : 'Select all';
+    $('#ml-foot').innerHTML = `<span>${list.length ? `Showing ${start + 1}-${start + rows.length} of ${list.length} media ${list.length === 1 ? 'item' : 'items'}` : 'Showing 0 media items'}</span>${pagerHTML(state.mlPage, pages, 'ml-page', 'Media pages')}`;
+  }
+
+  function mlUpload(files) {
+    const s = curSite(); if (!s || !files || !files.length) return;
+    const list = mediaOf(s), skipped = [];
+    let added = 0;
+    [...files].forEach((f, i) => {
+      const kind = /^image\//.test(f.type) ? 'image' : /^video\//.test(f.type) ? 'video' : f.type === 'application/pdf' ? 'document' : null;
+      if (!kind || f.size > 100 * MB) { skipped.push(f.name); return; }
+      const dot = f.name.lastIndexOf('.');
+      const base = (dot > 0 ? f.name.slice(0, dot) : f.name).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'file';
+      const ext = dot > 0 ? f.name.slice(dot + 1).toLowerCase() : (kind === 'document' ? 'pdf' : kind === 'video' ? 'mp4' : 'jpg');
+      const url = kind === 'document' ? null : URL.createObjectURL(f);
+      list.unshift({ id: `${s.id}m${Date.now()}${i}`, base, ext, kind, size: f.size, date: Date.now(), thumb: kind === 'image' ? url : null, vsrc: kind === 'video' ? url : null, file: url });
+      added++;
+    });
+    if (added) { Object.assign(state, { mlType: 'all', mlMonth: 'all', mlQuery: '', mlPage: 1 }); renderMediaView(); }
+    if (added && skipped.length) toast(`${added} uploaded. Skipped ${skipped.length}: only images, videos and PDFs up to 100MB.`);
+    else if (added) toast(`${added} ${added === 1 ? 'file' : 'files'} uploaded`);
+    else toast('Only images, videos and PDFs up to 100MB can be uploaded.');
+  }
+  function mlRemove(ids) {
+    const s = curSite(); if (!s) return;
+    const list = mediaOf(s), removed = list.map((m, i) => [m, i]).filter(([m]) => ids.includes(m.id));
+    removed.slice().reverse().forEach(([, i]) => list.splice(i, 1));
+    ids.forEach(id => mlSel.delete(id));
+    if (!mlSel.size) state.mlBulk = false;
+    renderMediaView();
+    const label = removed.length === 1 ? mlFull(removed[0][0]) : `${removed.length} files`;
+    toast(`${label} deleted`, { label: 'Undo', action: () => { removed.forEach(([m, i]) => list.splice(i, 0, m)); if (siteView === 'media') renderMediaView(); } });
+  }
+
+  $('#ov-view').addEventListener('change', e => {
+    if (siteView !== 'media') return;
+    const c = e.target.closest('[data-ml-check]'); if (!c) return;
+    c.checked ? mlSel.add(c.dataset.mlCheck) : mlSel.delete(c.dataset.mlCheck);
+    paintMedia();
+    $(`[data-ml-check="${c.dataset.mlCheck}"]`)?.focus();
+  });
+  $('#ov-view').addEventListener('click', e => {
+    const s = curSite(); if (!s || siteView !== 'media') return;
+    const hit = a => e.target.closest(`[${a}]`), find = id => mediaOf(s).find(m => m.id === id); let b;
+    if (hit('data-ml-upload')) { $('#ml-file').click(); return; }
+    if ((b = hit('data-ml-view'))) { state.mlView = b.dataset.mlView; $$('[data-ml-view]').forEach(x => x.setAttribute('aria-pressed', x === b)); paintMedia(); return; }
+    if (e.target.closest('#ml-bulk')) {
+      state.mlBulk = !state.mlBulk; if (!state.mlBulk) mlSel.clear();
+      const btn = $('#ml-bulk'); btn.setAttribute('aria-pressed', state.mlBulk); btn.textContent = state.mlBulk ? 'Cancel' : 'Bulk Select';
+      paintMedia(); return;
+    }
+    if (hit('data-ml-selall')) {
+      const vis = mlList(s).slice((state.mlPage - 1) * 20, state.mlPage * 20);
+      const all = vis.every(m => mlSel.has(m.id));
+      vis.forEach(m => all ? mlSel.delete(m.id) : mlSel.add(m.id)); paintMedia(); return;
+    }
+    if (hit('data-ml-delsel')) { mlRemove([...mlSel]); return; }
+    if (hit('data-ml-clear')) { Object.assign(state, { mlType: 'all', mlMonth: 'all', mlQuery: '', mlPage: 1 }); renderMediaView(); return; }
+    if ((b = hit('data-ml-page'))) { state.mlPage = +b.dataset.mlPage; paintMedia(); return; }
+    if ((b = hit('data-ml-copy'))) {
+      const m = find(b.dataset.mlCopy), url = `https://${siteData(s).domain}/media/${mlFull(m)}`; closeMenus();
+      (navigator.clipboard && window.isSecureContext ? navigator.clipboard.writeText(url) : Promise.reject()).then(() => toast('Link copied'), () => toast(url)); return;
+    }
+    if ((b = hit('data-ml-dl'))) {
+      const m = find(b.dataset.mlDl), src = m.file || m.thumb; closeMenus();
+      if (!src) { toast(`${mlFull(m)} is sample data, so there's no file to download yet`); return; }
+      const a = document.createElement('a'); a.href = src; a.download = mlFull(m); a.target = '_blank'; a.rel = 'noopener';
+      document.body.appendChild(a); a.click(); a.remove(); return;
+    }
+    if ((b = hit('data-ml-del'))) { closeMenus(); mlRemove([b.dataset.mlDel]); return; }
+    /* In bulk mode a click anywhere on an item toggles it */
+    const item = hit('data-ml-item');
+    if (item && (state.mlBulk || mlSel.size) && !e.target.closest('.menu-anchor, .ml-check')) {
+      const id = item.dataset.mlItem; mlSel.has(id) ? mlSel.delete(id) : mlSel.add(id); paintMedia();
+    }
+  });
+
+  /* @@JS-CONTENT =====================================================================
      Content (#/overview/content): article list + add / edit dialog
      ===================================================================== */
   Object.assign(state, { artQuery: '', artFilter: 'all', artPage: 1 });
@@ -7144,7 +7648,7 @@ button.sx-row:hover { background: #faf9f5; }
     sel.value = current || labels[0];
   }
 
-  /* ---- Article content body: rich text editor ---- */
+  /* @@JS-ARTICLE-EDITOR ---- Article content body: rich text editor ---- */
   const aeText = () => aeDoc.innerText.replace(/\s+/g, ' ').trim();
   const aeErr = m => { const e = $('#ae-err'); e.textContent = m || ''; e.hidden = !m; $('#ae').classList.toggle('bad', !!m); };
   /* Formatted, safe copy of article HTML for previews: keeps bold/italic/underline/headings/lists, drops images and attributes */
@@ -7254,84 +7758,48 @@ button.sx-row:hover { background: #faf9f5; }
   const arReadImg = (f, done) => { if (!f) return; if (!/^image\/(png|jpe?g|webp)$/.test(f.type) || f.size > 5 * 1024 * 1024) return toast('Use a JPG, PNG or WebP image under 5MB.'); const r = new FileReader(); r.onload = () => done(r.result); r.readAsDataURL(f); };
   $('#ae-img').addEventListener('change', e => { const f = e.target.files[0]; e.target.value = ''; arReadImg(f, src => { aeRestore(); document.execCommand('insertHTML', false, `<img src="${src}" alt="">`); aeDoc.dispatchEvent(new Event('input')); }); });
 
-  /* ---- Article SEO: summary card + its own dialog (same as products) ---- */
-  const dASeo = $('#dlg-aseo');
-  let aseoAuto = { title: true, meta: true }, aseoSnap = null, aseoSaved = false, arOg = null;
-  const aSlugPath = () => '/blog/' + ($('#ar-slug').value.trim().replace(/^-+|-+$/g, '') || '');
-  /* Excerpt: filled from the first sentences of the Content Body until the person types their own */
+  /* @@JS-ARTICLE-SEO ---- Article SEO & Social Sharing (inline under the text editor) ---- */
+  let aseoAuto = { title: true, meta: true }, arOg = null;
+  /* Meta title and description fill themselves from the title and text until the person types their own */
   function aseoFill() {
     const n = $('#ar-name').value.trim(), site = seoSite();
-    if (aseoAuto.title) $('#ar-seo-title').value = n ? n + ' — ' + site.name : '';
-    if (aseoAuto.meta) $('#ar-seo-meta').value = seoTwo(aeText());
-    if (!dASeo.open) $('#ar-seo-slug').value = aSlugPath();
+    if (aseoAuto.title) $('#ar-seo-title').value = n ? n + ' | ' + site.name : '';
+    if (aseoAuto.meta) $('#ar-seo-meta').value = seoTwo(aeText()).slice(0, SEO_D);
   }
   function aseoPaint() {
-    const tt = $('#ar-seo-title').value, m = $('#ar-seo-meta').value, sl = $('#ar-seo-slug').value.trim(), site = seoSite(), on = $('#ar-seo-index').checked;
-    const path = sl.replace(/^\/+/, '').split('/').filter(Boolean).join(' › ');
-    const url = site.domain + (path ? ' › ' + path : ''), ini = site.name.charAt(0).toUpperCase();
-    const T = seoCut(tt, SEO_T) || 'Article title', D = seoCut(m, SEO_D) || 'Add a description and it shows here.';
-    $('#arps-fav').textContent = ini; $('#arps-site').textContent = site.name; $('#arps-url').textContent = url; $('#arps-t').textContent = T; $('#arps-d').textContent = D;
-    $('#arps-pill').textContent = on ? 'Visible on Google' : 'Hidden from Google'; $('#arps-pill').classList.toggle('off', !on);
-    $('#agp-fav').textContent = ini; $('#agp-sn').textContent = site.name; $('#agp-url').textContent = url; $('#agp-t').textContent = T; $('#agp-d').textContent = D;
-    $('#agp-q').textContent = ($('#ar-name').value.trim().toLowerCase() || 'your article');
-    $('#aseo-dom').textContent = site.domain;
-    [['title', tt, SEO_T], ['meta', m, SEO_D]].forEach(([k, v, lim]) => {
-      const c = $('#aseo-c-' + k), b = $('#aseo-bar-' + k);
-      c.textContent = v.length + ' / ' + lim; c.className = v.length > lim ? 'over' : '';
-      b.style.width = Math.min(100, v.length / lim * 100) + '%'; b.className = v.length > lim ? 'over' : '';
+    [['title', SEO_T], ['meta', SEO_D]].forEach(([k, lim]) => {
+      const v = $('#ar-seo-' + k).value, c = $('#aseo-c-' + k);
+      c.textContent = v.length + '/' + lim; c.classList.toggle('over', v.length > lim);
+      c.title = v.length > lim ? 'Google may cut this off in search results' : '';
     });
-    $('#agp-off').hidden = on; $('.seo-res', dASeo).classList.toggle('off', !on);
-    $('#ar-sxv-slug').textContent = site.domain + (sl ? '/' + sl.replace(/^\/+/, '') : '');
-    $('#ar-sxv-index').textContent = on ? 'Visible on Google' : 'Hidden from Google';
-    const use = $('#ar-og-use').checked, img = use ? arImg : arOg;
-    $('#ar-og-own').hidden = use; $('#ar-og-clear').hidden = !arOg;
-    $('#ar-og-img').innerHTML = img ? `<img src="${img}" alt="">` : `<span>${use ? 'Add a featured banner image to the article' : 'Upload an image for social sharing'}</span>`;
-    $('#ar-sxv-og').innerHTML = `<span class="sx-thumb">${img ? `<img src="${img}" alt="">` : ''}</span>${use ? (arImg ? 'Featured banner image' : 'Featured banner image (none added yet)') : (arOg ? 'Custom image' : 'No image yet')}`;
-    $('#ar-og-dom').textContent = site.domain.toUpperCase(); $('#ar-og-t').textContent = T; $('#ar-og-d').textContent = D;
+    const img = arOg || arImg, th = $('#ar-og-thumb');
+    th.innerHTML = img ? `<img src="${img}" alt="" onerror="this.parentNode.classList.add('empty');this.remove()">` : '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="#i-image"/></svg>';
+    th.classList.toggle('empty', !img);
+    $('#ar-og-pick-l').textContent = img ? 'Change Image' : 'Upload Image';
+    $('#ar-og-clear').hidden = !arOg;
+    $('#ar-og-note').textContent = arOg ? 'Custom image for WhatsApp and social posts.' : arImg ? 'Using the featured image.' : 'Uses the featured image once you add one.';
+    $('#ar-index-note').textContent = $('#ar-seo-index').checked ? 'Google can list this article in search results.' : 'Hidden from Google. People with the link can still open it.';
   }
-  const aseoRead = () => ({ title: $('#ar-seo-title').value.trim(), meta: $('#ar-seo-meta').value.trim(), slug: $('#ar-seo-slug').value.trim(), index: $('#ar-seo-index').checked, auto: { ...aseoAuto }, ogUse: $('#ar-og-use').checked, og: arOg });
-  function aseoRestore(o) { aseoAuto = { ...o.auto }; $('#ar-seo-title').value = o.title; $('#ar-seo-meta').value = o.meta; $('#ar-seo-slug').value = o.slug; $('#ar-seo-index').checked = o.index; $('#ar-og-use').checked = o.ogUse !== false; arOg = o.og || null; }
+  const aseoRead = () => ({ title: $('#ar-seo-title').value.trim(), meta: $('#ar-seo-meta').value.trim(), index: $('#ar-seo-index').checked, auto: { ...aseoAuto }, ogUse: !arOg, og: arOg });
   function aseoLoad(a) {
-    if (a && a.seo) { aseoRestore(a.seo); $('#ar-seo-slug').value = aSlugPath(); }
-    else { aseoAuto = { title: true, meta: true }; $('#ar-seo-index').checked = true; $('#ar-og-use').checked = true; arOg = null; aseoFill(); }
+    const o = a && a.seo;
+    if (o) { aseoAuto = { ...o.auto }; $('#ar-seo-title').value = o.title; $('#ar-seo-meta').value = o.meta; $('#ar-seo-index').checked = o.index !== false; arOg = o.ogUse === false ? (o.og || null) : null; if (aseoAuto.title || aseoAuto.meta) aseoFill(); }
+    else { aseoAuto = { title: true, meta: true }; $('#ar-seo-index').checked = true; arOg = null; aseoFill(); }
+    ['ar-seo-title', 'ar-seo-meta'].forEach(id => fieldErr(id, ''));
     aseoPaint();
   }
-  ['#ar-name', '#ar-slug'].forEach(id => $(id).addEventListener('input', () => { aseoFill(); aseoPaint(); }));
-  [['title', '#ar-seo-title'], ['meta', '#ar-seo-meta']].forEach(([k, id]) => $(id).addEventListener('input', () => { aseoAuto[k] = false; aseoPaint(); }));
-  $('#ar-seo-slug').addEventListener('input', aseoPaint);
+  $('#ar-name').addEventListener('input', () => { aseoFill(); aseoPaint(); });
+  [['title', '#ar-seo-title'], ['meta', '#ar-seo-meta']].forEach(([k, id]) => $(id).addEventListener('input', () => { aseoAuto[k] = false; fieldErr(id.slice(1), ''); aseoPaint(); }));
   $('#ar-seo-index').addEventListener('change', aseoPaint);
-  $('#ar-og-use').addEventListener('change', aseoPaint);
-  $('#ar-og-pick').addEventListener('click', () => $('#ar-og-file').click());
   $('#ar-og-clear').addEventListener('click', () => { arOg = null; aseoPaint(); });
-  $('#ar-og-file').addEventListener('change', e => { const f = e.target.files[0]; e.target.value = ''; arReadImg(f, src => { arOg = src; aseoPaint(); }); });
-  $('#ar-seo-open').addEventListener('click', () => { $('#ar-seo-slug').value = aSlugPath(); aseoSnap = aseoRead(); aseoSaved = true; aseoPaint(); dASeo.showModal(); $('#ar-seo-title').focus(); });
-  $('#ar-seo-save').addEventListener('click', () => {
-    aseoSaved = true; dASeo.close();
-  });
-  $('#ar-seo-reset').addEventListener('click', () => { aseoAuto = { title: true, meta: true }; $('#ar-og-use').checked = true; arOg = null; aseoFill(); $('#ar-seo-slug').value = aSlugPath(); aseoPaint(); });
-  $('#dlg-aseo [data-discard]').addEventListener('click', () => { aseoSaved = false; });
-  dASeo.addEventListener('close', () => {
-    if (!aseoSaved && aseoSnap) aseoRestore(aseoSnap);
-    else {
-      const sl = $('#ar-seo-slug').value.trim().replace(/^\/?(blog\/)?/, '').toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-{2,}/g, '-').replace(/^-+|-+$/g, '');
-      if (sl && sl !== $('#ar-slug').value.trim()) { $('#ar-slug').value = sl; arSlugEdited = true; fieldErr('ar-slug', ''); }
-    }
-    $('#ar-seo-slug').value = aSlugPath(); aseoPaint(); aseoSaved = false; aseoSnap = null;
-  });
+  const takeOg = f => arReadImg(f, src => { arOg = src; aseoPaint(); });
+  $('#ar-og-file').addEventListener('change', e => { const f = e.target.files[0]; e.target.value = ''; takeOg(f); });
+  const ogDrop = $('#ar-og-drop');
+  ['dragenter', 'dragover'].forEach(ev => ogDrop.addEventListener(ev, e => { e.preventDefault(); ogDrop.classList.add('drag'); }));
+  ['dragleave', 'drop'].forEach(ev => ogDrop.addEventListener(ev, () => ogDrop.classList.remove('drag')));
+  ogDrop.addEventListener('drop', e => { e.preventDefault(); takeOg(e.dataTransfer.files[0]); });
 
-  /* ---- SEO dialogs: compact rows that open into a small editor ---- */
-  function sxToggle(btn, open) {
-    const body = document.getElementById(btn.getAttribute('aria-controls')); if (!body) return;
-    open = open ?? body.hidden;
-    body.hidden = !open; btn.setAttribute('aria-expanded', open);
-    const act = btn.querySelector('.sx-act'); act.dataset.label ||= act.textContent; act.textContent = open ? 'Done' : act.dataset.label;
-    if (open) body.querySelector('input:not([type=checkbox]), input, button')?.focus();
-  }
-  [dSeo, dASeo].forEach(dl => {
-    dl.addEventListener('click', e => { const b = e.target.closest('.sx-row[aria-controls]'); if (b) sxToggle(b); });
-    dl.addEventListener('close', () => $$('.sx-row[aria-controls]', dl).forEach(b => sxToggle(b, false)));
-  });
-  function openArticle(a) {
+    function openArticle(a) {
     arEdit = a || null; $('#ar-form').reset(); arSlugEdited = !!a; arImg = a ? (a.img || (a.photo ? `https://images.unsplash.com/photo-${a.photo}?w=280&h=280&fit=crop&auto=format&q=75` : null)) : null; arImgErr(''); aeErr('');
     aeDoc.innerHTML = a ? (a.body || (a.excerpt ? `<p>${esc(a.excerpt)}</p>` : '')) : ''; $('#ae-link').hidden = true; aeRange = null;
     $('#ar-title').textContent = a ? 'Edit Article' : 'Create New Article';
@@ -7351,6 +7819,8 @@ button.sx-row:hover { background: #faf9f5; }
     if (!title) bad('ar-name', 'Give the article a title.');
     if (!slug) bad('ar-slug', 'Add a URL slug, e.g. 5-tips-raising-broilers.');
     else if (list.some(x => x !== arEdit && x.slug === slug)) bad('ar-slug', `/blog/${slug} is already used by another article.`);
+    if (!$('#ar-seo-title').value.trim()) bad('ar-seo-title', 'Add a meta title. It is the headline people see on Google.');
+    if (!$('#ar-seo-meta').value.trim()) bad('ar-seo-meta', 'Add a meta description, one or two sentences about the article.');
     if (first) { $('#' + first).focus(); return; }
     const status = arEdit ? arEdit.status : 'published';
     if (status === 'published' && !aeText() && !aeDoc.querySelector('img')) { aeErr('Write the article before publishing, or save it as a draft.'); aeDoc.focus(); return; }
@@ -7365,7 +7835,7 @@ button.sx-row:hover { background: #faf9f5; }
     }
   });
 
-  /* =====================================================================
+  /* @@JS-SITE-DANGER =====================================================================
      Site settings → Danger Zone: unpublish, transfer to another workspace, delete
      ===================================================================== */
   const SDZ_IC = {
@@ -7492,6 +7962,7 @@ button.sx-row:hover { background: #faf9f5; }
   const normDomain = v => v.trim().toLowerCase().replace(/^https?:\/\//, '').replace(/[/?#].*$/, '').replace(/^www\./, '').replace(/\.$/, '');
   const DOMAIN_RE = /^(?=.{4,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,24}$/;
 
+  /* @@JS-SITESET-RENDER Site settings: tab bar + Custom domain tab */
   function renderSettingsView() {
     const el = $('#ov-view'), s = curSite();
     syncDomain(s);
@@ -7534,7 +8005,7 @@ button.sx-row:hover { background: #faf9f5; }
     renderSettingsView(); $('#ss-tab-' + state.ssTab).focus();
   });
 
-  /* ---------- Site settings → Branding & Favicon ---------- */
+  /* @@JS-BRANDING ---------- Site settings → Branding & Favicon ---------- */
   const META_T = 60, META_D = 300;
   function brandingOf(s) {
     if (s.branding) return s.branding;
@@ -7632,7 +8103,7 @@ button.sx-row:hover { background: #faf9f5; }
     paintFav(); paintCounts();
   }
 
-  /* ---------- Site settings → Analytics & Pixels ---------- */
+  /* @@JS-PIXELS ---------- Site settings → Analytics & Pixels ---------- */
   function pixelsOf(s) {
     if (s.pixels) { s.pixels.extra ||= ['ga', 'fb']; return s.pixels; }
     const p = { ga: '', fb: isShop(s) ? '123456789012345' : '', code: '', extra: ['ga', 'fb'], on: { ga: true, fb: true, code: true }, saved: null };
@@ -7841,7 +8312,7 @@ button.sx-row:hover { background: #faf9f5; }
     });
     sync();
   }
-  /* ---------- "Add tracking tool" picker ---------- */
+  /* @@JS-PXADD ---------- "Add tracking tool" picker ---------- */
   const dPxAdd = $('#dlg-pxadd'), pxaQ = $('#pxa-q');
   let pxaView = null, pxaPick = null;
   function paintPxAdd() {
@@ -7868,6 +8339,7 @@ button.sx-row:hover { background: #faf9f5; }
     dPxAdd.close(); pxaPick?.(b.dataset.pxa);
   });
   $('#pxa-other').addEventListener('click', () => { dPxAdd.close(); pxaPick?.('code'); });
+  /* @@JS-DOMAIN-DNS Connect custom domain + DNS records dialogs */
   const dDomain = $('#dlg-domain'), dDns = $('#dlg-dns'), dmIn = $('#dm-input');
   let dnsDomain = '';
   function dmCheck() {
@@ -7977,7 +8449,7 @@ button.sx-row:hover { background: #faf9f5; }
   });
 
 
-  /* =====================================================================
+  /* @@JS-WIZARD =====================================================================
      Create a new website: 3-step wizard (#/new-site/category → name → domain)
      ===================================================================== */
   const wsvg = d => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
@@ -8140,7 +8612,7 @@ button.sx-row:hover { background: #faf9f5; }
   }
   document.addEventListener('click', e => { if (e.target.closest('[data-wiz-cancel]')) { wiz = { cat: null, desc: '', name: '', domain: '' }; go('#/workspace'); } });
 
-  /* ---------- Overview sidebar groups + mobile drawers ---------- */
+  /* @@JS-DRAWERS ---------- Overview sidebar groups + mobile drawers ---------- */
   $$('.nav-group-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const open = btn.getAttribute('aria-expanded') === 'true';
@@ -8174,7 +8646,7 @@ button.sx-row:hover { background: #faf9f5; }
   function closeMenu() { drawers.forEach(d => { if (!d.panel.classList.contains('open')) return; d.panel.classList.remove('open'); d.scrim.classList.remove('show'); d.open.setAttribute('aria-expanded', 'false'); }); }
   $('#wsd-side').addEventListener('click', e => { if (e.target.closest('.wsd-nav a')) closeMenu(); });
 
-  /* ---------- Prototype screen picker ---------- */
+  /* @@JS-PROTO ---------- Prototype screen picker ---------- */
   const pFab = $('#proto-fab'), pPanel = $('#proto-panel');
   function closeProto(focus) { if (pPanel.hidden) return; pPanel.hidden = true; pFab.setAttribute('aria-expanded', 'false'); if (focus) pFab.focus(); }
   pFab.addEventListener('click', e => { e.stopPropagation(); if (pPanel.hidden) { pPanel.hidden = false; pFab.setAttribute('aria-expanded', 'true'); ($('a[aria-current]', pPanel) || $('a', pPanel)).focus(); } else closeProto(true); });
