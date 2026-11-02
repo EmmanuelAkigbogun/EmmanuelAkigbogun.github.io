@@ -3690,6 +3690,8 @@ button.sx-row:hover { background: #faf9f5; }
 .gp.prev .gp-rail, .gp.prev .gp-pn { display: none; } .gp.prev .gp-body { grid-template-columns: 1fr; } .gp.prev .gp-chip, .gp.prev .gp-plus, .gp.prev .gp-adds, .gp.prev .gp-ph, .gp.prev .gp-ind { display: none; } .gp.prev .gp-sec, .gp.prev .gp-el { outline: 0 !important; } .gp.prev .gp-hid { display: none; } .gp.prev .gp-cv { border: 0; } .gp.prev .gp-exit { display: inline-flex; position: fixed; top: 68px; right: 20px; z-index: 20; background: #111; color: #fff; }
 .gp-modal { position: fixed; inset: 0; z-index: 50; background: rgb(0 0 0 / .45); display: grid; place-items: center; } .gp-mb { width: min(560px, 92vw); background: #fff; border-radius: 12px; padding: 20px; } .gp-mh { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; font-size: 15px; } .gp-mh button { border: 0; background: none; font-size: 16px; }
 .gp-mg { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; } .gp-mg button { padding: 22px 12px; border: 1px solid #e2e2e2; border-radius: 8px; background: #fafafa; text-align: center; display: grid; gap: 6px; } .gp-mg button:hover { border-color: var(--bl); background: #f3f9ff; } .gp-mg span { font-weight: 600; font-size: 13px; } .gp-mg small { color: #666; }
+
+.gp-cv { padding-top: 38px; }
 </style>
 </head>
 <body>
@@ -6166,7 +6168,7 @@ button.sx-row:hover { background: #faf9f5; }
           <header><h2 id="ovp-t">Recently Edited Pages</h2><a class="link-sm" href="#/overview" data-ov-nav="pages">View details ${CHEV_R}</a></header>
           <div class="ptable" role="table" aria-label="Recently edited pages">
             <div class="prow head" role="row"><span role="columnheader">Page Name</span><span role="columnheader">Path</span><span role="columnheader">Last Modified</span><span role="columnheader">Status</span><span></span></div>
-            ${d.pages.map(pg => `<button class="prow" role="row" data-ov-toast="Opening ${esc(pg.name)} in the editor">
+            ${d.pages.map(pg => `<button class="prow" role="row" data-ov-go="#/builder">
               <span class="pn" role="cell">${esc(pg.name)}</span><code role="cell">${esc(pg.path)}</code><span class="lm" role="cell">${pg.mod}</span>
               <span class="st" role="cell"><span class="spill ${pg.status}">${statusLbl[pg.status]}</span></span>${CHEV_R}</button>`).join('')}
           </div>
@@ -6180,6 +6182,7 @@ button.sx-row:hover { background: #faf9f5; }
     requestAnimationFrame(() => requestAnimationFrame(() => { const bar = $('.ring .bar', el); if (bar) bar.style.strokeDashoffset = bar.dataset.off; }));
   }
   $('#ov-view').addEventListener('click', e => {
+    const g = e.target.closest('[data-ov-go]'); if (g) { go(g.dataset.ovGo); return; }
     const t = e.target.closest('[data-ov-toast]'); if (t) { toast(t.dataset.ovToast); return; }
     const n = e.target.closest('[data-ov-nav]'); if (n) { e.preventDefault(); const k = n.dataset.ovNav === 'store' ? 'products' : n.dataset.ovNav; if (SITE_VIEWS[k]) { go(SITE_VIEWS[k]); return; } const l = $(`[data-site-nav="${n.dataset.ovNav}"]`); toast(`${l ? l.textContent.trim() : 'This section'} is coming soon`); }
   });
@@ -6493,7 +6496,7 @@ button.sx-row:hover { background: #faf9f5; }
     }
     if (hit('data-wclear')) { state.pageQuery = ''; renderPagesView(); return; }
     if (hit('data-add-page')) { closeMenus(); openPage(); return; }
-    if ((b = hit('data-wedit'))) { const p = W().find(x => x.id === b.dataset.wedit); toast(`Opening ${p.name} in the page editor`); return; }
+    if ((b = hit('data-wedit'))) { const p = W().find(x => x.id === b.dataset.wedit); go('#/builder'); return; }
     if ((b = hit('data-wstatus'))) { const p = W().find(x => x.id === b.dataset.wstatus); p.status = p.status === 'draft' ? 'published' : 'draft'; closeMenus(); paintPages(); toast(`${p.name} ${p.status === 'draft' ? 'unpublished' : 'published'}`); return; }
     if ((b = hit('data-wdup'))) {
       const list = W(), i = list.findIndex(x => x.id === b.dataset.wdup), src = list[i];
@@ -8932,7 +8935,7 @@ button.sx-row:hover { background: #faf9f5; }
   /* ---- init + events ---- */
   function renderBuilder() {
     if (!gp.init) {
-      gp.init = true; gp.secs = [];
+      gp.init = true; gp.secs = []; Object.keys(GP_CAT).forEach(k => gp.open.add(k));
       try { const d = JSON.parse(localStorage.getItem(GP_KEY) || 'null'); if (d) { gp.secs = d.secs; gp.n = Math.max(gp.n, d.n); gp.colors = d.colors; gp.fonts = d.fonts; } } catch (e) {} gp.saved = gpSnap(); gp.dirty = false;
       const root = $('#gp');
       root.addEventListener('click', ev => {
