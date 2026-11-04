@@ -3678,6 +3678,20 @@ button.sx-row:hover { background: #faf9f5; }
 .gp-bt { display: inline-flex; align-items: center; justify-content: center; padding: 12px 24px; border-radius: 4px; box-sizing: border-box; } .gp-bt[data-hv]:hover { background-color: var(--hb) !important; color: var(--hc) !important; background-image: var(--hi, none) !important; background-size: cover; background-position: center; } .gp-bt .bi { font-style: normal; line-height: 1; } .gp-bt .bi svg { width: 100%; height: 100%; fill: currentColor; }
 .gp-tghost { position: fixed; z-index: 99999; transform: translateX(-50%); padding: 6px 12px; border-radius: 8px; background: #111; color: #fff; font-size: 12px; pointer-events: none; opacity: .92; box-shadow: 0 6px 20px rgb(0 0 0 / .35); } .gp.tdrag, .gp.tdrag * { user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
 .gp-dial { position: relative; width: 120px; height: 120px; border-radius: 50%; background: #1b1b1b; touch-action: none; cursor: pointer; margin-left: auto; } .gp-dial i { position: absolute; inset: 0; pointer-events: none; } .gp-dial i b { position: absolute; right: 8px; top: 50%; width: 12px; height: 12px; margin-top: -6px; border-radius: 50%; background: #fff; } .gp-dial em { position: absolute; inset: 0; display: grid; place-items: center; font-style: normal; font-size: 18px; pointer-events: none; }
+
+.gp-vd.edit iframe, .gp-vd.edit video { pointer-events: none; } .gp-vplay { border: 0; cursor: pointer; } .gp-vd { position: relative; width: 100%; overflow: hidden; border-radius: inherit; background: #111; } .gp-vd iframe, .gp-vd video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; } .gp-vth { position: absolute; inset: 0; background-size: cover; background-position: center; } .gp-vplay { position: absolute; left: 50%; top: 50%; width: 58px; height: 58px; margin: -29px 0 0 -29px; border-radius: 50%; background: rgb(0 0 0 / .55); color: #fff; display: grid; place-items: center; font-size: 20px; padding-left: 4px; } .gp-vbar { position: absolute; left: 0; right: 0; bottom: 0; height: 36px; display: flex; align-items: center; gap: 10px; padding: 0 12px; color: #fff; font-size: 12px; background: linear-gradient(transparent, rgb(0 0 0 / .65)); } .gp-vbar b { flex: 1; height: 3px; border-radius: 2px; background: rgb(255 255 255 / .7); }
+.gp-hero { transition: transform .2s, filter .2s, background-size .3s, box-shadow .2s; } .gp-hero[data-hfx="Lift"]:hover { transform: translateY(-4px); box-shadow: 0 14px 34px rgb(0 0 0 / .25); } .gp-hero[data-hfx="Darken"]:hover { filter: brightness(.85); } .gp-hero[data-hfx="Zoom"]:hover { background-size: 112% !important; } .gp-ovl { position: absolute; inset: 0; z-index: 0; pointer-events: none; border-radius: inherit; }
+.gp-mb.gal { width: min(900px, 94vw); padding: 0; overflow: hidden; background: #f1f1f1; } .gp-mb.gal .gp-mh { padding: 18px 22px; margin: 0; background: #fff; font-size: 17px; } .gp-mb.gal .gp-mh button { border: 0; background: none; font-size: 18px; } .gp-gt { display: flex; gap: 6px; margin: 12px 18px; padding: 6px; background: #fff; border-radius: 10px; } .gp-gt button { flex: 1; height: 40px; border: 0; border-radius: 8px; background: none; color: #2f55d4; font-weight: 500; } .gp-gt button.on { background: #cfd8fb; } .gp-gg { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; padding: 6px 18px 22px; max-height: 60vh; overflow-y: auto; } .gp-gg[hidden] { display: none; } .gp-gu, .gp-gi { aspect-ratio: 1; border: 1px solid #e2e2e2; border-radius: 12px; background: #fff center/cover; font-size: 30px; color: #777; cursor: pointer; } .gp-gu:hover, .gp-gi:hover { border-color: var(--bl); } .gp-gempty { padding: 40px; text-align: center; color: #777; }
+.gp-lopts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 14px 16px 16px; } .gp-lopts button { display: grid; justify-items: center; gap: 6px; padding: 10px 6px; border: 1px solid #e2e2e2; border-radius: 10px; background: #fff; font-size: 12px; } .gp-lopts button.on { border-color: var(--bl); background: #eef2ff; }
+/* light theme for floating cards (matches the Figma light panels) */
+#gp .gp-fl { background: #fff; color: #222; border: 1px solid #e2e2e2; box-shadow: 0 10px 34px rgb(0 0 0 / .16); } #gp .gp-fh { border-bottom-color: #ececec; } #gp .gp-fh button { color: #222; } #gp .gp-pr > span, #gp .gp-cm-top { color: #666; }
+#gp .gp-fl .nin, #gp .gp-fl .hx2, #gp .gp-ch .hx { background: #f3f3f3; color: #222; } #gp .gp-fl .hx2 input, #gp .gp-ch .hx input, #gp .gp-fl .op { color: #222; } #gp .gp-fl .hx2 .sw, #gp .gp-ch .pv, #gp .gp-cs { border-color: #cfcfcf; }
+#gp .gp-sg2, #gp .gp-so button { background: #f3f3f3; } #gp .gp-sg2 button { color: #555; } #gp .gp-sg2 button.on { background: #fff; color: #111; box-shadow: 0 1px 3px rgb(0 0 0 / .15); } #gp .gp-so button.on { background: #eef2ff; border-color: var(--bl); }
+#gp .gp-padg button { border-color: #cfcfcf; color: #222; } #gp .gp-padg button.on { background: #eef2ff; border-color: var(--bl); }
+#gp .gp-cm { background: #f3f3f3; color: #222; } #gp .gp-cm .gr svg, #gp .gp-fh svg { fill: #555; } #gp .gp-cm .ac button { color: #222; } #gp .gp-cm .ac button:hover { background: #e4e4e4; } #gp .gp-cm .ac svg { fill: #333; }
+#gp .gp-ig button { background: #f3f3f3; color: #222; } #gp .gp-ig button.on, #gp .gp-ig button:hover { background: #dfe6ff; } #gp .gp-pc .gp-up2 { background: #f3f3f3; color: #222; } #gp .gp-dial { background: #f3f3f3; } #gp .gp-dial i b { background: #222; } #gp .gp-dial em { color: #222; }
+#gp .gp-fl .gp-up .pv button { background: #111; color: #fff; } #gp .gp-fl .gp-in { background: #f3f3f3; color: #222; }
+#gp .gp-btn[data-crev] { background: #f3f3f3 !important; color: #222 !important; }
 .gp-more { display: block; margin: 6px auto 10px; border: 0; background: none; color: #444; font-size: 11px; cursor: pointer; }
 .gp-rat { user-select: none; touch-action: none; } .gp-rat span { pointer-events: none; } .gp-rat i { width: 8px !important; height: 30px !important; background: none !important; position: relative; cursor: col-resize; flex: none; } .gp-rat i::after { content: ""; position: absolute; left: 3px; top: 6px; width: 2px; height: 18px; background: var(--bl); border-radius: 1px; } .gp-rat.fit { opacity: .45; pointer-events: none; }
 .gp-lr { position: relative; } .gp-lm { position: absolute; right: 6px; top: 100%; z-index: 30; min-width: 150px; padding: 4px; background: #fff; border: 1px solid #ddd; border-radius: 6px; box-shadow: 0 6px 20px rgb(0 0 0 / .18); } .gp-lm button { display: block; width: 100%; text-align: left; border: 0; background: none; padding: 7px 10px; font-size: 11px; border-radius: 4px; color: #222; } .gp-lm button:hover { background: #f0f0f0; } .gp-lm button.dg { color: #d33; } .gp-lr.mo .ac { display: flex; }
@@ -3746,6 +3760,19 @@ button.sx-row:hover { background: #faf9f5; }
 .gp-fl .hx2 { display: flex; align-items: center; gap: 8px; height: 34px; width: 190px; padding: 0 8px; border-radius: 8px; background: #232323; } .gp-fl .hx2 .sw { width: 22px; height: 22px; border-radius: 5px; border: 1px solid #555; display: block; } .gp-fl .hx2 input { flex: 1; min-width: 0; background: none; border: 0; outline: 0; color: #fff; text-transform: uppercase; }
 .gp-fl .nin { width: 190px; height: 34px; border-radius: 8px; border: 0; background: #232323; color: #fff; padding: 0 10px; outline: 0; } .gp-fl .nin.sm { width: 84px; text-align: center; } .gp-fl .op { width: 40px; background: none; border: 0; color: #fff; outline: 0; text-align: right; }
 .gp-padg { display: grid; grid-template-columns: 1fr 44px 1fr; gap: 10px; padding: 16px; align-items: center; justify-items: center; } .gp-padg button { width: 36px; height: 36px; border: 1px solid #444; border-radius: 8px; background: none; color: #fff; } .gp-padg button.on { background: #1f2c6b; border-color: #3d5afe; }
+.gp-rtb { position: fixed; z-index: 2147483000; display: none; align-items: center; gap: 2px; padding: 6px 8px; background: #1b1b1b; border-radius: 12px; box-shadow: 0 8px 28px rgb(0 0 0 / .45); color: #fff; font: 600 17px Assistant, Inter, sans-serif; } .gp-rtb.on { display: flex; }
+.gp-rtb button { position: relative; width: 40px; height: 40px; display: grid; place-items: center; border: 0; border-radius: 8px; background: none; color: #fff; font: inherit; cursor: pointer; } .gp-rtb button:hover, .gp-rtb button.act { background: #3a3a3a; } .gp-rtb button:focus-visible { outline: 2px solid #8fb8ff; }
+.gp-rtb .bar { position: absolute; left: 9px; right: 9px; bottom: 5px; height: 3px; border-radius: 2px; background: #242424; } .gp-rtb .sep { width: 1px; height: 26px; background: #4a4a4a; margin: 0 5px; }
+.gp-rtp { position: fixed; z-index: 2147483001; display: none; width: 380px; max-width: calc(100vw - 16px); padding: 14px; background: #1b1b1b; border-radius: 12px; box-shadow: 0 8px 28px rgb(0 0 0 / .5); color: #fff; font: 500 14px Assistant, Inter, sans-serif; } .gp-rtp.on { display: block; }
+.gp-rtp .rp-top { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; } .gp-rtp .rp-sw { flex: none; width: 44px; height: 44px; border-radius: 50%; border: 1px solid #555; }
+.gp-rtp .rp-f { flex: 1; display: flex; align-items: center; justify-content: space-between; gap: 6px; height: 44px; padding: 0 12px; background: #2a2a2a; border-radius: 8px; } .gp-rtp .rp-f input { min-width: 0; border: 0; outline: 0; background: none; color: #fff; font: inherit; } .gp-rtp .rp-hex { width: 80px; text-transform: uppercase; } .gp-rtp .rp-al { width: 38px; text-align: right; -moz-appearance: textfield; } .gp-rtp .rp-al::-webkit-outer-spin-button, .gp-rtp .rp-al::-webkit-inner-spin-button { -webkit-appearance: none; }
+.gp-rtp .rp-eye { flex: none; width: 44px; height: 44px; display: grid; place-items: center; border: 0; border-radius: 8px; background: #2a2a2a; color: #fff; cursor: pointer; } .gp-rtp .rp-eye[hidden] { display: none; }
+.gp-rtp .rp-sv { position: relative; height: 170px; border-radius: 4px; cursor: crosshair; touch-action: none; } .gp-rtp .rp-sv i { position: absolute; width: 20px; height: 20px; margin: -10px 0 0 -10px; border: 2px solid #fff; border-radius: 50%; box-shadow: 0 0 0 1px rgb(0 0 0 / .4); pointer-events: none; }
+.gp-rtp .rp-sl { position: relative; height: 14px; margin-top: 16px; border-radius: 7px; touch-action: none; cursor: pointer; } .gp-rtp .rp-hue { background: linear-gradient(90deg, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00); } .gp-rtp .rp-alpha { background: repeating-conic-gradient(#888 0 25%, #ccc 0 50%) 0 0 / 10px 10px; } .gp-rtp .rp-alpha u { position: absolute; inset: 0; border-radius: 7px; }
+.gp-rtp .rp-sl i { position: absolute; top: 50%; width: 20px; height: 20px; margin: -10px 0 0 -10px; border: 3px solid #fff; border-radius: 50%; box-shadow: 0 0 0 1px rgb(0 0 0 / .35); pointer-events: none; }
+.gp-pc.wide { width: 420px; max-height: calc(100% - 140px); overflow: auto; }
+.gp-fl .gp-lopts.g12 { grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 14px 16px 6px; } .gp-fl .gp-lopts.g12 button { padding: 6px; border: 2px solid transparent; border-radius: 10px; background: #1d1d1d; cursor: pointer; } .gp-fl .gp-lopts.g12 button:hover { background: #262626; } .gp-fl .gp-lopts.g12 button.on { border-color: #2b7bff; background: #1b2740; } .gp-fl .gp-lopts.g12 svg { width: 100%; height: auto; display: block; }
+.gp-fl .gp-lsub { padding: 12px 16px 2px; font-size: 13px; font-weight: 600; color: #ddd; }
 .gp-vid { position: absolute; left: 0; right: 0; height: 100%; overflow: hidden; z-index: 0; pointer-events: none; } .gp-vid iframe { width: 100%; height: 100%; border: 0; transform: scale(1.4); } .gp-cols { position: relative; z-index: 1; }
 </style>
 </head>
@@ -8832,10 +8859,10 @@ button.sx-row:hover { background: #faf9f5; }
   const gp = { secs: [], sel: null, hist: [], redo: [], saved: '', dirty: false, rail: 'add', tab: 'element', n: 0, dev: 'desktop', drag: null, ind: null, open: new Set(['Layout', 'Text', 'Button', 'Media']), init: false, padlink: true, pop: null, cont: {}, layersOpen: false, lopen: new Set(), lastSel: null, cpick: null, styleOpen: false, recent: ['#111111', '#4d4d4d', '#e0e0e0', '#ffffff', '#2f4fd0', '#555555'], itab: 'settings', prev: false, fonts: { heading: 'Assistant', paragraph: 'Assistant' }, gsnap: '', colors: { Button: ['#ffffff', '#4d4d4d'], Text: ['#555555', '#111111', '#ffffff'], Background: ['#e0e0e0', '#f4f4f4', '#ffffff'], Line: ['#e0e0e0', '#808080', '#ffffff'], Accent: ['#2e8b3e', '#f03a3a', '#f5821f', '#2a85ff'] } };
   const GP_FF = { Assistant: 'Assistant,Inter,sans-serif', Inter: 'Inter,sans-serif', Georgia: 'Georgia,serif', Roboto: 'Roboto,Arial,sans-serif' };
   const gpId = () => 'g' + (++gp.n);
-  const GP_DEF = { heading: { text: 'Your heading text goes here', style: 2, size: 46, color: '#121212', align: 'left', b: 0, i: 0, u: 0, font: 'Sans-serif', width: 1200, pad: '' }, text: { text: 'Write your paragraph here. Double-click to edit this text.', size: 16, color: '#121212', align: 'left', b: 0, i: 0, u: 0, font: 'Sans-serif', width: 1200, pad: '' }, button: { text: 'Button', color: '#ffffff', bg: '#121212', align: 'left', size: 16, pad: '12, 24, 12, 24', icon: 0, ig: '★', ipos: 'Left', igap: 8, textOn: 1, fw: 'Normal', lh: 180, ls: '', tt: 'none', font: 'Sans-serif', bstyle: 'Paragraph 1', after: 'Open page', href: '' }, image: { shape: 'rect', src: GP_IMG, w: 500, unit: 'px', align: 'center', alt: '', title: '', pre: 'No', quality: 'High', link: false, frame: 'Original' }, divider: {}, stars: {}, accordion: { open: 0 }, generic: {} };
-  const GP_CAT = { 'Layout': ['Row|row1|c1', 'Row|row2|c2', 'Row|row3|c3', 'Row|row4|c4'], 'Text': ['Heading|heading|H', 'Text Block|text|P'], 'Button': ['Button|button|btn', 'Button|button|btnx'], 'Media': ['Image|image|img', 'Image|imagec|imgr', 'Video||vid', 'Video Banner||vid', 'Hero Banner||ban', 'Hero Banner||ban', 'Hero Banner||ban', 'Hero Banner Parallax||ban', 'Image Comparison||cmp'], 'Icon & line': ['Icon||ico', 'Icon List|stars|stars', 'Line|divider|line'], 'Content List': ['Item List||list', 'Advanced List||list', 'Accordion|accordion|acc', 'Accordion|accordion|acc', 'Accordion|accordion|acc'], 'Interactives': ['Carousel||car', 'Carousel||car', 'Carousel||car', 'Carousel||car', 'Tab||tab', 'Breadcrumb||crumb', 'Marquee||mq', 'Marquee||mq'], 'Product': ['Product||prod', 'Product||prod', 'Product||prod', 'Product List||c3', 'Sticky Add to Cart||t:Sticky', 'Add to Cart||!t:Add to Cart', 'Add to Cart||!t:View More', 'Product Images||!prod', 'Dynamic Checkout||!t:Buy Now', 'Product Title||!t:Tote Bag', 'Product Description||!t:Made from 100% cotton', 'Product Price||!t:$19.99', 'Product File Upload||!t:Upload File', 'Compare Price||!t:$20.99', 'Product Quantity||!t:− 1 +', 'Product Color||!t:○ ● ●', 'Product Variants||!t:Size', 'Product Batch||!prod', 'Custom Field||!t:Custom Field', 'Product Vendor||!t:Vendor', 'Product SKU||!t:SKU'], 'Conversion Booster': ['Stock Counter||t:Hurry! Only 3 left', 'Countdown Timer||t:00:00:00:00', 'Popup||t:Popup', 'Delivery Date||t:Ship on May', 'Bundle Discount||c1', 'Bundle Discount||c2', 'Copy Coupon Code||t:Copy'], 'Forms': ['Contact Form||list', 'Newsletter||t:Newsletter', 'Dropdown||!t:Dropdown', 'Checkbox||!t:Checkbox', 'Submit Button||!t:Submit', 'Email Field||!t:Email Field', 'Text Field||!t:Text Field', 'Text Area||!t:Text Area'], 'Article': ['Article List||img', 'Article Image||!t:Featured Image', 'Article Title||!t:Article Title', 'Article Excerpt||!t:Article Excerpt', 'Article Content||!t:Article Content', 'Article Date||!t:Oct 21, 2026', 'Article Author||!t:By Smith', 'Article Category||!t:Fashion', 'Article Tag||!t:Christmas', 'Article Read More||!t:Read More'], 'Advanced': ['Custom Code||code', 'Sticky Back to Top||top'] };
+  const GP_DEF = { heading: { text: 'Your heading text goes here', style: 2, size: 46, color: '#121212', align: 'left', b: 0, i: 0, u: 0, font: 'Sans-serif', width: 1200, pad: '' }, text: { text: 'Write your paragraph here. Double-click to edit this text.', size: 16, lh: 180, color: '#121212', align: 'left', b: 0, i: 0, u: 0, font: 'Sans-serif', width: 1200, pad: '' }, video: { vtype: 'YouTube', vurl: 'https://www.youtube.com/embed/Jcu1AHaTchM', vthumb: '', ctrl: 'Yes', sound: 'No', lazy: 'Yes', auto: 'Yes', loop: 'No', frame: '16:9', align: 'center' }, button: { text: 'Button', color: '#ffffff', bg: '#121212', align: 'left', size: 16, pad: '12, 24, 12, 24', icon: 0, ig: '★', ipos: 'Left', igap: 8, textOn: 1, fw: 'Normal', lh: 180, ls: '', tt: 'none', font: 'Sans-serif', bstyle: 'Paragraph 1', after: 'Open page', href: '' }, image: { shape: 'rect', src: GP_IMG, w: 500, unit: 'px', align: 'center', alt: '', title: '', pre: 'No', quality: 'High', link: false, frame: 'Original' }, divider: {}, stars: {}, accordion: { open: 0 }, generic: {} };
+  const GP_CAT = { 'Layout': ['Row|row1|c1', 'Row|row2|c2', 'Row|row3|c3', 'Row|row4|c4'], 'Text': ['Heading|heading|H', 'Text Block|text|P'], 'Button': ['Button|button|btn', 'Button|button|btnx'], 'Media': ['Image|image|img', 'Image|imagec|imgr', 'Video|video|vid', 'Video Banner|vbanner|vid', 'Hero Banner|hero1|ban', 'Hero Banner|hero2|ban', 'Hero Banner|hero3|ban', 'Hero Banner Parallax|hero4|ban', 'Image Comparison||cmp'], 'Icon & line': ['Icon||ico', 'Icon List|stars|stars', 'Line|divider|line'], 'Content List': ['Item List||list', 'Advanced List||list', 'Accordion|accordion|acc', 'Accordion|accordion|acc', 'Accordion|accordion|acc'], 'Interactives': ['Carousel||car', 'Carousel||car', 'Carousel||car', 'Carousel||car', 'Tab||tab', 'Breadcrumb||crumb', 'Marquee||mq', 'Marquee||mq'], 'Product': ['Product||prod', 'Product||prod', 'Product||prod', 'Product List||c3', 'Sticky Add to Cart||t:Sticky', 'Add to Cart||!t:Add to Cart', 'Add to Cart||!t:View More', 'Product Images||!prod', 'Dynamic Checkout||!t:Buy Now', 'Product Title||!t:Tote Bag', 'Product Description||!t:Made from 100% cotton', 'Product Price||!t:$19.99', 'Product File Upload||!t:Upload File', 'Compare Price||!t:$20.99', 'Product Quantity||!t:− 1 +', 'Product Color||!t:○ ● ●', 'Product Variants||!t:Size', 'Product Batch||!prod', 'Custom Field||!t:Custom Field', 'Product Vendor||!t:Vendor', 'Product SKU||!t:SKU'], 'Conversion Booster': ['Stock Counter||t:Hurry! Only 3 left', 'Countdown Timer||t:00:00:00:00', 'Popup||t:Popup', 'Delivery Date||t:Ship on May', 'Bundle Discount||c1', 'Bundle Discount||c2', 'Copy Coupon Code||t:Copy'], 'Forms': ['Contact Form||list', 'Newsletter||t:Newsletter', 'Dropdown||!t:Dropdown', 'Checkbox||!t:Checkbox', 'Submit Button||!t:Submit', 'Email Field||!t:Email Field', 'Text Field||!t:Text Field', 'Text Area||!t:Text Area'], 'Article': ['Article List||img', 'Article Image||!t:Featured Image', 'Article Title||!t:Article Title', 'Article Excerpt||!t:Article Excerpt', 'Article Content||!t:Article Content', 'Article Date||!t:Oct 21, 2026', 'Article Author||!t:By Smith', 'Article Category||!t:Fashion', 'Article Tag||!t:Christmas', 'Article Read More||!t:Read More'], 'Advanced': ['Custom Code||code', 'Sticky Back to Top||top'] };
   const GP_SECT = ['Hero', 'Features', 'Content', 'Footer'];
-  const GP_LBL = { heading: 'Heading', text: 'Text Block', button: 'Button', image: 'Image', divider: 'Divider', stars: 'Icon List', accordion: 'Accordion', generic: 'Element' };
+  const GP_LBL = { video: 'Video', heading: 'Heading', text: 'Text Block', button: 'Button', image: 'Image', divider: 'Divider', stars: 'Icon List', accordion: 'Accordion', generic: 'Element' };
   const GP_R = (x, y, w, h, c) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="2"${c ? ` class="d"` : ''}/>`;
   const GP_G = { H: '<text x="50" y="62" text-anchor="middle" font-family="Georgia,serif" font-size="46">H</text>', P: '<text x="50" y="62" text-anchor="middle" font-family="Georgia,serif" font-size="46">P</text>', btn: GP_R(20, 36, 60, 22) + GP_R(32, 46, 36, 3, 1), img: GP_R(20, 22, 60, 48) + '<circle cx="36" cy="38" r="5" class="d"/><path class="d" d="M24 66l16-17 10 11 10-13 16 19z"/>', line: GP_R(18, 46, 64, 3), list: GP_R(22, 28, 6, 6) + GP_R(34, 29, 44, 4) + GP_R(22, 44, 6, 6) + GP_R(34, 45, 44, 4) + GP_R(22, 60, 6, 6) + GP_R(34, 61, 44, 4), acc: GP_R(20, 28, 60, 3) + GP_R(20, 46, 60, 3) + GP_R(20, 64, 60, 3), stars: '<text x="50" y="55" text-anchor="middle" font-size="16" letter-spacing="2">★★★★★</text>', car: GP_R(30, 24, 40, 44) + '<path d="m16 46 8-8v16zM84 46l-8-8v16z"/>', tab: GP_R(20, 36, 28, 6) + GP_R(52, 36, 28, 6), mq: GP_R(10, 30, 24, 36) + GP_R(38, 30, 24, 36) + GP_R(66, 30, 24, 36), btnx: GP_R(20, 36, 60, 22) + GP_R(28, 46, 10, 3, 1) + GP_R(42, 46, 30, 3, 1), imgr: '<circle cx="50" cy="45" r="26"/><circle cx="50" cy="38" r="7" class="d"/><path class="d" d="M35 62a15 10 0 0 1 30 0z"/>', vid: GP_R(20, 22, 60, 48) + '<circle cx="50" cy="46" r="12" class="d"/><path d="M46 40l11 6-11 6z"/>', ban: GP_R(14, 20, 72, 50) + GP_R(32, 38, 36, 4, 1) + GP_R(38, 48, 24, 4, 1), cmp: GP_R(14, 20, 72, 50) + GP_R(48, 20, 5, 50, 1), ico: '<path d="m50 22 6 13 14 2-10 10 3 14-13-7-13 7 3-14-10-10 14-2z"/>', crumb: GP_R(16, 42, 20, 4) + GP_R(42, 42, 20, 4) + GP_R(68, 42, 16, 4), prod: GP_R(14, 20, 40, 50) + GP_R(60, 26, 26, 5) + GP_R(60, 38, 20, 4) + GP_R(60, 48, 24, 4), code: '<text x="50" y="56" text-anchor="middle" font-size="20" font-family="monospace">&lt;/&gt;</text>', top: '<circle cx="50" cy="46" r="14"/><path d="M50 52V40m-6 6 6-6 6 6" stroke="#5e5e5e" stroke-width="3" fill="none"/>', c1: GP_R(14, 26, 72, 38), c2: GP_R(14, 26, 34, 38) + GP_R(52, 26, 34, 38), c3: GP_R(14, 26, 22, 38) + GP_R(39, 26, 22, 38) + GP_R(64, 26, 22, 38), c4: GP_R(14, 26, 16, 38) + GP_R(33, 26, 16, 38) + GP_R(52, 26, 16, 38) + GP_R(71, 26, 15, 38) };
   const GP_SH = { Small: '0 1px 4px rgb(0 0 0 / .25)', Medium: '0 4px 14px rgb(0 0 0 / .25)', Large: '0 10px 30px rgb(0 0 0 / .3)' };
@@ -8843,7 +8870,7 @@ button.sx-row:hover { background: #faf9f5; }
   const gpShd = (o, p, a) => { const t = o[p]; if (!t) return ''; let g; if (t === 'Custom') { const an = (o[p + 'd'] == null ? 49 : o[p + 'd']) * Math.PI / 180, d = o[p + 'dist'] == null ? 20 : +o[p + 'dist']; g = `${Math.round(Math.cos(an) * d)}px ${Math.round(Math.sin(an) * d)}px ${Math.round(d * 1.2)}px`; } else g = GP_SHD[t] || GP_SHD.Light; return `${g} ${gpRgba(o[p + 'c'] || '#121212', a)}`; };
   const GP_SHD = { Light: '0 1px 4px', Medium: '0 4px 14px', Heavy: '0 10px 30px', Custom: '0 6px 24px 4px' };
   const gpBox = o => (o.op != null && o.op < 100 ? `opacity:${o.op / 100};` : '') + (o.pos === 'Sticky' ? 'position:sticky;top:0;z-index:4;' : '') + (o.mar ? ['top', 'right', 'bottom', 'left'].map((n, i) => o.mar[i] ? `margin-${n}:${o.mar[i]}px;` : '').join('') : '') + (o.gm ? `background:linear-gradient(180deg,${o.g1 || '#ffffff'},${o.g2 || '#111111'});` : o.sbg ? `background-color:${gpRgba(o.sbg, o.bgo)};` : '') + (o.simg ? `background-image:url(${o.simg});background-size:cover;background-position:center;` : '') + (o.bw ? `border:${o.bw}px ${o.bs || 'solid'} ${o.bc || '#121212'};` : '') + (o.rad ? `border-radius:${o.rad}px;` : '') + (o.sh ? `box-shadow:${gpShd(o, 'sh', 30)};` : '');
-  const gpVidHTML = o => { const u = o.vid && o.vid.url, m = u && u.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{6,})/); return m ? `<div class="gp-vid" style="${o.vid.align === 'bottom' ? 'bottom:0' : o.vid.align === 'center' ? 'top:50%;transform:translateY(-50%)' : 'top:0'}"><iframe src="https://www.youtube.com/embed/${m[1]}?autoplay=1&mute=1&controls=0${o.vid.loop === 'Yes' ? '&loop=1&playlist=' + m[1] : ''}" tabindex="-1" aria-hidden="true"></iframe></div>` : ''; };
+  const gpVidHTML = o => { const u = o.vid && o.vid.url, m = u && u.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{6,})/); return m ? `<div class="gp-vid" style="${o.vid.align === 'bottom' ? 'bottom:0' : o.vid.align === 'center' ? 'top:50%;transform:translateY(-50%)' : 'top:0'}"><iframe src="https://www.youtube.com/embed/${m[1]}?autoplay=1&mute=1&controls=0&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1${o.vid.loop === 'Yes' ? '&loop=1&playlist=' + m[1] : ''}" tabindex="-1" aria-hidden="true" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>` : ''; };
   const gpHid = o => o.hide && o.hide[gp.dev] ? ' gp-hid' : '';
   const GP_KEY = 'dr-builder-v2';
   const gpStore = () => { try { localStorage.setItem(GP_KEY, JSON.stringify({ v: 2, secs: gp.secs, n: gp.n, colors: gp.colors, fonts: gp.fonts })); } catch (e) {} };
@@ -8870,7 +8897,39 @@ button.sx-row:hover { background: #faf9f5; }
   const gpRow = n => ({ id: gpId(), type: 'row', label: 'Row', cols: Array.from({ length: n }, () => []), ratio: 'ratio', gap: 16, pad: '16, 16, 16, 16', maxw: 1200, height: 'Fit', valign: 'top' });
   const gpSec = n => ({ id: gpId(), cols: Array.from({ length: n }, () => []), ratio: 'ratio', pad: '32, 0, 32, 0', width: 'full', maxw: 1200, pp: 'No' });
   const gpRestore = str => { gp.secs = JSON.parse(str); };
-  const gpEl = (type, label) => { const circ = type === 'imagec'; if (circ) type = 'image'; const e = { id: gpId(), type, label: label || GP_LBL[type], ...JSON.parse(JSON.stringify(GP_DEF[type])) }; if (circ) e.shape = 'circle'; return e; };
+
+  const GP_SVG = (a, b) => 'data:image/svg+xml;utf8,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><rect width="1200" height="675" fill="url(#g)"/></svg>`).replace(/[()']/g, c => '%' + c.charCodeAt(0).toString(16));
+  const GP_GAL = [GP_IMG, GP_SVG('#e8d5c8', '#8a6a5c'), GP_SVG('#9fc5e8', '#3d5a80'), GP_SVG('#3a3f4a', '#14161c'), GP_SVG('#c9e4c5', '#4f7a52'), GP_SVG('#f4c7c3', '#b5565e')];
+  const GP_HERO = { hero1: 'Center', hero2: 'Image right', hero3: 'Image left', hero4: 'Parallax', vbanner: 'Video banner' };
+  const GP_HLAYS = ['Top left', 'Top center', 'Top right', 'Middle left', 'Center', 'Middle right', 'Bottom left', 'Bottom center', 'Bottom right', 'Distributed - Left', 'Distributed - Center', 'Distributed - Right'];
+  const GP_HSPLIT = ['Image right', 'Image left'];
+  const gpHnorm = l => ({ Left: 'Middle left', Right: 'Middle right' })[l] || l || 'Center';
+  function gpHeroLayout(o, lay) {
+    lay = gpHnorm(lay); const items = o.cols.flat(), imgs = items.filter(i => i.type === 'image'), txt = items.filter(i => i.type !== 'image'); o.hlay = lay;
+    if (GP_HSPLIT.indexOf(lay) >= 0) {
+      txt.forEach(t => { if (t.align !== undefined) t.align = 'left'; }); o.valign = 'center'; o.dist = 0; o.gap = 16;
+      const im = imgs[0] || gpEl('image'); if (!imgs.length) { im.w = 100; im.unit = '%'; } const rest = imgs.slice(1); o.cols = lay === 'Image right' ? [txt.concat(rest), [im]] : [[im], txt.concat(rest)];
+    } else {
+      const dist = lay.indexOf('Distributed') === 0, side = /left$/i.test(lay) ? 'left' : /right$/i.test(lay) ? 'right' : 'center', vert = dist ? 'stretch' : lay.indexOf('Top') === 0 ? 'top' : lay.indexOf('Bottom') === 0 ? 'bottom' : 'center', all = txt.concat(imgs);
+      all.forEach(t => { if (t.align !== undefined) t.align = 'center'; });
+      o.cols = side === 'left' ? [all, []] : side === 'right' ? [[], all] : [all]; o.valign = vert; o.dist = dist ? 1 : 0; o.gap = side === 'center' ? 16 : 36; if (o.hrat === 'Original') o.hrat = '16:9';
+    }
+    delete o.rw;
+  }
+  function gpHero(kind) {
+    const split = kind === 'Image right' || kind === 'Image left', dark = !split, al = split ? 'left' : 'center';
+    const h = gpEl('heading'), t = gpEl('text'), b = gpEl('button');
+    h.text = 'Click here to edit heading'; h.size = 46; h.align = al; t.text = 'This is your text block. Click to edit and make it your own. Share your product’s story or services offered. Get creative and make it yours!'; t.align = al; b.text = 'Get started'; b.align = al;
+    if (dark) { h.color = '#ffffff'; t.color = '#ffffff'; }
+    h.mar = [0, 0, 16, 0]; t.mar = [0, 0, 16, 0]; t.width = 700; b.pad = '12, 24, 12, 24'; b.sq = 1;
+    const r = { id: gpId(), type: 'row', hero: 1, label: 'Hero Banner', cols: [[h, t, b]], ratio: 'ratio', gap: 16, pad: '4, 16, 4, 16', maxw: 1200, height: 'Fit', valign: 'center', hlay: split ? kind : 'Center', hrat: '16:9', hw: 100, hwu: '%', bgsz: 'cover' };
+    if (dark) r.simg = GP_GAL[1]; else r.sbg = '#f4efe9';
+    if (kind === 'Parallax') { r.parallax = 1; r.simg = GP_GAL[2]; r.label = 'Hero Banner Parallax'; }
+    if (kind === 'Video banner') { r.label = 'Video Banner'; r.simg = GP_GAL[3]; r.vid = { src: 'Youtube', url: 'https://www.youtube.com/embed/Jcu1AHaTchM', align: 'center', loop: 'Yes' }; }
+    if (split) { gpHeroLayout(r, kind); r.hrat = 'Original'; }
+    return r;
+  }
+  const gpEl = (type, label) => { if (GP_HERO[type]) return gpHero(GP_HERO[type]); const circ = type === 'imagec'; if (circ) type = 'image'; const e = { id: gpId(), type, label: label || GP_LBL[type], ...JSON.parse(JSON.stringify(GP_DEF[type])) }; if (circ) e.shape = 'circle'; return e; };
   const gpSnap = () => JSON.stringify(gp.secs);
   function gpPush() { gp.hist.push(gpSnap()); if (gp.hist.length > 80) gp.hist.shift(); gp.redo = []; gp.dirty = true; }
   function gpFind(id) {
@@ -8895,21 +8954,24 @@ button.sx-row:hover { background: #faf9f5; }
   const GP_ICONS = [['Star filled', '★'], ['Star', '☆'], ['Heart', '♥'], ['Arrow right', '→'], ['Arrow left', '←'], ['Arrow up', '↑'], ['Arrow down', '↓'], ['Check', '✓'], ['Cross', '✕'], ['Plus', '+'], ['Plane', '✈'], ['Phone', '☎'], ['Mail', '✉'], ['Cart', '🛒'], ['Bag', '🛍'], ['Sun', '☀'], ['Moon', '☾'], ['Bell', '🔔'], ['Lock', '🔒'], ['Gift', '🎁'], ['Fire', '🔥'], ['Bolt', '⚡'], ['Diamond', '◆'], ['Play', '▶'], ['Download', '⬇'], ['Search', '🔍'], ['Home', '⌂'], ['Pin', '📍'], ['Chat', '💬'], ['Truck', '🚚']];
   const GP_ICAT = { Shapes: '★☆♥◆▶', Symbols: '→←↑↓✓✕+⌂' };
   const GP_BFF = { 'Sans-serif': 'Assistant,Inter,sans-serif', 'Serif': 'Georgia,serif', 'Monospace': 'ui-monospace,Menlo,monospace' };
+  const GP_TYS = { 'Heading 1': 52, 'Heading 2': 46, 'Heading 3': 41, 'Heading 4': 32, 'Heading 5': 24, 'Heading 6': 18, 'Paragraph 1': 16, 'Paragraph 2': 14, 'Paragraph 3': 12 };
+  const GP_FWT = { 'Extra Light': 200, 'Light': 300, 'Normal': 400, 'Medium': 500, 'Semi Bold': 600, 'Bold': 700, 'Extra Bold': 800 };
   const GP_BSIZE = { 'Heading 5': 24, 'Heading 6': 18, 'Paragraph 1': 16, 'Paragraph 2': 14, 'Paragraph 3': 12 };
   const GP_TSH = { Light: '0 1px 2px rgba(0,0,0,.35)', Medium: '0 2px 5px rgba(0,0,0,.45)', Heavy: '0 3px 8px rgba(0,0,0,.6)' };
   function gpBtnHTML(e) {
-    const ic = e.icon ? `<i class="bi" style="order:${e.ipos === 'Right' ? 2 : 0}">${e.isvg || e.ig || '★'}</i>` : '', tx = e.textOn !== 0 ? `<span data-edit style="order:1">${esc(e.text)}</span>` : '';
+    const ic = e.icon ? `<i class="bi" style="order:${e.ipos === 'Right' ? 2 : 0}">${e.isvg || e.ig || '★'}</i>` : '', tx = e.textOn !== 0 ? `<span data-edit style="order:1">${e.html ? gpClean(e.html) : esc(e.text)}</span>` : '';
     const st = gpBox({ ...e, op: undefined, pos: undefined, mar: undefined, sbg: e.sbg, gm: e.gm, simg: e.simg });
     const hv = (e.hbg || e.hc || e.himg) ? ` data-hv="1"` : '', hvs = (e.hbg || e.hc || e.himg) ? `--hb:${e.hbg || e.bg};--hc:${e.hc || e.color};${e.himg ? '--hi:url(' + e.himg + ');' : ''}` : '';
-    return `<div style="text-align:${e.align}"><span class="gp-bt"${hv} style="background:${e.bg};color:${e.color};padding:${gpPad(e.pad || '12, 24, 12, 24')};gap:${e.igap == null ? 8 : e.igap}px;font-family:${GP_BFF[e.font] || 'inherit'};font-size:${e.size || 16}px;font-weight:${e.fw === 'Bold' ? 700 : e.fw === 'Medium' ? 500 : e.fw === 'Light' ? 300 : (e.b ? 700 : 400)};font-style:${e.i ? 'italic' : 'normal'};text-decoration:${e.u ? 'underline' : 'none'};line-height:${(e.lh || 180) / 100};${e.ls !== '' && e.ls != null ? 'letter-spacing:' + e.ls + 'px;' : ''}text-transform:${e.tt && e.tt !== 'none' ? e.tt : 'none'};${e.tsh ? 'text-shadow:' + gpShd(e, 'tsh', 45) + ';' : ''}${e.wid ? 'width:' + parseFloat(e.wid) + 'px;' : ''}${e.hei ? 'height:' + parseFloat(e.hei) + 'px;' : ''}${hvs}${st}">${ic}${tx}</span></div>`;
+    return `<div style="text-align:${e.align}"><span class="gp-bt"${hv} style="background:${e.bg};color:${e.color};padding:${gpPad(e.pad || '12, 24, 12, 24')};gap:${e.igap == null ? 8 : e.igap}px;font-family:${GP_BFF[e.font] || 'inherit'};font-size:${e.size || 16}px;font-weight:${e.fw === 'Bold' ? 700 : e.fw === 'Medium' ? 500 : e.fw === 'Light' ? 300 : (e.b ? 700 : 400)};font-style:${e.i ? 'italic' : 'normal'};text-decoration:${e.u ? 'underline' : 'none'};${e.sq ? 'border-radius:0;' : ''}line-height:${(e.lh || 180) / 100};${e.ls !== '' && e.ls != null ? 'letter-spacing:' + e.ls + 'px;' : ''}text-transform:${e.tt && e.tt !== 'none' ? e.tt : 'none'};${e.tsh ? 'text-shadow:' + gpShd(e, 'tsh', 45) + ';' : ''}${e.wid ? 'width:' + parseFloat(e.wid) + 'px;' : ''}${e.hei ? 'height:' + parseFloat(e.hei) + 'px;' : ''}${hvs}${st}">${ic}${tx}</span></div>`;
   }
   const gpPad = p => p.split(',').map(v => (parseFloat(v) || 0) + 'px').join(' ');
   function gpElHTML(e) {
     const sel = gp.sel === e.id;
-    const ts = `font-family:${e.type === 'heading' ? GP_FF[gp.fonts.heading] : GP_FF[gp.fonts.paragraph]};font-size:${e.size}px;color:${e.color};text-align:${e.align};font-weight:${e.b ? 700 : 400};font-style:${e.i ? 'italic' : 'normal'};text-decoration:${e.u ? 'underline' : 'none'};max-width:${e.width}px`;
+    const ts = `font-family:${(e.tstyle ? e.tstyle.indexOf('Heading') === 0 : e.type === 'heading') ? GP_FF[gp.fonts.heading] : GP_FF[gp.fonts.paragraph]};font-size:${e.size}px;color:${e.color};text-align:${e.align};font-weight:${e.fw ? GP_FWT[e.fw] || 400 : e.b ? 700 : 400};font-style:${e.i ? 'italic' : 'normal'};text-decoration:${e.u ? 'underline' : 'none'};${e.lh ? 'line-height:' + e.lh / 100 + ';' : ''}${e.ls !== '' && e.ls != null ? 'letter-spacing:' + e.ls + 'px;' : ''}${e.tt && e.tt !== 'none' ? 'text-transform:' + e.tt + ';' : ''}${e.tsh ? 'text-shadow:' + gpShd(e, 'tsh', 45) + ';' : ''}max-width:${e.width}px${e.align === 'center' ? ';margin-left:auto;margin-right:auto' : e.align === 'right' ? ';margin-left:auto' : ''}`;
     let h;
-    if (e.type === 'heading' || e.type === 'text') h = `<div class="gp-txt" data-edit style="${ts};${e.pad ? 'padding:' + gpPad(e.pad) : ''}">${esc(e.text)}</div>`;
+    if (e.type === 'heading' || e.type === 'text') h = `<div class="gp-txt" data-edit style="${ts};${e.pad ? 'padding:' + gpPad(e.pad) : ''}">${e.html ? gpClean(e.html) : esc(e.text)}</div>`;
     else if (e.type === 'button') h = gpBtnHTML(e);
+    else if (e.type === 'video') h = gpVideoHTML(e);
     else if (e.type === 'image') h = `<div style="text-align:${e.align}"><img src="${e.src}" alt="${esc(e.alt)}" style="width:${e.w}${e.unit};max-width:100%;display:inline-block;vertical-align:top${e.ulock && e.h ? ';height:' + parseFloat(e.h) + (e.hu || 'px') + ';object-fit:cover' : ''}${e.shape === 'circle' ? ';aspect-ratio:1/1;object-fit:cover;border-radius:50%' : ''}"></div>`;
     else if (e.type === 'divider') h = '<hr style="border:0;border-top:1px solid #222;margin:18px 0">';
     else if (e.type === 'stars') h = '<div style="font-size:20px;padding:6px 0">★★★★<span style="opacity:.6">★</span></div>';
@@ -8924,22 +8986,157 @@ button.sx-row:hover { background: #faf9f5; }
   }
   const GP_VA = { top: 'start', center: 'center', bottom: 'end', stretch: 'stretch' };
   function gpColsHTML(h) {
-    return h.cols.map((c, ci) => `<div class="gp-col" data-sec="${h.id}" data-col="${ci}">${c.length ? c.map(it => it.type === 'row' ? gpRowHTML(it) : gpElHTML(it)).join('') : '<div class="gp-ph"><span>+ &nbsp;Drop element here</span></div>'}</div>`).join('');
+    return h.cols.map((c, ci) => `<div class="gp-col" data-sec="${h.id}" data-col="${ci}"${h.dist ? ' style="justify-content:space-between"' : ''}>${c.length ? c.map(it => it.type === 'row' ? gpRowHTML(it) : gpElHTML(it)).join('') : '<div class="gp-ph"><span>+ &nbsp;Drop element here</span></div>'}</div>`).join('');
   }
   function gpRowHTML(r) {
+    if (r.hero) return gpHeroHTML(r);
     const sel = gp.sel === r.id;
     const ui = sel ? `<div class="gp-chip row"><span class="gr" draggable="true" data-rdrag="${r.id}">${ICO.grip}Row ▴</span><button data-act="dup" aria-label="Duplicate">${ICO.copy}</button><button data-act="del" aria-label="Delete">${ICO.trash}</button></div>${gpBands(r, r.id)}` : '';
     return `<div class="gp-sec${sel ? ' is-sel' : ''}${gpHid(r)}${r.cls ? ' ' + esc(r.cls) : ''}"${r.eid ? ` id="${esc(r.eid)}"` : ''} data-s="${r.id}" style="max-width:${r.maxw || 1200}px;margin-left:auto;margin-right:auto;width:100%;${r.height === 'Full' ? 'min-height:320px;' : ''}${gpBox(r)}padding:${gpPad(r.pad)}">${gpVidHTML(r)}${ui}<div class="gp-cols" style="grid-template-columns:${gpTpl(r)};gap:${r.gap == null ? 16 : r.gap}px;align-items:${GP_VA[r.valign || 'top']}${r.rev ? ';direction:rtl' : ''}">${gpColsHTML(r)}</div></div>`;
+  }
+
+  const GP_YT = 'https://www.youtube.com/embed/Jcu1AHaTchM';
+  function gpVideoEmbed(e, force) {
+    const u = e.vurl || '', yn = k => e[k] === 'Yes', auto = force || yn('auto') ? 1 : 0, ym = u.match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([\w-]{6,})/), vm = u.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+    if (e.vtype === 'YouTube' && ym) { const org = /^https?:/.test(location.protocol) ? '&origin=' + encodeURIComponent(location.origin) : ''; return `<iframe src="https://www.youtube.com/embed/${ym[1]}?autoplay=${auto}&mute=${yn('sound') ? 0 : 1}&controls=${yn('ctrl') ? 1 : 0}&rel=0&playsinline=1&enablejsapi=1${org}${yn('loop') ? '&loop=1&playlist=' + ym[1] : ''}" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen loading="${yn('lazy') ? 'lazy' : 'eager'}" referrerpolicy="strict-origin-when-cross-origin"></iframe>`; }
+    if (e.vtype === 'Vimeo' && vm) return `<iframe src="https://player.vimeo.com/video/${vm[1]}?autoplay=${auto}&muted=${yn('sound') ? 0 : 1}&controls=${yn('ctrl') ? 1 : 0}${yn('loop') ? '&loop=1' : ''}" title="Vimeo video" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="${yn('lazy') ? 'lazy' : 'eager'}"></iframe>`;
+    if (e.vtype === 'Video hosting' && u) return `<video src="${esc(u)}" poster="${esc(e.vthumb || '')}"${yn('ctrl') ? ' controls' : ''}${auto ? ' autoplay' : ''}${yn('loop') ? ' loop' : ''}${yn('sound') && !auto ? '' : ' muted'} playsinline></video>`;
+    return '';
+  }
+  function gpVideoHTML(e) {
+    const fr = (e.frame && e.frame !== 'Original' ? e.frame : '16:9').replace(':', ' / '), embed = gpVideoEmbed(e);
+    let inner;
+    if (e.vthumb || !embed) inner = `<div class="gp-vth" style="background-image:url('${e.vthumb || ((e.vurl || '').match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([\w-]{6,})/) ? 'https://i.ytimg.com/vi/' + RegExp.$1 + '/hqdefault.jpg' : GP_GAL[1])}')"></div><button class="gp-vplay" data-vplay aria-label="Play video">▶</button>`;
+    else inner = embed;
+    return `<div class="gp-vd${gp.prev ? '' : ' edit'}" style="aspect-ratio:${fr}">${inner}</div>`;
+  }
+  function gpHeroHTML(r) {
+    const sel = gp.sel === r.id, ui = sel ? `<div class="gp-chip row"><span class="gr" draggable="true" data-rdrag="${r.id}">${ICO.grip}${esc(r.label || 'Hero Banner')} ▴</span><button data-act="dup" aria-label="Duplicate">${ICO.copy}</button><button data-act="del" aria-label="Delete">${ICO.trash}</button></div>${gpBands(r, r.id)}` : '';
+    const rat = r.hrat && r.hrat !== 'Original' ? `aspect-ratio:${r.hrat.replace(':', ' / ')};` : '', hgt = (r.hunlock && +r.hh) ? `height:${+r.hh}${r.hhu || 'px'};` : '';
+    const al = r.halign === 'right' ? 'margin-left:auto;' : r.halign === 'left' ? 'margin-right:auto;' : 'margin-left:auto;margin-right:auto;', va = { top: 'flex-start', center: 'center', bottom: 'flex-end', stretch: 'flex-start' }[r.valign || 'center'], vs = r.valign === 'stretch';
+    const ovl = r.ovl ? `<div class="gp-ovl" style="background:${gpRgba(r.ovl, r.ovlo == null ? 40 : r.ovlo)}"></div>` : '';
+    return `<div class="gp-sec gp-hero${sel ? ' is-sel' : ''}${gpHid(r)}${r.cls ? ' ' + esc(r.cls) : ''}"${r.eid ? ` id="${esc(r.eid)}"` : ''}${r.title ? ` title="${esc(r.title)}"` : ''}${r.alt ? ` role="img" aria-label="${esc(r.alt)}"` : ''}${r.hfx && r.hfx !== 'None' ? ` data-hfx="${r.hfx}"` : ''} data-s="${r.id}" style="width:${+r.hw || 100}${r.hwu || '%'};${al}${rat}${hgt}min-height:200px;display:flex;flex-direction:column;justify-content:${va};position:relative;${gpBox(r)}background-size:${r.bgsz || 'cover'};${r.simg ? 'background-position:' + (r.bgpos || 'center') + ';' : ''}${r.parallax ? 'background-attachment:fixed;' : ''}padding:${gpPad(r.pad)}">${gpVidHTML(r)}${ovl}${ui}<div class="gp-cols" style="grid-template-columns:${gpTpl(r)};gap:${r.gap == null ? 16 : r.gap}px;align-items:${vs || (r.cols.length > 1 && GP_HSPLIT.indexOf(r.hlay) < 0) ? 'stretch' : 'center'};${vs ? 'flex:1;' : ''}width:100%;max-width:${r.maxw || 1200}px;margin:0 auto${r.rev ? ';direction:rtl' : ''}">${gpColsHTML(r)}</div></div>`;
+  }
+  function gpGallery(key) {
+    gp.galkey = key; const old = $('.gp-modal'); if (old) old.remove();
+    const items = [...(gp.gal || []), ...GP_GAL], m = document.createElement('div'); m.className = 'gp-modal';
+    m.innerHTML = `<div class="gp-mb gal" role="dialog" aria-label="Choose from gallery"><div class="gp-mh"><b>Choose from gallery</b><button data-mclose aria-label="Close">✕</button></div><div class="gp-gt"><button class="on" data-gtab="g">Gallery</button><button data-gtab="d">Recently Deleted</button></div><div class="gp-gg" data-gg><button class="gp-gu" data-galup aria-label="Upload image">＋</button>${items.map((x, i) => `<button class="gp-gi" data-gpick="${i}" style="background-image:url('${x}')" aria-label="Image ${i + 1}"></button>`).join('')}</div><input type="file" accept="image/*" id="gp-galf" hidden></div>`;
+    gp.galitems = items; document.body.appendChild(m);
   }
   function gpSecHTML(s, i) {
     const sel = gp.sel === s.id;
     const ui = sel ? `<div class="gp-chip sec"><span class="gr" draggable="true" data-sdrag="${s.id}">${ICO.grip}Section ${i + 1}</span><span>▣ Create Theme Section</span><button data-act="dup" aria-label="Duplicate">${ICO.copy}</button><button data-act="del" aria-label="Delete">${ICO.trash}</button></div><button class="gp-plus t" data-ins="before" aria-label="Add section above">+</button><button class="gp-plus b" data-ins="after" aria-label="Add section below">+</button>${gpBands(s, s.id)}` : '';
     return `<div class="gp-ct${sel ? ' is-sel' : ''}${gpHid(s)}${s.cls ? ' ' + esc(s.cls) : ''}"${s.eid ? ` id="${esc(s.eid)}"` : ''} data-c="${s.id}" style="${s.width === 'default' ? 'max-width:' + (s.maxw || 1200) + 'px;margin-left:auto;margin-right:auto;' : ''}${gpBox(s)}padding:${gpPad(s.pad)}${s.pp === 'Yes' ? ';padding-left:24px;padding-right:24px' : ''}">${gpVidHTML(s)}${ui}<div class="gp-cols" style="grid-template-columns:${gpTpl(s)};gap:16px${s.rev ? ';direction:rtl' : ''}">${gpColsHTML(s)}</div></div>`;
   }
+  /* patch the canvas DOM in place: keeps <iframe>/<video> nodes alive so playing videos are not restarted by re-renders */
+  const gpKey = x => x.nodeType === 1 ? (x.getAttribute('data-c') || x.getAttribute('data-s') || x.getAttribute('data-el') || null) : null;
+  function gpPatch(o, n) {
+    if (o.nodeType !== 1) { if (o.nodeValue !== n.nodeValue) o.nodeValue = n.nodeValue; return; }
+    if (o.nodeName === 'IFRAME' || o.nodeName === 'VIDEO') { if (o.getAttribute('src') !== n.getAttribute('src')) { o.replaceWith(n); return; } }
+    for (const a of [...o.attributes]) if (!n.hasAttribute(a.name)) o.removeAttribute(a.name);
+    for (const a of n.attributes) if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+    if (o.nodeName !== 'IFRAME' && o.nodeName !== 'VIDEO') gpKids(o, n);
+  }
+  function gpKids(o, n) {
+    const nk = [...n.childNodes], byKey = new Map(), used = new Set();
+    [...o.childNodes].forEach(x => { const k = gpKey(x); if (k) byKey.set(k, x); });
+    nk.forEach((nn, i) => {
+      const cur = o.childNodes[i], k = gpKey(nn); let m = null;
+      if (k) { m = byKey.get(k) || null; if (m && used.has(m)) m = null; }
+      else if (cur && !used.has(cur) && !gpKey(cur) && cur.nodeType === nn.nodeType && cur.nodeName === nn.nodeName) m = cur;
+      if (m) { used.add(m); if (m !== cur) o.insertBefore(m, cur || null); gpPatch(m, nn); } else { o.insertBefore(nn, cur || null); used.add(nn); }
+    });
+    while (o.childNodes.length > nk.length) o.removeChild(o.lastChild);
+  }
+  function gpMorph(root, html) { const t = document.createElement('div'); t.innerHTML = html; gpKids(root, t); }
+  /* ---- rich text: selection toolbar + colour picker (content-page style) ---- */
+  function gpClean(h) {
+    const t = document.createElement('template'); t.innerHTML = h;
+    const ok = { B: 1, STRONG: 1, I: 1, EM: 1, U: 1, S: 1, STRIKE: 1, DEL: 1, SUB: 1, SUP: 1, A: 1, OL: 1, UL: 1, LI: 1, SPAN: 1, BR: 1, DIV: 1, P: 1, MARK: 1 };
+    const walk = n => [...n.childNodes].forEach(c => {
+      if (c.nodeType === 3) return;
+      if (c.nodeType !== 1) { c.remove(); return; }
+      walk(c);
+      if (!ok[c.tagName]) { c.replaceWith(...c.childNodes); return; }
+      const st = (c.getAttribute('style') || '').split(';').map(x => x.trim()).filter(x => /^(color|background-color|font-weight|font-style|text-decoration(-line)?)\s*:\s*[#\w\s(),.%-]+$/i.test(x)).join(';');
+      const href = c.tagName === 'A' ? c.getAttribute('href') : null;
+      [...c.attributes].forEach(a => c.removeAttribute(a.name));
+      if (st) c.setAttribute('style', st);
+      if (href && /^(https?:|mailto:|tel:|#|\/)/i.test(href)) { c.setAttribute('href', href); c.setAttribute('target', '_blank'); c.setAttribute('rel', 'noopener'); }
+    });
+    walk(t.content); return t.innerHTML;
+  }
+  const gpRt = { fc: '#242424', hc: '#ffe066', range: null, ed: null, mode: null, c: { h: 0, s: 1, v: 1, a: 1 }, tb: null, pk: null };
+  const gpHex = (r, g, b) => '#' + [r, g, b].map(x => Math.round(x).toString(16).padStart(2, '0')).join('');
+  function gpHsv2rgb(h, s, v) { const f = n => { const k = (n + h / 60) % 6; return v - v * s * Math.max(0, Math.min(k, 4 - k, 1)); }; return [f(5) * 255, f(3) * 255, f(1) * 255]; }
+  function gpRgb2hsv(r, g, b) { r /= 255; g /= 255; b /= 255; const mx = Math.max(r, g, b), mn = Math.min(r, g, b), d = mx - mn; let h = 0; if (d) h = mx === r ? ((g - b) / d + 6) % 6 : mx === g ? (b - r) / d + 2 : (r - g) / d + 4; return { h: h * 60, s: mx ? d / mx : 0, v: mx }; }
+  function gpParseCol(c) { let m = String(c || '').trim().match(/^#?([0-9a-f]{3}|[0-9a-f]{6})$/i); if (m) { let x = m[1]; if (x.length === 3) x = x.replace(/./g, '$&$&'); return { ...gpRgb2hsv(parseInt(x.slice(0, 2), 16), parseInt(x.slice(2, 4), 16), parseInt(x.slice(4), 16)), a: 1 }; } m = String(c).match(/rgba?\(\s*(\d+)[ ,]+(\d+)[ ,]+(\d+)(?:[ ,/]+([\d.]+))?/i); return m ? { ...gpRgb2hsv(+m[1], +m[2], +m[3]), a: m[4] == null ? 1 : +m[4] } : null; }
+  const gpColStr = c => { const [r, g, b] = gpHsv2rgb(c.h, c.s, c.v); return c.a < 1 ? `rgba(${Math.round(r)},${Math.round(g)},${Math.round(b)},${+c.a.toFixed(2)})` : gpHex(r, g, b); };
+  function gpRtBuild() {
+    if (gpRt.tb) return;
+    const I = { hl: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 11-6 6v3h9l3-3"/><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"/></svg>', ol: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 6h11M10 12h11M10 18h11"/><path d="M3.5 5.5 5 4.5V8M3.5 14h3l-3 3.5h3" stroke-width="1.5"/></svg>', ul: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6h12M9 12h12M9 18h12"/><circle cx="4.5" cy="6" r="1" fill="currentColor"/><circle cx="4.5" cy="12" r="1" fill="currentColor"/><circle cx="4.5" cy="18" r="1" fill="currentColor"/></svg>', lk: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>' };
+    const b = (c, h, t, bar) => `<button type="button" data-rt="${c}" title="${t}" aria-label="${t}">${h}${bar ? `<i class="bar" data-bar="${c}"></i>` : ''}</button>`;
+    const tb = document.createElement('div'); tb.className = 'gp-rtb'; tb.setAttribute('role', 'toolbar'); tb.setAttribute('aria-label', 'Text formatting');
+    tb.innerHTML = b('bold', '<b>B</b>', 'Bold') + b('italic', '<i style="font-family:serif">I</i>', 'Italic') + b('underline', '<u>U</u>', 'Underline') + b('strikeThrough', '<s>S</s>', 'Strikethrough') + b('fc', '<span style="font-weight:700;text-decoration:none">A</span>', 'Text color', 1) + b('hc', I.hl, 'Highlight color', 1) + '<span class="sep"></span>' + b('insertOrderedList', I.ol, 'Numbered list') + b('insertUnorderedList', I.ul, 'Bulleted list') + '<span class="sep"></span>' + b('subscript', 'X<sub style="font-size:11px">2</sub>', 'Subscript') + b('superscript', 'X<sup style="font-size:11px">2</sup>', 'Superscript') + '<span class="sep"></span>' + b('link', I.lk, 'Link') + '<span class="sep"></span>' + b('clear', '<span style="font-size:15px">T<small>x</small></span>', 'Clear formatting');
+    const pk = document.createElement('div'); pk.className = 'gp-rtp'; pk.setAttribute('role', 'dialog'); pk.setAttribute('aria-label', 'Color');
+    pk.innerHTML = '<div class="rp-top"><i class="rp-sw"></i><div class="rp-f"><input class="rp-hex" maxlength="9" aria-label="Hex color" spellcheck="false"><span><input class="rp-al" type="number" min="0" max="100" aria-label="Opacity"> %</span></div><button type="button" class="rp-eye" title="Pick from screen" aria-label="Pick color from screen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 22 1-1h3l9-9"/><path d="M3 21v-3l9-9"/><path d="m15 6 3.4-3.4a2.1 2.1 0 1 1 3 3L18 9l.4.4a2.1 2.1 0 1 1-3 3l-3.8-3.8a2.1 2.1 0 1 1 3-3z"/></svg></button></div><div class="rp-sv"><i></i></div><div class="rp-sl rp-hue"><i></i></div><div class="rp-sl rp-alpha"><u></u><i></i></div>';
+    document.body.appendChild(tb); document.body.appendChild(pk); gpRt.tb = tb; gpRt.pk = pk;
+    const keep = e => { if (!e.target.closest('input')) e.preventDefault(); };
+    tb.addEventListener('mousedown', keep); pk.addEventListener('mousedown', keep);
+    tb.addEventListener('click', e => {
+      const bt = e.target.closest('[data-rt]'); if (!bt) return; const c = bt.dataset.rt;
+      if (c === 'fc' || c === 'hc') { gpRt.pk.classList.contains('on') && gpRt.mode === c ? gpRt.pk.classList.remove('on') : gpRtOpen(c, bt); return; }
+      gpRt.pk.classList.remove('on');
+      if (c === 'link') { const u = prompt('Link URL', 'https://'); if (u === null) { gpRtExec('x'); return; } u.trim() ? gpRtExec('createLink', u.trim()) : gpRtExec('unlink'); return; }
+      if (c === 'clear') { gpRtExec('removeFormat'); gpRtExec('unlink'); return; }
+      gpRtExec(c);
+    });
+    const $q = s => pk.querySelector(s), sv = $q('.rp-sv'), hue = $q('.rp-hue'), al = $q('.rp-alpha');
+    const drag = (el, fn) => el.addEventListener('pointerdown', e => { e.preventDefault(); el.setPointerCapture(e.pointerId); const mv = ev => { const r = el.getBoundingClientRect(); fn(Math.min(1, Math.max(0, (ev.clientX - r.left) / r.width)), Math.min(1, Math.max(0, (ev.clientY - r.top) / r.height))); gpRtSync(true); }; mv(e); el.addEventListener('pointermove', mv); el.addEventListener('pointerup', () => el.removeEventListener('pointermove', mv), { once: true }); });
+    drag(sv, (x, y) => { gpRt.c.s = x; gpRt.c.v = 1 - y; }); drag(hue, x => { gpRt.c.h = x * 360; }); drag(al, x => { gpRt.c.a = x; });
+    $q('.rp-hex').addEventListener('change', e => { const c = gpParseCol(e.target.value); if (c) { gpRt.c = { ...c, a: gpRt.c.a }; gpRtSync(true); } else gpRtSync(false); });
+    $q('.rp-al').addEventListener('change', e => { gpRt.c.a = Math.min(100, Math.max(0, +e.target.value || 0)) / 100; gpRtSync(true); });
+    const ey = $q('.rp-eye'); if (window.EyeDropper) ey.addEventListener('click', () => new EyeDropper().open().then(r => { const c = gpParseCol(r.sRGBHex); if (c) { gpRt.c = { ...c, a: gpRt.c.a }; gpRtSync(true); } }).catch(() => { })); else ey.hidden = true;
+  }
+  function gpRtSync(apply) {
+    const pk = gpRt.pk, c = gpRt.c, [r, g, b] = gpHsv2rgb(c.h, c.s, c.v), hx = gpHex(r, g, b), q = s => pk.querySelector(s);
+    q('.rp-sw').style.background = gpColStr(c); q('.rp-hex').value = hx.slice(1).toUpperCase(); q('.rp-al').value = Math.round(c.a * 100);
+    const sv = q('.rp-sv'); sv.style.background = `linear-gradient(transparent,#000),linear-gradient(90deg,#fff,hsl(${c.h},100%,50%))`; sv.firstChild.style.left = c.s * 100 + '%'; sv.firstChild.style.top = (1 - c.v) * 100 + '%';
+    q('.rp-hue i').style.left = c.h / 360 * 100 + '%'; q('.rp-alpha i').style.left = c.a * 100 + '%'; q('.rp-alpha u').style.background = `linear-gradient(90deg,transparent,${hx})`;
+    if (apply) { const col = gpColStr(c); gpRt[gpRt.mode] = col; gpRt.tb.querySelector(`[data-bar="${gpRt.mode}"]`).style.background = col; gpRtExec(gpRt.mode === 'fc' ? 'foreColor' : 'hiliteColor', col); }
+  }
+  function gpRtOpen(mode, btn) {
+    gpRt.mode = mode; const c = gpParseCol(gpRt[mode]) || { h: 0, s: 1, v: 1, a: 1 }; gpRt.c = c;
+    const pk = gpRt.pk, tr = gpRt.tb.getBoundingClientRect(); pk.classList.add('on'); gpRtSync(false);
+    pk.style.left = Math.max(8, Math.min(tr.left, innerWidth - pk.offsetWidth - 8)) + 'px';
+    const below = tr.bottom + 8 + pk.offsetHeight < innerHeight; pk.style.top = (below ? tr.bottom + 8 : Math.max(8, tr.top - 8 - pk.offsetHeight)) + 'px';
+  }
+  function gpRtExec(cmd, val) {
+    const ed = gpRt.ed; if (!ed || !ed.isConnected) return;
+    ed.contentEditable = 'true'; ed.focus(); const s = getSelection();
+    if (gpRt.range) { s.removeAllRanges(); s.addRange(gpRt.range); }
+    if (cmd !== 'x') { try { document.execCommand('styleWithCSS', false, true); document.execCommand(cmd, false, val); } catch (e) { } }
+    if (s.rangeCount) gpRt.range = s.getRangeAt(0).cloneRange(); gpRtUpdate();
+  }
+  function gpRtEd() { const s = getSelection(); if (!s || !s.rangeCount) return null; const n = s.anchorNode, el = n && (n.nodeType === 1 ? n : n.parentElement), ed = el && el.closest && el.closest('#gp-cv [data-edit][contenteditable="true"]'); return ed && ed.contains(s.focusNode) ? ed : null; }
+  let gpRtRaf = 0;
+  function gpRtUpdate() {
+    cancelAnimationFrame(gpRtRaf); gpRtRaf = requestAnimationFrame(() => {
+      const s = getSelection(), ed = gpRtEd(), inUI = gpRt.tb && (gpRt.tb.contains(document.activeElement) || gpRt.pk.contains(document.activeElement));
+      if (ed && !s.isCollapsed) {
+        gpRtBuild(); gpRt.ed = ed; gpRt.range = s.getRangeAt(0).cloneRange(); const tb = gpRt.tb; tb.classList.add('on');
+        const r = gpRt.range.getBoundingClientRect(), w = tb.offsetWidth; tb.style.left = Math.max(8, Math.min(r.left, innerWidth - w - 8)) + 'px'; tb.style.top = Math.max(8, r.top - tb.offsetHeight - 8) + 'px';
+        tb.querySelectorAll('[data-rt]').forEach(x => { const c = x.dataset.rt; let on = false; try { on = ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'insertOrderedList', 'insertUnorderedList'].includes(c) && document.queryCommandState(c); } catch (e) { } x.classList.toggle('act', on); });
+        tb.querySelectorAll('[data-bar]').forEach(x => { x.style.background = gpRt[x.dataset.bar]; });
+      } else if (!inUI && gpRt.tb) { gpRt.tb.classList.remove('on'); gpRt.pk.classList.remove('on'); }
+    });
+  }
+  document.addEventListener('selectionchange', gpRtUpdate);
+  addEventListener('scroll', () => { if (gpRt.tb && gpRt.tb.classList.contains('on')) gpRtUpdate(); }, true);
   function gpCanvas() {
     const c = $('#gp-cv'); c.dataset.d = gp.dev; c.style.fontFamily = GP_FF[gp.fonts.paragraph];
-    c.innerHTML = gp.secs.length ? gp.secs.map(gpSecHTML).join('') + '<div class="gp-adds" id="gp-adds"><span>Add section</span><div><button id="gp-tpl">Choose templates<small>inspired by CRO experts</small></button><button id="gp-blank">Add blank section<small>then drag &amp; drop elements</small></button></div></div>'
-      : '<div class="gp-start"><div class="gp-ill" aria-hidden="true"><div class="im"><svg width="52" height="44" viewBox="0 0 52 44" fill="#fff"><circle cx="12" cy="10" r="5"/><path d="M0 44 17 22l10 12 8-9 17 19z"/></svg></div><div class="ln"><i></i><i></i><i></i><i></i></div></div><p>Start with Sections from sidebar</p><div class="gp-cta"><button class="dark" data-tab="section">Add Sections</button><button data-tab="element">Add Elements</button></div></div>';
+    gpMorph(c, gp.secs.length ? gp.secs.map(gpSecHTML).join('') + '<div class="gp-adds" id="gp-adds"><span>Add section</span><div><button id="gp-tpl">Choose templates<small>inspired by CRO experts</small></button><button id="gp-blank">Add blank section<small>then drag &amp; drop elements</small></button></div></div>'
+      : '<div class="gp-start"><div class="gp-ill" aria-hidden="true"><div class="im"><svg width="52" height="44" viewBox="0 0 52 44" fill="#fff"><circle cx="12" cy="10" r="5"/><path d="M0 44 17 22l10 12 8-9 17 19z"/></svg></div><div class="ln"><i></i><i></i><i></i><i></i></div></div><p>Start with Sections from sidebar</p><div class="gp-cta"><button class="dark" data-tab="section">Add Sections</button><button data-tab="element">Add Elements</button></div></div>');
     $('#gp').classList.toggle('dirty', gp.dirty); $('#gp-draft').textContent = gp.dirty ? 'Unsaved changes' : 'Draft';
     $('#gp-undo').disabled = !gp.hist.length; $('#gp-redo').disabled = !gp.redo.length;
     $$('[data-dev]').forEach(b => b.setAttribute('aria-pressed', b.dataset.dev === gp.dev));
@@ -9003,6 +9200,14 @@ button.sx-row:hover { background: #faf9f5; }
     } else if (gp.pop === 'sh' || gp.pop === 'tsh') {
       const P = gp.pop, custom = o[P] === 'Custom', ang = o[P + 'd'] == null ? 49 : o[P + 'd']; t = 240;
       h = head('Shadow') + prow('Type', sg([['Light', '▢'], ['Medium', '◧'], ['Heavy', '◨'], ['Custom', '☰']], o[P] || 'Light', `data-pset="${P}"`).replace(new RegExp(`data-pset="${P}"="(\\w+)"`, 'g'), (m, a) => `data-pset="${P}:${a}"`)) + (custom ? `<div class="gp-pr"><span>Direction</span><div class="gp-dial" data-dial="${P}d" role="slider" aria-label="Shadow direction" aria-valuenow="${ang}"><i style="transform:rotate(${ang}deg)"><b></b></i><em>${ang}°</em></div></div>` : '') + prow('Color', hexw(P + 'c', o[P + 'c'] || '#121212')) + (custom ? prow('Distance', `<input class="nin" type="number" min="0" data-pf="${P}dist" value="${o[P + 'dist'] == null ? 20 : o[P + 'dist']}">`) : '');
+    } else if (gp.pop === 'hlay') {
+      t = 130; const lt = (l => `<button class="${gpHnorm(o.hlay) === l ? 'on' : ''}" data-hlayset="${l}" title="${l}" aria-label="${l}" aria-pressed="${gpHnorm(o.hlay) === l}">${HLAY_ICO(l, 100, 70)}</button>`); h = head('Layout') + `<div class="gp-lopts g12">${GP_HLAYS.map(lt).join('')}</div><div class="gp-lsub">With image column</div><div class="gp-lopts g12">${GP_HSPLIT.map(lt).join('')}</div><div class="gp-lsub">Ratio</div><div style="padding:0 16px 14px">${opt('hrat', ['Original', '16:9', '4:3', '1:1', '21:9', '3:4'], o.hrat || '16:9')}</div>`;
+    } else if (gp.pop === 'hfx') {
+      t = 340; h = head('Hover effect') + prow('Effect', sg([['None', 'None'], ['Zoom', 'Zoom'], ['Darken', 'Dark'], ['Lift', 'Lift']], o.hfx || 'None', 'data-pset="hfx"').replace(/data-pset="hfx"="(\w+)"/g, (m, a) => `data-pset="hfx:${a}"`));
+    } else if (gp.pop === 'halt' || gp.pop === 'htit') {
+      const alt = gp.pop === 'halt'; t = 300; h = head(alt ? 'Image alt text' : 'Image title') + `<div class="gp-pr" style="flex-direction:column;align-items:stretch"><span>Content</span><textarea class="nin" style="width:100%;height:84px;padding:10px;resize:none" data-f="${alt ? 'alt' : 'title'}" placeholder="${alt ? 'Describes the appearance of the image' : 'Shown as a tooltip'}">${esc(alt ? o.alt || '' : o.title || '')}</textarea></div>`;
+    } else if (gp.pop === 'vth') {
+      t = 130; const th = o.vthumb || GP_GAL[1]; h = head('Thumbnail') + `<div class="gp-cl2" style="font-weight:600">Source</div><div class="gp-up" style="margin:0 16px 14px"><div class="pv" style="height:120px;background-size:cover;background-position:center;background-image:url('${th}')"><button data-vup>⇧ Upload Image</button></div><input class="gp-in" data-f="vthumb" placeholder="https://…" value="${o.vthumb && o.vthumb.startsWith('data:') ? '' : esc(o.vthumb || '')}"><div>or <a data-gal2="vthumb">Browse gallery</a></div></div>`;
     } else if (gp.pop === 'pad') {
       t = 170; const p = padArr(o), inp = i => `<input class="nin sm" type="number" data-pp="${i}" value="${p[i]}" aria-label="Padding ${['top', 'right', 'bottom', 'left'][i]}">`;
       h = head('Padding') + `<div class="gp-padg"><span></span>${inp(0)}<span></span>${inp(3)}<button data-plink class="${gp.padlink ? 'on' : ''}" aria-label="Link sides">▢</button>${inp(1)}<span></span>${inp(2)}<span></span></div>`;
@@ -9015,20 +9220,55 @@ button.sx-row:hover { background: #faf9f5; }
     } else if (gp.pop === 'bhov') {
       t = 220; h = head('Hover') + `<div class="gp-cl2" style="margin:10px 16px 0;font-weight:600">Background</div>` + prow('Color', hexw('hbg', o.hbg || '#4d4d4d')) + prow('Image', o.himg ? `<span class="nin" style="display:flex;align-items:center;gap:8px;width:190px">▣ Image<b data-pclr="himg" style="margin-left:auto;cursor:pointer">✕</b></span>` : '<button class="nin" data-hbgimg style="width:190px;text-align:left;cursor:pointer">＋ Add...</button>') + '<input type="file" accept="image/*" id="gp-file3" hidden>' + `<div class="gp-cl2" style="margin:10px 16px 0;font-weight:600">Text</div>` + prow('Text color', hexw('hc', o.hc || '#ffffff'));
     }
-    return `<div class="gp-fl gp-pc" role="dialog" style="top:${t}px">${h}</div>`;
+    return `<div class="gp-fl gp-pc${gp.pop === 'hlay' ? ' wide' : ''}" role="dialog" style="top:${t}px">${h}</div>`;
   }
   const advf0 = o => hh('Visibility') + ['desktop', 'tablet', 'mobile'].map(d => fld('Hide on ' + d, `<button class="gp-tog2${o.hide && o.hide[d] ? ' on' : ''}" data-hide="${d}" aria-label="Hide on ${d}"></button>`)).join('') + hh('Attributes') + fld('CSS class', `<input class="gp-in" data-f="cls" placeholder="my-class" value="${esc(o.cls || '')}">`) + fld('ID', `<input class="gp-in" data-f="eid" placeholder="section-id" value="${esc(o.eid || '')}">`);
   const alignBtns = v => `<div class="gp-sg">${['left', 'center', 'right', 'justify'].map(a => `<button data-al="${a}" class="${v === a ? 'on' : ''}" aria-label="Align ${a}">${{ left: '☰', center: '≡', right: '☷', justify: '▤' }[a]}</button>`).join('')}</div>`;
+
+  const yn2 = (o, k, d) => `<div class="gp-sg">${['Yes', 'No'].map(v => `<button data-set="${k}:${v}" class="${(o[k] || d || 'No') === v ? 'on' : ''}">${v}</button>`).join('')}</div>`;
+  const HLAY_ICO = (l, w = 46, h = 34) => {
+    l = gpHnorm(l);
+    if (l === 'Image right' || l === 'Image left') return `<svg width="${w}" height="${h}" viewBox="0 0 46 34" fill="none"><rect width="46" height="34" rx="4" fill="#3a3a3a"/>${l === 'Image right' ? '<rect x="25" y="5" width="16" height="24" rx="2" fill="#666"/><rect x="5" y="10" width="16" height="3" rx="1.5" fill="#eee"/><rect x="5" y="16" width="12" height="2" rx="1" fill="#bbb"/>' : '<rect x="5" y="5" width="16" height="24" rx="2" fill="#666"/><rect x="25" y="10" width="16" height="3" rx="1.5" fill="#eee"/><rect x="25" y="16" width="12" height="2" rx="1" fill="#bbb"/>'}</svg>`;
+    const dist = l.indexOf('Distributed') === 0, side = /left$/i.test(l) ? 0 : /right$/i.test(l) ? 2 : 1, vert = dist ? 'd' : l.indexOf('Top') === 0 ? 't' : l.indexOf('Bottom') === 0 ? 'b' : 'm';
+    const x1 = [10, 33, 56][side], x2 = [10, 39, 68][side], y = { t: 9, m: 28, b: 50, d: 9 }[vert], y2 = vert === 'd' ? 57 : y + 9;
+    return `<svg width="${w}" height="${h}" viewBox="0 0 100 70" fill="none"><rect width="100" height="70" rx="7" fill="#3b3b3b"/><path d="M0 70V58l26-24 18 18 14-12 42 30z" fill="#555"/><rect x="${x1}" y="${y}" width="34" height="5" rx="2.500" fill="#f2f2f2"/><rect x="${x2}" y="${y2}" width="22" height="4" rx="2" fill="#f2f2f2"/></svg>`;
+  };
+  function gpVideoSettings(e, o) {
+    const th = e.vthumb || GP_GAL[1];
+    return hh('Video source') + fld('Type', opt('vtype', ['YouTube', 'Vimeo', 'Video hosting'], e.vtype || 'YouTube')) + fld('Video link', `<input class="gp-in" data-f="vurl" placeholder="Add..." value="${esc(e.vurl || '')}">`) + fld('Thumbnail', pfld('vth', `<i class="sw" style="width:22px;height:22px;border-radius:4px;background:center/cover url('${th}')"></i>`, e.vthumb ? 'Image' : '', 'vthumb'))
+      + hh('Video configure') + fld('Control bar', yn2(e, 'ctrl', 'Yes')) + fld('Sound', yn2(e, 'sound', 'No')) + fld('Lazy load', yn2(e, 'lazy', 'Yes')) + fld('Autoplay', yn2(e, 'auto', 'No')) + fld('Loop video', yn2(e, 'loop', 'No'))
+      + hh('Size') + fld('Frame', opt('frame', ['Original', '16:9', '4:3', '1:1', '21:9', '9:16'], e.frame || '16:9')) + shape(o) + hh('Align') + alignBtns(e.align || 'center') + '<input type="file" accept="image/*" id="gp-file4" hidden>';
+  }
+  function gpHeroSettings(o) {
+    const lock = !o.hunlock, unit = (k, v) => `<select class="gp-in" data-f="${k}" style="width:76px"><option${(v || 'px') === 'px' ? ' selected' : ''}>px</option><option${v === '%' ? ' selected' : ''}>%</option></select>`;
+    let h = hh('Layout') + `<div class="gp-af on${gp.pop === 'hlay' ? ' act' : ''}" data-popen="hlay" role="button" tabindex="0" style="height:64px"><span class="th" style="width:58px;height:48px;background:none">${HLAY_ICO(o.hlay || 'Center')}</span><span class="vv">${gpHnorm(o.hlay)}</span></div>`
+      + bgf(o) + (gp.hmore ? fld('Position', opt('bgpos', ['center', 'top', 'bottom', 'left', 'right'], o.bgpos || 'center')) + fld('Overlay', `<div class="gp-cl"><label style="background:${o.ovl || '#000000'}"><input type="color" data-f="ovl" value="${o.ovl || '#000000'}"></label>${(o.ovl || '').slice(1).toUpperCase() || 'None'}</div>`) + fld('Overlay %', `<input class="gp-in" type="number" min="0" max="100" data-f="ovlo" value="${o.ovlo == null ? 40 : o.ovlo}">`) + fld('Parallax', `<button class="gp-tog2${o.parallax ? ' on' : ''}" data-btog="parallax" aria-label="Parallax"></button>`) : '') + `<button class="gp-more" data-hmore>${gp.hmore ? 'Show less ⌃' : 'Show more ⌄'}</button>`
+      + hh('Size') + fld('Ratio', opt('hrat', ['Original', '16:9', '4:3', '1:1', '21:9', '3:4'], o.hrat || '16:9'))
+      + fld('Width', `<div style="display:flex;gap:8px"><input class="gp-in" type="number" min="0" data-f="hw" value="${o.hw || 100}">${unit('hwu', o.hwu || '%')}</div>`)
+      + fld('Height', `<div style="display:flex;gap:8px"><input class="gp-in" type="number" min="0" data-f="hh" placeholder="Auto" value="${esc(o.hh || '')}"${lock ? ' disabled' : ''}>${unit('hhu', o.hhu || 'px').replace('<select', lock ? '<select disabled' : '<select')}</div>`)
+      + fld('Lock ratio', `<button class="gp-tog2${lock ? ' on' : ''}" data-btog="hunlock" aria-label="Keep ratio (height auto)"></button>`)
+      + fld('Scale', `<div class="gp-sg">${[['cover', 'Fill'], ['contain', 'Fit']].map(([v, l]) => `<button data-set="bgsz:${v}" class="${(o.bgsz || 'cover') === v ? 'on' : ''}">${l}</button>`).join('')}</div>`)
+      + hh('Content') + fld('Width', `<input class="gp-in" type="number" data-f="maxw" value="${o.maxw || 1200}">`) + fld('Padding', padf(o))
+      + fld('Align', `<div class="gp-sg">${[['top', '⤒'], ['center', '↕'], ['bottom', '⤓'], ['stretch', '☰']].map(([v, ic]) => `<button data-set="valign:${v}" class="${(o.valign || 'center') === v ? 'on' : ''}" aria-label="${v}">${ic}</button>`).join('')}</div>`)
+      + shape(o)
+      + hh('Effect') + fld('Hover effect', pfld('hfx', '✦', o.hfx && o.hfx !== 'None' ? o.hfx : '', 'hfx'))
+      + `<h4 class="gp-h">Link<button class="gp-tog2${o.link ? ' on' : ''}" data-btog="link" aria-label="Toggle link"></button></h4>` + (o.link ? fld('After click', opt('after', ['Open page', 'Scroll to', 'Open popup', 'Send email', 'Make phone call'], o.after || 'Open page')) + fld('Page/link', `<input class="gp-in" data-f="href" placeholder="Add..." value="${esc(o.href || '')}">`) : '')
+      + hh('SEO') + fld('Image alt text', pfld('halt', '≡', o.alt || '', 'alt')) + fld('Image title', pfld('htit', '≡', o.title || '', 'title'))
+      + hh('Align') + `<div class="gp-sg">${['left', 'center', 'right'].map(a => `<button data-set="halign:${a}" class="${(o.halign || 'center') === a ? 'on' : ''}" aria-label="Align ${a}">${{ left: '☰', center: '≡', right: '☷' }[a]}</button>`).join('')}</div>`;
+    return h;
+  }
   function gpInspector() {
     const f = gpFind(gp.sel); if (!f) return gpElements();
-    const e = f.e, s = f.s, o = e || f.r || s, title = e ? (e.label || GP_LBL[e.type]) : f.r ? 'Row' : 'Section';
+    const e = f.e, s = f.s, o = e || f.r || s, title = e ? (e.label || GP_LBL[e.type]) : f.r ? (f.r.label || 'Row') : 'Section';
     let b = '';
     if (!e) {
-      b = gpContSettings(o, !!f.r);
+      b = (f.r && f.r.hero) ? gpHeroSettings(o) : gpContSettings(o, !!f.r);
     } else if (e.type === 'heading' || e.type === 'text') {
-      b = hh('Text style') + (e.type === 'heading' ? fld('Styles', opt('style', [1, 2, 3, 4, 5, 6].map(n => 'Heading ' + n), 'Heading ' + e.style)) : '') + fld('Font', opt('font', ['Sans-serif', 'Serif', 'Monospace'], e.font)) + fld('Size', `<div class="gp-step"><button data-step="-1">−</button><span>${e.size}</span><button data-step="1">+</button></div>`) + `<div class="gp-bi">${[['b', '<b>B</b>'], ['i', '<i>I</i>'], ['u', '<u>U</u>']].map(([k, l]) => `<button data-fmt="${k}" class="${e[k] ? 'on' : ''}">${l}</button>`).join('')}</div>` + fld('Color', `<div class="gp-cl"><label style="background:${e.color}"><input type="color" data-f="color" value="${e.color}"></label>${e.color.slice(1)}</div>`) + fld('Align', alignBtns(e.align)) + hh('Size') + fld('Width', `<input class="gp-in" type="number" data-f="width" value="${e.width}">`) + fld('Padding', `<input class="gp-in" data-f="pad" placeholder="Add..." value="${esc(e.pad)}">`) + bgf(o) + shape(o);
+      b = hh('Text style') + fld('Styles', `<select class="gp-in" data-f="tstyle">${Object.keys(GP_TYS).map(n => `<option value="${n}"${n === (e.tstyle || (e.type === 'heading' ? 'Heading ' + e.style : 'Paragraph 1')) ? ' selected' : ''}>${n} (${GP_TYS[n]}px)</option>`).join('')}</select>`) + fld('Font', opt('font', ['Sans-serif', 'Serif', 'Monospace'], e.font)) + fld('Size', `<div class="gp-step"><button data-step="-1">−</button><span>${e.size}</span><button data-step="1">+</button></div>`) + `<div class="gp-bi">${[['b', '<b>B</b>'], ['i', '<i>I</i>'], ['u', '<u>U</u>']].map(([k, l]) => `<button data-fmt="${k}" class="${e[k] ? 'on' : ''}">${l}</button>`).join('')}</div>` + fld('Color', `<div class="gp-cl"><label style="background:${e.color}"><input type="color" data-f="color" value="${e.color}"></label>${e.color.slice(1)}</div>`) + fld('Align', alignBtns(e.align)) + (gp.tmore ? fld('Font weight', `<select class="gp-in" data-f="fw">${Object.keys(GP_FWT).map(n => `<option${n === (e.fw || (e.b ? 'Bold' : 'Normal')) ? ' selected' : ''}>${n}</option>`).join('')}</select>`) + fld('Line height', `<div style="display:flex;align-items:center;gap:4px"><input class="gp-in" type="number" min="50" max="400" data-f="lh" value="${e.lh || (e.type === 'heading' ? 125 : 180)}"><span>%</span></div>`) + fld('Letter spacing', `<input class="gp-in" type="number" step="0.5" data-f="ls" placeholder="Auto" value="${e.ls == null ? '' : e.ls}">`) + fld('Transform', `<div class="gp-sg">${[['none', '—'], ['uppercase', 'AA'], ['capitalize', 'Aa'], ['lowercase', 'aa']].map(([v, l]) => `<button data-set="tt:${v}" class="${(e.tt || 'none') === v ? 'on' : ''}">${l}</button>`).join('')}</div>`) + fld('Shadow', pfld('tsh', `<i class="sw" style="background:${e.tshc || '#121212'}"></i>`, e.tsh ? (e.tshc || '#121212').slice(1).toUpperCase() : '', 'tsh,tshc,tshd,tshdist')) : '') + `<button class="gp-more" data-tmore>${gp.tmore ? 'Show less ⌃' : 'Show more ⌄'}</button>` + hh('Size') + fld('Width', `<input class="gp-in" type="number" data-f="width" value="${e.width}">`) + fld('Padding', `<input class="gp-in" data-f="pad" placeholder="Add..." value="${esc(e.pad)}">`) + bgf(o) + shape(o);
     } else if (e.type === 'image') {
       b = hh('Style') + `<button class="gp-af gp-sty${gp.styleOpen ? ' on' : ''}" data-imgstyle style="height:70px;color:#333"><span class="th">${e.shape === 'circle' ? GP_CIRC : GP_RECT}</span>${e.shape === 'circle' ? 'Circle' : 'Rectangle'}<span style="margin-left:auto;padding-right:6px">›</span></button>` + hh('Source') + `<div class="gp-up"><div class="pv" style="background-image:url(${e.src})"><button data-up>⇧ Upload Image</button></div><input class="gp-in" data-f="src" value="${e.src.startsWith('data:') ? 'https://cdn.example.com/s/f…' : esc(e.src)}" readonly><div>or <a data-gal>Browse gallery</a></div></div><input type="file" accept="image/*" id="gp-file" hidden>` + hh('Size') + fld('Frame', opt('frame', ['Original', 'Square', '16:9'], e.frame)) + fld('Width', `<div style="display:flex;gap:8px"><input class="gp-in" type="number" data-f="w" value="${e.w}"><select class="gp-in" data-f="unit" style="width:80px"><option${e.unit === 'px' ? ' selected' : ''}>px</option><option${e.unit === '%' ? ' selected' : ''}>%</option></select></div>`) + fld('Height', `<div style="display:flex;gap:8px"><input class="gp-in" type="number" min="0" data-f="h" placeholder="Auto" value="${esc(e.h || '')}"${e.ulock ? '' : ' disabled'}><select class="gp-in" data-f="hu" style="width:80px"${e.ulock ? '' : ' disabled'}><option${(e.hu || 'px') === 'px' ? ' selected' : ''}>px</option><option${e.hu === '%' ? ' selected' : ''}>%</option></select></div>`) + fld('Lock ratio', `<button class="gp-tog2${e.ulock ? '' : ' on'}" data-btog="ulock" aria-label="Keep aspect ratio (Height auto)"></button>`) + shape(o) + fld('Link', `<button class="gp-tog2${e.link ? ' on' : ''}" data-link aria-label="Link"></button>`) + hh('SEO') + fld('Alt text', `<input class="gp-in" data-f="alt" placeholder="Add..." value="${esc(e.alt)}">`) + fld('Image title', `<input class="gp-in" data-f="title" placeholder="Add..." value="${esc(e.title)}">`) + hh('Optimize LCP') + fld('Preload', `<div class="gp-sg"><button data-pre="Yes" class="${e.pre === 'Yes' ? 'on' : ''}">Yes</button><button data-pre="No" class="${e.pre === 'No' ? 'on' : ''}">No</button></div>`) + fld('Quality', opt('quality', ['High', 'Medium', 'Low'], e.quality)) + hh('Align') + alignBtns(e.align);
+    } else if (e.type === 'video') {
+      b = gpVideoSettings(e, o);
     } else if (e.type === 'button') {
       if (!e.pad) e.pad = '12, 24, 12, 24';
       const tg = (k, on) => `<button class="gp-tog2${on ? ' on' : ''}" data-btog="${k}" aria-label="Toggle ${k}"></button>`, lab = x => { const m = GP_ICONS.find(i => i[1] === x); return e.isvg ? 'Custom SVG' : m ? m[0] : 'Icon'; };
@@ -9038,7 +9278,7 @@ button.sx-row:hover { background: #faf9f5; }
         + `<h4 class="gp-h">Link${tg('link', e.link)}</h4>` + (e.link ? fld('After click', opt('after', ['Open page', 'Scroll to', 'Open popup', 'Send email', 'Make phone call'], e.after || 'Open page')) + fld({ 'Open page': 'Page/link', 'Scroll to': 'Element ID', 'Open popup': 'Popup', 'Send email': 'Email', 'Make phone call': 'Phone' }[e.after || 'Open page'], `<input class="gp-in" data-f="href" placeholder="Add..." value="${esc(e.href || '')}">`) : '')
         + hh('Align') + alignBtns(e.align);
     } else b = hh(title) + afd('Content') + shape(o);
-    return `<div class="gp-ih"><button data-back aria-label="Back">‹</button><span>${esc(title)}</span><span class="sp"></span><button aria-label="Help">${e && e.type === 'image' ? '?' : '✎'}</button></div><div class="gp-tabs"><button data-itab="settings" class="${gp.itab === 'settings' ? 'on' : ''}">Settings</button><button data-itab="advanced" class="${gp.itab === 'advanced' ? 'on' : ''}">Advanced</button><button aria-label="Search">⌕</button></div>${gp.itab === 'advanced' ? advf(o, !e) : b}<button class="gp-del" data-act="del">${ICO.trash.replace('#fff', '#ff6a6a').replace('fill="#fff"', 'fill="#ff6a6a"')}Delete element</button>`;
+    return `<div class="gp-ih"><button data-back aria-label="Back">‹</button><span>${esc(title)}</span><span class="sp"></span><button aria-label="Help">${e && e.type === 'image' ? '?' : '✎'}</button></div><div class="gp-tabs"><button data-itab="settings" class="${gp.itab === 'settings' ? 'on' : ''}">Settings</button><button data-itab="advanced" class="${gp.itab === 'advanced' ? 'on' : ''}">Advanced</button><button aria-label="Search">⌕</button></div>${gp.itab === 'advanced' ? advf(o, !e && !o.hero) : b}<button class="gp-del" data-act="del">${ICO.trash.replace('#fff', '#ff6a6a').replace('fill="#fff"', 'fill="#ff6a6a"')}Delete element</button>`;
   }
   function gpPanel() {
     const pn = $('#gp-pn'); pn.classList.toggle('dark', gp.rail === 'styles');
@@ -9051,7 +9291,7 @@ button.sx-row:hover { background: #faf9f5; }
     const lmenu = id => { const x = gpObj(id), box = x && x.cols; return `<div class="gp-lm" role="menu"><button data-lm="dup:${id}">Duplicate</button><button data-lm="up:${id}">Move up</button><button data-lm="down:${id}">Move down</button><button data-lm="hide:${id}">${x && x.hide && x.hide[gp.dev] ? 'Show' : 'Hide'}</button>${box && x.cols.length > 1 ? `<button data-lm="rev:${id}">Reverse columns</button>` : ''}<button class="dg" data-lm="del:${id}">Delete</button></div>`; };
     const row = (id, label, d, kids, open, e) => `<div class="gp-lr${gp.sel === id ? ' on' : ''}${gp.lmenu === id ? ' mo' : ''}" data-lpick="${id}" style="padding-left:${8 + d * 14}px"><span class="ar"${kids ? ` data-ltog="${id}"` : ''}>${kids ? (open ? '▾' : '▸') : ''}</span>${e ? `<span class="ic">${e.type === 'heading' || e.type === 'text' ? 'T' : '▣'}</span>` : ''}<span class="lb">${esc(label)}</span><span class="ac"><button data-leye="${id}" aria-label="Toggle visibility">${GP_EYE}</button><button data-ldots="${id}" aria-label="More options">···</button></span>${gp.lmenu === id ? lmenu(id) : ''}</div>`;
     const colsOf = (h, d) => h.cols.flat().map(it => it.type === 'row' ? rowNode(it, d) : row(it.id, it.label || GP_LBL[it.type], d, 0, false, it)).join('');
-    const rowNode = (r, d) => { let x = row(r.id, 'Row', d, r.cols.flat().length, op(r.id), null); if (op(r.id)) x += colsOf(r, d + 1); return x; };
+    const rowNode = (r, d) => { let x = row(r.id, r.label || 'Row', d, r.cols.flat().length, op(r.id), null); if (op(r.id)) x += colsOf(r, d + 1); return x; };
     const rows = gp.secs.map((s, i) => { let h = row(s.id, 'Section ' + (i + 1), 0, s.cols.flat().length, op(s.id), null); if (op(s.id)) h += colsOf(s, 1); return h; }).join('');
     return '<div class="gp-ptitle">Layer Tree</div>' + (rows || '<div class="gp-note">No layers yet. Add a section or element to the page.</div>');
   }
@@ -9070,6 +9310,7 @@ button.sx-row:hover { background: #faf9f5; }
     let host, ci = 0, idx;
     if (at) { host = gpHostById(at.sec); ci = at.col; idx = at.idx; } else host = f ? (f.e ? gpHost(f) : (f.r || f.s)) : gp.secs[gp.secs.length - 1];
     if (!host) { host = gpSec(1); gp.secs.push(host); }
+    if (el.hero && host.type !== 'row' && host.cols.every(c => !c.length)) host.pad = '0, 0, 0, 0';
     host.cols[ci].splice(idx == null ? host.cols[ci].length : idx, 0, el); gp.sel = el.id; gpAll(); return el;
   }
   function gpAddRow(n, at) {
@@ -9122,7 +9363,7 @@ button.sx-row:hover { background: #faf9f5; }
         let after = false; if (ctEl) { const r = ctEl.getBoundingClientRect(); after = e.clientY >= r.top + r.height / 2; }
         gpPush(); let ns;
         if (d.kind === 'sec') { ns = gp.secs.find(x => x.id === d.id); gp.secs = gp.secs.filter(x => x !== ns); }
-        else { ns = gpSec(d.kind === 'newsec' ? d.n : 1); if (d.kind === 'new') ns.cols[0].push(gpEl(d.type, d.label)); if (d.kind === 'newrow') ns.cols[0].push(gpRow(d.n)); }
+        else { ns = gpSec(d.kind === 'newsec' ? d.n : 1); if (d.kind === 'new') { const ne = gpEl(d.type, d.label); if (ne.hero) ns.pad = '0, 0, 0, 0'; ns.cols[0].push(ne); } if (d.kind === 'newrow') ns.cols[0].push(gpRow(d.n)); }
         let at = gp.secs.length; if (ref) { const ix = gp.secs.findIndex(x => x.id === ref); at = after ? ix + 1 : ix; }
         gp.secs.splice(at, 0, ns); gp.sel = d.kind === 'new' ? ns.cols[0][0].id : d.kind === 'newrow' ? ns.cols[0][0].id : ns.id; gpAll();
       }
@@ -9140,7 +9381,7 @@ button.sx-row:hover { background: #faf9f5; }
         if (gp.lmenu && !q('[data-lm]') && !q('[data-ldots]')) { gp.lmenu = null; gpPanel(); }
         if (q('[data-pclose]')) { gp.pop = null; gpPanel(); gpFloat(); return; }
         if (q('[data-pclr]')) { const o = gpObj(gp.sel); gpPush(); q('[data-pclr]').dataset.pclr.split(',').forEach(k => delete o[k]); gp.pop = null; gpAll(); return; }
-        if (q('[data-popen]')) { const k = q('[data-popen]').dataset.popen, o = gpObj(gp.sel); if (gp.pop === k) gp.pop = null; else { gp.pop = k; gpPush(); if (k === 'bd' && !o.bw) Object.assign(o, { bw: 1, bc: '#121212', bs: 'solid' }); if (k === 'rad' && !o.rad) o.rad = 8; if (k === 'bhov' && !o.hbg && !o.hc) { o.hbg = '#4d4d4d'; o.hc = '#ffffff'; } if (k === 'sh' && !o.sh) Object.assign(o, { sh: 'Light', shc: '#121212' }); if (k === 'tsh' && !o.tsh) Object.assign(o, { tsh: 'Light', tshc: '#121212' }); if (k === 'bgc' && !o.sbg && !o.gm) o.sbg = '#dddddd'; if (k === 'bgv' && !o.vid) o.vid = { src: 'Youtube', url: '', align: 'top', loop: 'No' }; } const keep = gp.pop; gpAll(); gp.pop = keep; gpPanel(); gpFloat(); return; }
+        if (q('[data-popen]')) { const k = q('[data-popen]').dataset.popen, o = gpObj(gp.sel); if (gp.pop === k) gp.pop = null; else { gp.pop = k; gpPush(); if (k === 'bd' && !o.bw) Object.assign(o, { bw: 1, bc: '#121212', bs: 'solid' }); if (k === 'rad' && !o.rad) o.rad = 8; if (k === 'bhov' && !o.hbg && !o.hc) { o.hbg = '#4d4d4d'; o.hc = '#ffffff'; } if (k === 'sh' && !o.sh) Object.assign(o, { sh: 'Light', shc: '#121212' }); if (k === 'tsh' && !o.tsh) Object.assign(o, { tsh: 'Light', tshc: '#121212' }); if (k === 'bgc' && !o.sbg && !o.gm) o.sbg = '#dddddd'; if (k === 'bgv' && !o.vid) o.vid = { src: 'Youtube', url: 'https://www.youtube.com/embed/Jcu1AHaTchM', align: 'top', loop: 'No' }; } const keep = gp.pop; gpAll(); gp.pop = keep; gpPanel(); gpFloat(); return; }
         if (q('[data-pset]')) { const o = gpObj(gp.sel), x = q('[data-pset]').dataset.pset, ix = x.indexOf(':'), k = x.slice(0, ix), v = x.slice(ix + 1), keep = gp.pop; gpPush(); if (v === '') delete o[k]; else o[k] = v; if (k === 'sbg') o.sbg = v; gpAll(); gp.pop = keep; gpPanel(); gpFloat(); return; }
         if (q('[data-pvset]')) { const o = gpObj(gp.sel), [k, v] = q('[data-pvset]').dataset.pvset.split(':'), keep = gp.pop; gpPush(); o.vid = o.vid || { src: 'Youtube', url: '', align: 'top', loop: 'No' }; o.vid[k] = v; gpAll(); gp.pop = keep; gpFloat(); return; }
         if (q('[data-plink]')) { gp.padlink = !gp.padlink; gpFloat(); return; }
@@ -9182,13 +9423,21 @@ button.sx-row:hover { background: #faf9f5; }
         if (q('[data-pick]')) return gpSelect(q('[data-pick]').dataset.pick);
         if (q('[data-btog]')) { const o = gpObj(gp.sel), k = q('[data-btog]').dataset.btog; gpPush(); o[k] = k === 'textOn' ? (o.textOn === 0 ? 1 : 0) : (o[k] ? 0 : 1); if (k === 'icon' && !o.icon && gp.pop === 'bicon') gp.pop = null; gpAll(); return; }
         if (q('[data-ipick]')) { const o = gpObj(gp.sel); gpPush(); o.ig = q('[data-ipick]').dataset.ipick; delete o.isvg; gpAll(); return; }
-        if (q('[data-bless]')) { gp.bless = !gp.bless; gpPanel(); return; }
+        if (q('[data-tmore]')) { gp.tmore = !gp.tmore; gpPanel(); return; } if (q('[data-bless]')) { gp.bless = !gp.bless; gpPanel(); return; }
         if (q('[data-hbgimg]')) { const fi = $('#gp-file3'); if (fi) fi.click(); return; }
         if (q('[data-isvg]')) { const fi = $('#gp-svgf'); if (fi) fi.click(); return; }
         if (q('[data-crev]')) { const o = gpObj(gp.sel); gpPush(); o.rev = !o.rev; gpAll(); return; }
         if (q('[data-cmove]')) { const o = gpObj(gp.sel), [i, d] = q('[data-cmove]').dataset.cmove.split(':').map(Number), j = i + d; if (j >= 0 && j < o.cols.length) { gpPush(); const mv = a => a.splice(j, 0, a.splice(i, 1)[0]); mv(o.cols); if (o.rw) mv(o.rw); gpAll(); } return; }
         if (q('[data-cdup]')) { const o = gpObj(gp.sel), i = +q('[data-cdup]').dataset.cdup; if (o.cols.length >= 6) return toast('Maximum 6 columns'); gpPush(); o.cols.splice(i + 1, 0, o.cols[i].map(gpCopy)); delete o.rw; gpAll(); return; }
         if (q('[data-cdel]')) { const o = gpObj(gp.sel), i = +q('[data-cdel]').dataset.cdel; if (o.cols.length <= 1) return toast('A row needs at least one column'); gpPush(); o.cols.splice(i, 1); delete o.rw; gpAll(); return; }
+        if (q('[data-vplay]') && gp.prev) { const el = gpFind(q('[data-el]').dataset.el), box = q('.gp-vd'); if (el && el.e && box) {  const em = gpVideoEmbed(el.e, true); if (em) box.innerHTML = em; } return; }
+        if (q('[data-hlayset]')) { const o = gpObj(gp.sel); gpPush(); gpHeroLayout(o, q('[data-hlayset]').dataset.hlayset); gpAll(); return; }
+        if (q('[data-hmore]')) { gp.hmore = !gp.hmore; gpPanel(); return; }
+        if (q('[data-vup]')) { const fi = $('#gp-file4'); if (fi) fi.click(); return; }
+        if (q('[data-gal2]')) return gpGallery(q('[data-gal2]').dataset.gal2);
+        if (q('[data-galup]')) { const fi = $('#gp-galf'); if (fi) fi.click(); return; }
+        if (q('[data-gtab]')) { const d = q('[data-gtab]').dataset.gtab === 'd'; $$('[data-gtab]').forEach(b => b.classList.toggle('on', b === q('[data-gtab]'))); const g = $('[data-gg]'); if (g) g.hidden = d; let em = $('.gp-gempty'); if (d) { if (!em) { em = document.createElement('div'); em.className = 'gp-gempty'; em.textContent = 'No recently deleted images'; g.parentNode.insertBefore(em, g.nextSibling); } } else if (em) em.remove(); return; }
+        if (q('[data-gpick]')) { const src = (gp.galitems || [])[+q('[data-gpick]').dataset.gpick], o = gpObj(gp.sel), k = gp.galkey; if (src && o && k) { gpPush(); o[k] = src; if (k === 'simg') delete o.gm; } const m = $('.gp-modal'); if (m) m.remove(); gpAll(); return; }
         if (q('[data-lay]')) return gpSetLayout(+q('[data-lay]').dataset.lay);
         const f = gpFind(gp.sel);
         if (q('[data-ratio]') && f) { gpPush(); (f.r || f.s).ratio = q('[data-ratio]').dataset.ratio; gpAll(); return; }
@@ -9197,7 +9446,7 @@ button.sx-row:hover { background: #faf9f5; }
         if (q('[data-al]') && f.e) { gpPush(); f.e.align = q('[data-al]').dataset.al; gpAll(); return; }
         if (q('[data-pre]') && f.e) { gpPush(); f.e.pre = q('[data-pre]').dataset.pre; gpAll(); return; }
         if (q('[data-link]') && f.e) { gpPush(); f.e.link = !f.e.link; gpAll(); return; }
-        if (q('[data-up]')) return $('#gp-file').click(); if (q('[data-gal]')) return toast('Gallery is coming soon');
+        if (q('[data-up]')) return $('#gp-file').click(); if (q('[data-gal]')) return gpGallery('src');
         if (q('[data-dev]')) { gp.dev = q('[data-dev]').dataset.dev; gpCanvas(); return; }
         if (q('#gp-full')) return document.fullscreenElement ? document.exitFullscreen() : $('#gp').requestFullscreen && $('#gp').requestFullscreen().catch(() => {});
         if (q('[data-gs]')) { if (q('[data-gs]').dataset.gs === 'discard' && gp.gsnap) { gp.colors = JSON.parse(gp.gsnap); gp.gsnap = ''; gp.cpick = null; gpPanel(); gpFloat(); toast('Changes discarded'); } else toast('Styles updated on all pages'); return; }
@@ -9207,7 +9456,7 @@ button.sx-row:hover { background: #faf9f5; }
         if (q('#gp-pub')) { gp.saved = gpSnap(); gp.dirty = false; gpStore(); gpCanvas(); return toast('Page published'); }
         if (q('#gp-eye')) { gp.prev = true; gp.sel = null; $('#gp').classList.add('prev'); gpAll(); return; } if (q('#gp-exit')) { gp.prev = false; $('#gp').classList.remove('prev'); return; }
         if (q('[data-acc]')) { const el = gpFind(q('[data-el]').dataset.el); gpPush(); el.e.open = +q('[data-acc]').dataset.acc; gp.sel = el.e.id; gpAll(); return; }
-        if (q('[data-el]')) { const id = q('[data-el]').dataset.el, was = gp.sel === id; if (!was) gpSelect(id); else if (q('[data-edit]')) { const n = q('[data-edit]'); n.contentEditable = 'true'; n.focus(); gpPush(); } return; }
+        if (q('[data-el]')) { const id = q('[data-el]').dataset.el, was = gp.sel === id; if (!was) gpSelect(id); else if (q('[data-edit]')) { const n = q('[data-edit]'); n.contentEditable = 'true'; const dg = n.closest('[draggable]'); if (dg) dg.draggable = false; n.focus(); gpPush(); } return; }
         if (q('[data-s]') && q('#gp-cv')) return gpSelect(q('[data-s]').dataset.s);
         if (q('[data-c]') && q('#gp-cv')) return gpSelect(q('[data-c]').dataset.c);
         if (q('#gp-cv') || q('#gp-st')) { if (gp.sel) { gp.sel = null; gpAll(); } }
@@ -9230,17 +9479,17 @@ button.sx-row:hover { background: #faf9f5; }
         const f = gpFind(gp.sel); if (!f) return;
         if (t.dataset && t.dataset.order !== undefined) { gpPush(); (f.r || f.s).rev = t.value.includes('reversed'); gpAll(); return; }
         if (t.dataset && t.dataset.sp) { const o = f.e || f.r || f.s, k = t.dataset.sp, i = +k[1], v = parseFloat(t.value) || 0; if (!t.dataset.pushed) { gpPush(); t.dataset.pushed = 1; } if (k[0] === 'm') { o.mar = o.mar || [0, 0, 0, 0]; o.mar[i] = v; } else { const a = padArr(o); a[i] = v; o.pad = a.join(', '); } gpCanvas(); return; }
-        if (t.matches('[contenteditable]')) { f.e.text = t.innerText; gp.dirty = true; $('#gp').classList.add('dirty'); return; }
-        const k = t.dataset.f; if (k && f) { const o = f.e || f.r || f.s; let v = t.value; if (k === 'bstyle') { gpPush(); o.bstyle = v; o.size = GP_BSIZE[v] || 16; gpAll(); return; } if (k === 'after') { gpPush(); o.after = v; gpAll(); return; } if (['igap', 'lh'].includes(k)) v = +v; if (k === 'tsh' && v === 'None') v = ''; if (k === 'style') { const n = +v.slice(-1); o.style = n; o.size = [52, 46, 41, 32, 24, 18][n - 1]; gpPush(); gpAll(); return; } if (['w', 'width', 'size', 'bw', 'rad', 'gap', 'maxw', 'op'].includes(k)) v = +v; if (k === 'sh' && v === 'None') v = ''; if (!t.dataset.pushed) { gpPush(); t.dataset.pushed = 1; } o[k] = v; $$(`[data-f="${k}"]`).forEach(x => { if (x !== t) x.value = v; }); gpCanvas(); if (t.type === 'color') t.parentNode.style.background = v; }
+        if (t.matches('[contenteditable]')) { f.e.text = t.innerText; const ch = gpClean(t.innerHTML); if (/<(?!br\b)[a-z]/i.test(ch)) f.e.html = ch; else delete f.e.html; gp.dirty = true; $('#gp').classList.add('dirty'); return; }
+        const k = t.dataset.f; if (k && f) { const o = f.e || f.r || f.s; let v = t.value; if (k === 'text') delete o.html; if (k === 'bstyle') { gpPush(); o.bstyle = v; o.size = GP_BSIZE[v] || 16; gpAll(); return; } if (k === 'after') { gpPush(); o.after = v; gpAll(); return; } if (['igap', 'lh'].includes(k)) v = +v; if (k === 'tsh' && v === 'None') v = ''; if (k === 'tstyle') { gpPush(); o.tstyle = v; o.size = GP_TYS[v] || 16; if (v.indexOf('Heading') === 0) o.style = +v.slice(-1); gpAll(); return; } if (k === 'style') { const n = +v.slice(-1); o.style = n; o.size = [52, 46, 41, 32, 24, 18][n - 1]; gpPush(); gpAll(); return; } if (['w', 'width', 'size', 'bw', 'rad', 'gap', 'maxw', 'op', 'hw', 'ovlo'].includes(k)) v = +v; if (k === 'sh' && v === 'None') v = ''; if (!t.dataset.pushed) { gpPush(); t.dataset.pushed = 1; } o[k] = v; $$(`[data-f="${k}"]`).forEach(x => { if (x !== t) x.value = v; }); gpCanvas(); if (t.type === 'color') t.parentNode.style.background = v; }
         if (t.matches('[data-sw]')) { gpPush(); f.s.width = t.value[0] === 'F' ? 'full' : 'default'; gpAll(); } };
       root.addEventListener('input', edit); root.addEventListener('change', ev => { if (ev.target.matches && ev.target.matches('[data-pp], [data-pf]')) gpPanel(); }); root.addEventListener('change', ev => { if (/^gp-file2?$/.test(ev.target.id)) { const fl = ev.target.files[0], f = gpFind(gp.sel), bg = ev.target.id === 'gp-file2'; if (!fl || !f) return; const r = new FileReader(); r.onload = () => { gpPush(); if (bg) (f.e || f.r || f.s).simg = r.result; else f.e.src = r.result; gpAll(); }; r.readAsDataURL(fl); } else if (ev.target.matches('[data-sw], select[data-f], select[data-gfont], select[data-order], select[data-pv]')) edit(ev); });
-      root.addEventListener('focusout', ev => { if (ev.target.matches('[contenteditable]')) { ev.target.contentEditable = 'false'; } if (ev.target.dataset) delete ev.target.dataset.pushed; });
+      root.addEventListener('focusout', ev => { if (ev.target.matches('[contenteditable]') && !(ev.relatedTarget && ev.relatedTarget.closest && ev.relatedTarget.closest('.gp-rtb,.gp-rtp'))) { ev.target.contentEditable = 'false'; const dg = ev.target.closest('.gp-el'); if (dg) dg.draggable = true; } if (ev.target.dataset) delete ev.target.dataset.pushed; });
       root.addEventListener('keydown', ev => { const typing = ev.target.matches('input,select,textarea,[contenteditable]'), mod = ev.ctrlKey || ev.metaKey, k = ev.key.toLowerCase();
         if (ev.key === 'Escape' && gp.prev) { gp.prev = false; root.classList.remove('prev'); return; }
         if (mod && k === 's') { ev.preventDefault(); $('#gp-save').click(); return; }
         if (mod && !typing && k === 'z') { ev.preventDefault(); ev.shiftKey ? gpHist('redo', 'hist') : gpHist('hist', 'redo'); return; }
         if (mod && !typing && k === 'y') { ev.preventDefault(); gpHist('redo', 'hist'); return; }
-        if (mod && !typing && k === 'd' && gp.sel) { ev.preventDefault(); gpDup(); return; } if (ev.target.matches('[contenteditable]') && ev.key === 'Escape') ev.target.blur(); else if ((ev.key === 'Delete' || ev.key === 'Backspace') && gp.sel && !ev.target.matches('input,select,[contenteditable]')) gpDelete(); });
+        if (mod && !typing && k === 'd' && gp.sel) { ev.preventDefault(); gpDup(); return; } if (ev.target.matches('[contenteditable]') && ev.key === 'Enter' && ev.target.closest('.gp-bt')) ev.preventDefault(); if (ev.target.matches('[contenteditable]') && ev.key === 'Escape') ev.target.blur(); else if ((ev.key === 'Delete' || ev.key === 'Backspace') && gp.sel && !ev.target.matches('input,select,[contenteditable]')) gpDelete(); });
       /* touch drag & drop: long-press a tile, element, row/section grip or column, then drag (native HTML5 drag doesn't fire on touch) */
       (() => {
         const SRC = '[data-new],[data-newsec],[data-sdrag],[data-rdrag],[data-el],[data-cm]'; let tm = null, st = null, ghost = null, raf = 0;
@@ -9267,6 +9516,7 @@ button.sx-row:hover { background: #faf9f5; }
         set(ev); const mv = e2 => set(e2), up = () => { document.removeEventListener('pointermove', mv); document.removeEventListener('pointerup', up); };
         document.addEventListener('pointermove', mv); document.addEventListener('pointerup', up);
       });
+      root.addEventListener('change', ev => { const id = ev.target.id; if (id !== 'gp-file4' && id !== 'gp-galf') return; const fl = ev.target.files[0]; if (!fl) return; const r = new FileReader(); r.onload = () => { if (id === 'gp-file4') { const o = gpObj(gp.sel); if (!o) return; gpPush(); o.vthumb = r.result; gpAll(); } else { gp.gal = [r.result, ...(gp.gal || [])]; gpGallery(gp.galkey); } }; r.readAsDataURL(fl); });
       /* ratio resize, columns-management drag, svg icon upload */
       root.addEventListener('pointerdown', ev => {
         const h = ev.target.closest && ev.target.closest('[data-rsz]'); if (!h) return; const o = gpObj(gp.sel), bar = h.closest('[data-rat]'); if (!o || !bar) return; ev.preventDefault();
